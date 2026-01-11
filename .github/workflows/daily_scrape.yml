@@ -39,6 +39,13 @@ jobs:
           TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
+          SESSION_GIST_ID: ${{ secrets.SESSION_GIST_ID }}
+          LOG_LEVEL: ${{ secrets.LOG_LEVEL || 'INFO' }}
+          PDF_THEME: ${{ secrets.PDF_THEME || 'light' }}
+          ENABLE_SVG_BACKGROUNDS: ${{ secrets.ENABLE_SVG_BACKGROUNDS || 'true' }}
+          SVG_BACKGROUND_TYPE: ${{ secrets.SVG_BACKGROUND_TYPE || 'wave' }}
           USE_HEADLESS: 'true'
         run: |
           cd automation
