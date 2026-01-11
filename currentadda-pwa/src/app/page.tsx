@@ -51,17 +51,20 @@ export default function HomePage() {
         .order('quiz_date', { ascending: false });
 
       // Apply Search Filter with Advanced Date Parsing
+      // Apply Search Filter with Advanced Date Parsing
       if (searchQuery) {
         const parsedDateRange = parseSearchDate(searchQuery);
+        const conditions = [
+          `title.ilike.%${searchQuery}%`,
+          `slug.ilike.%${searchQuery}%`,
+          `date_str.ilike.%${searchQuery}%`
+        ];
 
         if (parsedDateRange) {
-          // If a valid date is detected, strictly search for quizzes on that date.
-          // This is more accurate for queries like "26 December"
-          query = query.gte('quiz_date', parsedDateRange.start).lte('quiz_date', parsedDateRange.end);
-        } else {
-          // Otherwise perform a text-based title search
-          query = query.ilike('title', `%${searchQuery}%`);
+          conditions.push(`and(quiz_date.gte.${parsedDateRange.start},quiz_date.lte.${parsedDateRange.end})`);
         }
+
+        query = query.or(conditions.join(','));
       }
 
       // Apply Month Filter
