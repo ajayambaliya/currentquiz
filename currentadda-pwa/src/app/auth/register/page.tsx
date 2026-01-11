@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [fullName, setFullName] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -21,6 +22,12 @@ export default function RegisterPage() {
         setLoading(true);
         setError(null);
 
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            setLoading(false);
+            return;
+        }
+
         const { error } = await supabase.auth.signUp({
             email,
             password,
@@ -28,6 +35,7 @@ export default function RegisterPage() {
                 data: {
                     full_name: fullName,
                 },
+                emailRedirectTo: `${window.location.origin}/auth/callback`,
             },
         });
 
@@ -123,6 +131,22 @@ export default function RegisterPage() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full pl-12 pr-4 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all"
                                 placeholder="Min 6 characters"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Confirm Password</label>
+                        <div className="relative">
+                            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                            <input
+                                type="password"
+                                required
+                                minLength={6}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                className="w-full pl-12 pr-4 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all"
+                                placeholder="Re-enter password"
                             />
                         </div>
                     </div>

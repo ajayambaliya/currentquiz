@@ -25,6 +25,8 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
+import ProtectContent from "@/components/ProtectContent";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="gu">
       <body className="antialiased">
+        <ProtectContent />
         {children}
       </body>
     </html>

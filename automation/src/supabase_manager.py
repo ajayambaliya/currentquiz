@@ -10,10 +10,10 @@ logger = logging.getLogger(__name__)
 class SupabaseManager:
     """Handles synchronization of quiz data to Supabase database."""
     
-    def __init__(self):
-        """Initialize Supabase client using environment variables."""
-        self.url: str = os.getenv("SUPABASE_URL", "")
-        self.key: str = os.getenv("SUPABASE_KEY", "")
+    def __init__(self, url: Optional[str] = None, key: Optional[str] = None):
+        """Initialize Supabase client using environment variables or passed arguments."""
+        self.url: str = url or os.getenv("SUPABASE_URL", "")
+        self.key: str = key or os.getenv("SUPABASE_KEY", "")
         
         if not self.url or not self.key:
             logger.warning("Supabase URL or Key missing. Database sync will be skipped.")

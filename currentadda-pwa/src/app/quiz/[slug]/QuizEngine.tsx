@@ -340,9 +340,14 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                                     <HelpCircle className="w-4 h-4" />
                                     <span className="font-black text-[10px] uppercase tracking-[0.2em]">Explanation</span>
                                 </div>
-                                <p className="text-slate-500 leading-relaxed gujarati-text text-base">
-                                    {currentQuestion.explanation}
-                                </p>
+                                {currentQuestion.explanation.split('•').map((part, index) => (
+                                    part.trim() && (
+                                        <p key={index} className="mb-2 last:mb-0">
+                                            {index > 0 && <span className="mr-2 font-bold text-indigo-500">•</span>}
+                                            {part.trim()}
+                                        </p>
+                                    )
+                                ))}
                             </motion.div>
                         )}
                     </motion.div>

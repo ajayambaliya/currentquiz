@@ -1,71 +1,95 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
-import { BookOpen, Calendar, ChevronRight, Trophy, Search, User, LogOut, Heart, ExternalLink, Loader2 } from 'lucide-react';
+import { BookOpen, Calendar, ChevronRight, Trophy, Search, User, LogOut, Heart, ExternalLink, Loader2, ArrowDown } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns';
 import { useAuth } from '@/hooks/useAuth';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const ITEMS_PER_PAGE = 10;
+
 export default function HomePage() {
   const [quizzes, setQuizzes] = useState<any[]>([]);
-  const [filteredQuizzes, setFilteredQuizzes] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMonth, setSelectedMonth] = useState<Date | null>(null);
   const { user } = useAuth();
 
+  // Pagination State
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+
   // Generate last 6 months
   const recentMonths = Array.from({ length: 6 }).map((_, i) => subMonths(new Date(), i));
 
+  // Debounce search
   useEffect(() => {
-    fetchQuizzes();
-  }, []);
+    const timer = setTimeout(() => {
+      setPage(0);
+      setHasMore(true);
+      fetchQuizzes(0, true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchQuery, selectedMonth]);
 
-  useEffect(() => {
-    filterQuizzes();
-  }, [searchQuery, selectedMonth, quizzes]);
-
-  async function fetchQuizzes() {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from('quizzes')
-      .select('*')
-      .order('quiz_date', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching quizzes:', error);
+  const fetchQuizzes = async (pageNumber: number, reset: boolean = false) => {
+    if (reset) {
+      setQuizzes([]);
+      setLoading(true);
     } else {
-      setQuizzes(data || []);
-    }
-    setLoading(false);
-  }
-
-  function filterQuizzes() {
-    let result = [...quizzes];
-
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(q =>
-        q.title.toLowerCase().includes(query) ||
-        (q.date_str && q.date_str.toLowerCase().includes(query))
-      );
+      setLoading(true);
     }
 
-    if (selectedMonth) {
-      const monthStart = startOfMonth(selectedMonth);
-      const monthEnd = endOfMonth(selectedMonth);
-      result = result.filter(q => {
-        if (!q.quiz_date) return false;
-        const quizDate = new Date(q.quiz_date);
-        return quizDate >= monthStart && quizDate <= monthEnd;
-      });
-    }
+    try {
+      let query = supabase
+        .from('quizzes')
+        .select('*', { count: 'exact' })
+        .order('quiz_date', { ascending: false });
 
-    setFilteredQuizzes(result);
-  }
+      // Apply Search Filter
+      if (searchQuery) {
+        query = query.ilike('title', `%${searchQuery}%`);
+      }
+
+      // Apply Month Filter
+      if (selectedMonth) {
+        const start = startOfMonth(selectedMonth).toISOString();
+        const end = endOfMonth(selectedMonth).toISOString();
+        query = query.gte('quiz_date', start).lte('quiz_date', end);
+      }
+
+      const from = pageNumber * ITEMS_PER_PAGE;
+      const to = from + ITEMS_PER_PAGE - 1;
+
+      const { data, error, count } = await query.range(from, to);
+
+      if (error) throw error;
+
+      if (data) {
+        setQuizzes(prev => reset ? data : [...prev, ...data]);
+
+        // Check if we reached the end
+        if (count !== null) {
+          setHasMore(from + data.length < count);
+        } else {
+          setHasMore(data.length === ITEMS_PER_PAGE);
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching quizzes:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadMore = () => {
+    const nextPage = page + 1;
+    setPage(nextPage);
+    fetchQuizzes(nextPage, false);
+  };
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -191,43 +215,55 @@ export default function HomePage() {
             <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em]">Available Quizzes</h4>
           </div>
 
-          {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 opacity-20">
-              <Loader2 className="w-7 h-7 animate-spin mb-3" />
-              <span className="text-[9px] font-black tracking-widest uppercase">Fetching List</span>
-            </div>
-          ) : filteredQuizzes.length === 0 ? (
+          {quizzes.length === 0 && !loading && (
             <div className="bg-white py-16 rounded-[2.5rem] border border-slate-50 text-center space-y-4 shadow-sm">
               <div className="bg-slate-50 w-14 h-14 rounded-full flex items-center justify-center mx-auto">
                 <Search className="w-6 h-6 text-slate-200" />
               </div>
               <p className="text-slate-400 font-bold gujarati-text text-sm">કોઈ ડેટા મળ્યો નથી.</p>
             </div>
-          ) : (
-            filteredQuizzes.map((quiz) => (
-              <motion.div layout key={quiz.id}>
-                <Link
-                  href={`/quiz/${quiz.slug}`}
-                  className="block bg-white p-5 rounded-[1.75rem] border border-slate-100 premium-card group"
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/40" />
-                        <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest leading-none">{quiz.date_str || 'Static Quiz'}</span>
-                      </div>
-                      <h3 className="text-base font-black text-slate-800 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4">
-                        {quiz.title}
-                      </h3>
-                    </div>
-                    <div className="bg-slate-50 p-3.5 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
-                      <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))
           )}
+
+          {quizzes.map((quiz) => (
+            <motion.div layout key={quiz.id}>
+              <Link
+                href={`/quiz/${quiz.slug}`}
+                className="block bg-white p-5 rounded-[1.75rem] border border-slate-100 premium-card group"
+              >
+                <div className="flex justify-between items-center">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/40" />
+                      <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest leading-none">{quiz.date_str || 'Static Quiz'}</span>
+                    </div>
+                    <h3 className="text-base font-black text-slate-800 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4">
+                      {quiz.title}
+                    </h3>
+                  </div>
+                  <div className="bg-slate-50 p-3.5 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
+                    <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+
+          {loading && (
+            <div className="flex flex-col items-center justify-center py-10 opacity-60">
+              <Loader2 className="w-6 h-6 animate-spin mb-2 text-indigo-600" />
+              <span className="text-[9px] font-black tracking-widest uppercase text-slate-400">Loading Content</span>
+            </div>
+          )}
+
+          {!loading && hasMore && quizzes.length > 0 && (
+            <button
+              onClick={loadMore}
+              className="w-full py-4 bg-white border border-slate-100 rounded-2xl text-slate-500 font-bold text-xs uppercase tracking-widest hover:bg-slate-50 hover:text-indigo-600 transition-all flex items-center justify-center gap-2"
+            >
+              Load More <ArrowDown className="w-4 h-4" />
+            </button>
+          )}
+
         </div>
 
         {/* Branding Footer */}
