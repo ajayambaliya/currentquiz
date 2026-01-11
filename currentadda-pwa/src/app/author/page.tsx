@@ -83,7 +83,7 @@ export default function AuthorProfile() {
 
                     {/* Grid Info */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <InfoCard icon={<MapPin className="w-5 h-5" />} label="Location" value="Gujarat, India" />
+                        <InfoCard icon={<MapPin className="w-5 h-5" />} label="Location" value="Vadodara, Gujarat, India" />
                         <InfoCard icon={<Award className="w-5 h-5" />} label="Experience" value="Senior Clerk Service" />
                     </div>
 
@@ -125,7 +125,7 @@ export default function AuthorProfile() {
                                 icon={<Mail className="w-5 h-5" />}
                                 label="Email"
                                 color="bg-slate-100 text-slate-700"
-                                href="mailto:ambaliyaajay8@gmail.com"
+                                href="mailto:ajay.ambaliya007@gmail.com"
                             />
                         </div>
                     </div>

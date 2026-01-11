@@ -372,7 +372,7 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                     >
                         {currentIdx === totalQuestions - 1
                             ? (isSubmitted && !reviewMode ? 'View Result' : (reviewMode ? 'Finished' : 'Submit Quiz'))
-                            : 'Next Step'
+                            : 'Next Question'
                         }
                         {!reviewMode && <ChevronRight className="w-5 h-5" />}
                     </button>
