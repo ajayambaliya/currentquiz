@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns';
 import { useAuth } from '@/hooks/useAuth';
 import { motion, AnimatePresence } from 'framer-motion';
+import { parseSearchDate } from '@/lib/searchUtils';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -49,9 +50,18 @@ export default function HomePage() {
         .select('*', { count: 'exact' })
         .order('quiz_date', { ascending: false });
 
-      // Apply Search Filter
+      // Apply Search Filter with Advanced Date Parsing
       if (searchQuery) {
-        query = query.ilike('title', `%${searchQuery}%`);
+        const parsedDateRange = parseSearchDate(searchQuery);
+
+        if (parsedDateRange) {
+          // If a valid date is detected, strictly search for quizzes on that date.
+          // This is more accurate for queries like "26 December"
+          query = query.gte('quiz_date', parsedDateRange.start).lte('quiz_date', parsedDateRange.end);
+        } else {
+          // Otherwise perform a text-based title search
+          query = query.ilike('title', `%${searchQuery}%`);
+        }
       }
 
       // Apply Month Filter
