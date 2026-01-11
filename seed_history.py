@@ -52,8 +52,8 @@ class HistoricalSeeder:
         anon_key = os.getenv('NEXT_PUBLIC_SUPABASE_ANON_KEY')
         
         # Set environment variables so SupabaseManager can pick them up
-        os.environ['SUPABASE_URL'] = os.getenv('NEXT_PUBLIC_SUPABASE_URL', 'https://dvsiyoqcylcvjtmgyphe.supabase.co')
-        os.environ['SUPABASE_KEY'] = service_key if service_key else (anon_key or 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2c2l5b3FjeWxjdmp0bWd5cGhlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODAzNzUzOCwiZXhwIjoyMDgzNjEzNTM4fQ.50oYoPYSjnHjPxXHupmPE6GZIJaYfa3pFecPRFHLerg')
+        os.environ['SUPABASE_URL'] = os.getenv('NEXT_PUBLIC_SUPABASE_URL', '')
+        os.environ['SUPABASE_KEY'] = service_key if service_key else (anon_key or '')
         
         self.supabase = SupabaseManager()
 
