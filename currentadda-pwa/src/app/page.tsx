@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { BookOpen, Calendar, ChevronRight, Trophy, Search, User, LogOut, Heart, ExternalLink, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns';
 import { useAuth } from '@/hooks/useAuth';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -77,7 +78,14 @@ export default function HomePage() {
       <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-100">
         <div className="max-w-xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="bg-indigo-600 w-9 h-9 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-100 italic font-black text-white text-[9px] tracking-widest">CA</div>
+            <div className="w-10 h-10 relative">
+              <Image
+                src="/newlogo.png"
+                alt="Logo"
+                fill
+                className="object-contain mix-blend-multiply"
+              />
+            </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-black tracking-tighter text-slate-900 leading-none">
                 CurrentAdda

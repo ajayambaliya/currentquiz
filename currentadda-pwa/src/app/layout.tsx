@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "CurrentAdda - Daily Gujarati Current Affairs Quiz",
   description: "Play daily live current affairs quizzes in Gujarati for GPSC and GSSSB exams.",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/newlogo.png",
+    shortcut: "/newlogo.png",
+    apple: "/newlogo.png",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
