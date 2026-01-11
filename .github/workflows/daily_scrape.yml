@@ -1,14 +1,13 @@
-name: CurrentAdda Daily Scrape & PWA Sync
+name: CurrentAdda Automation (Scrape, Sync & Telegram)
 
 on:
   schedule:
+    # Runs at 00:00, 06:00, 12:00, 18:00 UTC
     - cron: '0 0,6,12,18 * * *'
   workflow_dispatch:
- # Runs at 00:00, 06:00, 12:00, 18:00 UTC
-  workflow_dispatch:          # Allows manual trigger
 
 jobs:
-  scrape-and-sync:
+  automation:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -21,15 +20,32 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
+          cache-dependency-path: 'automation/requirements.txt'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'automation/package-lock.json'
 
       - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r automation/requirements.txt
 
+      - name: Install Node.js Dependencies
+        run: |
+          cd automation
+          npm ci
+
+      - name: Install Playwright System Deps
+        run: |
+          npx playwright install-deps chromium
+
       - name: Install Playwright Browsers
         run: |
-          playwright install chromium
+          npx playwright install chromium
 
       - name: Run Scraper and Sync
         env:
@@ -37,8 +53,9 @@ jobs:
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
+          TELEGRAM_TEXT_CHANNEL: ${{ secrets.TELEGRAM_TEXT_CHANNEL }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
           GIST_ID: ${{ secrets.GIST_ID }}
           SESSION_GIST_ID: ${{ secrets.SESSION_GIST_ID }}
@@ -51,10 +68,10 @@ jobs:
           cd automation
           python src/runner.py
 
-      - name: Commit State Changes
+      - name: Commit State Changes (Backup)
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add automation/data/processed_urls.json
-          git commit -m "chore: update processed urls [skip ci]" || echo "No changes to commit"
+          git add automation/data/processed_urls.json || true
+          git commit -m "chore: update state backup [skip ci]" || echo "No changes to commit"
           git push || echo "No changes to push"
