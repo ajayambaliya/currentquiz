@@ -260,9 +260,13 @@ def process_quiz(
             # Send live quiz link to Telegram
             live_link = f"https://currentadda.vercel.app/quiz/{quiz_slug}"
             live_message = f"🎯 <b>Live Quiz રમો!</b>\n\n" \
+                           f"📅 <b>તારીખ:</b> {date_gujarati}\n\n" \
                            f"હવે તમે આ ક્વિઝ ઓનલાઇન રમી શકો છો અને તમારો સ્કોર જાણી શકો છો.\n" \
                            f"👉 <a href='{live_link}'>અહીં ક્લિક કરો</a>\n\n" \
-                           f"#CurrentAdda #LiveQuiz #GPSC"
+                           f"<b>વિશેષતાઓ:</b>\n" \
+                           f"✅ ક્વિઝ પૂર્ણ થયા પછી તમે સમજૂતી જોઈ શકો છો.\n" \
+                           f"🏆 તમે લીડરબોર્ડમાં તમારો રેન્ક જોઈ શકો છો.\n\n" \
+                           f"#CurrentAdda #LiveQuiz #GPSC #GSSSB #GPRB #Constable #PSI"
             telegram_sender.send_message(live_message, parse_mode='HTML')
         else:
             logger.warning("⚠️  Supabase sync failed, skipping Live Quiz link")
