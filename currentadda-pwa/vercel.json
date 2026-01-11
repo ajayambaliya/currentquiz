@@ -1,7 +1,5 @@
 {
     "version": 2,
-    "framework": "nextjs",
-    "rootDirectory": "currentadda-pwa",
     "installCommand": "npm install",
     "buildCommand": "next build"
 }
