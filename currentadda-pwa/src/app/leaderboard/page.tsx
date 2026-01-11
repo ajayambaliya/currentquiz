@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { Trophy, Star, ArrowLeft, Loader2, Target, Award, TrendingUp, BookOpen, User } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { LeaderboardSkeleton } from '@/components/SkeletonLoader';
 
 export default function LeaderboardPage() {
     const [leaders, setLeaders] = useState<any[]>([]);
@@ -112,10 +113,7 @@ export default function LeaderboardPage() {
 
                 <div className="space-y-1">
                     {loading ? (
-                        <div className="flex flex-col items-center justify-center py-24 opacity-30">
-                            <Loader2 className="w-6 h-6 animate-spin mb-4" />
-                            <span className="text-[10px] font-bold tracking-widest uppercase">Analyzing Data</span>
-                        </div>
+                        <LeaderboardSkeleton count={15} />
                     ) : leaders.length === 0 ? (
                         <div className="py-20 text-center text-slate-400 text-sm italic">
                             No heroes recorded yet.

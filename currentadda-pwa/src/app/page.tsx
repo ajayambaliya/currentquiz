@@ -1,20 +1,22 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { BookOpen, Calendar, ChevronRight, Trophy, Search, User, LogOut, Heart, ExternalLink, Loader2, ArrowDown } from 'lucide-react';
+import { BookOpen, ChevronRight, Trophy, Search, User, LogOut, Loader2, ArrowDown } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns';
 import { useAuth } from '@/hooks/useAuth';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { parseSearchDate } from '@/lib/searchUtils';
+import { QuizListSkeleton, SearchBarSkeleton } from '@/components/SkeletonLoader';
 
 const ITEMS_PER_PAGE = 10;
 
 export default function HomePage() {
   const [quizzes, setQuizzes] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMonth, setSelectedMonth] = useState<Date | null>(null);
   const { user } = useAuth();
@@ -40,6 +42,7 @@ export default function HomePage() {
     if (reset) {
       setQuizzes([]);
       setLoading(true);
+      if (pageNumber === 0) setInitialLoading(true);
     } else {
       setLoading(true);
     }
@@ -95,6 +98,7 @@ export default function HomePage() {
       console.error('Error fetching quizzes:', err);
     } finally {
       setLoading(false);
+      setInitialLoading(false);
     }
   };
 
@@ -179,104 +183,113 @@ export default function HomePage() {
       {/* Main Content Area */}
       <div className="max-w-xl mx-auto px-6 -mt-8 relative z-20">
         {/* Compact Search Bar */}
-        <div className="bg-white p-5 rounded-[2rem] shadow-xl shadow-slate-200/40 mb-10 border border-slate-100">
-          <div className="relative group">
-            <input
-              type="text"
-              placeholder="શોધો (તારીખ અથવા નામ)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-6 py-4 bg-slate-50/80 border-2 border-transparent rounded-[1.25rem] focus:border-indigo-100 focus:bg-white transition-all text-slate-700 gujarati-text text-sm"
-            />
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5" />
-          </div>
+        {initialLoading ? (
+          <SearchBarSkeleton />
+        ) : (
+          <div className="bg-white p-5 rounded-[2rem] shadow-xl shadow-slate-200/40 mb-10 border border-slate-100">
+            <div className="relative group">
+              <input
+                type="text"
+                placeholder="શોધો (તારીખ અથવા નામ)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-6 py-4 bg-slate-50/80 border-2 border-transparent rounded-[1.25rem] focus:border-indigo-100 focus:bg-white transition-all text-slate-700 gujarati-text text-sm"
+              />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5" />
+            </div>
 
-          <div className="mt-5">
-            <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar px-1">
-              <button
-                onClick={() => setSelectedMonth(null)}
-                className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all border
-                  ${selectedMonth === null
-                    ? 'bg-slate-900 border-slate-900 text-white shadow-lg'
-                    : 'bg-white border-slate-100 text-slate-400 hover:text-indigo-600'}`}
-              >
-                Recent
-              </button>
-              {recentMonths.map((date) => {
-                const isActive = selectedMonth && format(selectedMonth, 'MMM yy') === format(date, 'MMM yy');
-                return (
-                  <button
-                    key={date.toISOString()}
-                    onClick={() => setSelectedMonth(isActive ? null : date)}
-                    className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all border
-                      ${isActive
-                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg'
-                        : 'bg-white border-slate-100 text-slate-400 hover:border-indigo-200'}`}
-                  >
-                    {format(date, 'MMM yy')}
-                  </button>
-                );
-              })}
+            <div className="mt-5">
+              <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar px-1">
+                <button
+                  onClick={() => setSelectedMonth(null)}
+                  className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all border
+                    ${selectedMonth === null
+                      ? 'bg-slate-900 border-slate-900 text-white shadow-lg'
+                      : 'bg-white border-slate-100 text-slate-400 hover:text-indigo-600'}`}
+                >
+                  Recent
+                </button>
+                {recentMonths.map((date) => {
+                  const isActive = selectedMonth && format(selectedMonth, 'MMM yy') === format(date, 'MMM yy');
+                  return (
+                    <button
+                      key={date.toISOString()}
+                      onClick={() => setSelectedMonth(isActive ? null : date)}
+                      className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest whitespace-nowrap transition-all border
+                        ${isActive
+                          ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg'
+                          : 'bg-white border-slate-100 text-slate-400 hover:border-indigo-200'}`}
+                    >
+                      {format(date, 'MMM yy')}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Quiz List */}
         <div className="space-y-4 min-h-[40vh]">
-          <div className="flex items-center gap-2 px-3 mb-4 opacity-40">
-            <BookOpen className="w-4 h-4 text-slate-400" />
-            <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em]">Available Quizzes</h4>
-          </div>
-
-          {quizzes.length === 0 && !loading && (
-            <div className="bg-white py-16 rounded-[2.5rem] border border-slate-50 text-center space-y-4 shadow-sm">
-              <div className="bg-slate-50 w-14 h-14 rounded-full flex items-center justify-center mx-auto">
-                <Search className="w-6 h-6 text-slate-200" />
+          {initialLoading ? (
+            <QuizListSkeleton count={8} />
+          ) : (
+            <>
+              <div className="flex items-center gap-2 px-3 mb-4 opacity-40">
+                <BookOpen className="w-4 h-4 text-slate-400" />
+                <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em]">Available Quizzes</h4>
               </div>
-              <p className="text-slate-400 font-bold gujarati-text text-sm">કોઈ ડેટા મળ્યો નથી.</p>
-            </div>
-          )}
 
-          {quizzes.map((quiz) => (
-            <motion.div layout key={quiz.id}>
-              <Link
-                href={`/quiz/${quiz.slug}`}
-                className="block bg-white p-5 rounded-[1.75rem] border border-slate-100 premium-card group"
-              >
-                <div className="flex justify-between items-center">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/40" />
-                      <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest leading-none">{quiz.date_str || 'Static Quiz'}</span>
-                    </div>
-                    <h3 className="text-base font-black text-slate-800 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4">
-                      {quiz.title}
-                    </h3>
+              {quizzes.length === 0 && !loading && (
+                <div className="bg-white py-16 rounded-[2.5rem] border border-slate-50 text-center space-y-4 shadow-sm">
+                  <div className="bg-slate-50 w-14 h-14 rounded-full flex items-center justify-center mx-auto">
+                    <Search className="w-6 h-6 text-slate-200" />
                   </div>
-                  <div className="bg-slate-50 p-3.5 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
-                    <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white" />
-                  </div>
+                  <p className="text-slate-400 font-bold gujarati-text text-sm">કોઈ ડેટા મળ્યો નથી.</p>
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+              )}
 
-          {loading && (
-            <div className="flex flex-col items-center justify-center py-10 opacity-60">
-              <Loader2 className="w-6 h-6 animate-spin mb-2 text-indigo-600" />
-              <span className="text-[9px] font-black tracking-widest uppercase text-slate-400">Loading Content</span>
-            </div>
+              {quizzes.map((quiz) => (
+                <motion.div layout key={quiz.id}>
+                  <Link
+                    href={`/quiz/${quiz.slug}`}
+                    className="block bg-white p-5 rounded-[1.75rem] border border-slate-100 premium-card group"
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/40" />
+                          <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest leading-none">{quiz.date_str || 'Static Quiz'}</span>
+                        </div>
+                        <h3 className="text-base font-black text-slate-800 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4">
+                          {quiz.title}
+                        </h3>
+                      </div>
+                      <div className="bg-slate-50 p-3.5 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
+                        <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white" />
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+
+              {loading && !initialLoading && (
+                <div className="flex flex-col items-center justify-center py-10 opacity-60">
+                  <Loader2 className="w-6 h-6 animate-spin mb-2 text-indigo-600" />
+                  <span className="text-[9px] font-black tracking-widest uppercase text-slate-400">Loading Content</span>
+                </div>
+              )}
+
+              {!loading && hasMore && quizzes.length > 0 && (
+                <button
+                  onClick={loadMore}
+                  className="w-full py-4 bg-white border border-slate-100 rounded-2xl text-slate-500 font-bold text-xs uppercase tracking-widest hover:bg-slate-50 hover:text-indigo-600 transition-all flex items-center justify-center gap-2"
+                >
+                  Load More <ArrowDown className="w-4 h-4" />
+                </button>
+              )}
+            </>
           )}
-
-          {!loading && hasMore && quizzes.length > 0 && (
-            <button
-              onClick={loadMore}
-              className="w-full py-4 bg-white border border-slate-100 rounded-2xl text-slate-500 font-bold text-xs uppercase tracking-widest hover:bg-slate-50 hover:text-indigo-600 transition-all flex items-center justify-center gap-2"
-            >
-              Load More <ArrowDown className="w-4 h-4" />
-            </button>
-          )}
-
         </div>
 
         {/* Branding Footer */}

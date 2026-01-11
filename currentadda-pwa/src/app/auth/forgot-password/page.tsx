@@ -1,19 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
-import { Mail, ArrowLeft, AlertCircle, Loader2, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowLeft, AlertCircle, Loader2, CheckCircle2, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const RATE_LIMIT_KEY = 'forgot_password_last_request';
+const COOLDOWN_SECONDS = 60; // Match Supabase's 60-second cooldown
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
+    const [cooldownRemaining, setCooldownRemaining] = useState(0);
+
+    // Check for existing cooldown on mount and set up interval
+    useEffect(() => {
+        const checkCooldown = () => {
+            const lastRequest = localStorage.getItem(RATE_LIMIT_KEY);
+            if (lastRequest) {
+                const timeSinceLastRequest = Date.now() - parseInt(lastRequest);
+                const remainingTime = Math.max(0, COOLDOWN_SECONDS - Math.floor(timeSinceLastRequest / 1000));
+                setCooldownRemaining(remainingTime);
+            }
+        };
+
+        checkCooldown();
+        const interval = setInterval(checkCooldown, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     const handleReset = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Check client-side rate limit
+        const lastRequest = localStorage.getItem(RATE_LIMIT_KEY);
+        if (lastRequest) {
+            const timeSinceLastRequest = Date.now() - parseInt(lastRequest);
+            if (timeSinceLastRequest < COOLDOWN_SECONDS * 1000) {
+                const remainingSeconds = Math.ceil((COOLDOWN_SECONDS * 1000 - timeSinceLastRequest) / 1000);
+                setError(`Please wait ${remainingSeconds} seconds before requesting another reset link.`);
+                return;
+            }
+        }
+
         setLoading(true);
         setError(null);
 
@@ -22,9 +54,18 @@ export default function ForgotPasswordPage() {
         });
 
         if (error) {
-            setError(error.message);
+            // Handle rate limit errors specifically
+            if (error.message.toLowerCase().includes('rate limit') || 
+                error.message.toLowerCase().includes('email rate') ||
+                error.status === 429) {
+                setError('Too many password reset attempts. Please wait a few minutes and try again. Supabase allows only 2 password reset emails per hour.');
+            } else {
+                setError(error.message);
+            }
             setLoading(false);
         } else {
+            // Store timestamp of successful request
+            localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
             setSuccess(true);
             setLoading(false);
         }
@@ -75,6 +116,13 @@ export default function ForgotPasswordPage() {
                     </div>
                 )}
 
+                {cooldownRemaining > 0 && (
+                    <div className="bg-amber-50 border border-amber-100 p-4 rounded-2xl flex items-center gap-3 text-amber-700 text-sm">
+                        <Clock className="w-5 h-5 flex-shrink-0" />
+                        <p>Please wait {cooldownRemaining} seconds before requesting another reset link.</p>
+                    </div>
+                )}
+
                 <form onSubmit={handleReset} className="space-y-5">
                     <div className="space-y-2">
                         <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
@@ -93,10 +141,15 @@ export default function ForgotPasswordPage() {
 
                     <button
                         type="submit"
-                        disabled={loading}
-                        className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 group"
+                        disabled={loading || cooldownRemaining > 0}
+                        className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 group disabled:bg-slate-300 disabled:shadow-none disabled:cursor-not-allowed"
                     >
-                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : cooldownRemaining > 0 ? (
+                            <>
+                                <Clock className="w-5 h-5" />
+                                <span>Wait {cooldownRemaining}s</span>
+                            </>
+                        ) : (
                             <>
                                 <span>Send Reset Link</span>
                                 <Mail className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
