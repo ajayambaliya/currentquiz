@@ -3,7 +3,7 @@ name: CurrentAdda Automation (Scrape, Sync & Telegram)
 on:
   schedule:
     # Runs at 00:00, 06:00, 12:00, 18:00 UTC
-    - cron: '0 0,6,12,18 * * *'
+    - cron: '31 6 * * *'
   workflow_dispatch:
 
 jobs:
