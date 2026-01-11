@@ -1,0 +1,35 @@
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "CurrentAdda - Daily Gujarati Current Affairs Quiz",
+  description: "Play daily live current affairs quizzes in Gujarati for GPSC and GSSSB exams.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "CurrentAdda",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#4f46e5",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="gu">
+      <body className="antialiased">
+        {children}
+      </body>
+    </html>
+  );
+}

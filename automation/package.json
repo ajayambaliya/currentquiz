@@ -1,0 +1,9 @@
+{
+    "name": "automation-pdf-generator",
+    "version": "1.0.0",
+    "description": "PDF Generator using Playwright",
+    "main": "generate_pdf.js",
+    "dependencies": {
+        "playwright": "^1.40.0"
+    }
+}
