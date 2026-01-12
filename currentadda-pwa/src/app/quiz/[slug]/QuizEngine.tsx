@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ChevronLeft, ChevronRight, X, Trophy, HelpCircle, Loader2, ShieldAlert, BookOpen, ExternalLink, RotateCcw } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight, X, Trophy, HelpCircle, Loader2, BookOpen, ExternalLink, RotateCcw } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '../../../hooks/useAuth';
 import { supabase } from '../../../lib/supabase';
@@ -126,31 +126,7 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
 
     if (!user) return null;
 
-    if (!isVerified) {
-        return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-white p-10 rounded-[3rem] shadow-2xl text-center space-y-6 max-w-sm border border-slate-100"
-                >
-                    <div className="bg-amber-50 w-24 h-24 rounded-[2rem] flex items-center justify-center mx-auto text-amber-500 shadow-inner">
-                        <ShieldAlert className="w-12 h-12" />
-                    </div>
-                    <div className="space-y-2">
-                        <h2 className="text-2xl font-black text-slate-800">Email Not Verified</h2>
-                        <p className="text-slate-500 leading-relaxed font-medium">તમારે ક્વિઝ રમવા માટે તમારું ઈમેઈલ વેરિફાઈ કરવું જરૂરી છે. મહેરબાની કરીને તમારું ઈનબોક્સ ચેક કરો.</p>
-                    </div>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold shadow-xl hover:shadow-slate-200 transition-all active:scale-95"
-                    >
-                        I've Verified
-                    </button>
-                </motion.div>
-            </div>
-        );
-    }
+    // Email verification is now disabled - users can access quizzes immediately after signup
 
     if (showResults) {
         const score = calculateScore();

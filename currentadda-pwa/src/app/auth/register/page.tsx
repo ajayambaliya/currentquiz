@@ -48,6 +48,14 @@ export default function RegisterPage() {
             return;
         }
 
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError("Please enter a valid email address");
+            setLoading(false);
+            return;
+        }
+
         // Check client-side rate limit
         const lastRequest = localStorage.getItem(RATE_LIMIT_KEY);
         if (lastRequest) {
@@ -67,7 +75,7 @@ export default function RegisterPage() {
                 data: {
                     full_name: fullName,
                 },
-                emailRedirectTo: `${window.location.origin}/auth/callback`,
+                // Remove email redirect since confirmation is disabled
             },
         });
 
@@ -100,10 +108,27 @@ export default function RegisterPage() {
                     <div className="bg-emerald-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto text-emerald-500">
                         <CheckCircle2 className="w-12 h-12" />
                     </div>
-                    <h2 className="text-2xl font-bold text-slate-800">Check your email</h2>
-                    <p className="text-slate-500">We've sent a verification link to <span className="font-bold text-slate-700">{email}</span>. Please verify your email to access the quizzes.</p>
-                    <Link href="/auth/login" className="block w-full bg-slate-900 text-white py-4 rounded-2xl font-bold">
-                        Back to Login
+                    <h2 className="text-2xl font-bold text-slate-800">એકાઉન્ટ બનાવ્યું!</h2>
+                    <div className="space-y-3 text-slate-600">
+                        <p className="gujarati-text leading-relaxed">
+                            🎉 <span className="font-bold text-slate-700">{fullName}</span>, તમારું એકાઉન્ટ સફળતાપૂર્વક બનાવાઈ ગયું છે!
+                        </p>
+                        <p className="gujarati-text leading-relaxed">
+                            હવે તમે તમારા <span className="font-bold text-indigo-600">{email}</span> અને પાસવર્ડ વડે લોગિન કરીને ક્વિઝ રમી શકો છો.
+                        </p>
+                        <div className="bg-indigo-50 p-4 rounded-2xl border border-indigo-100">
+                            <p className="text-sm gujarati-text text-indigo-700 font-medium">
+                                📚 GPSC, GSSSB, તલાટી અને અન્ય તમામ સ્પર્ધાત્મક પરીક્ષાઓ માટે દરરોજ નવા ક્વિઝ ઉપલબ્ધ છે!
+                            </p>
+                        </div>
+                        <div className="bg-emerald-50 p-4 rounded-2xl border border-emerald-100">
+                            <p className="text-sm gujarati-text text-emerald-700 font-medium">
+                                🏆 તમારા સ્કોર ટ્રેક કરો અને લીડરબોર્ડમાં ટોપ પર આવો!
+                            </p>
+                        </div>
+                    </div>
+                    <Link href="/auth/login" className="block w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold hover:bg-indigo-700 transition-all">
+                        હવે લોગિન કરો
                     </Link>
                 </motion.div>
             </main>
