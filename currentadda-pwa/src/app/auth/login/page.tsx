@@ -7,6 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LogIn, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import LoginMigrationBanner from '@/components/LoginMigrationBanner';
+import LoginErrorMessage from '@/components/LoginErrorMessage';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -58,11 +60,10 @@ export default function LoginPage() {
                         </div>
                     </div>
 
+                    <LoginMigrationBanner />
+
                     {error && (
-                        <div className="bg-rose-50 border border-rose-100 p-4 rounded-2xl flex items-center gap-3 text-rose-600 text-sm">
-                            <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                            <p>{error}</p>
-                        </div>
+                        <LoginErrorMessage error={error} />
                     )}
 
                     <form onSubmit={handleLogin} className="space-y-5">

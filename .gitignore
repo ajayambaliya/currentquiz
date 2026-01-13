@@ -72,6 +72,12 @@ yarn-error.log*
 !.env.example
 !**/.env.example
 
+# Environment Backup Files (contain real credentials)
+.env.backup
+.env.local.backup
+**/.env.backup
+**/.env.local.backup
+
 # Vercel
 .vercel
 **/.vercel
