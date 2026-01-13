@@ -17,8 +17,8 @@ class NotificationSender:
             app_id: OneSignal App ID
             api_key: OneSignal REST API Key
         """
-        self.app_id = app_id or os.getenv("ONESIGNAL_APP_ID")
-        self.api_key = api_key or os.getenv("ONESIGNAL_REST_API_KEY")
+        self.app_id = (app_id or os.getenv("ONESIGNAL_APP_ID", "")).strip()
+        self.api_key = (api_key or os.getenv("ONESIGNAL_REST_API_KEY", "")).strip()
         
         if not self.app_id or not self.api_key:
             logger.warning("OneSignal App ID or API Key missing. Notifications will be skipped.")
@@ -53,15 +53,18 @@ class NotificationSender:
 
         payload = {
             "app_id": self.app_id,
-            "included_segments": ["Subscribed Users"],
+            # Use filters instead of segments for 100% targeting
+            "filters": [
+                {"field": "last_session", "relation": ">", "value": "0"}
+            ],
             "headings": {"en": title},
             "contents": {"en": message},
             "url": launch_url,
             "isAnyWeb": True,
             "chrome_web_icon": "https://currentadda.vercel.app/newlogo.png",
-            "chrome_web_badge": "https://currentadda.vercel.app/newlogo.png", # Small icon in status bar
-            "android_visibility": 1, # Public
-            "priority": 10, # High priority
+            "chrome_web_badge": "https://currentadda.vercel.app/newlogo.png",
+            "android_visibility": 1,
+            "priority": 10
         }
 
         try:
@@ -69,11 +72,16 @@ class NotificationSender:
             response_data = response.json()
             
             if response.status_code == 200:
-                logger.info(f"Successfully sent OneSignal notification for quiz: {quiz_slug}")
+                recipients = response_data.get('recipients', 0)
+                if recipients == 0:
+                    logger.warning(f"⚠️ OneSignal sent message but targeted 0 recipients. Response: {response_data}")
+                    logger.info("Tip: Check your OneSignal Dashboard -> Audience -> Segments to ensure 'Subscribed Users' isn't empty.")
+                else:
+                    logger.info(f"✅ OneSignal: Notification sent! Recipients: {recipients}")
                 return True
             else:
-                logger.error(f"Failed to send OneSignal notification: {response_data}")
+                logger.error(f"❌ OneSignal API Error: {response_data}")
                 return False
         except Exception as e:
-            logger.error(f"Error sending OneSignal notification: {str(e)}")
+            logger.error(f"❌ Network Error: {str(e)}")
             return False
