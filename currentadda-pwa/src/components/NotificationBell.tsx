@@ -16,35 +16,36 @@ export default function NotificationBell() {
 
             const appId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
             if (!appId) {
-                console.warn("⚠️ OneSignal App ID not found in environment.");
+                console.error("❌ NEXT_PUBLIC_ONESIGNAL_APP_ID is missing!");
                 setLoading(false);
                 return;
             }
 
-            // Prevent double-initialization
             if ((window as any).OneSignalInitStarted) {
-                // If already started elsewhere, check status and stop loading
-                const checkInterval = setInterval(() => {
-                    if ((window as any).OneSignal?.initialized) {
-                        try {
-                            setIsSubscribed(!!(window as any).OneSignal.User.PushSubscription.optedIn);
-                        } catch (e) { }
+                // Wait for existing initialization to complete
+                let attempts = 0;
+                const checkReady = setInterval(() => {
+                    if ((OneSignal as any).initialized) {
+                        setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
                         setLoading(false);
-                        clearInterval(checkInterval);
+                        clearInterval(checkReady);
+                    }
+                    if (attempts++ > 10) { // Max 10 attempts (5 seconds)
+                        setLoading(false);
+                        clearInterval(checkReady);
                     }
                 }, 500);
-                setTimeout(() => { clearInterval(checkInterval); setLoading(false); }, 5000);
                 return;
             }
             (window as any).OneSignalInitStarted = true;
 
             const safetyTimeout = setTimeout(() => {
-                console.warn("⏳ OneSignal timed out after 7s.");
+                console.warn("⏳ OneSignal init timed out (7s).");
                 setLoading(false);
             }, 7000);
 
             try {
-                console.log("🚀 Initializing OneSignal:", appId);
+                console.log("🚀 Initializing OneSignal...");
                 await OneSignal.init({
                     appId: appId,
                     allowLocalhostAsSecureOrigin: true,
@@ -53,14 +54,9 @@ export default function NotificationBell() {
                 });
 
                 console.log("✅ OneSignal Ready");
+                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
 
-                // Set initial state safely
-                if (OneSignal.User?.PushSubscription) {
-                    setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
-                }
-
-                // Listener for foreground
-                OneSignal.Notifications?.addEventListener("foregroundWillDisplay", (event) => {
+                OneSignal.Notifications.addEventListener("foregroundWillDisplay", (event) => {
                     if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
                         new Notification(event.notification.title || "New Quiz", {
                             body: event.notification.body,
@@ -70,52 +66,56 @@ export default function NotificationBell() {
                 });
 
             } catch (error: any) {
-                console.error('❌ OneSignal Error:', error);
+                console.error('❌ OneSignal Init Error:', error);
             } finally {
                 clearTimeout(safetyTimeout);
                 setLoading(false);
             }
         };
 
-        initOneSignal();
+        const timer = setTimeout(initOneSignal, 500); // Small delay to let page settle
 
-        const statusPoller = setInterval(() => {
-            try {
-                if (typeof window !== 'undefined' && (window as any).OneSignal?.User?.PushSubscription) {
-                    const current = !!(window as any).OneSignal.User.PushSubscription.optedIn;
-                    setIsSubscribed(current);
-                }
-            } catch (e) { }
-        }, 3000);
+        const poller = setInterval(() => {
+            if ((OneSignal as any).initialized) {
+                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
+            }
+        }, 5000);
 
-        return () => clearInterval(statusPoller);
+        return () => {
+            clearTimeout(timer);
+            clearInterval(poller);
+        };
     }, []);
 
     const handleToggleNotifications = async () => {
         if (loading) return;
 
-        const os = (window as any).OneSignal;
-        if (!os || !os.initialized) {
-            alert("નોટિફિકેશન સિસ્ટમ હજી તૈયાર નથી. કૃપા કરીને થોડીવાર પછી પ્રયત્ન કરો.");
+        if (!(OneSignal as any).initialized) {
+            // Check if App ID is missing
+            if (!process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID) {
+                alert("સીસ્ટમ એરર: App ID મળ્યું નથી. કૃપા કરીને Vercel માં Environment Variable ચેક કરો.");
+            } else {
+                alert("નોટિફિકેશન સિસ્ટમ હજી તૈયાર નથી. કૃપા કરીને પેજ રીફ્રેશ કરો અથવા થોડીવાર પછી પ્રયત્ન કરો.");
+            }
             return;
         }
 
         setLoading(true);
         try {
             if (isSubscribed) {
-                await os.User.PushSubscription.optOut();
+                await OneSignal.User.PushSubscription.optOut();
                 setIsSubscribed(false);
             } else {
-                const currentPermission = await os.Notifications.permission;
-                if (currentPermission === 'denied') {
-                    alert("તમે નોટિફિકેશન બ્લોક કરેલ છે. કૃપા કરીને બ્રાઉઝર સેટિંગ્સમાં જઈને તેને Allow કરો.");
+                const permission = await OneSignal.Notifications.permission;
+                if ((permission as any) === 'denied') {
+                    alert("તમે નોટિફિકેશન બ્લોક કરેલ છે. બ્રાઉઝર સેટિંગ્સમાં જઈને 'Allow' કરો.");
                     setLoading(false);
                     return;
                 }
 
-                await os.Notifications.requestPermission();
-                await os.User.PushSubscription.optIn();
-                setIsSubscribed(!!os.User.PushSubscription.optedIn);
+                await OneSignal.Notifications.requestPermission();
+                await OneSignal.User.PushSubscription.optIn();
+                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
             }
         } catch (error) {
             console.error('❌ Toggle Error:', error);
