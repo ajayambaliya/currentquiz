@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import OneSignal from 'react-onesignal';
 import { Bell, BellOff, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,53 +8,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function NotificationBell() {
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isSdkReady, setIsSdkReady] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
 
-    useEffect(() => {
-        const initOneSignal = async () => {
-            if (typeof window === 'undefined') return;
+    const initAttempted = useRef(false);
 
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        if (initAttempted.current) return;
+        initAttempted.current = true;
+
+        const initOneSignal = async () => {
             const appId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
             if (!appId) {
-                console.error("❌ NEXT_PUBLIC_ONESIGNAL_APP_ID is missing!");
+                console.error("❌ OneSignal App ID missing (NEXT_PUBLIC_ONESIGNAL_APP_ID)");
                 setLoading(false);
                 return;
             }
-
-            if ((window as any).OneSignalInitStarted) {
-                // Wait for existing initialization to complete
-                let attempts = 0;
-                const checkReady = setInterval(() => {
-                    if ((OneSignal as any).initialized) {
-                        setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
-                        setLoading(false);
-                        clearInterval(checkReady);
-                    }
-                    if (attempts++ > 10) { // Max 10 attempts (5 seconds)
-                        setLoading(false);
-                        clearInterval(checkReady);
-                    }
-                }, 500);
-                return;
-            }
-            (window as any).OneSignalInitStarted = true;
-
-            const safetyTimeout = setTimeout(() => {
-                console.warn("⏳ OneSignal init timed out (7s).");
-                setLoading(false);
-            }, 7000);
 
             try {
-                console.log("🚀 Initializing OneSignal...");
+                console.log("🚀 OneSignal: Initializing with ID", appId);
                 await OneSignal.init({
                     appId: appId,
                     allowLocalhostAsSecureOrigin: true,
-                    serviceWorkerParam: { scope: '/' },
-                    serviceWorkerPath: 'OneSignalSDKWorker.js',
+                    serviceWorkerPath: '/OneSignalSDKWorker.js',
                 });
 
-                console.log("✅ OneSignal Ready");
-                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
+                console.log("✅ OneSignal: Initialization successful");
+                setIsSdkReady(true);
+
+                const optedIn = OneSignal.User.PushSubscription.optedIn;
+                setIsSubscribed(!!optedIn);
 
                 OneSignal.Notifications.addEventListener("foregroundWillDisplay", (event) => {
                     if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
@@ -66,17 +51,24 @@ export default function NotificationBell() {
                 });
 
             } catch (error: any) {
-                console.error('❌ OneSignal Init Error:', error);
+                console.error('❌ OneSignal: Initialization failed', error);
+                if (error?.message?.includes('already initialized')) {
+                    console.log("ℹ️ OneSignal was already initialized.");
+                    setIsSdkReady(true);
+                    if (OneSignal.User?.PushSubscription) {
+                        setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
+                    }
+                }
             } finally {
-                clearTimeout(safetyTimeout);
                 setLoading(false);
             }
         };
 
-        const timer = setTimeout(initOneSignal, 500); // Small delay to let page settle
+        // Small delay to ensure browser environment is stable
+        const timer = setTimeout(initOneSignal, 1000);
 
         const poller = setInterval(() => {
-            if ((OneSignal as any).initialized) {
+            if (OneSignal.User?.PushSubscription) {
                 setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
             }
         }, 5000);
@@ -90,14 +82,14 @@ export default function NotificationBell() {
     const handleToggleNotifications = async () => {
         if (loading) return;
 
-        if (!(OneSignal as any).initialized) {
-            // Check if App ID is missing
-            if (!process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID) {
-                alert("સીસ્ટમ એરર: App ID મળ્યું નથી. કૃપા કરીને Vercel માં Environment Variable ચેક કરો.");
+        if (!isSdkReady) {
+            if (OneSignal.User?.PushSubscription) {
+                setIsSdkReady(true);
+                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
             } else {
-                alert("નોટિફિકેશન સિસ્ટમ હજી તૈયાર નથી. કૃપા કરીને પેજ રીફ્રેશ કરો અથવા થોડીવાર પછી પ્રયત્ન કરો.");
+                alert("નોટિફિકેશન સિસ્ટમ હજી તૈયાર નથી. કૃપા કરીને થોડીવાર પછી પ્રયત્ન કરો.");
+                return;
             }
-            return;
         }
 
         setLoading(true);
@@ -115,10 +107,13 @@ export default function NotificationBell() {
 
                 await OneSignal.Notifications.requestPermission();
                 await OneSignal.User.PushSubscription.optIn();
+
+                await new Promise(r => setTimeout(r, 1500));
                 setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
             }
         } catch (error) {
-            console.error('❌ Toggle Error:', error);
+            console.error('❌ OneSignal: Toggle failed', error);
+            alert("કંઈક ભૂલ થઈ છે. કૃપા કરીને ફરીથી પ્રયત્ન કરો.");
         } finally {
             setLoading(false);
         }
@@ -148,7 +143,6 @@ export default function NotificationBell() {
                     <BellOff className="w-5 h-5" />
                 )}
 
-                {/* Status Indicator */}
                 {!loading && (
                     <span className={`absolute top-2 right-2 w-2 h-2 rounded-full border-2 border-white
             ${isSubscribed ? 'bg-green-500' : 'bg-slate-300'}`}
@@ -156,7 +150,6 @@ export default function NotificationBell() {
                 )}
             </motion.button>
 
-            {/* Premium Tooltip */}
             <AnimatePresence>
                 {showTooltip && (
                     <motion.div
