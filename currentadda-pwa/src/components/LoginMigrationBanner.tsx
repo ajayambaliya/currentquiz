@@ -3,8 +3,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { AlertTriangle } from 'lucide-react';
+import { useMigrationState } from '@/hooks/useMigrationState';
 
 const LoginMigrationBanner = () => {
+  const { shouldShowNotices } = useMigrationState();
+
+  // Don't render if user has already acknowledged migration
+  if (!shouldShowNotices) {
+    return null;
+  }
+
   return (
     <div className="bg-amber-50 border border-amber-100 p-4 rounded-2xl space-y-3">
       <div className="flex items-center gap-3 text-amber-700">

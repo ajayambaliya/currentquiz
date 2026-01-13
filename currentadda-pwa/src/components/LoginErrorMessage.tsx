@@ -3,20 +3,23 @@
 import React from 'react';
 import Link from 'next/link';
 import { AlertCircle, UserPlus } from 'lucide-react';
+import { useMigrationState } from '@/hooks/useMigrationState';
 
 interface LoginErrorMessageProps {
   error: string;
 }
 
 const LoginErrorMessage = ({ error }: LoginErrorMessageProps) => {
+  const { shouldShowNotices } = useMigrationState();
+
   // Check if error is related to invalid credentials
   const isCredentialError = error.toLowerCase().includes('invalid') || 
                            error.toLowerCase().includes('credentials') ||
                            error.toLowerCase().includes('password') ||
                            error.toLowerCase().includes('email');
 
-  if (!isCredentialError) {
-    // Show regular error for other types of errors
+  if (!isCredentialError || !shouldShowNotices) {
+    // Show regular error for other types of errors or if migration is acknowledged
     return (
       <div className="bg-rose-50 border border-rose-100 p-4 rounded-2xl flex items-center gap-3 text-rose-600 text-sm">
         <AlertCircle className="w-5 h-5 flex-shrink-0" />
@@ -25,7 +28,7 @@ const LoginErrorMessage = ({ error }: LoginErrorMessageProps) => {
     );
   }
 
-  // Show migration-specific error message
+  // Show migration-specific error message only if user hasn't acknowledged migration
   return (
     <div className="bg-rose-50 border border-rose-100 p-4 rounded-2xl space-y-3">
       <div className="flex items-center gap-3 text-rose-700">

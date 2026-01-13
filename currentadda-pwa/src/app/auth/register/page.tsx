@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { UserPlus, Mail, Lock, User, AlertCircle, Loader2, CheckCircle2, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { migrationState } from '@/lib/migrationState';
+import RegistrationMigrationNotice from '@/components/RegistrationMigrationNotice';
 
 const RATE_LIMIT_KEY = 'signup_last_request';
 const COOLDOWN_SECONDS = 60; // Match Supabase's 60-second cooldown
@@ -92,6 +94,8 @@ export default function RegisterPage() {
         } else {
             // Store timestamp of successful request
             localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
+            // Mark migration as acknowledged on successful registration
+            migrationState.acknowledge();
             setSuccess(true);
             setLoading(false);
         }
@@ -146,6 +150,8 @@ export default function RegisterPage() {
                     <h1 className="text-2xl font-bold text-slate-800">Create Account</h1>
                     <p className="text-slate-500 text-sm">Join CurrentAdda to track your scores</p>
                 </div>
+
+                <RegistrationMigrationNotice />
 
                 {error && (
                     <div className="bg-rose-50 border border-rose-100 p-4 rounded-2xl flex items-center gap-3 text-rose-600 text-sm">

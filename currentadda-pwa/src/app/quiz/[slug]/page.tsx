@@ -37,5 +37,5 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
         notFound();
     }
 
-    return <QuizEngine quiz={data.quiz} questions={data.questions} />;
+    return <QuizEngine quiz={data.quiz} questions={data.questions || []} />;
 }
