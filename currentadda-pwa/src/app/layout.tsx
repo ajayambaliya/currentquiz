@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="gu">
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <ProtectContent />
         {children}
       </body>

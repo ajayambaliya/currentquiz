@@ -25,6 +25,7 @@ from src.telegram_sender import TelegramSender
 from src.telegram_text_sender import TelegramTextSender
 from src.date_extractor import DateExtractor
 from src.supabase_manager import SupabaseManager
+from src.notification_sender import NotificationSender
 
 # Load environment variables
 from dotenv import load_dotenv
@@ -102,6 +103,7 @@ def process_quiz(
     telegram_sender: TelegramSender,
     telegram_text_sender: TelegramTextSender,
     supabase_manager: SupabaseManager,
+    notification_sender: NotificationSender,
     state_manager: StateManager,
     date_extractor: DateExtractor
 ) -> bool:
@@ -268,6 +270,11 @@ def process_quiz(
                            f"🏆 તમે લીડરબોર્ડમાં તમારો રેન્ક જોઈ શકો છો.\n\n" \
                            f"#CurrentAdda #LiveQuiz #GPSC #GSSSB #GPRB #Constable #PSI"
             telegram_sender.send_message(live_message, parse_mode='HTML')
+            
+            # Step 7.1: Send Push Notification
+            if notification_sender:
+                logger.info("Step 7.1: Sending push notification...")
+                notification_sender.send_quiz_notification(date_gujarati, quiz_slug)
         else:
             logger.warning("⚠️  Supabase sync failed, skipping Live Quiz link")
 
@@ -326,6 +333,7 @@ def main():
         pdf_generator = PDFGenerator()
         date_extractor = DateExtractor()
         supabase_manager = SupabaseManager()
+        notification_sender = NotificationSender()
         
         # Prepare channel username (add @ if not present)
         channel = env_vars['telegram_channel']
@@ -407,6 +415,7 @@ def main():
                 telegram_sender=telegram_sender,
                 telegram_text_sender=telegram_text_sender,
                 supabase_manager=supabase_manager,
+                notification_sender=notification_sender,
                 state_manager=state_manager,
                 date_extractor=date_extractor
             )

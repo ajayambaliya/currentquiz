@@ -10,6 +10,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { motion } from 'framer-motion';
 import { parseSearchDate } from '@/lib/searchUtils';
 import { QuizListSkeleton, SearchBarSkeleton } from '@/components/SkeletonLoader';
+import NotificationBell from '@/components/NotificationBell';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -124,6 +125,7 @@ export default function HomePage() {
                 src="/newlogo.png"
                 alt="Logo"
                 fill
+                sizes="40px"
                 className="object-contain mix-blend-multiply"
               />
             </div>
@@ -139,6 +141,7 @@ export default function HomePage() {
               <Link href="/author" title="Author Profile" className="p-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-400 hover:text-indigo-600 transition-all">
                 <User className="w-5 h-5" />
               </Link>
+              <NotificationBell />
               <button
                 onClick={handleLogout}
                 className="p-2 text-slate-300 hover:text-rose-500 transition-colors"
