@@ -22,7 +22,6 @@ export default function OneSignalInit() {
                 await OneSignal.init({
                     appId: appId,
                     allowLocalhostAsSecureOrigin: true,
-                    serviceWorkerPath: '/OneSignalSDKWorker.js',
                 });
                 console.log("✅ OneSignal: Ready");
             } catch (e: any) {
