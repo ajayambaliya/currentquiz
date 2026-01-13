@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import OneSignal from 'react-onesignal';
 import { Bell, BellOff, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,88 +8,45 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function NotificationBell() {
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [isSdkReady, setIsSdkReady] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
 
-    const initAttempted = useRef(false);
-
     useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        if (initAttempted.current) return;
-        initAttempted.current = true;
-
-        const initOneSignal = async () => {
-            const appId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
-            if (!appId) {
-                console.error("❌ OneSignal App ID missing (NEXT_PUBLIC_ONESIGNAL_APP_ID)");
+        // Poll for OneSignal presence and subscription status
+        const checkStatus = () => {
+            if (typeof window !== 'undefined' && OneSignal.User?.PushSubscription) {
+                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
                 setLoading(false);
-                return;
+                return true;
             }
-
-            try {
-                console.log("🚀 OneSignal: Initializing with ID", appId);
-                await OneSignal.init({
-                    appId: appId,
-                    allowLocalhostAsSecureOrigin: true,
-                    serviceWorkerPath: '/OneSignalSDKWorker.js',
-                });
-
-                console.log("✅ OneSignal: Initialization successful");
-                setIsSdkReady(true);
-
-                const optedIn = OneSignal.User.PushSubscription.optedIn;
-                setIsSubscribed(!!optedIn);
-
-                OneSignal.Notifications.addEventListener("foregroundWillDisplay", (event) => {
-                    if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-                        new Notification(event.notification.title || "New Quiz", {
-                            body: event.notification.body,
-                            icon: "/newlogo.png"
-                        });
-                    }
-                });
-
-            } catch (error: any) {
-                console.error('❌ OneSignal: Initialization failed', error);
-                if (error?.message?.includes('already initialized')) {
-                    console.log("ℹ️ OneSignal was already initialized.");
-                    setIsSdkReady(true);
-                    if (OneSignal.User?.PushSubscription) {
-                        setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
-                    }
-                }
-            } finally {
-                setLoading(false);
-            }
+            return false;
         };
 
-        // Small delay to ensure browser environment is stable
-        const timer = setTimeout(initOneSignal, 1000);
+        // Try immediately
+        if (checkStatus()) return;
 
-        const poller = setInterval(() => {
-            if (OneSignal.User?.PushSubscription) {
-                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
-            }
-        }, 5000);
+        // Otherwise poll until ready or timeout
+        const interval = setInterval(() => {
+            if (checkStatus()) clearInterval(interval);
+        }, 1000);
+
+        const timeout = setTimeout(() => {
+            clearInterval(interval);
+            setLoading(false);
+        }, 10000);
 
         return () => {
-            clearTimeout(timer);
-            clearInterval(poller);
+            clearInterval(interval);
+            clearTimeout(timeout);
         };
     }, []);
 
     const handleToggleNotifications = async () => {
         if (loading) return;
 
-        if (!isSdkReady) {
-            if (OneSignal.User?.PushSubscription) {
-                setIsSdkReady(true);
-                setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
-            } else {
-                alert("નોટિફિકેશન સિસ્ટમ હજી તૈયાર નથી. કૃપા કરીને થોડીવાર પછી પ્રયત્ન કરો.");
-                return;
-            }
+        // Check if SDK is actually available
+        if (!OneSignal.User?.PushSubscription) {
+            alert("નોટિફિકેશન સિસ્ટમ હજી તૈયાર નથી. કૃપા કરીને થોડીવાર પછી પ્રયત્ન કરો.");
+            return;
         }
 
         setLoading(true);
@@ -106,14 +63,17 @@ export default function NotificationBell() {
                 }
 
                 await OneSignal.Notifications.requestPermission();
+
+                // OneSignal.optIn is the modern way to ensure they are active
                 await OneSignal.User.PushSubscription.optIn();
 
-                await new Promise(r => setTimeout(r, 1500));
+                // Wait for sync
+                await new Promise(r => setTimeout(r, 2000));
                 setIsSubscribed(!!OneSignal.User.PushSubscription.optedIn);
             }
         } catch (error) {
-            console.error('❌ OneSignal: Toggle failed', error);
-            alert("કંઈક ભૂલ થઈ છે. કૃપા કરીને ફરીથી પ્રયત્ન કરો.");
+            console.error('❌ OneSignal Error:', error);
+            alert("કંઈક ભૂલ થઈ છે. કૃપા કરીને રીફ્રેશ કરો.");
         } finally {
             setLoading(false);
         }
@@ -133,7 +93,6 @@ export default function NotificationBell() {
                         ? 'bg-indigo-50 border-indigo-100 text-indigo-600 shadow-sm'
                         : 'bg-slate-50 border-slate-100 text-slate-400 hover:text-indigo-600'
                     }`}
-                title={isSubscribed ? "Notifications Enabled" : "Enable Notifications"}
             >
                 {loading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -159,8 +118,8 @@ export default function NotificationBell() {
                         className="absolute top-full right-0 mt-3 w-48 p-3 bg-white/90 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl z-[60] text-[10px] font-bold text-slate-600 leading-tight"
                     >
                         {isSubscribed
-                            ? "તમે નોટિફિકેશન મેળવી રહ્યા છો! નવી ક્વિઝ આવશે ત્યારે તમને સમાચાર મળશે."
-                            : "નવી ક્વિઝ અપલોડ થાય ત્યારે તરત જાણવા માટે નોટિફિકેશન ચાલુ કરો."}
+                            ? "તમે નોટિફિકેશન મેળવી રહ્યા છો!"
+                            : "નવી ક્વિઝ માટે નોટિફિકેશન ચાલુ કરો."}
                     </motion.div>
                 )}
             </AnimatePresence>

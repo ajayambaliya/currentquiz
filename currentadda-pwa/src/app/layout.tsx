@@ -26,6 +26,7 @@ export const viewport: Viewport = {
 };
 
 import ProtectContent from "@/components/ProtectContent";
+import OneSignalInit from "@/components/OneSignalInit";
 
 export default function RootLayout({
   children,
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="gu">
       <body className="antialiased" suppressHydrationWarning>
+        <OneSignalInit />
         <ProtectContent />
         {children}
       </body>
