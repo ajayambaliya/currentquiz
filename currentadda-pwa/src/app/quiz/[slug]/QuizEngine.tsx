@@ -98,7 +98,7 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                 .single();
 
             if (existingScore) {
-                console.log('Score already exists for this quiz. First attempt locked.');
+                // Score already exists for this quiz. First attempt locked.
                 return;
             }
 
@@ -109,7 +109,7 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                 total_questions: totalQuestions,
             });
         } catch (err) {
-            console.error('Failed to save score:', err);
+            // Failed to save score - silent fail for production
         }
     };
 

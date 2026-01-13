@@ -22,7 +22,7 @@ async function getQuizData(slug: string) {
         .order('q_index', { ascending: true });
 
     if (questionsError) {
-        console.error('Error fetching questions:', questionsError);
+        // Error fetching questions - return null for production
         return null;
     }
 

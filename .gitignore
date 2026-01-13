@@ -78,6 +78,19 @@ yarn-error.log*
 **/.env.backup
 **/.env.local.backup
 
+# Debugging and Testing Files (contain sensitive data)
+test_auth*.py
+test_supabase*.py
+test_supabase*.js
+fix_user*.py
+fix_email*.py
+force_confirm*.py
+migrate_supabase*.py
+verify_fix*.py
+debug_auth*.py
+*_backup_*.json
+user_dependent_data.json
+
 # Vercel
 .vercel
 **/.vercel

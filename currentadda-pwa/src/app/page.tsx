@@ -95,7 +95,7 @@ export default function HomePage() {
         }
       }
     } catch (err) {
-      console.error('Error fetching quizzes:', err);
+      // Error fetching quizzes - silent fail for production
     } finally {
       setLoading(false);
       setInitialLoading(false);

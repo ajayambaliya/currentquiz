@@ -79,7 +79,7 @@ export default function LeaderboardPage() {
 
             setLeaders(mergedData);
         } catch (error) {
-            console.error('Error fetching leaders:', error);
+            // Error fetching leaders - silent fail for production
         } finally {
             setLoading(false);
         }
