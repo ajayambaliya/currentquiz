@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
-import { subMonths } from 'date-fns';
 
 const categories = [
     { name: 'Agriculture', icon: Sprout, color: 'text-emerald-500', bg: 'bg-emerald-50' },
@@ -53,22 +52,25 @@ export default function CategoriesPage() {
     async function fetchCategoryDistribution() {
         try {
             setLoadingCounts(true);
-            const eightMonthsAgo = subMonths(new Date(), 8).toISOString();
 
-            // Smart single query to get all active categories and their distribution
-            // We fetch only the 'category' field for questions in the last 8 months
-            // This is efficient because 'category' should be indexed
-            const { data, error } = await supabase
-                .from('questions')
-                .select('category')
-                .gte('created_at', eightMonthsAgo);
+            // Perform parallel HEAD queries for each category to get exact counts
+            // This bypasses the 1000-row limit of .select() and is very accurate
+            const countPromises = categories.map(async (cat) => {
+                const { count, error } = await supabase
+                    .from('questions')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('category', cat.name);
 
-            if (error) throw error;
-
-            const distribution = (data || []).reduce((acc: any, curr: any) => {
-                if (curr.category) {
-                    acc[curr.category] = (acc[curr.category] || 0) + 1;
+                if (error) {
+                    console.error(`Error counting ${cat.name}:`, error);
+                    return { name: cat.name, count: 0 };
                 }
+                return { name: cat.name, count: count || 0 };
+            });
+
+            const results = await Promise.all(countPromises);
+            const distribution = results.reduce((acc: any, curr: any) => {
+                acc[curr.name] = curr.count;
                 return acc;
             }, {});
 
