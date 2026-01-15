@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Trophy, Star, ArrowLeft, Loader2, Target, Award, TrendingUp, BookOpen, User } from 'lucide-react';
+import { Trophy, Star, ArrowLeft, Loader2, Target, Award, TrendingUp, BookOpen, User, LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { LeaderboardSkeleton } from '@/components/SkeletonLoader';
@@ -167,15 +167,29 @@ export default function LeaderboardPage() {
                 </div>
             </div>
 
+            {/* Bottom Footer Attribution */}
+            <footer className="py-20 text-center space-y-6 opacity-30 group hover:opacity-100 transition-all">
+                <div className="flex flex-col items-center justify-center gap-4">
+                    <div className="w-12 h-[1px] bg-white/10" />
+                    <Link href="/author" className="text-[10px] font-black uppercase tracking-[0.5em] hover:text-indigo-400 transition-colors">
+                        Crafted by Ajay Ambaliya
+                    </Link>
+                    <div className="w-12 h-[1px] bg-white/10" />
+                </div>
+            </footer>
+
             <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-6 pb-8 pt-2">
                 <div className="glass p-2 rounded-[2rem] modern-shadow border border-white/40 flex justify-around items-center shadow-2xl">
                     <Link href="/" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
                         <div className="p-3"><HomeIcon className="w-6 h-6" /></div>
                     </Link>
+                    <Link href="/categories" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
+                        <div className="p-3"><LayoutGrid className="w-6 h-6" /></div>
+                    </Link>
                     <Link href="/leaderboard" className="flex flex-col items-center gap-1 text-indigo-600">
                         <div className="bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-100"><Trophy className="w-6 h-6" /></div>
                     </Link>
-                    <Link href="/author" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
+                    <Link href="/profile" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
                         <div className="p-3"><UserIcon className="w-6 h-6" /></div>
                     </Link>
                 </div>

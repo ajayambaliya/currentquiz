@@ -13,7 +13,7 @@ export default function MigrationInfoPage() {
       <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-100">
         <div className="max-w-xl mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
-            <Link 
+            <Link
               href="/auth/login"
               className="p-2 hover:bg-slate-100 rounded-xl transition-colors"
             >
@@ -55,7 +55,7 @@ export default function MigrationInfoPage() {
               <h2 className="text-xl font-black text-slate-800 gujarati-text">સિસ્ટમ અપગ્રેડ સૂચના</h2>
             </div>
             <p className="text-slate-600 leading-relaxed gujarati-text text-sm">
-              અમારી સેવા વધુ સારી બનાવવા માટે અમે ડેટાબેસ અપગ્રેડ કર્યો છે. 
+              અમારી સેવા વધુ સારી બનાવવા માટે અમે ડેટાબેસ અપગ્રેડ કર્યો છે.
               આ કારણે તમામ યુઝર્સે નવા એકાઉન્ટ બનાવવા પડશે.
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function MigrationInfoPage() {
               </div>
               <h3 className="text-lg font-black text-slate-800 gujarati-text">નવો એકાઉન્ટ કેવી રીતે બનાવવો?</h3>
             </div>
-            
+
             <div className="space-y-5">
               {/* Step 1 */}
               <div className="flex gap-4">
@@ -106,7 +106,7 @@ export default function MigrationInfoPage() {
                   <p className="text-slate-600 text-sm mb-3 gujarati-text">
                     "નવો એકાઉન્ટ બનાવો" બટન પર ક્લિક કરો અથવા રજિસ્ટર પેજ પર જાઓ
                   </p>
-                  <Link 
+                  <Link
                     href="/auth/register"
                     className="inline-flex items-center gap-2 bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-xs font-black hover:bg-indigo-700 transition-colors"
                   >
@@ -187,8 +187,8 @@ export default function MigrationInfoPage() {
               <h3 className="text-lg font-black text-slate-800 gujarati-text">સિક્યુરિટી નોટ</h3>
             </div>
             <p className="text-slate-600 text-sm leading-relaxed gujarati-text">
-              આ અસુવિધા માટે અમે ક્ષમા માગીએ છીએ. અમે તમારી ડેટા સિક્યુરિટીને સૌથી વધુ 
-              પ્રાધાન્યતા આપીએ છીએ, તેથી જ આ પ્રક્રિયા જરૂરી હતી. નવા સિસ્ટમમાં તમને 
+              આ અસુવિધા માટે અમે ક્ષમા માગીએ છીએ. અમે તમારી ડેટા સિક્યુરિટીને સૌથી વધુ
+              પ્રાધાન્યતા આપીએ છીએ, તેથી જ આ પ્રક્રિયા જરૂરી હતી. નવા સિસ્ટમમાં તમને
               વધુ સારો અનુભવ મળશે.
             </p>
           </div>
@@ -200,13 +200,13 @@ export default function MigrationInfoPage() {
               કોઈ પણ સમસ્યા હોય તો અમારો સંપર્ક કરો
             </p>
             <div className="flex flex-col gap-3">
-              <Link 
+              <Link
                 href="/auth/register"
                 className="bg-indigo-600 text-white px-6 py-3 rounded-2xl font-black hover:bg-indigo-700 transition-colors gujarati-text"
               >
                 નવો એકાઉન્ટ બનાવો
               </Link>
-              <a 
+              <a
                 href="mailto:support@currentadda.com"
                 className="bg-slate-100 text-slate-700 px-6 py-3 rounded-2xl font-black hover:bg-slate-200 transition-colors text-sm"
               >
@@ -214,6 +214,16 @@ export default function MigrationInfoPage() {
               </a>
             </div>
           </div>
+
+          <footer className="py-20 text-center space-y-6 opacity-30 group hover:opacity-100 transition-all">
+            <div className="flex flex-col items-center justify-center gap-4">
+              <div className="w-12 h-[1px] bg-slate-300" />
+              <Link href="/author" className="text-[10px] font-black uppercase tracking-[0.5em] hover:text-indigo-600 transition-colors">
+                Crafted by Ajay Ambaliya
+              </Link>
+              <div className="w-12 h-[1px] bg-slate-300" />
+            </div>
+          </footer>
         </motion.div>
       </div>
     </main>

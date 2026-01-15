@@ -1,40 +1,62 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ChevronLeft, Github, Instagram, MessageCircle, Mail, MapPin, Briefcase, Award, Code, ExternalLink, Cpu } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+    ChevronLeft, Github, Mail, MapPin,
+    Code, Cpu, LayoutGrid, Sparkles
+} from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 export default function AuthorProfile() {
-    return (
-        <main className="min-h-screen bg-white">
-            {/* Header / Navigation */}
-            <header className="p-6 fixed top-0 left-0 w-full z-50">
-                <Link href="/" className="inline-flex items-center gap-2 px-5 py-3 glass rounded-2xl modern-shadow transition-all hover:pr-7 group">
-                    <ChevronLeft className="w-5 h-5 text-slate-600 group-hover:-translate-x-1 transition-transform" />
-                    <span className="font-bold text-slate-600 text-sm">Back to Home</span>
-                </Link>
-            </header>
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        offset: ["start start", "end end"]
+    });
 
-            {/* Hero Section */}
-            <div className="relative h-[45vh] w-full overflow-hidden bg-slate-900">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/60 to-slate-900 z-10" />
-                <div className="absolute inset-0 opacity-40 mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/20 rounded-full blur-[120px] animate-pulse" />
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+    const opacityHero = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+
+    return (
+        <main ref={containerRef} className="min-h-screen bg-[#05070a] text-white overflow-x-hidden selection:bg-indigo-500/30">
+            {/* Ambient Background Elements */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[50%] bg-purple-600/10 rounded-full blur-[100px]" />
+                <div className="absolute top-[20%] right-[10%] w-[20%] h-[20%] bg-blue-600/5 rounded-full blur-[80px]" />
             </div>
 
-            {/* Profile Content */}
-            <div className="max-w-2xl mx-auto px-6 -mt-32 relative z-20 pb-24">
-                <motion.div
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    className="space-y-10"
-                >
-                    {/* Avatar & Title */}
-                    <div className="text-center space-y-6">
-                        <div className="relative inline-block">
-                            <div className="absolute inset-0 bg-indigo-600 rounded-[3rem] blur-2xl opacity-20 animate-pulse" />
-                            <div className="relative w-40 h-40 rounded-[3rem] border-4 border-white shadow-2xl overflow-hidden bg-slate-100">
+            {/* Header / Navigation */}
+            <header className="p-6 fixed top-0 left-0 w-full z-[100]">
+                <div className="max-w-5xl mx-auto flex justify-between items-center">
+                    <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl hover:bg-white/10 transition-all group">
+                        <ChevronLeft className="w-5 h-5 text-slate-400 group-hover:-translate-x-1 transition-transform" />
+                        <span className="font-bold text-slate-300 text-sm">Home</span>
+                    </Link>
+                    <div className="flex gap-3">
+                        <SocialIconButton href="https://github.com/ajayambaliya" icon={<Github className="w-5 h-5" />} />
+                        <SocialIconButton href="mailto:ajay.ambaliya007@gmail.com" icon={<Mail className="w-5 h-5" />} />
+                    </div>
+                </div>
+            </header>
+
+            {/* Author Hero Section */}
+            <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
+                <motion.div style={{ y: backgroundY, opacity: opacityHero }} className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-indigo-600/20 via-transparent to-[#05070a]" />
+                </motion.div>
+
+                <div className="container max-w-5xl mx-auto px-6 relative z-10 text-center space-y-8">
+                    <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="relative inline-block"
+                    >
+                        <div className="absolute inset-0 bg-indigo-600 rounded-[3.5rem] blur-3xl opacity-30 animate-pulse" />
+                        <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-[3.5rem] border-2 border-white/20 p-2 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl overflow-hidden">
+                            <div className="relative w-full h-full rounded-[2.8rem] overflow-hidden bg-[#10141d]">
                                 <Image
                                     src="/author_placeholder_1768048016185.png"
                                     alt="Ajay Ambaliya"
@@ -42,121 +64,67 @@ export default function AuthorProfile() {
                                     className="object-cover"
                                 />
                             </div>
-                            <div className="absolute -bottom-2 -right-2 bg-emerald-500 w-10 h-10 rounded-2xl flex items-center justify-center border-4 border-white shadow-lg">
-                                <Award className="w-5 h-5 text-white" />
-                            </div>
                         </div>
+                    </motion.div>
 
-                        <div className="space-y-2">
-                            <h1 className="text-4xl font-black text-slate-900 tracking-tight">Ajay Ambaliya</h1>
-                            <div className="flex items-center justify-center gap-2 text-slate-500 font-bold uppercase tracking-widest text-xs">
-                                <Briefcase className="w-4 h-4" />
-                                <span>Senior Clerk, Health Department</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Stats / Badges */}
-                    <div className="flex flex-wrap justify-center gap-3">
-                        <Badge icon={<Cpu className="w-3.5 h-3.5" />} text="IT Specialist" color="bg-indigo-50 text-indigo-600" />
-                        <Badge icon={<Code className="w-3.5 h-3.5" />} text="Full Stack Dev" color="bg-emerald-50 text-emerald-600" />
-                        <Badge icon={<Award className="w-3.5 h-3.5" />} text="Govt Service" color="bg-amber-50 text-amber-600" />
-                    </div>
-
-                    {/* About Section */}
-                    <section className="bg-slate-50 p-8 rounded-[2.5rem] space-y-4 border border-slate-100">
-                        <h2 className="text-xl font-black text-slate-800 flex items-center gap-3">
-                            <div className="w-2 h-6 bg-indigo-600 rounded-full" />
-                            Professional Bio
-                        </h2>
-                        <p className="text-slate-600 leading-relaxed font-medium">
-                            Dedicated Government employee with a passion for streamlining public services through digital innovation.
-                            Beyond my role in the Health Department, I am a seasoned technologist specializing in web automation,
-                            data scraping, and PWA development.
-                        </p>
-                        <p className="text-slate-600 leading-relaxed font-medium pt-2">
-                            I build tools that make government operations more efficient, transforming complex manual tasks
-                            into seamless automated workflows. CurrentAdda is part of my mission to provide high-quality educational
-                            resources to every student in Gujarat.
-                        </p>
-                    </section>
-
-                    {/* Grid Info */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <InfoCard icon={<MapPin className="w-5 h-5" />} label="Location" value="Vadodara, Gujarat, India" />
-                        <InfoCard icon={<Award className="w-5 h-5" />} label="Experience" value="Senior Clerk Service" />
-                    </div>
-
-                    {/* Tech Stack */}
                     <div className="space-y-4">
-                        <h3 className="font-black text-slate-400 uppercase tracking-widest text-[10px] text-center">Tech Arsenal</h3>
-                        <div className="flex flex-wrap justify-center gap-2">
-                            {['Next.js', 'TypeScript', 'Supabase', 'Python', 'Playwright', 'Automation'].map(tech => (
-                                <span key={tech} className="px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl text-[10px] font-bold text-slate-500">
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
+                        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
+                            Ajay Ambaliya
+                        </h1>
+                        <p className="text-indigo-400 font-bold uppercase tracking-[0.2em] text-sm">Visionary Developer & Strategist</p>
                     </div>
 
-                    {/* Social Connects */}
-                    <div className="space-y-6 pt-4">
-                        <h3 className="text-center font-black text-slate-400 uppercase tracking-widest text-xs">Let's Connect</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            <SocialLink
-                                icon={<MessageCircle className="w-5 h-5" />}
-                                label="WhatsApp"
-                                color="bg-[#25D366] text-white"
-                                href="https://wa.me/918000212153"
-                            />
-                            <SocialLink
-                                icon={<Instagram className="w-5 h-5" />}
-                                label="Instagram"
-                                color="bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white"
-                                href="https://instagram.com/ajayambaliyaa"
-                            />
-                            <SocialLink
-                                icon={<Github className="w-5 h-5" />}
-                                label="GitHub"
-                                color="bg-[#24292e] text-white"
-                                href="https://github.com/ajayambaliya"
-                            />
-                            <SocialLink
-                                icon={<Mail className="w-5 h-5" />}
-                                label="Email"
-                                color="bg-slate-100 text-slate-700"
-                                href="mailto:ajay.ambaliya007@gmail.com"
-                            />
+                    <div className="flex flex-wrap justify-center gap-3">
+                        <Badge icon={<Cpu className="w-3.5 h-3.5" />} text="Govt Service (Health)" color="bg-white/5 border-white/10" />
+                        <Badge icon={<Code className="w-3.5 h-3.5" />} text="Full Stack Architect" color="bg-white/5 border-white/10" />
+                    </div>
+                </div>
+            </section>
+
+            {/* About Section */}
+            <section className="container max-w-5xl mx-auto px-6 py-24">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+                    <div className="md:col-span-8 bg-white/5 backdrop-blur-xl border border-white/10 p-12 rounded-[3.5rem] space-y-8">
+                        <h2 className="text-3xl font-black flex items-center gap-4">
+                            <Sparkles className="w-8 h-8 text-indigo-400" />
+                            The Developer
+                        </h2>
+                        <div className="space-y-6 text-slate-300 text-lg leading-relaxed">
+                            <p>I am a dedicated Government professional serving in the Health Department, Gujarat.</p>
+                            <p>My mission with CurrentAdda is to provide the best Gujarati current affairs resources to all aspirants of GPSC, GSSSB, and other competitive exams.</p>
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    {/* Footer attribution */}
-                    <div className="pt-12 text-center text-slate-300 font-bold text-[10px] uppercase tracking-[0.3em] space-y-4">
-                        <p>Bridging Governance & Technology</p>
-                        <div className="flex items-center justify-center gap-4 opacity-50">
-                            <div className="w-12 h-px bg-slate-300" />
-                            <div className="w-2 h-2 rounded-full border border-slate-300" />
-                            <div className="w-12 h-px bg-slate-300" />
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* Navigation Footer */}
-            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-6 pb-8 pt-2">
-                <div className="glass p-2.5 rounded-[2rem] modern-shadow border border-white/40 flex justify-around items-center shadow-2xl">
-                    <Link href="/" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
-                        <div className="p-3"><HomeIcon className="w-6 h-6" /></div>
-                    </Link>
-                    <Link href="/leaderboard" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
-                        <div className="p-3"><TrophyIcon className="w-6 h-6" /></div>
-                    </Link>
-                    <Link href="/author" className="flex flex-col items-center gap-1 text-indigo-600">
-                        <div className="bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-100"><UserIcon className="w-6 h-6" /></div>
-                    </Link>
+            {/* Floating Navigation Dock */}
+            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-[100] px-6 pb-8 pt-2">
+                <div className="bg-[#10141d]/80 backdrop-blur-2xl p-2.5 rounded-[2.5rem] border border-white/10 flex justify-around items-center shadow-2xl">
+                    <Link href="/" className="p-4 text-slate-500 hover:text-indigo-400 transition-all rounded-2xl"><HomeIcon className="w-6 h-6" /></Link>
+                    <Link href="/categories" className="p-4 text-slate-500 hover:text-indigo-400 transition-all rounded-2xl"><LayoutGrid className="w-6 h-6" /></Link>
+                    <Link href="/leaderboard" className="p-4 text-slate-500 hover:text-indigo-400 transition-all rounded-2xl"><TrophyIcon className="w-6 h-6" /></Link>
+                    <Link href="/author" className="p-4 bg-indigo-600 text-white rounded-2xl shadow-lg shadow-indigo-500/30"><UserIcon className="w-6 h-6" /></Link>
                 </div>
             </nav>
         </main>
+    );
+}
+
+function SocialIconButton({ href, icon }: { href: string, icon: any }) {
+    return (
+        <a href={href} target="_blank" rel="noopener noreferrer"
+            className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all text-slate-400 hover:text-white">
+            {icon}
+        </a>
+    );
+}
+
+function Badge({ icon, text, color }: { icon: any, text: string, color: string }) {
+    return (
+        <span className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-[0.15em] border ${color}`}>
+            {icon}
+            {text}
+        </span>
     );
 }
 
@@ -170,41 +138,4 @@ function TrophyIcon({ className }: { className?: string }) {
 
 function UserIcon({ className }: { className?: string }) {
     return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>;
-}
-
-function Badge({ icon, text, color }: { icon: any, text: string, color: string }) {
-    return (
-        <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider shadow-sm ${color}`}>
-            {icon}
-            {text}
-        </span>
-    );
-}
-
-function InfoCard({ icon, label, value }: { icon: any, label: string, value: string }) {
-    return (
-        <div className="p-6 bg-white border border-slate-100 rounded-[2rem] shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
-                {icon}
-            </div>
-            <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{label}</p>
-                <p className="text-sm font-bold text-slate-700">{value}</p>
-            </div>
-        </div>
-    );
-}
-
-function SocialLink({ icon, label, color, href }: { icon: any, label: string, color: string, href: string }) {
-    return (
-        <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex items-center gap-4 p-4 rounded-2xl transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-slate-100/50 ${color}`}
-        >
-            {icon}
-            <span className="font-bold text-sm tracking-tight">{label}</span>
-        </a>
-    );
 }

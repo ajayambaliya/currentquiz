@@ -23,6 +23,7 @@ create table if not exists public.questions (
     options jsonb not null,
     answer char(1) not null,
     explanation text,
+    category text,
     created_at timestamptz default now()
 );
 

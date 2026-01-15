@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { BookOpen, ChevronRight, Trophy, Search, User, LogOut, Loader2, ArrowDown } from 'lucide-react';
+import { BookOpen, ChevronRight, Trophy, Search, User, LogOut, Loader2, ArrowDown, LayoutGrid, Flame } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns';
@@ -20,6 +20,7 @@ export default function HomePage() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMonth, setSelectedMonth] = useState<Date | null>(null);
+  const [profile, setProfile] = useState<any>(null);
   const { user } = useAuth();
 
   // Pagination State
@@ -103,6 +104,25 @@ export default function HomePage() {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      fetchProfile();
+    }
+  }, [user]);
+
+  const fetchProfile = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user?.id)
+        .single();
+      if (data) setProfile(data);
+    } catch (err) {
+      // Silent fail
+    }
+  };
+
   const loadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
@@ -138,17 +158,22 @@ export default function HomePage() {
           </div>
           {user ? (
             <div className="flex items-center gap-2">
-              <Link href="/author" title="Author Profile" className="p-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-400 hover:text-indigo-600 transition-all">
-                <User className="w-5 h-5" />
+              <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all ${profile?.streak_count > 0 ? 'bg-orange-50 border-orange-100' : 'bg-slate-50 border-slate-100'}`}>
+                <Flame className={`w-3.5 h-3.5 ${profile?.streak_count > 0 ? 'text-orange-600 fill-orange-600 animate-pulse' : 'text-slate-300'}`} />
+                <span className={`text-xs font-black ${profile?.streak_count > 0 ? 'text-orange-700' : 'text-slate-400'}`}>
+                  {profile?.streak_count || 0}
+                </span>
+              </div>
+              <Link href="/profile" className="relative group">
+                <div className="w-11 h-11 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center text-slate-400 group-hover:border-indigo-100 group-hover:text-indigo-600 transition-all overflow-hidden relative">
+                  {profile?.avatar_url ? (
+                    <Image src={profile.avatar_url} alt="Profile" width={44} height={44} className="object-cover" />
+                  ) : (
+                    <User className="w-5 h-5 transition-transform group-hover:scale-110" />
+                  )}
+                </div>
               </Link>
               <NotificationBell />
-              <button
-                onClick={handleLogout}
-                className="p-2 text-slate-300 hover:text-rose-500 transition-colors"
-                title="Logout"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
             </div>
           ) : (
             <Link href="/auth/login" className="text-[9px] font-black uppercase tracking-widest text-indigo-600 bg-indigo-50 px-4 py-2.5 rounded-xl hover:bg-indigo-100 transition-all border border-indigo-100/50">
@@ -252,29 +277,39 @@ export default function HomePage() {
                 </div>
               )}
 
-              {quizzes.map((quiz) => (
-                <motion.div layout key={quiz.id}>
-                  <Link
-                    href={`/quiz/${quiz.slug}`}
-                    className="block bg-white p-5 rounded-[1.75rem] border border-slate-100 premium-card group"
-                  >
-                    <div className="flex justify-between items-center">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/40" />
-                          <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest leading-none">{quiz.date_str || 'Static Quiz'}</span>
+              {quizzes.map((quiz) => {
+                const isIndiaBix = quiz.source_url?.includes('indiabix.com');
+                const displayTitle = isIndiaBix && !quiz.title.includes('IndiaBix')
+                  ? `IndiaBix - ${quiz.title}`
+                  : quiz.title;
+
+                return (
+                  <motion.div layout key={quiz.id}>
+                    <Link
+                      href={`/quiz/${quiz.slug}`}
+                      className="block bg-white p-5 rounded-[1.75rem] border border-slate-100 premium-card group"
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className={`w-1.5 h-1.5 rounded-full ${isIndiaBix ? 'bg-orange-500' : 'bg-indigo-500/40'}`} />
+                            <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest leading-none">{quiz.date_str || 'Static Quiz'}</span>
+                            {isIndiaBix && (
+                              <span className="text-[7px] font-black bg-orange-50 text-orange-600 px-1.5 py-0.5 rounded-md uppercase tracking-tighter">IndiaBix</span>
+                            )}
+                          </div>
+                          <h3 className="text-base font-black text-slate-800 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4">
+                            {displayTitle}
+                          </h3>
                         </div>
-                        <h3 className="text-base font-black text-slate-800 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4">
-                          {quiz.title}
-                        </h3>
+                        <div className="bg-slate-50 p-3.5 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
+                          <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white" />
+                        </div>
                       </div>
-                      <div className="bg-slate-50 p-3.5 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
-                        <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white" />
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
+                    </Link>
+                  </motion.div>
+                );
+              })}
 
               {loading && !initialLoading && (
                 <div className="flex flex-col items-center justify-center py-10 opacity-60">
@@ -313,16 +348,30 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Bottom Footer Attribution */}
+      <footer className="py-20 text-center space-y-6 opacity-30 group hover:opacity-100 transition-all">
+        <div className="flex flex-col items-center justify-center gap-4">
+          <div className="w-12 h-[1px] bg-slate-200" />
+          <Link href="/author" className="text-[10px] font-black uppercase tracking-[0.5em] hover:text-indigo-600 transition-colors">
+            Crafted by Ajay Ambaliya
+          </Link>
+          <div className="w-12 h-[1px] bg-slate-200" />
+        </div>
+      </footer>
+
       {/* Docked Modern Tab Bar */}
       <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-6 pb-8 pt-2">
         <div className="glass p-2 rounded-[2rem] modern-shadow border border-white/40 flex justify-around items-center shadow-2xl">
           <Link href="/" className="flex flex-col items-center gap-1 text-indigo-600">
             <div className="bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-100"><BookOpen className="w-5 h-5" /></div>
           </Link>
+          <Link href="/categories" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
+            <div className="p-3"><LayoutGrid className="w-6 h-6" /></div>
+          </Link>
           <Link href="/leaderboard" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
             <div className="p-3"><Trophy className="w-6 h-6" /></div>
           </Link>
-          <Link href="/author" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
+          <Link href="/profile" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
             <div className="p-3"><User className="w-6 h-6" /></div>
           </Link>
         </div>
