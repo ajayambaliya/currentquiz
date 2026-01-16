@@ -21,6 +21,7 @@ export default function UserProfile() {
     const [scores, setScores] = useState<any[]>([]);
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [uploading, setUploading] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
 
     const { scrollYProgress } = useScroll({
@@ -59,7 +60,7 @@ export default function UserProfile() {
     const categoryStats = useMemo(() => {
         const stats: Record<string, { total: number, correct: number }> = {};
         scores.forEach(s => {
-            const cat = s.category || 'Miscellaneous';
+            const cat = s.category || 'General';
             if (!stats[cat]) stats[cat] = { total: 0, correct: 0 };
             stats[cat].total += s.total_questions;
             stats[cat].correct += s.score;
@@ -75,6 +76,77 @@ export default function UserProfile() {
     const handleLogout = async () => {
         await supabase.auth.signOut();
         router.push('/');
+    };
+
+    const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const file = event.target.files?.[0];
+            if (!file || !user) return;
+
+            // 1. Validations
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Only JPG, JPEG or PNG files are allowed.');
+                return;
+            }
+
+            if (file.size > 500 * 1024) { // 500KB
+                alert('File size must be less than 500KB.');
+                return;
+            }
+
+            setUploading(true);
+
+            // 2. Delete OLD avatar from storage if exists to save space (1GB limit)
+            if (profile?.avatar_url) {
+                try {
+                    const oldPath = profile.avatar_url.split('/').pop();
+                    if (oldPath) {
+                        await supabase.storage.from('avatars').remove([oldPath]);
+                    }
+                } catch (err) {
+                    console.error('Error deleting old avatar:', err);
+                }
+            }
+
+            // 3. Upload NEW avatar
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${user.id}.${fileExt}`; // Fixed filename per user to simplify
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('avatars')
+                .upload(fileName, file, {
+                    upsert: true // This allows replacing the file if it exists
+                });
+
+            if (uploadError) {
+                console.error('Supabase Storage Error:', uploadError);
+                throw uploadError;
+            }
+
+            // 4. Get Public URL
+            const { data: { publicUrl } } = supabase.storage
+                .from('avatars')
+                .getPublicUrl(fileName);
+
+            // 5. Update Profile in DB
+            const { error: updateError } = await supabase
+                .from('profiles')
+                .update({ avatar_url: publicUrl, updated_at: new Date().toISOString() })
+                .eq('id', user.id);
+
+            if (updateError) throw updateError;
+
+            // 6. Refresh Local State
+            setProfile({ ...profile, avatar_url: publicUrl });
+            alert('Profile picture updated!');
+
+        } catch (err: any) {
+            console.error('Upload failed:', err);
+            // Show the actual error message to the user for better debugging
+            alert(`Upload failed: ${err.message || 'Unknown error'}`);
+        } finally {
+            setUploading(false);
+        }
     };
 
     const shareToWhatsApp = () => {
@@ -161,14 +233,33 @@ export default function UserProfile() {
                     <div className="flex flex-col items-center text-center space-y-6">
                         <div className="relative group">
                             <div className="absolute inset-0 bg-indigo-500 rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse" />
-                            <div className="relative w-32 h-32 rounded-[3rem] border-2 border-white/20 p-2 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl">
-                                <div className="w-full h-full rounded-[2.5rem] bg-[#0d1117] overflow-hidden flex items-center justify-center border border-white/5">
-                                    {profile?.avatar_url ? (
-                                        <Image src={profile.avatar_url} alt="Profile" width={128} height={128} className="object-cover" />
-                                    ) : (
-                                        <UserIcon className="w-12 h-12 text-indigo-400" />
-                                    )}
-                                </div>
+                            <div className="relative w-32 h-32 rounded-[3rem] border-2 border-white/20 p-2 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl transition-all hover:scale-105 active:scale-95">
+                                <label htmlFor="avatar-upload" className="cursor-pointer block w-full h-full group">
+                                    <div className="w-full h-full rounded-[2.5rem] bg-[#0d1117] overflow-hidden flex items-center justify-center border border-white/5 relative">
+                                        {profile?.avatar_url ? (
+                                            <img src={profile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
+                                        ) : (
+                                            <UserIcon className="w-12 h-12 text-indigo-400" />
+                                        )}
+
+                                        {/* Hover Overlay */}
+                                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            {uploading ? (
+                                                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white shadow-xl" />
+                                            ) : (
+                                                <Sparkles className="w-6 h-6 text-white" />
+                                            )}
+                                        </div>
+                                    </div>
+                                    <input
+                                        id="avatar-upload"
+                                        type="file"
+                                        accept="image/png, image/jpeg"
+                                        className="hidden"
+                                        onChange={handleAvatarUpload}
+                                        disabled={uploading}
+                                    />
+                                </label>
                             </div>
                             {profile?.streak_count > 0 && (
                                 <div className="absolute -bottom-2 -right-2 bg-gradient-to-br from-orange-400 to-red-600 px-3 py-1.5 rounded-2xl border-4 border-[#05060a] shadow-xl flex items-center gap-1.5">
@@ -176,6 +267,11 @@ export default function UserProfile() {
                                     <span className="text-xs font-black text-white">{profile.streak_count}</span>
                                 </div>
                             )}
+                        </div>
+                        <div className="text-center space-y-1">
+                            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full inline-block">
+                                {uploading ? 'Processing Image...' : 'Tap photo to change'}
+                            </p>
                         </div>
                         <div className="space-y-2">
                             <motion.h1

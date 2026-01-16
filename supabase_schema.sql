@@ -39,9 +39,10 @@ create table if not exists public.profiles (
 create table if not exists public.scores (
     id uuid primary key default uuid_generate_v4(),
     user_id uuid references auth.users on delete cascade not null,
-    quiz_id uuid references public.quizzes(id) on delete cascade not null,
+    quiz_id uuid references public.quizzes(id) on delete cascade,
     score int not null,
     total_questions int not null,
+    category text default 'General',
     created_at timestamptz default now()
 );
 
@@ -64,12 +65,6 @@ begin
     if not exists (select 1 from pg_policies where policyname = 'Allow public read access for quizzes') then
         create policy "Allow public read access for quizzes" on public.quizzes for select using (true);
     end if;
-    if not exists (select 1 from pg_policies where policyname = 'Allow insert for authenticated users on quizzes') then
-        create policy "Allow insert for authenticated users on quizzes" on public.quizzes for insert with check (true);
-    end if;
-    if not exists (select 1 from pg_policies where policyname = 'Allow update for authenticated users on quizzes') then
-        create policy "Allow update for authenticated users on quizzes" on public.quizzes for update using (true);
-    end if;
 end $$;
 
 -- 9. Policies for Questions (Auth Required)
@@ -77,9 +72,6 @@ do $$
 begin
     if not exists (select 1 from pg_policies where policyname = 'Allow auth read access for questions') then
         create policy "Allow auth read access for questions" on public.questions for select using (auth.role() = 'authenticated');
-    end if;
-    if not exists (select 1 from pg_policies where policyname = 'Allow insert for authenticated users on questions') then
-        create policy "Allow insert for authenticated users on questions" on public.questions for insert with check (true);
     end if;
 end $$;
 
@@ -113,9 +105,27 @@ begin
   values (new.id, new.raw_user_meta_data->>'full_name');
   return new;
 end;
-$$ language plpgsql security definer;
+$$ language plpgsql security definer set search_path = public;
 
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
+
+-- 13. Storage Setup for Avatars (Run these in SQL Editor if bucket not created)
+-- Note: You may need to create the 'avatars' bucket manually in the dashboard first.
+/*
+insert into storage.buckets (id, name, public) values ('avatars', 'avatars', true);
+
+create policy "Avatar images are publicly accessible" on storage.objects
+  for select using (bucket_id = 'avatars');
+
+create policy "Anyone can upload an avatar" on storage.objects
+  for insert with check (bucket_id = 'avatars' AND auth.uid() = owner);
+
+create policy "Anyone can update their own avatar" on storage.objects
+  for update using (auth.uid() = owner);
+
+create policy "Anyone can delete their own avatar" on storage.objects
+  for delete using (auth.uid() = owner);
+*/

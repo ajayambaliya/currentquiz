@@ -113,7 +113,7 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                 quiz_id: isDailyQuiz ? quiz.id : null,
                 score: score,
                 total_questions: totalQuestions,
-                category: quiz.category || 'Miscellaneous'
+                category: quiz.category || 'General'
             });
 
             // Update Streak Logic
