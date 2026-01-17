@@ -81,15 +81,20 @@ export default function AdminSubjectQuiz() {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setAuthError('');
-        const isValid = await checkAdminCredentials(authForm.username, authForm.password);
-        if (isValid) {
-            setIsLoggedIn(true);
-            sessionStorage.setItem('admin_auth', 'true');
-            fetchSubjects();
-            fetchTotals();
-            fetchQuizzes();
-        } else {
-            setAuthError('Invalid credentials');
+        try {
+            const isValid = await checkAdminCredentials(authForm.username, authForm.password);
+            if (isValid) {
+                setIsLoggedIn(true);
+                sessionStorage.setItem('admin_auth', 'true');
+                fetchSubjects();
+                fetchTotals();
+                fetchQuizzes();
+            } else {
+                setAuthError('Invalid credentials');
+            }
+        } catch (err: any) {
+            console.error('Login error:', err);
+            setAuthError('Server error during login. Please check logs.');
         }
     };
 
@@ -134,16 +139,20 @@ export default function AdminSubjectQuiz() {
         setIsProcessing(true);
         setImportStatus({ type: 'info', message: `Sending notification for ${quiz.title}...` });
 
-        const result = await sendNotificationAction(
-            "New Quiz Available! 🎯",
-            `A new study set "${quiz.title}" is now available. Start practicing now!`,
-            `${window.location.origin}/quiz/${quiz.slug}`
-        );
+        try {
+            const result = await sendNotificationAction(
+                "New Quiz Available! 🎯",
+                `A new study set "${quiz.title}" is now available. Start practicing now!`,
+                `${window.location.origin}/quiz/${quiz.slug}`
+            );
 
-        if (result.error) {
-            setImportStatus({ type: 'error', message: result.error });
-        } else {
-            setImportStatus({ type: 'success', message: 'Notification sent successfully!' });
+            if (result.error) {
+                setImportStatus({ type: 'error', message: result.error });
+            } else {
+                setImportStatus({ type: 'success', message: 'Notification sent successfully!' });
+            }
+        } catch (err: any) {
+            setImportStatus({ type: 'error', message: 'Failed to call notification service' });
         }
         setIsProcessing(false);
     };
@@ -168,28 +177,32 @@ export default function AdminSubjectQuiz() {
         setIsProcessing(true);
         setImportStatus(null);
 
-        let result: any;
-        const slug = createSlug(newItemName);
+        try {
+            let result: any;
+            const slug = createSlug(newItemName);
 
-        if (!selectedSubject) {
-            // Adding a Subject
-            result = await addSubjectAction(newItemName, slug);
-            if (!result.error) fetchSubjects();
-        } else if (!selectedMainTopic) {
-            // Adding a Main Topic
-            result = await addMainTopicAction(selectedSubject, newItemName, slug);
-            if (!result.error) fetchMainTopics(selectedSubject);
-        } else {
-            // Adding a Sub Topic
-            result = await addSubTopicAction(selectedMainTopic, newItemName, slug);
-            if (!result.error) fetchSubTopics(selectedMainTopic);
-        }
+            if (!selectedSubject) {
+                // Adding a Subject
+                result = await addSubjectAction(newItemName, slug);
+                if (!result.error) fetchSubjects();
+            } else if (!selectedMainTopic) {
+                // Adding a Main Topic
+                result = await addMainTopicAction(selectedSubject, newItemName, slug);
+                if (!result.error) fetchMainTopics(selectedSubject);
+            } else {
+                // Adding a Sub Topic
+                result = await addSubTopicAction(selectedMainTopic, newItemName, slug);
+                if (!result.error) fetchSubTopics(selectedMainTopic);
+            }
 
-        if (result?.error) {
-            setImportStatus({ type: 'error', message: result.error });
-        } else {
-            setImportStatus({ type: 'success', message: 'Added successfully!' });
-            setNewItemName('');
+            if (result?.error) {
+                setImportStatus({ type: 'error', message: result.error });
+            } else {
+                setImportStatus({ type: 'success', message: 'Added successfully!' });
+                setNewItemName('');
+            }
+        } catch (err: any) {
+            setImportStatus({ type: 'error', message: 'Connection lost or server error' });
         }
         setIsProcessing(false);
     };

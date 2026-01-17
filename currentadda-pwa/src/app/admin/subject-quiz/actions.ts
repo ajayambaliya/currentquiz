@@ -2,87 +2,132 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+// Helper to get admin client to avoid top-level crashes if env vars are missing
+function getSupabaseAdmin() {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!url || !key) {
+        throw new Error('Missing Supabase environment variables. Check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.');
+    }
+
+    return createClient(url, key, {
+        auth: {
+            autoRefreshToken: false,
+            persistSession: false
+        }
+    });
+}
 
 export async function checkAdminCredentials(username: string, password: string) {
-    const adminUser = process.env.ADMIN_USERNAME;
-    const adminPass = process.env.ADMIN_PASSWORD;
+    try {
+        const adminUser = process.env.ADMIN_USERNAME;
+        const adminPass = process.env.ADMIN_PASSWORD;
 
-    return username === adminUser && password === adminPass;
+        if (!adminUser || !adminPass) {
+            console.error('Admin credentials not configured in environment variables');
+            return false;
+        }
+
+        return username === adminUser && password === adminPass;
+    } catch (error) {
+        console.error('Error checking admin credentials:', error);
+        return false;
+    }
 }
 
 export async function addSubjectAction(name: string, slug: string) {
-    const { data, error } = await supabaseAdmin
-        .from('subjects')
-        .insert({ name, slug })
-        .select();
-    if (error) return { error: error.message };
-    return { data };
+    try {
+        const supabase = getSupabaseAdmin();
+        const { data, error } = await supabase
+            .from('subjects')
+            .insert({ name, slug })
+            .select();
+
+        if (error) return { error: error.message };
+        return { data };
+    } catch (error: any) {
+        return { error: error.message || 'An unexpected error occurred' };
+    }
 }
 
 export async function addMainTopicAction(subjectId: string, name: string, slug: string) {
-    const { data, error } = await supabaseAdmin
-        .from('main_topics')
-        .insert({ subject_id: subjectId, name, slug })
-        .select();
-    if (error) return { error: error.message };
-    return { data };
+    try {
+        const supabase = getSupabaseAdmin();
+        const { data, error } = await supabase
+            .from('main_topics')
+            .insert({ subject_id: subjectId, name, slug })
+            .select();
+
+        if (error) return { error: error.message };
+        return { data };
+    } catch (error: any) {
+        return { error: error.message || 'An unexpected error occurred' };
+    }
 }
 
 export async function addSubTopicAction(mainTopicId: string, name: string, slug: string) {
-    const { data, error } = await supabaseAdmin
-        .from('sub_topics')
-        .insert({ main_topic_id: mainTopicId, name, slug })
-        .select();
-    if (error) return { error: error.message };
-    return { data };
+    try {
+        const supabase = getSupabaseAdmin();
+        const { data, error } = await supabase
+            .from('sub_topics')
+            .insert({ main_topic_id: mainTopicId, name, slug })
+            .select();
+
+        if (error) return { error: error.message };
+        return { data };
+    } catch (error: any) {
+        return { error: error.message || 'An unexpected error occurred' };
+    }
 }
 
 export async function importQuizDataAction(baseTitle: string, baseSlug: string, subTopicId: string, allQuestions: any[]) {
-    const CHUNK_SIZE = 10;
-    const results = [];
+    try {
+        const supabase = getSupabaseAdmin();
+        const CHUNK_SIZE = 10;
+        const results = [];
 
-    // Split questions into chunks of 10
-    for (let i = 0; i < allQuestions.length; i += CHUNK_SIZE) {
-        const chunk = allQuestions.slice(i, i + CHUNK_SIZE);
-        const setNumber = Math.floor(i / CHUNK_SIZE) + 1;
-        const quizTitle = allQuestions.length > CHUNK_SIZE ? `${baseTitle} - Set ${setNumber}` : baseTitle;
-        const quizSlug = `${baseSlug}-set-${setNumber}-${Date.now()}`;
+        for (let i = 0; i < allQuestions.length; i += CHUNK_SIZE) {
+            const chunk = allQuestions.slice(i, i + CHUNK_SIZE);
+            const setNumber = Math.floor(i / CHUNK_SIZE) + 1;
+            const quizTitle = allQuestions.length > CHUNK_SIZE ? `${baseTitle} - Set ${setNumber}` : baseTitle;
+            const quizSlug = `${baseSlug}-set-${setNumber}-${Date.now()}`;
 
-        // 1. Create Quiz Set
-        const { data: quiz, error: quizError } = await supabaseAdmin
-            .from('subject_quizzes')
-            .insert({
-                title: quizTitle,
-                slug: quizSlug,
-                sub_topic_id: subTopicId
-            })
-            .select()
-            .single();
+            // 1. Create Quiz Set
+            const { data: quiz, error: quizError } = await supabase
+                .from('subject_quizzes')
+                .insert({
+                    title: quizTitle,
+                    slug: quizSlug,
+                    sub_topic_id: subTopicId
+                })
+                .select()
+                .single();
 
-        if (quizError) return { error: `Error creating ${quizTitle}: ${quizError.message}` };
+            if (quizError) return { error: `Error creating ${quizTitle}: ${quizError.message}` };
+            if (!quiz) return { error: `Failed to create quiz ${quizTitle}` };
 
-        // 2. Attach quiz_id and fix q_index for this set
-        const questionsWithId = chunk.map((q, idx) => ({
-            ...q,
-            quiz_id: quiz.id,
-            q_index: idx + 1 // Start index from 1 for each set
-        }));
+            // 2. Attach quiz_id and fix q_index for this set
+            const questionsWithId = chunk.map((q, idx) => ({
+                ...q,
+                quiz_id: quiz.id,
+                q_index: idx + 1
+            }));
 
-        // 3. Insert Questions for this set
-        const { error: questionsError } = await supabaseAdmin
-            .from('subject_questions')
-            .insert(questionsWithId);
+            // 3. Insert Questions for this set
+            const { error: questionsError } = await supabase
+                .from('subject_questions')
+                .insert(questionsWithId);
 
-        if (questionsError) return { error: `Error inserting questions for ${quizTitle}: ${questionsError.message}` };
+            if (questionsError) return { error: `Error inserting questions for ${quizTitle}: ${questionsError.message}` };
 
-        results.push({ title: quizTitle, count: chunk.length });
+            results.push({ title: quizTitle, count: chunk.length });
+        }
+
+        return { success: true, totalSets: results.length, totalQuestions: allQuestions.length };
+    } catch (error: any) {
+        return { error: error.message || 'An unexpected error occurred during import' };
     }
-
-    return { success: true, totalSets: results.length, totalQuestions: allQuestions.length };
 }
 
 export async function sendNotificationAction(title: string, message: string, url?: string, image?: string) {
@@ -90,7 +135,7 @@ export async function sendNotificationAction(title: string, message: string, url
     const apiKey = process.env.ONESIGNAL_REST_API_KEY;
 
     if (!appId || !apiKey) {
-        return { error: 'OneSignal credentials not found' };
+        return { error: 'OneSignal credentials not found in environment' };
     }
 
     try {
@@ -122,7 +167,8 @@ export async function sendNotificationAction(title: string, message: string, url
         }
         return { success: true, id: data.id, recipients: data.recipients };
     } catch (err: any) {
-        return { error: err.message };
+        return { error: err.message || 'Failed to send notification' };
     }
 }
+
 
