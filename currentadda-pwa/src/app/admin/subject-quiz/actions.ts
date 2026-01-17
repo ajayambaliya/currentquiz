@@ -174,4 +174,37 @@ export async function sendNotificationAction(title: string, message: string, url
     }
 }
 
+export async function deleteSubjectAction(id: string) {
+    try {
+        const supabase = getSupabaseAdmin();
+        const { error } = await supabase.from('subjects').delete().eq('id', id);
+        if (error) return { error: error.message };
+        return { success: true };
+    } catch (error: any) {
+        return { error: error.message };
+    }
+}
+
+export async function deleteMainTopicAction(id: string) {
+    try {
+        const supabase = getSupabaseAdmin();
+        const { error } = await supabase.from('main_topics').delete().eq('id', id);
+        if (error) return { error: error.message };
+        return { success: true };
+    } catch (error: any) {
+        return { error: error.message };
+    }
+}
+
+export async function deleteSubTopicAction(id: string) {
+    try {
+        const supabase = getSupabaseAdmin();
+        const { error } = await supabase.from('sub_topics').delete().eq('id', id);
+        if (error) return { error: error.message };
+        return { success: true };
+    } catch (error: any) {
+        return { error: error.message };
+    }
+}
+
 

@@ -15,7 +15,10 @@ import {
     addMainTopicAction,
     addSubTopicAction,
     importQuizDataAction,
-    sendNotificationAction
+    sendNotificationAction,
+    deleteSubjectAction,
+    deleteMainTopicAction,
+    deleteSubTopicAction
 } from './actions';
 
 export default function AdminSubjectQuiz() {
@@ -170,7 +173,64 @@ export default function AdminSubjectQuiz() {
         setIsProcessing(false);
     };
 
-    const createSlug = (text: string) => text.toLowerCase().trim().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    const createSlug = (text: string) => {
+        if (!text) return `item-${Date.now()}`;
+
+        let slug = text
+            .toLowerCase()
+            .trim()
+            .replace(/[\s_]+/g, '-') // Replace spaces and underscores with -
+            .replace(/[^\p{L}\p{N}-]+/gu, '') // Keep all Unicode letters and numbers
+            .replace(/-+/g, '-') // Replace multiple hyphens with one
+            .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+
+        // Fallback if result is empty or just hyphens
+        if (!slug || slug === '-') {
+            return `topic-${Math.random().toString(36).substring(2, 7)}`;
+        }
+        return slug;
+    };
+
+    const handleDeleteItem = async (level: 'subject' | 'main' | 'sub') => {
+        const id = level === 'subject' ? selectedSubject : level === 'main' ? selectedMainTopic : selectedSubTopic;
+        if (!id) return;
+
+        const name = level === 'subject' ? subjects.find(s => s.id === id)?.name :
+            level === 'main' ? mainTopics.find(t => t.id === id)?.name :
+                subTopics.find(t => t.id === id)?.name;
+
+        if (!confirm(`Are you sure you want to delete "${name}"? This will delete all topics and quizzes inside it.`)) return;
+
+        setIsProcessing(true);
+        let result: any;
+
+        if (level === 'subject') {
+            result = await deleteSubjectAction(id);
+            if (!result.error) {
+                setSelectedSubject('');
+                fetchSubjects();
+            }
+        } else if (level === 'main') {
+            result = await deleteMainTopicAction(id);
+            if (!result.error) {
+                setSelectedMainTopic('');
+                fetchMainTopics(selectedSubject);
+            }
+        } else {
+            result = await deleteSubTopicAction(id);
+            if (!result.error) {
+                setSelectedSubTopic('');
+                fetchSubTopics(selectedMainTopic);
+            }
+        }
+
+        if (result?.error) setImportStatus({ type: 'error', message: result.error });
+        else {
+            setImportStatus({ type: 'success', message: 'Deleted successfully' });
+            fetchTotals();
+        }
+        setIsProcessing(false);
+    };
 
     const handleAddItem = async () => {
         if (!newItemName) return;
@@ -383,14 +443,24 @@ export default function AdminSubjectQuiz() {
                                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">1. Subject</label>
                                         <span className="text-[8px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-bold">Base Level</span>
                                     </div>
-                                    <select
-                                        className="w-full bg-slate-50 border-none rounded-xl text-sm font-bold p-4 outline-none appearance-none cursor-pointer hover:bg-slate-100 transition-colors"
-                                        value={selectedSubject}
-                                        onChange={(e) => setSelectedSubject(e.target.value)}
-                                    >
-                                        <option value="">Select Subject</option>
-                                        {subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-                                    </select>
+                                    <div className="flex-1 relative group/select">
+                                        <select
+                                            className="w-full bg-slate-50 border-none rounded-xl text-sm font-bold p-4 outline-none appearance-none cursor-pointer hover:bg-slate-100 transition-colors pr-10"
+                                            value={selectedSubject}
+                                            onChange={(e) => setSelectedSubject(e.target.value)}
+                                        >
+                                            <option value="">Select Subject</option>
+                                            {subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+                                        </select>
+                                        {selectedSubject && (
+                                            <button
+                                                onClick={() => handleDeleteItem('subject')}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-300 hover:text-rose-500 hover:bg-white rounded-lg transition-all opacity-0 group-hover/select:opacity-100"
+                                            >
+                                                <Trash2 size={14} />
+                                            </button>
+                                        )}
+                                    </div>
                                     <div className="flex gap-2">
                                         <input
                                             type="text"
@@ -426,15 +496,25 @@ export default function AdminSubjectQuiz() {
                                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">2. Main Topic</label>
                                         {selectedSubject && <span className="text-[8px] bg-indigo-50 text-indigo-500 px-2 py-0.5 rounded-full font-bold">In selected subject</span>}
                                     </div>
-                                    <select
-                                        className="w-full bg-slate-50 border-none rounded-xl text-sm font-bold p-4 outline-none appearance-none disabled:opacity-30 cursor-pointer"
-                                        disabled={!selectedSubject}
-                                        value={selectedMainTopic}
-                                        onChange={(e) => setSelectedMainTopic(e.target.value)}
-                                    >
-                                        <option value="">Select Main Topic</option>
-                                        {mainTopics.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
-                                    </select>
+                                    <div className="flex-1 relative group/select">
+                                        <select
+                                            className="w-full bg-slate-50 border-none rounded-xl text-sm font-bold p-4 outline-none appearance-none disabled:opacity-30 cursor-pointer pr-10"
+                                            disabled={!selectedSubject}
+                                            value={selectedMainTopic}
+                                            onChange={(e) => setSelectedMainTopic(e.target.value)}
+                                        >
+                                            <option value="">Select Main Topic</option>
+                                            {mainTopics.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
+                                        </select>
+                                        {selectedMainTopic && (
+                                            <button
+                                                onClick={() => handleDeleteItem('main')}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-300 hover:text-rose-500 hover:bg-white rounded-lg transition-all opacity-0 group-hover/select:opacity-100"
+                                            >
+                                                <Trash2 size={14} />
+                                            </button>
+                                        )}
+                                    </div>
                                     <div className="flex gap-2">
                                         <input
                                             type="text"
@@ -472,15 +552,25 @@ export default function AdminSubjectQuiz() {
                                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">3. Sub Topic</label>
                                         {selectedMainTopic && <span className="text-[8px] bg-emerald-50 text-emerald-500 px-2 py-0.5 rounded-full font-bold">Target for Quiz</span>}
                                     </div>
-                                    <select
-                                        className="w-full bg-slate-50 border-none rounded-xl text-sm font-bold p-4 outline-none appearance-none disabled:opacity-30 cursor-pointer"
-                                        disabled={!selectedMainTopic}
-                                        value={selectedSubTopic}
-                                        onChange={(e) => setSelectedSubTopic(e.target.value)}
-                                    >
-                                        <option value="">Select Sub Topic</option>
-                                        {subTopics.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
-                                    </select>
+                                    <div className="flex-1 relative group/select">
+                                        <select
+                                            className="w-full bg-slate-50 border-none rounded-xl text-sm font-bold p-4 outline-none appearance-none disabled:opacity-30 cursor-pointer pr-10"
+                                            disabled={!selectedMainTopic}
+                                            value={selectedSubTopic}
+                                            onChange={(e) => setSelectedSubTopic(e.target.value)}
+                                        >
+                                            <option value="">Select Sub Topic</option>
+                                            {subTopics.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
+                                        </select>
+                                        {selectedSubTopic && (
+                                            <button
+                                                onClick={() => handleDeleteItem('sub')}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-300 hover:text-rose-500 hover:bg-white rounded-lg transition-all opacity-0 group-hover/select:opacity-100"
+                                            >
+                                                <Trash2 size={14} />
+                                            </button>
+                                        )}
+                                    </div>
                                     <div className="flex gap-2">
                                         <input
                                             type="text"
