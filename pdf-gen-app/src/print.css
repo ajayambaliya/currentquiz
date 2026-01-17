@@ -1,0 +1,136 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Gujarati:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Reset & Variables */
+:root {
+  --brand-orange: #ea580c;
+  /* Orange-600 for better contrast */
+  --brand-green: #15803d;
+  /* Green-700 */
+  --brand-blue: #1e3a8a;
+  /* Blue-900 */
+  --paper-white: #ffffff;
+}
+
+body {
+  font-family: 'Inter', 'Noto Serif Gujarati', sans-serif;
+  color: #111827;
+  /* Gray-900 */
+  background: #f3f4f6;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+.font-gujarati {
+  font-family: 'Noto Serif Gujarati', serif !important;
+}
+
+/* Page Container - WYSIWYG A4 Sheet */
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  padding: 20mm 15mm 15mm 15mm;
+  /* Top padding leaves room for header */
+  margin: 20px auto;
+  /* Visible separation on screen */
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  box-sizing: border-box;
+  page-break-after: always;
+}
+
+/* Utility: Watermark */
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 8rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.02);
+  /* Extremely subtle */
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Utility: Headers & Footers (Inside .page) */
+.page-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15mm;
+  padding: 0 15mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #fff7ed;
+  font-size: 10px;
+  color: #c2410c;
+  /* Orange-800 */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 12mm;
+  padding: 0 15mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f3f4f6;
+  font-size: 9px;
+  color: #6b7280;
+  background: white;
+}
+
+.question-card {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* PRINT MEDIA QUERIES - THE IMPORTANT PART */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+    /* Important: Browser margin 0 to let our .page control margins */
+  }
+
+  body {
+    background: white;
+  }
+
+  .print-container {
+    background: white;
+  }
+
+  .page {
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Force background graphics */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
