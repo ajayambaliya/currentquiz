@@ -27,6 +27,7 @@ interface Quiz {
     title: string;
     slug: string;
     category?: string;
+    sub_topic_id?: string;
 }
 
 export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions: Question[] }) {
@@ -175,8 +176,8 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
         if (!user) return { oldStreak: 0, newStreak: 0 };
 
         const score = calculateScore();
-        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-        const isDailyQuiz = uuidRegex.test(quiz.id);
+        const isSubjectQuiz = !!quiz.sub_topic_id;
+        const isDailyQuiz = !isSubjectQuiz;
 
         try {
             if (isDailyQuiz) {

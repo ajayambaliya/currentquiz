@@ -1,0 +1,1851 @@
+{
+  "status": "success",
+  "data": {
+    "test": {
+      "name": "CULT-Test007 - Art & Culture",
+      "testTotalDuration": 1800000,
+      "settings": {
+        "fonts": {
+          "fonts": [
+            {
+              "face": "sans-serif",
+              "supported": false
+            }
+          ],
+          "include": "https://cms-gcp.classplusapp.com/parser/v3/css/combined?face=sans-serif"
+        },
+        "isSectionSwitchingEnabled": true
+      },
+      "practiceTestUrls": []
+    },
+    "filters": {
+      "incorrect": 0,
+      "correct": 0,
+      "partiallyMarked": 0,
+      "unattempted": 1,
+      "markForReview": 0,
+      "graceMarked": 0,
+      "revaluated": 0
+    },
+    "timeTaken": 3000,
+    "courseId": "767835",
+    "showReportQuestion": true,
+    "sectionWiseStats": [
+      {
+        "marksScored": 0,
+        "sectionMarks": 30,
+        "accuracy": 0,
+        "_id": "6944bb7b16dba933efb0d9e3",
+        "totalQuestions": 30,
+        "attemptDuration": 3000,
+        "correctAnswers": 0,
+        "inCorrectAnswers": 0,
+        "partiallyCorrectAnswers": 0,
+        "unAttempted": 30,
+        "name": "culture",
+        "order": 1,
+        "sectionDuration": 0,
+        "sectionId": "6795d91c7395f600aad17be8"
+      }
+    ],
+    "sections": [
+      {
+        "sectionDuration": 0,
+        "sectionMarks": 30,
+        "isActive": true,
+        "draftMode": false,
+        "sectionInstructions": " ",
+        "_id": "6795d91c7395f600aad17be8",
+        "hasOptionalQuestions": false,
+        "name": "culture",
+        "order": 1,
+        "createdAt": "2025-12-19T02:42:00.200Z",
+        "updatedAt": "2025-12-19T02:42:00.200Z",
+        "questions": [
+          {
+            "_id": "6795d7258746fb0822ab51c6",
+            "name": "<p>પુસ્તક - ધ ટેસ્ટ ઓફ માય લાઈફ - દ્વારા લખવામાં આવ્યું હતું-</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "પુસ્તક - ધ ટેસ્ટ ઓફ માય લાઈફ - દ્વારા લખવામાં આવ્યું હતું-",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 1,
+            "questionSubmitOrder": 1,
+            "options": [
+              {
+                "name": "<p>સાયના નેહવાલ</p>",
+                "nameText": "સાયના નેહવાલ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bbb0649f1f68",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કપિલ દેવ&nbsp;</p>",
+                "nameText": "કપિલ દેવ ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bbcc0e9f1f69",
+                "isMarked": false
+              },
+              {
+                "name": "<p>સચિન તેંડુલકર</p>",
+                "nameText": "સચિન તેંડુલકર",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb1b459f1f6a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>યુવરાજ સિંહ</p>",
+                "nameText": "યુવરાજ સિંહ",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bbb70a9f1f6b",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 3000,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fbaa5cab51cb",
+            "name": "<p>અર્નેસ્ટ મેકે દ્વારા પુરાતત્વીય ખોદકામ વિશે લખાયેલ પુસ્તકનું નામ શું છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "અર્નેસ્ટ મેકે દ્વારા પુરાતત્વીય ખોદકામ વિશે લખાયેલ પુસ્તકનું નામ શું છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 2,
+            "questionSubmitOrder": 2,
+            "options": [
+              {
+                "name": "<p>પ્રારંભિક સિંધુ સંસ્કૃતિ</p>",
+                "nameText": "પ્રારંભિક સિંધુ સંસ્કૃતિ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bbaec89f1f58",
+                "isMarked": false
+              },
+              {
+                "name": "<p>મોહેંજો-દડો ખાતે ઊંડું ખોદકામ</p>",
+                "nameText": "મોહેંજો-દડો ખાતે ઊંડું ખોદકામ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb7e919f1f59",
+                "isMarked": false
+              },
+              {
+                "name": "<p>મોહેંજો-દડોનું પુરાતત્વ</p>",
+                "nameText": "મોહેંજો-દડોનું પુરાતત્વ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb3d819f1f5a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>મોહેંજો-દડો ખાતે વધુ ખોદકામ</p>",
+                "nameText": "મોહેંજો-દડો ખાતે વધુ ખોદકામ",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb1eb89f1f5b",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fb4b3eab51d0",
+            "name": "<p>'સ્ટ્રેટ ડ્રાઇવ' પુસ્તકના લેખક કોણ છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'સ્ટ્રેટ ડ્રાઇવ' પુસ્તકના લેખક કોણ છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 3,
+            "questionSubmitOrder": 3,
+            "options": [
+              {
+                "name": "<p>&nbsp;કપિલ દેવ</p>",
+                "nameText": " કપિલ દેવ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb77ad9f1f50",
+                "isMarked": false
+              },
+              {
+                "name": "<p>સુનિલ ગાવસ્કર</p>",
+                "nameText": "સુનિલ ગાવસ્કર",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb3cec9f1f51",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;પ્રકાશ પાદુકોણ</p>",
+                "nameText": " પ્રકાશ પાદુકોણ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb39c09f1f52",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વિશ્વનાથન આનંદ</p>",
+                "nameText": "વિશ્વનાથન આનંદ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb81a39f1f53",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fb41eeab51d5",
+            "name": "<p>'માય મધર એટ સિક્સટી-સિક્સ' કવિતા કોણે લખી હતી?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'માય મધર એટ સિક્સટી-સિક્સ' કવિતા કોણે લખી હતી?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 4,
+            "questionSubmitOrder": 4,
+            "options": [
+              {
+                "name": "<p>રોબર્ટ ફ્રોસ્ટ</p>",
+                "nameText": "રોબર્ટ ફ્રોસ્ટ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bbbd829f1f48",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અશોકમિત્રન</p>",
+                "nameText": "અશોકમિત્રન",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb400b9f1f49",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કમલા દાસ</p>",
+                "nameText": "કમલા દાસ",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb02a89f1f4a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>રવીન્દ્રનાથ ટાગોર</p>",
+                "nameText": "રવીન્દ્રનાથ ટાગોર",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb28569f1f4b",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fbc8e6ab51da",
+            "name": "<p>'ધ ગોડ ઓફ સ્મોલ થિંગ્સ' નવલકથા કોણે લખી?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'ધ ગોડ ઓફ સ્મોલ થિંગ્સ' નવલકથા કોણે લખી?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 5,
+            "questionSubmitOrder": 5,
+            "options": [
+              {
+                "name": "<p>અરુંધતી રોય</p>",
+                "nameText": "અરુંધતી રોય",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bbedba9f1f60",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કિરણ દેસાઈ</p>",
+                "nameText": "કિરણ દેસાઈ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb5fa39f1f61",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ચેતન ભગત</p>",
+                "nameText": "ચેતન ભગત",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb813e9f1f62",
+                "isMarked": false
+              },
+              {
+                "name": "<p>સલમાન રશ્દી</p>",
+                "nameText": "સલમાન રશ્દી",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb148a9f1f63",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fb580bab51df",
+            "name": "<p>'ધ વ્હાઇટ ટાઇગર' નવલકથા કોણે લખી?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'ધ વ્હાઇટ ટાઇગર' નવલકથા કોણે લખી?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 6,
+            "questionSubmitOrder": 6,
+            "options": [
+              {
+                "name": "<p>ચેતન ભગત</p>",
+                "nameText": "ચેતન ભગત",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb1d059f1f6c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વિક્રમ શેઠ</p>",
+                "nameText": "વિક્રમ શેઠ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb10339f1f6d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ખુશવંત સિંહ</p>",
+                "nameText": "ખુશવંત સિંહ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bbd5039f1f6e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અરવિંદ અદિગા</p>",
+                "nameText": "અરવિંદ અદિગા",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb1f659f1f6f",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fb3bb4ab51e4",
+            "name": "<p>\"બહુરૂપી ગાંધી\" કોણે લખ્યા છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "\"બહુરૂપી ગાંધી\" કોણે લખ્યા છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 7,
+            "questionSubmitOrder": 7,
+            "options": [
+              {
+                "name": "<p>જવાહરલાલ નેહરુ</p>",
+                "nameText": "જવાહરલાલ નેહરુ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb0a9b9f1f5c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ચક્રવર્તી રાજગોપાલાચારી</p>",
+                "nameText": "ચક્રવર્તી રાજગોપાલાચારી",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb06f49f1f5d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અમૃતા પ્રીતમ</p>",
+                "nameText": "અમૃતા પ્રીતમ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb69909f1f5e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અનુ બંદ્યોપાધ્યાય</p>",
+                "nameText": "અનુ બંદ્યોપાધ્યાય",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb5e3a9f1f5f",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fbf3e1ab51e9",
+            "name": "<p>ચાર્લ્સ વિલ્કિન્સનનું ભગવદ ગીતાનું અંગ્રેજી વર્ઝન સૌપ્રથમ વર્ષ ૧૯૯૩માં પ્રકાશિત થયું હતું</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ચાર્લ્સ વિલ્કિન્સનનું ભગવદ ગીતાનું અંગ્રેજી વર્ઝન સૌપ્રથમ વર્ષ ૧૯૯૩માં પ્રકાશિત થયું હતું",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 8,
+            "questionSubmitOrder": 8,
+            "options": [
+              {
+                "name": "<p>1685</p>",
+                "nameText": "1685",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb04449f1f54",
+                "isMarked": false
+              },
+              {
+                "name": "<p>1725</p>",
+                "nameText": "1725",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb31729f1f55",
+                "isMarked": false
+              },
+              {
+                "name": "<p>1785</p>",
+                "nameText": "1785",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb1a789f1f56",
+                "isMarked": false
+              },
+              {
+                "name": "<p>1885</p>",
+                "nameText": "1885",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bbe8c29f1f57",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fb4ee9ab51ee",
+            "name": "<p>મુનશી પ્રેમચંદ દ્વારા નીચેનામાંથી કયું પુસ્તક લખવામાં આવ્યું છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "મુનશી પ્રેમચંદ દ્વારા નીચેનામાંથી કયું પુસ્તક લખવામાં આવ્યું છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 9,
+            "questionSubmitOrder": 9,
+            "options": [
+              {
+                "name": "<p>ચિદમ્બર</p>",
+                "nameText": "ચિદમ્બર",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb9dd59f1f4c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કામાયની</p>",
+                "nameText": "કામાયની",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb0c889f1f4d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>સેવાસદન</p>",
+                "nameText": "સેવાસદન",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb542c9f1f4e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>યમ</p>",
+                "nameText": "યમ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb80269f1f4f",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d7258746fb7f5cab51f3",
+            "name": "<p>'<u style=\"font-family: sans-serif; font-size: 15px; user-select: initial !important;\"><span style=\"font-weight: bold; user-select: initial !important;\">વ્હાય આઈ એમ હિંદુ</span></u>' પુસ્તક કોણે લખ્યું?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'વ્હાય આઈ એમ હિંદુ' પુસ્તક કોણે લખ્યું?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 10,
+            "questionSubmitOrder": 10,
+            "options": [
+              {
+                "name": "<p>મનમોહન સિંહ</p>",
+                "nameText": "મનમોહન સિંહ",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb75049f1f64",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અટલ બિહારી વાજપેયી</p>",
+                "nameText": "અટલ બિહારી વાજપેયી",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb803b9f1f65",
+                "isMarked": false
+              },
+              {
+                "name": "<p>નરેન્દ્ર મોદી</p>",
+                "nameText": "નરેન્દ્ર મોદી",
+                "isCorrect": false,
+                "_id": "6795d8e297b8bb85ba9f1f66",
+                "isMarked": false
+              },
+              {
+                "name": "<p>શશિ થરૂર</p>",
+                "nameText": "શશિ થરૂર",
+                "isCorrect": true,
+                "_id": "6795d8e297b8bb02389f1f67",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f6ec81d17c20",
+            "name": "<p>'લેડી ડોક્ટર્સઃ ધ અનટોલ્ડ સ્ટોરીઝ ઓફ ઈન્ડિયાઝ ફર્સ્ટ વુમન ઈન મેડિસિન' પુસ્તકના લેખક કોણ છ���?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'લેડી ડોક્ટર્સઃ ધ અનટોલ્ડ સ્ટોરીઝ ઓફ ઈન્ડિયાઝ ફર્સ્ટ વુમન ઈન મેડિસિન' પુસ્તકના લેખક કોણ છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 11,
+            "questionSubmitOrder": 11,
+            "options": [
+              {
+                "name": "<p>કુણાલ બાસુ</p>",
+                "nameText": "કુણાલ બાસુ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e68c5220ef5",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કવિતા રાવ</p>",
+                "nameText": "કવિતા રાવ",
+                "isCorrect": true,
+                "_id": "6795df825d8e6ea56a220ef6",
+                "isMarked": false
+              },
+              {
+                "name": "<p>જયરામ રમેશ</p>",
+                "nameText": "જયરામ રમેશ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e4ecb220ef7",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અનુરાધા રોય</p>",
+                "nameText": "અનુરાધા રોય",
+                "isCorrect": false,
+                "_id": "6795df825d8e6eb085220ef8",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f61e0cd17c25",
+            "name": "<p>કયા અર્થશાસ્ત્રીએ \"ધ જનરલ થિયરી ઓફ એમ્પ્લોયમેન્ટ, ઈન્ટરેસ્ટ એન્ડ મની (1936)\" પુસ્તક લખ્યું છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "કયા અર્થશાસ્ત્રીએ \"ધ જનરલ થિયરી ઓફ એમ્પ્લોયમેન્ટ, ઈન્ટરેસ્ટ એન્ડ મની (1936)\" પુસ્તક લખ્યું છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 12,
+            "questionSubmitOrder": 12,
+            "options": [
+              {
+                "name": "<p>જ્હોન મેનાર્ડ કેન્સ</p>",
+                "nameText": "જ્હોન મેનાર્ડ કેન્સ",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e3439220f15",
+                "isMarked": false
+              },
+              {
+                "name": "<p>મિલ્ટન ફ્રીડમેન</p>",
+                "nameText": "મિલ્ટન ફ્રીડમેન",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e6c65220f16",
+                "isMarked": false
+              },
+              {
+                "name": "<p>એડમ સ્મિથ</p>",
+                "nameText": "એડમ સ્મિથ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e4f49220f17",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વિન્સેન્ટ ક્રોફોર્ડ</p>",
+                "nameText": "વિન્સેન્ટ ક્રોફોર્ડ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e26ec220f18",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f6e8b3d17c2a",
+            "name": "<p>ભારતીય મહાકાવ્ય મહાભારત (વ્યાસ દ્વારા લખાયેલ) ના અઢાર પુસ્તકોમાંથી છઠ્ઠું કયું પુસ્તક છે જેમાં ભગવદ ગીતાનો વ્યાપકપણે અભ્યાસ કરવામાં આવ્યો છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભારતીય મહાકાવ્ય મહાભારત (વ્યાસ દ્વારા લખાયેલ) ના અઢાર પુસ્તકોમાંથી છઠ્ઠું કયું પુસ્તક છે જેમાં ભગવદ ગીતાનો વ્યાપકપણે અભ્યાસ કરવામાં આવ્યો છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 13,
+            "questionSubmitOrder": 13,
+            "options": [
+              {
+                "name": "<p>સભા પર્વ</p>",
+                "nameText": "સભા પર્વ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e7c86220f05",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વિરાટ પર્વ</p>",
+                "nameText": "વિરાટ પર્વ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6eeb88220f06",
+                "isMarked": false
+              },
+              {
+                "name": "<p>આદિ&nbsp; પર્વ</p>",
+                "nameText": "આદિ  પર્વ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e4cfd220f07",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ભીષ્મ&nbsp; પર્વ</p>",
+                "nameText": "ભીષ્મ  પર્વ",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e5246220f08",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f629a6d17c2f",
+            "name": "<p>'રેડ અર્થ એન્ડ પોરિંગ રેઈન' નવલકથાના લેખક નીચેનામાંથી કોણ છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'રેડ અર્થ એન્ડ પોરિંગ રેઈન' નવલકથાના લેખક નીચેનામાંથી કોણ છે?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 14,
+            "questionSubmitOrder": 14,
+            "options": [
+              {
+                "name": "<p>સુકેતુ મહેતા</p>",
+                "nameText": "સુકેતુ મહેતા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6eddcc220ee9",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વિક્રમ ચંદ્ર</p>",
+                "nameText": "વિક્રમ ચંદ્ર",
+                "isCorrect": true,
+                "_id": "6795df825d8e6ed1a9220eea",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અરુંધતી રોય</p>",
+                "nameText": "અરુંધતી રોય",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e82f2220eeb",
+                "isMarked": false
+              },
+              {
+                "name": "<p>સામંત ભદ્રા</p>",
+                "nameText": "સામંત ભદ્રા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e1807220eec",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f61578d17c34",
+            "name": "<p>'ક્લીયર લાઈટ ઓફ ડે' પુસ્તક __________ દ્વારા લખવામાં આવ્યું છે.</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'ક્લીયર લાઈટ ઓફ ડે' પુસ્તક __________ દ્વારા લખવામાં આવ્યું છે.",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 15,
+            "questionSubmitOrder": 15,
+            "options": [
+              {
+                "name": "<p>અનિતા દેસાઈ</p>",
+                "nameText": "અનિતા દેસાઈ",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e80fa220f25",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ઝુંપા લાહિરી</p>",
+                "nameText": "ઝુંપા લાહિરી",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e6c0a220f26",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કિરણ દેસાઈ</p>",
+                "nameText": "કિરણ દેસાઈ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e10af220f27",
+                "isMarked": false
+              },
+              {
+                "name": "<p>નિકિતા લાલવાણી</p>",
+                "nameText": "નિકિતા લાલવાણી",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ebd66220f28",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f61101d17c39",
+            "name": "<p>____________ દ્વારા લખાયેલ પુસ્તક 'એ નેશન ઇન મેકિંગ'.</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "____________ દ્વારા લખાયેલ પુસ્તક 'એ નેશન ઇન મેકિંગ'.",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 16,
+            "questionSubmitOrder": 16,
+            "options": [
+              {
+                "name": "<p>સુરેન્દ્રનાથ બેનર્જી</p>",
+                "nameText": "સુરેન્દ્રનાથ બેનર્જી",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e42c9220ef9",
+                "isMarked": false
+              },
+              {
+                "name": "<p>જી કે ગોખલે</p>",
+                "nameText": "જી કે ગોખલે",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e615f220efa",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વલ્લભભાઈ પટેલ</p>",
+                "nameText": "વલ્લભભાઈ પટેલ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e1f13220efb",
+                "isMarked": false
+              },
+              {
+                "name": "<p>એમજી રાનડે</p>",
+                "nameText": "એમજી રાનડે",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e732c220efc",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f67513d17c3e",
+            "name": "<p>પ્રખ્યાત હિન્દી નવલકથા 'તમસ' કોણે લખી હતી?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "પ્રખ્યાત હિન્દી નવલકથા 'તમસ' કોણે લખી હતી?",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 17,
+            "questionSubmitOrder": 17,
+            "options": [
+              {
+                "name": "<p>યશપાલ</p>",
+                "nameText": "યશપાલ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e52d9220f19",
+                "isMarked": false
+              },
+              {
+                "name": "<p>નાગેન્દ્ર</p>",
+                "nameText": "નાગેન્દ્ર",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e3b11220f1a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ભીષ્મ સાહની</p>\n<p></p>",
+                "nameText": "ભીષ્મ સાહની\n",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e2b59220f1b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ત્રિલોચન</p>",
+                "nameText": "ત્રિલોચન",
+                "isCorrect": false,
+                "_id": "6795df825d8e6edda7220f1c",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f68069d17c43",
+            "name": "<p>'મિડનાઈટ્સ ચિલ્ડ્રન' જે બ્રિટિશ સંસ્થાનવાદી શાસનથી સ્વતંત્રતા અને ભારતના ભાગલા તરફના ભારતના સંક્રમણનું ચિત્રણ કરે છે તે આ દ્વારા લખાયેલ છે:</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'મિડનાઈટ્સ ચિલ્ડ્રન' જે બ્રિટિશ સંસ્થાનવાદી શાસનથી સ્વતંત્રતા અને ભારતના ભાગલા તરફના ભારતના સંક્રમણનું ચિત્રણ કરે છે તે આ દ્વારા લખાયેલ છે:\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 18,
+            "questionSubmitOrder": 18,
+            "options": [
+              {
+                "name": "<p>સલમાન રશ્દી</p>\n<p></p>",
+                "nameText": "સલમાન રશ્દી\n",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e2671220f09",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વિદ્યાધર સૂરજપ્રસાદ નાયપોલ</p>\n<p></p>",
+                "nameText": "વિદ્યાધર સૂરજપ્રસાદ નાયપોલ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e6fd1220f0a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અમિતાવ ઘોષ</p>\n<p></p>",
+                "nameText": "અમિતાવ ઘોષ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e7cd3220f0b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>વિક્રમ શેઠ</p>\n<p></p>",
+                "nameText": "વિક્રમ શેઠ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e4821220f0c",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f64302d17c48",
+            "name": "<p>'ઈન્ડિયા આફ્ટર ગાંધી' વાર્તાનો ઇતિહાસ કોણે લખ્યો છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'ઈન્ડિયા આફ્ટર ગાંધી' વાર્તાનો ઇતિહાસ કોણે લખ્યો છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 19,
+            "questionSubmitOrder": 19,
+            "options": [
+              {
+                "name": "<p>માલતી રાવ</p>\n<p></p>",
+                "nameText": "��ાલતી રાવ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e41eb220eed",
+                "isMarked": false
+              },
+              {
+                "name": "<p>રામચંદ્ર ગુહા</p>\n<p></p>",
+                "nameText": "રામચંદ્ર ગુહા\n",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e1a3d220eee",
+                "isMarked": false
+              },
+              {
+                "name": "<p>રૂપા બાજવા</p>\n<p></p>",
+                "nameText": "રૂપા બાજવા\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e721f220eef",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અરુંધતી રોય</p>\n<p></p>",
+                "nameText": "અરુંધતી રોય\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e84e2220ef0",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f6ad5ed17c4d",
+            "name": "<p>'વિકલાંગ શ્રદ્ધા કા દૌર' કયા જાણીતા લેખકની કૃતિ છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "'વિકલાંગ શ્રદ્ધા કા દૌર' કયા જાણીતા લેખકની કૃતિ છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 20,
+            "questionSubmitOrder": 20,
+            "options": [
+              {
+                "name": "<p>ખુશવંત સિંહ</p>\n<p></p>",
+                "nameText": "ખુશવંત સિંહ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e6b1e220f29",
+                "isMarked": false
+              },
+              {
+                "name": "<p>હરિ શંકર પરસાઈ</p>\n<p></p>",
+                "nameText": "હરિ શંકર પરસાઈ\n",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e8074220f2a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અટલ બિહારી વાજપેયી</p>\n<p></p>",
+                "nameText": "અટલ બિહારી વાજપેયી\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e0e05220f2b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>આરકે નારાયણ</p>\n<p></p>",
+                "nameText": "આરકે નારાયણ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e771e220f2c",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f6136ed17c52",
+            "name": "<p>નીચેનામાંથી કયું દક્ષિણ આફ્રિકાની વહીવટી રાજધાની છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કયું દક્ષિણ આફ્રિકાની વહીવટી રાજધાની છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 21,
+            "questionSubmitOrder": 21,
+            "options": [
+              {
+                "name": "<p>ડર્બન</p>",
+                "nameText": "ડર્બન",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e2efd220efd",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કેપ ટાઉન</p>\n<p></p>",
+                "nameText": "કેપ ટાઉન\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ea936220efe",
+                "isMarked": false
+              },
+              {
+                "name": "<p>પ્રિટોરિયા</p>",
+                "nameText": "પ્રિટોરિયા",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e3191220eff",
+                "isMarked": false
+              },
+              {
+                "name": "<p>બ્લૂમફોન્ટેન</p>",
+                "nameText": "બ્લૂમફોન્ટેન",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e4370220f00",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f63edbd17c57",
+            "name": "<p>શ્રીલંકાની ન્યાયિક રાજધાની કઈ છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "શ્રીલંકાની ન્યાયિક રાજધાની કઈ છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 22,
+            "questionSubmitOrder": 22,
+            "options": [
+              {
+                "name": "<p>કોલંબો</p>",
+                "nameText": "કોલંબો",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e638a220f1d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કેન્ડી</p>",
+                "nameText": "કેન્ડી",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e7abf220f1e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>જયવદેનેપુરા કોટ્ટે</p>",
+                "nameText": "જયવદેનેપુરા કોટ્ટે",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ee360220f1f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>અનુરાધાપુરા</p>",
+                "nameText": "અનુરાધાપુરા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e0bae220f20",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f680c9d17c5c",
+            "name": "<p>થિમ્પુ ભારતના કયા પાડોશી દેશની રાજધાની છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "થિમ્પુ ભારતના કયા પાડોશી દેશની રાજધાની છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 23,
+            "questionSubmitOrder": 23,
+            "options": [
+              {
+                "name": "<p>બાંગ્લાદેશ</p>\n<p></p>",
+                "nameText": "બાંગ્લાદેશ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e7f44220f0d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>મ્યાનમાર</p>",
+                "nameText": "મ્યાનમાર",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ef151220f0e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>નેપાળ</p>",
+                "nameText": "નેપાળ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e1587220f0f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ભુતાન</p>",
+                "nameText": "ભુતાન",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e0403220f10",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f6e69fd17c61",
+            "name": "<p>_________ એ મિઝોરમની રાજધાની છે.</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "_________ એ મિઝોરમની રાજધાની છે.\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 24,
+            "questionSubmitOrder": 24,
+            "options": [
+              {
+                "name": "<p>શિલોંગ</p>",
+                "nameText": "શિલોંગ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e5527220ef1",
+                "isMarked": false
+              },
+              {
+                "name": "<p>આઈઝોલ</p>",
+                "nameText": "આઈઝોલ",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e64f5220ef2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કાવરત્તી</p>",
+                "nameText": "કાવરત્તી",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ea87d220ef3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ઇમ્ફાલ</p>",
+                "nameText": "ઇમ્ફાલ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ebfec220ef4",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f601efd17c66",
+            "name": "<p>યુરો નીચેનામાંથી કયા આંતરરાષ્ટ્રીય જૂથનું સામાન્ય ચલણ છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "યુરો નીચેનામાંથી કયા આંતરરાષ્ટ્રીય જૂથનું સામાન્ય ચલણ છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 25,
+            "questionSubmitOrder": 25,
+            "options": [
+              {
+                "name": "<p>ગલ્ફ કોઓપરેશન કાઉન્સિલ</p>\n<p></p>",
+                "nameText": "ગલ્ફ કોઓપરેશન કાઉન્સિલ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ed599220f2d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>એસોસિએશન ઓફ સાઉથ એશિયન નેશન્સ</p>\n<p></p>",
+                "nameText": "એસોસિએશન ઓફ સાઉથ એશિયન નેશન્સ\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e51f5220f2e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>પ્રાદેશિક સહકાર માટે દક્ષિણ એશિયન એસોસિએશન</p>\n<p></p>",
+                "nameText": "પ્રાદેશિક સહકાર માટે દક્ષિણ એશિયન એસોસિએશન\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e44d4220f2f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>યુરોપિયન યુનિયન</p>\n<p></p>",
+                "nameText": "યુરોપિયન યુનિયન\n",
+                "isCorrect": true,
+                "_id": "6795df825d8e6ec32e220f30",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f621c4d17c6b",
+            "name": "<p>યુગાન્ડાની રાજધાનીનું નામ જણાવો?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "યુગાન્ડાની રાજધાનીનું નામ જણાવો?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 26,
+            "questionSubmitOrder": 26,
+            "options": [
+              {
+                "name": "<p>મોગાદિશુ</p>",
+                "nameText": "મોગાદિશુ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e366a220f01",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કમ્પાલા</p>",
+                "nameText": "કમ્પાલા",
+                "isCorrect": true,
+                "_id": "6795df825d8e6eedfe220f02",
+                "isMarked": false
+              },
+              {
+                "name": "<p>લુસાકા</p>",
+                "nameText": "લુસાકા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e71cd220f03",
+                "isMarked": false
+              },
+              {
+                "name": "<p>બુલેન્ગા</p>",
+                "nameText": "બુલેન્ગા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ed973220f04",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f6ad83d17c70",
+            "name": "<p>યે�� .......... નું ચલણ છે:</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "યેન .......... નું ચલણ છે:\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 27,
+            "questionSubmitOrder": 27,
+            "options": [
+              {
+                "name": "<p>માલદીવ</p>",
+                "nameText": "માલદીવ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e4a29220f21",
+                "isMarked": false
+              },
+              {
+                "name": "<p>જાપાન</p>",
+                "nameText": "જાપાન",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e7e64220f22",
+                "isMarked": false
+              },
+              {
+                "name": "<p>દક્ષિણ કોરિયા</p>\n<p></p>",
+                "nameText": "દક્ષિણ કોરિયા\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e27d0220f23",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ઈન્ડોનેશિયા</p>",
+                "nameText": "ઈન્ડોનેશિયા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e6c44220f24",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f62f05d17c75",
+            "name": "<p>Male કયા દેશની રાજધાની છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "Male કયા દેશની રાજધાની છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 28,
+            "questionSubmitOrder": 28,
+            "options": [
+              {
+                "name": "<p>મોરેશિયસ</p>",
+                "nameText": "મોરેશિયસ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e3de7220f11",
+                "isMarked": false
+              },
+              {
+                "name": "<p>લક્ષદ્વીપ</p>",
+                "nameText": "લક્ષદ્વીપ",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e888f220f12",
+                "isMarked": false
+              },
+              {
+                "name": "<p>માલદીવ્સ</p>",
+                "nameText": "માલદીવ્સ",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e88ec220f13",
+                "isMarked": false
+              },
+              {
+                "name": "<p>મલેશિયા</p>",
+                "nameText": "મલેશિયા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e6cbd220f14",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f60acbd17c7a",
+            "name": "<p>પાકિસ્તાનની રાજધાનીનું નામ જણાવો.</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "પાકિસ્તાનની રાજધાનીનું નામ જણાવો.\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 29,
+            "questionSubmitOrder": 29,
+            "options": [
+              {
+                "name": "<p>રાવલપિંડી</p>",
+                "nameText": "રાવલપિંડી",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e5884220f35",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ઈસ્લામાબાદ</p>",
+                "nameText": "ઈસ્લામાબાદ",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e5416220f36",
+                "isMarked": false
+              },
+              {
+                "name": "<p>કરાચી</p>",
+                "nameText": "કરાચી",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e7af0220f37",
+                "isMarked": false
+              },
+              {
+                "name": "<p>લાહોર</p>",
+                "nameText": "લાહોર",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e173e220f38",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "6795d9567395f63cc9d17c7f",
+            "name": "<p>કુના એ નીચેનામાંથી કયા દેશનું ચલણ છે?</p>\n<p></p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "કુના એ નીચેનામાંથી કયા દેશનું ચલણ છે?\n",
+            "sectionId": "6795d91c7395f600aad17be8",
+            "order": 30,
+            "questionSubmitOrder": 30,
+            "options": [
+              {
+                "name": "<p>કેન્યા</p>",
+                "nameText": "કેન્યા",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e1029220f31",
+                "isMarked": false
+              },
+              {
+                "name": "<p>ક્રોએશિયા</p>",
+                "nameText": "ક્રોએશિયા",
+                "isCorrect": true,
+                "_id": "6795df825d8e6e2cc8220f32",
+                "isMarked": false
+              },
+              {
+                "name": "<p>સંયુક્ત આરબ અમીરાત</p>\n<p></p>",
+                "nameText": "સંયુક્ત આરબ અમીરાત\n",
+                "isCorrect": false,
+                "_id": "6795df825d8e6e742f220f33",
+                "isMarked": false
+              },
+              {
+                "name": "<p>સુદાન</p>",
+                "nameText": "સુદાન",
+                "isCorrect": false,
+                "_id": "6795df825d8e6ead99220f34",
+                "isMarked": false
+              }
+            ],
+            "solution": "",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          }
+        ],
+        "numberOfQuestions": 30
+      }
+    ],
+    "userDetails": {
+      "name": "Ajay",
+      "userId": 92230062,
+      "orgId": 517121
+    },
+    "sts": 1766112130246,
+    "region": {
+      "timeFormat": "hh:mm a",
+      "dateTimeStamp": "yyyy/MM/dd"
+    }
+  },
+  "message": "Student Tests Fetched Successfully"
+}

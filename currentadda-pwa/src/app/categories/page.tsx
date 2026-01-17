@@ -7,7 +7,7 @@ import {
     Shield, TrendingUp, GraduationCap, TreePine, PartyPopper,
     Banknote, Calendar, Globe2, Flag, Cross, Users, MapPin,
     Vote, FlaskConical, Map, Film, Cpu, LayoutGrid, ChevronRight,
-    ArrowLeft, Home, User, Search, Zap, Clock
+    ArrowLeft, Home, User, Search, Zap, Clock, Book
 } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
@@ -228,9 +228,12 @@ export default function CategoriesPage() {
 
             {/* Docked Modern Tab Bar */}
             <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-6 pb-8 pt-2">
-                <div className="glass p-2 rounded-[2rem] modern-shadow border border-white/40 flex justify-around items-center shadow-2xl">
+                <div className="glass p-2 rounded-[2rem] modern-shadow border border-white/40 flex justify-around items-center shadow-2xl bg-white/80 backdrop-blur-xl">
                     <Link href="/" className="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-500 transition-all">
                         <div className="p-3"><HomeIcon className="w-6 h-6" /></div>
+                    </Link>
+                    <Link href="/subjects" className="p-3.5 text-slate-400 hover:text-indigo-600 transition-all rounded-2xl hover:bg-slate-50">
+                        <Book className="w-6 h-6" />
                     </Link>
                     <Link href="/categories" className="flex flex-col items-center gap-1 text-indigo-600">
                         <div className="bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-100"><LayoutGrid className="w-6 h-6" /></div>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import {
-  BookOpen, ChevronRight, Trophy, Search, User, Loader2,
+  Book, BookOpen, ChevronRight, Trophy, Search, User, Loader2,
   ArrowDown, LayoutGrid, Flame, Sparkles, Clock,
   Target, Star, TrendingUp, Calendar, Zap, Award,
   Brain, CheckCircle2, PlayCircle
@@ -558,6 +558,9 @@ export default function HomePage() {
               <BookOpen className="w-5 h-5" />
             </div>
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full" />
+          </Link>
+          <Link href="/subjects" className="p-3.5 text-slate-400 hover:text-indigo-600 transition-all rounded-2xl hover:bg-slate-50">
+            <Book className="w-5 h-5" />
           </Link>
           <Link href="/categories" className="p-3.5 text-slate-400 hover:text-indigo-600 transition-all rounded-2xl hover:bg-slate-50">
             <LayoutGrid className="w-5 h-5" />

@@ -1,0 +1,3495 @@
+{
+  "status": "success",
+  "data": {
+    "test": {
+      "name": "Talati-Culture-001- કળા સ્વરૂપો, સાહિત્ય, સંગીત, શિલ્પ અને સ્થાપત્ય",
+      "testTotalDuration": 2700000,
+      "settings": {
+        "fonts": {},
+        "isSectionSwitchingEnabled": true
+      },
+      "practiceTestUrls": []
+    },
+    "filters": {
+      "incorrect": 0,
+      "correct": 0,
+      "partiallyMarked": 0,
+      "unattempted": 1,
+      "markForReview": 0,
+      "graceMarked": 0,
+      "revaluated": 0
+    },
+    "timeTaken": 6000,
+    "courseId": "689596",
+    "showReportQuestion": true,
+    "sectionWiseStats": [
+      {
+        "marksScored": 0,
+        "sectionMarks": 58,
+        "accuracy": 0,
+        "_id": "69417216b07ecca842452bcd",
+        "totalQuestions": 58,
+        "attemptDuration": 6000,
+        "correctAnswers": 0,
+        "inCorrectAnswers": 0,
+        "partiallyCorrectAnswers": 0,
+        "unAttempted": 58,
+        "name": "test 1",
+        "order": 1,
+        "sectionDuration": 0,
+        "sectionId": "689a043a161ad5850349fade"
+      }
+    ],
+    "sections": [
+      {
+        "sectionDuration": 0,
+        "sectionMarks": 58,
+        "isActive": true,
+        "draftMode": false,
+        "sectionInstructions": " ",
+        "_id": "689a043a161ad5850349fade",
+        "hasOptionalQuestions": false,
+        "name": "test 1",
+        "order": 1,
+        "createdAt": "2025-08-12T17:50:38.906Z",
+        "updatedAt": "2025-08-12T17:50:38.906Z",
+        "questions": [
+          {
+            "_id": "689a044ebc666d2ddd82cfe4",
+            "name": "<p>ભારતીય નાટ્યકળા સંદર્ભે નીચેના વિધાનો તપાસો:</p>\n<p>1. &lsquo;દસ કઠિયા&rsquo; નાટ્યકળામાં બે વર્ણનકારો ભગવાન શંકરને લાગતી કથા ભજવે છે.</p>\n<p>2. &lsquo;દસ કઠિયા&rsquo; ઓડીસા રાજ્યની લોક રંગભૂમિ છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભારતીય નાટ્યકળા સંદર્ભે નીચેના વિધાનો તપાસો:\n1. ‘દસ કઠિયા’ નાટ્યકળામાં બે વર્ણનકારો ભગવાન શંકરને લાગતી કથા ભજવે છે.\n2. ‘દસ કઠિયા’ ઓડીસા રાજ્યની લોક રંગભૂમિ છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 1,
+            "questionSubmitOrder": 1,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 ",
+                "isCorrect": false,
+                "_id": "689a04d729a5591bfe8903ec",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 ",
+                "isCorrect": false,
+                "_id": "689a04d729a559ba7d8903ed",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) 1 અને 2 બંને&nbsp;</p>",
+                "nameText": "(C) 1 અને 2 બંને ",
+                "isCorrect": true,
+                "_id": "689a04d729a5597ec28903ee",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) એક પણ નહીં</p>",
+                "nameText": "(D) એક પણ નહીં",
+                "isCorrect": false,
+                "_id": "689a04d729a5590c438903ef",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>દસ કઠિયામાં બે વર્ણનકારો નાટક ભજવે છે કે જેનો મુખ્ય વિચાર ભગવાન શંકરને લાગતો હોય છે. દસ કઠિયા ઓડીસા રાજ્યની લોક રંગભૂમિ છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 6000,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d024482cfe9",
+            "name": "<p>નીચેનામાંથી કઈ જોડી યોગ્ય રીતે જોડાયેલી છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કઈ જોડી યોગ્ય રીતે જોડાયેલી છે?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 2,
+            "questionSubmitOrder": 2,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) તમાશા - મધ્ય પ્રદેશ&nbsp;</p>",
+                "nameText": " (A) તમાશા - મધ્ય પ્રદેશ ",
+                "isCorrect": false,
+                "_id": "689a050f267826417f0826c6",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ભાંડ પાથેર - કાશ્મીર&nbsp;</p>",
+                "nameText": "(B) ભાંડ પાથેર - કાશ્મીર ",
+                "isCorrect": true,
+                "_id": "689a050f26782674f00826c7",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) જાત્રા - ઉત્તર પ્રદેશ&nbsp;</p>",
+                "nameText": "(C) જાત્રા - ઉત્તર પ્રદેશ ",
+                "isCorrect": false,
+                "_id": "689a050f26782654930826c8",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) નોટકી - પશ્ચિમ બંગાળ</p>",
+                "nameText": "(D) નોટકી - પશ્ચિમ બંગાળ",
+                "isCorrect": false,
+                "_id": "689a050f26782676220826c9",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>તમાશા મહારાષ્ટ્રની લોક રંગભૂમિ છે. જાત્રા બંગાળ અને ઓડીસાની છે. નોટકી ઉત્તર ભારતની છે. ભાંડ પાથેર કાશ્મીરનું છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666da41882cfee",
+            "name": "<p>&nbsp;&lsquo;નાટ્યશાસ્ત્ર&rsquo; સંબંધિત નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. નાટ્યશાસ્ત્રની રચના ભરત મુનિ દ્વારા કરવામાં આવી છે.</p>\n<p>2. આ ગ્રંથમાં નાટ્યકળા, નૃત્યકળા અને સંગીતકળા &ndash; એમ ત્રણેય કળાઓનું વર્ણન છે.</p>\n<p>3. તે ભારતીય સૌંદર્યશાસ્ત્રની પ્રારંભિક બાબતોનો સમાવેશ કરે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ‘નાટ્યશાસ્ત્ર’ સંબંધિત નીચેના વિધાનો ધ્યાનમાં લો:\n1. નાટ્યશાસ્ત્રની રચના ભરત મુનિ દ્વારા કરવામાં આવી છે.\n2. આ ગ્રંથમાં નાટ્યકળા, નૃત્યકળા અને સંગીતકળા – એમ ત્રણેય કળાઓનું વર્ણન છે.\n3. તે ભારતીય સૌંદર્યશાસ્ત્રની પ્રારંભિક બાબતોનો સમાવેશ કરે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 3,
+            "questionSubmitOrder": 3,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a054ac2771b30a3f2e774",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a054ac2771b2d08f2e775",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a054ac2771bffc8f2e776",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a054ac2771bafddf2e777",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>નાટ્યશાસ્ત્રની રચના ભરત મુનિ દ્વારા કરવામાં આવી છે. આ પુસ્તકમાં નાટ્યકળા, નૃત્યકળા અને સંગીતકળા એમ ત્રણેય કળાઓનું વર્ણન છે. તે ભારતીય સૌંદર્યશાસ્ત્રની પ્રારંભિક બાબતોનો સમાવેશ કરે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666dfb8b82cff3",
+            "name": "<p>ભરતનાટ્યમના મુખ્ય સ્ત્રોત સંદર્ભે નીચેના વિધાનો તપાસો:</p>\n<p>1. ભરતમુનિએ રચેલું &lsquo;નાટ્યશાસ્ત્ર&rsquo; ભરતનાટ્યમનો મુખ્ય સ્ત્રોત છે.</p>\n<p>2. નંદિકેશ્વરે રચેલું &lsquo;અભિનવ દર્પણ&rsquo; ભરતનાટ્યમનો મુખ્ય સ્ત્રોત છે.</p>\n<p>3. તમિલ ભાષાનું પુસ્તક &lsquo;શિલ્પ અધિકારક&rsquo;, જે ઇલાંગો આદિગલ દ્વારા રચિત છે, તે પણ ભરતનાટ્યમનું વર્ણન ધરાવે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભરતનાટ્યમના મુખ્ય સ્ત્રોત સંદર્ભે નીચેના વિધાનો તપાસો:\n1. ભરતમુનિએ રચેલું ‘નાટ્યશાસ્ત્ર’ ભરતનાટ્યમનો મુખ્ય સ્ત્રોત છે.\n2. નંદિકેશ્વરે રચેલું ‘અભિનવ દર્પણ’ ભરતનાટ્યમનો મુખ્ય સ્ત્રોત છે.\n3. તમિલ ભાષાનું પુસ્તક ‘શિલ્પ અધિકારક’, જે ઇલાંગો આદિગલ દ્વારા રચિત છે, તે પણ ભરતનાટ્યમનું વર્ણન ધરાવે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 4,
+            "questionSubmitOrder": 4,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2</p>",
+                "nameText": "(A) ફક્ત 1 અને 2",
+                "isCorrect": false,
+                "_id": "689a05a4f49834896f71299b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": " (B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a05a4f49834812a71299c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3</p>",
+                "nameText": "(C) ફક્ત 1 અને 3",
+                "isCorrect": false,
+                "_id": "689a05a4f4983468b071299d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(D) 1, 2 અને 3</p>",
+                "nameText": " (D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a05a4f4983482b671299e",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>ભરતમુનિએ રચેલું નાટ્યશાસ્ત્ર, નંદિકેશ્વરે રચેલું અભિનવ દર્પણ, અને તમિલ ભાષાનું પુસ્તક શિલ્પ અધિકારક (ઇલાંગો આદિગલ દ્વારા રચિત) એ ભરતનાટ્યમના મુખ્ય સ્ત્રોત છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d271c82cff8",
+            "name": "<p>&nbsp;ભારતીય નાટ્યકળાના પ્રારંભિક તબક્કા વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. ભારતમાં નાટ્યકળાની શરૂઆત મુંબઈમાં થઈ હતી.</p>\n<p>2. ગ્રાન્ડ ટ્રંક રોડ પરની &lsquo;પારસી નાટક મંડળી&rsquo;એ નાટકોની શરૂઆત કરી.</p>\n<p>3. અદી મરજબાન, ફિરોજ આંટિયા અને યજદી કરંજીયા નાટ્યકળા સાથે સંકળાયેલા પારસી મહાનુભાવો છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ભારતીય નાટ્યકળાના પ્રારંભિક તબક્કા વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. ભારતમાં નાટ્યકળાની શરૂઆત મુંબઈમાં થઈ હતી.\n2. ગ્રાન્ડ ટ્રંક રોડ પરની ‘પારસી નાટક મંડળી’એ નાટકોની શરૂઆત કરી.\n3. અદી મરજબાન, ફિરોજ આંટિયા અને યજદી કરંજીયા નાટ્યકળા સાથે સંકળાયેલા પારસી મહાનુભાવો છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 5,
+            "questionSubmitOrder": 5,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a0600dd8e17936830d042",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a0600dd8e17b29830d043",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a0600dd8e17112130d044",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a0600dd8e17af5330d045",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>ભારતમાં નાટ્યકળાની શરૂઆત મુંબઈમાં થઈ હતી. પારસી નાટક મંડળી (ગ્રાન્ડ ટ્રંક રોડ, મુંબઈ)એ આ નાટકોની શરૂઆત કરી. અદી મરજબાન, ફિરોજ આંટિયા અને યજદી કરંજીયા નાટ્યકળા સાથે સંકળાયેલા પારસી મહાનુભાવો છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d4fc282cffd",
+            "name": "<p>મહાન રાજા હર્ષવર્ધન દ્વારા રચિત નાટકો વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. હર્ષવર્ધને ત્રણ નાટક લખ્યા છે: રત્નાવલી, નાગાનંદ અને પ્રિયદર્શિકા.</p>\n<p>2. &lsquo;રત્નાવલી&rsquo; એ રત્નાવલી નામની એક સુંદર રાજકુમારી અને ઉદયન નામના મહાન રાજા વિશેનું સંસ્કૃત નાટક છે.</p>\n<p>3. &lsquo;નાગાનંદ&rsquo; એ પાંચ અંકોનું નાટક છે જે વિદ્યાધરના રાજકુમાર જીમુતવાહનના સ્વબલિદાનની હકીકતો રજૂ કરે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "મહાન રાજા હર્ષવર્ધન દ્વારા રચિત નાટકો વિશે નીચેના વિધાનો તપાસો:\n1. હર્ષવર્ધને ત્રણ નાટક લખ્યા છે: રત્નાવલી, નાગાનંદ અને પ્રિયદર્શિકા.\n2. ‘રત્નાવલી’ એ રત્નાવલી નામની એક સુંદર રાજકુમારી અને ઉદયન નામના મહાન રાજા વિશેનું સંસ્કૃત નાટક છે.\n3. ‘નાગાનંદ’ એ પાંચ અંકોનું નાટક છે જે વિદ્યાધરના રાજકુમાર જીમુતવાહનના સ્વબલિદાનની હકીકતો રજૂ કરે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 6,
+            "questionSubmitOrder": 6,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a21597d9038736c0a00a7",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a21597d90386eab0a00a8",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a21597d903873710a00a9",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a21597d90383c930a00aa",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>હર્ષવર્ધને ત્રણ નાટક લખ્યા છે: રત્નાવલી, નાગાનંદ અને પ્રિયદર્શિકા. રત્નાવલી એ રત્નાવલી નામની એક સુંદર રાજકુમારી અને ઉદયન નામના મહાન રાજા વિશેનું સંસ્કૃત નાટક છે (નોંધ: હર્ષવર્ધન નહીં). નાગાનંદ પાંચ અંકોનું નાટક છે જે રાજકુમાર જીમુતવાહનના સ્વબલિદાનની હકીકતો રજૂ કરે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d7c4282d002",
+            "name": "<p>નીચેનામાંથી કઈ જોડી યોગ્ય નથી?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કઈ જોડી યોગ્ય નથી? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 7,
+            "questionSubmitOrder": 7,
+            "options": [
+              {
+                "name": "<p>(A) કૃષ્ણ અટ્ટમ &ndash; કેરળ&nbsp;</p>",
+                "nameText": "(A) કૃષ્ણ અટ્ટમ – કેરળ ",
+                "isCorrect": false,
+                "_id": "689a21917d90382f6a0a012d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) રમણ &ndash; ઉત્તરાખંડ&nbsp;</p>",
+                "nameText": "(B) રમણ – ઉત્તરાખંડ ",
+                "isCorrect": false,
+                "_id": "689a21917d903866450a012e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ભવાઈ &ndash; ઉત્તર પ્રદેશ&nbsp;</p>",
+                "nameText": "(C) ભવાઈ – ઉત્તર પ્રદેશ ",
+                "isCorrect": true,
+                "_id": "689a21917d903811d00a012f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) જાત્રા &ndash; પશ્ચિમ બંગાળ</p>",
+                "nameText": "(D) જાત્રા – પશ્ચિમ બંગાળ",
+                "isCorrect": false,
+                "_id": "689a21917d90388d2d0a0130",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;ભવાઈ ગુજરાત રાજ્યનું છે, ઉત્તર પ્રદેશનું નહીં. કૃષ્ણ અટ્ટમ કેરળમાં, રમણ ઉત્તરાખંડમાં, અને જાત્રા પશ્ચિમ બંગાળમાં જોવા મળે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d0d4082d007",
+            "name": "<p>&nbsp;&lsquo;રમણ&rsquo; નૃત્ય વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. રમણ રામ ભગવાનની અથવા રામાયણની દંતકથાનું લોકનૃત્ય છે.</p>\n<p>2. તેને 2009માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સ્થાન મળ્યું.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ‘રમણ’ નૃત્ય વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. રમણ રામ ભગવાનની અથવા રામાયણની દંતકથાનું લોકનૃત્ય છે.\n2. તેને 2009માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સ્થાન મળ્યું.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 8,
+            "questionSubmitOrder": 8,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1</p>",
+                "nameText": "(A) ફક્ત 1",
+                "isCorrect": false,
+                "_id": "689a21bda8ecac3d74f4dba2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(B) ફક્ત 2</p>",
+                "nameText": " (B) ફક્ત 2",
+                "isCorrect": false,
+                "_id": "689a21bda8ecac84a1f4dba3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(C) 1 અને 2 બંને&nbsp;</p>",
+                "nameText": " (C) 1 અને 2 બંને ",
+                "isCorrect": true,
+                "_id": "689a21bda8ecac3448f4dba4",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) એક પણ નહીં</p>",
+                "nameText": "(D) એક પણ નહીં",
+                "isCorrect": false,
+                "_id": "689a21bda8ecac6c75f4dba5",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666daed882d00c",
+            "name": "<p>નીચેનામાંથી કયું વિધાન સાચું નથી?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કયું વિધાન સાચું નથી?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 9,
+            "questionSubmitOrder": 9,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) દસકાંઠીયા ઝારખંડ ક્ષેત્રમાં લોકપ્રિય નાટ્યકલા છે.&nbsp;</p>",
+                "nameText": " (A) દસકાંઠીયા ઝારખંડ ક્ષેત્રમાં લોકપ્રિય નાટ્યકલા છે. ",
+                "isCorrect": true,
+                "_id": "689a22287d90388e240a01c1",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) જાત્રા પૂર્વ ભારતમાં બંગાળ અને ઓડીસાનો લોકપ્રિય લોકનાટ્યકલા છે.&nbsp;</p>",
+                "nameText": "(B) જાત્રા પૂર્વ ભારતમાં બંગાળ અને ઓડીસાનો લોકપ્રિય લોકનાટ્યકલા છે. ",
+                "isCorrect": false,
+                "_id": "689a22287d9038a7670a01c2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) સ્વાંગ પંજાબ અને હરિયાણા રાજ્યમાં મનોરંજનનો લોકપ્રિય સ્ત્રોત છે.&nbsp;</p>",
+                "nameText": "(C) સ્વાંગ પંજાબ અને હરિયાણા રાજ્યમાં મનોરંજનનો લોકપ્રિય સ્ત્રોત છે. ",
+                "isCorrect": false,
+                "_id": "689a22287d903825b00a01c3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) ઉપરોક્તમાંથી એક પણ નહીં</p>",
+                "nameText": "(D) ઉપરોક્તમાંથી એક પણ નહીં",
+                "isCorrect": false,
+                "_id": "689a22287d9038e3a20a01c4",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;દસકાંઠીયા ઓડીસાનું છે, ઝારખંડનું નહીં. જાત્રા પૂર્વ ભારતમાં બંગાળ અને ઓડીસામાં જોવા મળે છે. સ્વાંગ પંજાબ અને હરિયાણા રાજ્યમાં લોકપ્રિય છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666dd04d82d011",
+            "name": "<p>&nbsp;ભારતના લોકનૃત્યો અને સંબંધિત રાજ્યોની જોડીઓ પૈકી કઈ જોડી યોગ્ય રીતે જોડાયેલી છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ભારતના લોકનૃત્યો અને સંબંધિત રાજ્યોની જોડીઓ પૈકી કઈ જોડી યોગ્ય રીતે જોડાયેલી છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 10,
+            "questionSubmitOrder": 10,
+            "options": [
+              {
+                "name": "<p>(A) તમાશા &ndash; મધ્યપ્રદેશ&nbsp;</p>",
+                "nameText": "(A) તમાશા – મધ્યપ્રદેશ ",
+                "isCorrect": false,
+                "_id": "689a226a24e8823f748af248",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) માછ &ndash; મહારાષ્ટ્ર&nbsp;</p>",
+                "nameText": "(B) માછ – મહારાષ્ટ્ર ",
+                "isCorrect": false,
+                "_id": "689a226a24e882a1fb8af249",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) કાલબેલિયા &ndash; રાજસ્થાન&nbsp;</p>",
+                "nameText": "(C) કાલબેલિયા – રાજસ્થાન ",
+                "isCorrect": true,
+                "_id": "689a226a24e88203fb8af24a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) યક્ષાન &ndash; આંધ્રપ્રદેશ</p>",
+                "nameText": "(D) યક્ષાન – આંધ્રપ્રદેશ",
+                "isCorrect": false,
+                "_id": "689a226a24e882f19b8af24b",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>તમાશા મહારાષ્ટ્રમાં, માછ મધ્યપ્રદેશમાં, અને કાલબેલિયા રાજસ્થાનમાં જોવા મળે છે. યક્ષાન કર્ણાટકમાં જોવા મળે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d7a5982d016",
+            "name": "<p>&nbsp;&lsquo;મૂડીએટ્ટુ&rsquo; વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. મૂડીએટ્ટુ કેરળનું એક પ્રખ્યાત લોકનાટ્ય છે.</p>\n<p>2. તેને 2010માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સ્થાન મળ્યું.</p>\n<p>3. આ નૃત્ય નવેમ્બર-ડિસેમ્બર મહિનામાં ઉજવવામાં આવે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ‘મૂડીએટ્ટુ’ વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. મૂડીએટ્ટુ કેરળનું એક પ્રખ્યાત લોકનાટ્ય છે.\n2. તેને 2010માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સ્થાન મળ્યું.\n3. આ નૃત્ય નવેમ્બર-ડિસેમ્બર મહિનામાં ઉજવવામાં આવે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 11,
+            "questionSubmitOrder": 11,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a22df4c10f2dccdcd5613",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a22df4c10f2752dcd5614",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a22df4c10f209c8cd5615",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a22df4c10f243a4cd5616",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>મૂડીએટ્ટુ કેરળનું એક પ્રખ્યાત લોકનાટ્ય છે. તેને 2010માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સ્થાન મળ્યું. તે નવેમ્બર-ડિસેમ્બર મહિનામાં ઉજવવામાં આવે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666de21582d01b",
+            "name": "<p>&nbsp;&lsquo;છઉ (Chhau)&rsquo; લોકનૃત્ય સંદર્ભે નીચેના વિધાનો તપાસો:</p>\n<p>1. છઉ નૃત્ય પશ્ચિમ બંગાળ, ઓડીસા અને ઝારખંડ &ndash; એમ ત્રણ રાજ્યોમાં જોવા મળે છે.</p>\n<p>2. પશ્ચિમ બંગાળમાં તેને &lsquo;પુરુલિયા&rsquo; કહેવાય છે.</p>\n<p>3. ઝારખંડમાં તેને &lsquo;સરાઈ કેલા&rsquo; કહેવાય છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ‘છઉ (Chhau)’ લોકનૃત્ય સંદર્ભે નીચેના વિધાનો તપાસો:\n1. છઉ નૃત્ય પશ્ચિમ બંગાળ, ઓડીસા અને ઝારખંડ – એમ ત્રણ રાજ્યોમાં જોવા મળે છે.\n2. પશ્ચિમ બંગાળમાં તેને ‘પુરુલિયા’ કહેવાય છે.\n3. ઝારખંડમાં તેને ‘સરાઈ કેલા’ કહેવાય છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 12,
+            "questionSubmitOrder": 12,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a231f24e88297fa8af29b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a231f24e882d2f78af29c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a231f24e8823d5c8af29d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a231f24e882b0ad8af29e",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>છઉ ત્રણ રાજ્યોમાં જોવા મળે છે: પશ્ચિમ બંગાળમાં (પુરુલિયા), ઓડીસામાં (મયુરભંજ), અને ઝારખંડમાં (સરાઈ કેલા).</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d5abd82d020",
+            "name": "<p>&nbsp;&lsquo;ભવાઈ&rsquo; વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. ભવાઈનો અર્થ જીવનની કથા થાય છે.</p>\n<p>2. ભવાઈ ગુજરાત અને રાજસ્થાનમાં પ્રચલિત લોકપ્રિય ભાવપાત્ર નાટકો છે.</p>\n<p>3. ભવાઈનું પાત્ર શીખવનારને &lsquo;વેશ ઘરો&rsquo; કે &lsquo;વેશગોર&rsquo; કહેવાય છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ‘ભવાઈ’ વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. ભવાઈનો અર્થ જીવનની કથા થાય છે.\n2. ભવાઈ ગુજરાત અને રાજસ્થાનમાં પ્રચલિત લોકપ્રિય ભાવપાત્ર નાટકો છે.\n3. ભવાઈનું પાત્ર શીખવનારને ‘વેશ ઘરો’ કે ‘વેશગોર’ કહેવાય છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 13,
+            "questionSubmitOrder": 13,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a239b906bdbc3775103e2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a239b906bdb9e0f5103e3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a239b906bdb48e05103e4",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a239b906bdb00805103e5",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>ભવાઈનો અર્થ જીવનની કથા થાય છે. ભવાઈ ગુજરાત અને રાજસ્થાનમાં પ્રચલિત લોકપ્રિય ભાવપાત્ર નાટકો છે. ભવાઈનું પાત્ર શીખવનારને &lsquo;વેશ ઘરો&rsquo; કે &lsquo;વેશગોર&rsquo; કહેવાય છે</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d620d82d025",
+            "name": "<p>&lsquo;રાઉફ (Rauf)&rsquo; નૃત્ય વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. રાઉફ નૃત્ય જમ્મુ કાશ્મીર સાથે સંકળાયેલું છે.</p>\n<p>2. દમાલી અને દુમહલ પણ જમ્મુ કાશ્મીરના નૃત્યો છે.</p>\n<p>3. રાઉફ એક લણણી પ્રસંગનું નૃત્ય છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "‘રાઉફ (Rauf)’ નૃત્ય વિશે નીચેના વિધાનો તપાસો:\n1. રાઉફ નૃત્ય જમ્મુ કાશ્મીર સાથે સંકળાયેલું છે.\n2. દમાલી અને દુમહલ પણ જમ્મુ કાશ્મીરના નૃત્યો છે.\n3. રાઉફ એક લણણી પ્રસંગનું નૃત્ય છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 14,
+            "questionSubmitOrder": 14,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a23d724e882117b8af432",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a23d724e882761a8af433",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a23d724e882227e8af434",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a23d724e882c6ab8af435",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>રાઉફ નૃત્ય જમ્મુ કાશ્મીર સાથે સંકળાયેલું છે. દમાલી અને દુમહલ પણ જમ્મુ કાશ્મીરના નૃત્યો છે. રાઉફ લણણી પ્રસંગનું નૃત્ય છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d8aca82d02a",
+            "name": "<p>&lsquo;થેયમ&rsquo; નૃત્ય વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. થેયમ કેરળ રાજ્યનું લોકનૃત્ય છે.</p>\n<p>2. કાંતારા ફિલ્મ કર્ણાટકમાં આવેલા &lsquo;ભૂત આરાધને&rsquo; કે &lsquo;ભૂત કૌલા&rsquo; નામની નાટ્યકળા પર બનેલી છે, જે થેયમ જેવી જ છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "‘થેયમ’ નૃત્ય વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. થેયમ કેરળ રાજ્યનું લોકનૃત્ય છે.\n2. કાંતારા ફિલ્મ કર્ણાટકમાં આવેલા ‘ભૂત આરાધને’ કે ‘ભૂત કૌલા’ નામની નાટ્યકળા પર બનેલી છે, જે થેયમ જેવી જ છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 15,
+            "questionSubmitOrder": 15,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 ",
+                "isCorrect": false,
+                "_id": "689a241d7d903816130a02ab",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 ",
+                "isCorrect": false,
+                "_id": "689a241d7d90384aca0a02ac",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) 1 અને 2 બંને</p>",
+                "nameText": "(C) 1 અને 2 બંને",
+                "isCorrect": true,
+                "_id": "689a241d7d90382c3b0a02ad",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(D) એક પણ નહીં</p>",
+                "nameText": " (D) એક પણ નહીં",
+                "isCorrect": false,
+                "_id": "689a241d7d903893760a02ae",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;થેયમ કેરળ રાજ્યનું લોકનૃત્ય છે. કાંતારા ફિલ્મ કર્ણાટકમાં આવેલા &lsquo;ભૂત આરાધને&rsquo; કે &lsquo;ભૂત કૌલા&rsquo; નામની નાટ્યકળા પર બનેલી છે અને તે થેયમ જેવી જ છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d7e5182d02f",
+            "name": "<p>નીચેનામાંથી કઈ જોડી યોગ્ય નથી?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કઈ જોડી યોગ્ય નથી? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 16,
+            "questionSubmitOrder": 16,
+            "options": [
+              {
+                "name": "<p>(A) ગીદ્દા &ndash; પંજાબ&nbsp;</p>",
+                "nameText": "(A) ગીદ્દા – પંજાબ ",
+                "isCorrect": false,
+                "_id": "689a24557d903830800a02bf",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ઘુમ્મર &ndash; રાજસ્થાન&nbsp;</p>",
+                "nameText": "(B) ઘુમ્મર – રાજસ્થાન ",
+                "isCorrect": false,
+                "_id": "689a24557d903862770a02c0",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ગરબા &ndash; ગુજરાત&nbsp;</p>",
+                "nameText": "(C) ગરબા – ગુજરાત ",
+                "isCorrect": false,
+                "_id": "689a24557d9038f2630a02c1",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) સમી &ndash; હરિયાણા</p>",
+                "nameText": "(D) સમી – હરિયાણા",
+                "isCorrect": true,
+                "_id": "689a24557d903872fc0a02c2",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>સમી પંજાબનું લોકનૃત્ય છે, હરિયાણાનું નહીં. ગીદ્દા પંજાબનું, ઘુમ્મર રાજસ્થાનનું, અને ગરબા ગુજરાતનું છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d48bc82d034",
+            "name": "<p>&nbsp;કઠપૂતળી કળા સ્વરૂપો અને સંબંધિત રાજ્યોની જોડીઓ ચકાસો:</p>\n<p>1. રાવણ સાયા &ndash; ઓડીસા</p>\n<p>2. યમપુરી &ndash; બિહાર</p>\n<p>3. પાવાથું &ndash; કેરળ</p>\n<p>4. થોલું બોમ્બલત્તા &ndash; આંધ્રપ્રદેશ</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " કઠપૂતળી કળા સ્વરૂપો અને સંબંધિત રાજ્યોની જોડીઓ ચકાસો:\n1. રાવણ સાયા – ઓડીસા\n2. યમપુરી – બિહાર\n3. પાવાથું – કેરળ\n4. થોલું બોમ્બલત્તા – આંધ્રપ્રદેશ\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 17,
+            "questionSubmitOrder": 17,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a248d106eb2525a32b0b0",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a248d106eb260a932b0b1",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1, 2 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1, 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a248d106eb20cfb32b0b2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2, 3 અને 4</p>",
+                "nameText": "(D) 1, 2, 3 અને 4",
+                "isCorrect": true,
+                "_id": "689a248d106eb2514132b0b3",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>રાવણ સાયા ઓડીસાની છાયા કઠપૂતળી છે. યમપુરી બિહારમાં, પાવાથું કેરળમાં, અને થોલું બોમ્બલત્તા આંધ્રપ્રદેશમાં જોવા મળે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d151682d039",
+            "name": "<p>નીચેનામાંથી કઈ જોડી યોગ્ય રીતે જોડાયેલી નથી?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કઈ જોડી યોગ્ય રીતે જોડાયેલી નથી?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 18,
+            "questionSubmitOrder": 18,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) કુચીપુડી &ndash; તમિલનાડુ&nbsp;</p>",
+                "nameText": " (A) કુચીપુડી – તમિલનાડુ ",
+                "isCorrect": true,
+                "_id": "689a24c0a5deb4463f6ad97f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) સત્તરિયા &ndash; આસામ&nbsp;</p>",
+                "nameText": "(B) સત્તરિયા – આસામ ",
+                "isCorrect": false,
+                "_id": "689a24c0a5deb4d4806ad980",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ભરતનાટ્યમ &ndash; તમિલનાડુ&nbsp;</p>",
+                "nameText": "(C) ભરતનાટ્યમ – તમિલનાડુ ",
+                "isCorrect": false,
+                "_id": "689a24c0a5deb4e07a6ad981",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) ઉપરોક્તમાંથી એક પણ નહીં</p>",
+                "nameText": "(D) ઉપરોક્તમાંથી એક પણ નહીં",
+                "isCorrect": false,
+                "_id": "689a24c0a5deb427446ad982",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>કુચીપુડી આંધ્રપ્રદેશમાં આવે છે, તમિલનાડુમાં નહીં. સત્તરિયા આસામમાં અને ભરતનાટ્યમ તમિલનાડુમાં જોવા મળે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666dbcb982d03e",
+            "name": "<p>&nbsp;ભારતના લોકનૃત્ય અને સંબંધિત રાજ્યોની જોડીઓ પૈકી કઈ જોડી યોગ્ય છે?</p>\n<p>1. સિદ્દી ધમાલ નૃત્ય &ndash; ગુજરાત</p>\n<p>2. કાકસર નૃત્ય &ndash; છત્તીસગઢ</p>\n<p>3. જનપદ નૃત્ય &ndash; કર્ણાટક</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ભારતના લોકનૃત્ય અને સંબંધિત રાજ્યોની જોડીઓ પૈકી કઈ જોડી યોગ્ય છે?\n1. સિદ્દી ધમાલ નૃત્ય – ગુજરાત\n2. કાકસર નૃત્ય – છત્તીસગઢ\n3. જનપદ નૃત્ય – કર્ણાટક\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 19,
+            "questionSubmitOrder": 19,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2</p>",
+                "nameText": "(A) ફક્ત 1 અને 2",
+                "isCorrect": false,
+                "_id": "689a24fb9c2d636dd9f6f40e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(B) ફક્ત 2 અને 3</p>",
+                "nameText": " (B) ફક્ત 2 અને 3",
+                "isCorrect": false,
+                "_id": "689a24fb9c2d630cacf6f40f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": " (C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a24fb9c2d637502f6f410",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a24fb9c2d633795f6f411",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666ddc6782d043",
+            "name": "<p>નીચેનામાંથી કયા નૃત્યો છત્તીસગઢ રાજ્યમાં જોવા મળે છે?</p>\n<p>1. પંથી</p>\n<p>2. પંડવાની</p>\n<p>3. રાઉ�� નાચા</p>\n<p>4. ગૌર મારિયા</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કયા નૃત્યો છત્તીસગઢ રાજ્યમાં જોવા મળે છે?\n1. પંથી\n2. પંડવાની\n3. રાઉત નાચા\n4. ગૌર મારિયા\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 20,
+            "questionSubmitOrder": 20,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a252b9c2d63dd6ff6f559",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 1, 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 1, 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a252b9c2d63e4fef6f55a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 2, 3 અને 4&nbsp;</p>",
+                "nameText": "(C) ફક્ત 2, 3 અને 4 ",
+                "isCorrect": false,
+                "_id": "689a252b9c2d632b51f6f55b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2, 3 અને 4</p>",
+                "nameText": "(D) 1, 2, 3 અને 4",
+                "isCorrect": true,
+                "_id": "689a252b9c2d6375a6f6f55c",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666dff7a82d048",
+            "name": "<p>&lsquo;પોનુકંગ અને પોપપીર&rsquo; લોકનૃત્ય કયા રાજ્ય સાથે સંકળાયેલા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "‘પોનુકંગ અને પોપપીર’ લોકનૃત્ય કયા રાજ્ય સાથે સંકળાયેલા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 21,
+            "questionSubmitOrder": 21,
+            "options": [
+              {
+                "name": "<p>(A) નાગાલેન્ડ</p>",
+                "nameText": "(A) નાગાલેન્ડ",
+                "isCorrect": false,
+                "_id": "689a25586336051fcb07e668",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(B) ત્રિપુરા&nbsp;</p>",
+                "nameText": " (B) ત્રિપુરા ",
+                "isCorrect": false,
+                "_id": "689a255863360532d607e669",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) અરુણાચલ પ્રદેશ&nbsp;</p>",
+                "nameText": "(C) અરુણાચલ પ્રદેશ ",
+                "isCorrect": true,
+                "_id": "689a2558633605387c07e66a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) મિઝોરમ</p>",
+                "nameText": "(D) મિઝોરમ",
+                "isCorrect": false,
+                "_id": "689a2558633605ec3607e66b",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666dce2b82d04d",
+            "name": "<p>&nbsp;ભારતના લોકનૃત્ય અને સંબંધિત રાજ્યોની જોડીઓ પૈકી કઈ જોડી યોગ્ય નથી?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ભારતના લોકનૃત્ય અને સંબંધિત રાજ્યોની જોડીઓ પૈકી કઈ જોડી યોગ્ય નથી? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 22,
+            "questionSubmitOrder": 22,
+            "options": [
+              {
+                "name": "<p>(A) ભૂયા &ndash; અરુણાચલ પ્રદેશ&nbsp;</p>",
+                "nameText": "(A) ભૂયા – અરુણાચલ પ્રદેશ ",
+                "isCorrect": false,
+                "_id": "689a259524e88204dc8af662",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) રણમાલી &ndash; આસામ&nbsp;</p>",
+                "nameText": "(B) રણમાલી – આસામ ",
+                "isCorrect": true,
+                "_id": "689a259524e882575b8af663",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) પંથી &ndash; છત્તીસગઢ&nbsp;</p>",
+                "nameText": "(C) પંથી – છત્તીસગઢ ",
+                "isCorrect": false,
+                "_id": "689a259524e88261328af664",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) ફગવા &ndash; ઝારખંડ</p>",
+                "nameText": "(D) ફગવા – ઝારખંડ",
+                "isCorrect": false,
+                "_id": "689a259524e8826c7e8af665",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;રણમાલી ગોવામાં આવે છે, આસામમાં નહીં. ભૂયા અરુણાચલ પ્રદેશમાં, પંથી છત્તીસગઢમાં, અને ફગવા ઝારખંડમાં જોવા મળે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d382882d052",
+            "name": "<p>&nbsp;ભારતના શાસ્ત્રીય નૃત્ય અને તેના સંબંધિત મૂળ રાજ્યોની જોડીઓ પૈકી કઈ જોડીઓ યોગ્ય છે?</p>\n<p>1. ભરતનાટ્યમ &ndash; તમિલનાડુ</p>\n<p>2. કથ્થક &ndash; આંધ્રપ્રદેશ</p>\n<p>3. કુચ્ચીપુડી &ndash; ઉત્તર પ્રદેશ</p>\n<p>4. કથ્થકલી &ndash; કેરળ</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ભારતના શાસ્ત્રીય નૃત્ય અને તેના સંબંધિત મૂળ રાજ્યોની જોડીઓ પૈકી કઈ જોડીઓ યોગ્ય છે?\n1. ભરતનાટ્યમ – તમિલનાડુ\n2. કથ્થક – આંધ્રપ્રદેશ\n3. કુચ્ચીપુડી – ઉત્તર પ્રદેશ\n4. કથ્થકલી – કેરળ\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 23,
+            "questionSubmitOrder": 23,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a25d24c10f2d72bcd579e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a25d24c10f23d8bcd579f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 4&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 4 ",
+                "isCorrect": true,
+                "_id": "689a25d24c10f248e2cd57a0",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2, 3 અને 4</p>",
+                "nameText": "(D) 1, 2, 3 અને 4",
+                "isCorrect": false,
+                "_id": "689a25d24c10f2a823cd57a1",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>ભરતનાટ્યમ તમિલનાડુમાં. કથ્થક ઉત્તર પ્રદેશમાં (આંધ્રપ્રદેશ નહીં). કુચ્ચીપુડી આંધ્રપ્રદેશમાં (ઉત્તર પ્રદેશ નહીં). કથ્થકલી કેરળમાં.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d365982d057",
+            "name": "<p>લોકનૃત્ય અને તેમના સંબંધિત રાજ્યોની યોગ્ય જોડીઓ ઓળખો:</p>\n<p>1. તમાશા &ndash; મહારાષ્ટ્ર</p>\n<p>2. રામલીલા &ndash; ઉત્તર પ્રદેશ</p>\n<p>3. સ્વાંગ &ndash; પંજાબ અને હરિયાણા</p>\n<p>4. યક્ષગાન &ndash; કર્ણાટક</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "લોકનૃત્ય અને તેમના સંબંધિત રાજ્યોની યોગ્ય જોડીઓ ઓળખો:\n1. તમાશા – મહારાષ્ટ્ર\n2. રામલીલા – ઉત્તર પ્રદેશ\n3. સ્વાંગ – પંજાબ અને હરિયાણા\n4. યક્ષગાન – કર્ણાટક\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 24,
+            "questionSubmitOrder": 24,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a2652633605cf2507e894",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 1, 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 1, 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a2652633605d68507e895",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 2, 3 અને 4&nbsp;</p>",
+                "nameText": "(C) ફક્ત 2, 3 અને 4 ",
+                "isCorrect": false,
+                "_id": "689a26526336050c0807e896",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2, 3 અને 4</p>",
+                "nameText": "(D) 1, 2, 3 અને 4",
+                "isCorrect": true,
+                "_id": "689a2652633605a9da07e897",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d37e582d05c",
+            "name": "<p>નીચેના પૈકી મણિપુરનું કયું સૌથી લોકપ્રિય નૃત્ય છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેના પૈકી મણિપુરનું કયું સૌથી લોકપ્રિય નૃત્ય છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 25,
+            "questionSubmitOrder": 25,
+            "options": [
+              {
+                "name": "<p>(A) કથ્થકલી</p>",
+                "nameText": "(A) કથ્થકલી",
+                "isCorrect": false,
+                "_id": "689a268024e88208b28af91b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(B) તમાશા&nbsp;</p>",
+                "nameText": " (B) તમાશા ",
+                "isCorrect": false,
+                "_id": "689a268024e882df3e8af91c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) બિહુ</p>",
+                "nameText": "(C) બિહુ",
+                "isCorrect": false,
+                "_id": "689a268024e88269ab8af91d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(D) ખાંભા તોયબી</p>",
+                "nameText": " (D) ખાંભા તોયબી",
+                "isCorrect": true,
+                "_id": "689a268024e88232d78af91e",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;કથ્થકલી કેરળનું, તમાશા મહારાષ્ટ્રનું, અને બિહુ આસામનું છે. ખાંભા તોયબી મણિપુરનું ��ે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d1bbc82d061",
+            "name": "<p>નૃત્ય અને તેમના સંબંધિત રાજ્યોની જોડીઓ ઓળખો:</p>\n<p>1. હિરગીત &ndash; પંજાબ</p>\n<p>2. ભટ્ટાલી ગીત &ndash; બંગાળ</p>\n<p>3. ગરબા &ndash; ગુજરાત</p>\n<p>4. રાસ &ndash; ઉત્તર પ્રદેશ</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથ��� કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નૃત્ય અને તેમના સંબંધિત રાજ્યોની જોડીઓ ઓળખો:\n1. હિરગીત – પંજાબ\n2. ભટ્ટાલી ગીત – બંગાળ\n3. ગરબા – ગુજરાત\n4. રાસ – ઉત્તર પ્રદેશ\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 26,
+            "questionSubmitOrder": 26,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": " (A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a26eafa20071fb5c3db10",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2, 3 અને 4&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2, 3 અને 4 ",
+                "isCorrect": false,
+                "_id": "689a26eafa20076a10c3db11",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1, 3 અને 4&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1, 3 અને 4 ",
+                "isCorrect": false,
+                "_id": "689a26eafa2007f42fc3db12",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2, 3 અને 4</p>",
+                "nameText": "(D) 1, 2, 3 અને 4",
+                "isCorrect": true,
+                "_id": "689a26eafa200760e3c3db13",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d757082d066",
+            "name": "<p>&nbsp;&lsquo;કાલબેલિયા&rsquo; નૃત્ય વિશે નીચે આપેલા વિધાનો ધ્યાનમાં લો:</p>\n<p>1. તે ગુજરાતના કાલબેલિયા સમુદાયની મહિલાઓ દ્વારા રજૂ કરવામાં આવે છે.</p>\n<p>2. તે રાજસ્થાનનો એક સમુદાય મદારી સમુદાય સાથે સંકળાયેલું છે.</p>\n<p>3. તેનો 2010માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સમાવેશ કરવામાં આવ્યો છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ‘કાલબેલિયા’ નૃત્ય વિશે નીચે આપેલા વિધાનો ધ્યાનમાં લો:\n1. તે ગુજરાતના કાલબેલિયા સમુદાયની મહિલાઓ દ્વારા રજૂ કરવામાં આવે છે.\n2. તે રાજસ્થાનનો એક સમુદાય મદારી સમુદાય સાથે સંકળાયેલું છે.\n3. તેનો 2010માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સમાવેશ કરવામાં આવ્યો છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 27,
+            "questionSubmitOrder": 27,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a2726396775eb8f317928",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": true,
+                "_id": "689a27263967754307317929",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a2726396775b81631792a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": false,
+                "_id": "689a27263967752b1c31792b",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>કાલબેલિયા નૃત્ય રાજસ્થાનના કાલબેલિયા સમુદાય (મદારી સમુદાય)ની મહિલાઓ દ્વારા રજૂ કરવામાં આવે છે, ગુજરાતનો નહીં. તેને 2010માં યુનેસ્કોની અમૃત વિરાસતની સૂચીમાં સમાવેશ કરવામાં આવ્યો છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d7dae82d06b",
+            "name": "<p>&nbsp;યુનેસ્કોની અમૂર્ત હેરીટેજ યાદીમાં સમાવેશ કરાયેલા અભિનય કળાના સ્વરૂપો ઓળખો:&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " યુનેસ્કોની અમૂર્ત હેરીટેજ યાદીમાં સમાવેશ કરાયેલા અભિનય કળાના સ્વરૂપો ઓળખો: ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 28,
+            "questionSubmitOrder": 28,
+            "options": [
+              {
+                "name": "<p>(A) છઉ અને કથ્થકલી&nbsp;</p>",
+                "nameText": "(A) છઉ અને કથ્થકલી ",
+                "isCorrect": false,
+                "_id": "689a2767009ef80993aa1f09",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) મૂડી એટ્ટુ અને છઉ&nbsp;</p>",
+                "nameText": "(B) મૂડી એટ્ટુ અને છઉ ",
+                "isCorrect": true,
+                "_id": "689a2767009ef861b8aa1f0a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) કાલબેલિયા અને ભરતનાટ્યમ&nbsp;</p>",
+                "nameText": "(C) કાલબેલિયા અને ભરતનાટ્યમ ",
+                "isCorrect": false,
+                "_id": "689a2767009ef838d6aa1f0b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) રામલીલા અને કથ્થક</p>",
+                "nameText": "(D) રામલીલા અને કથ્થક",
+                "isCorrect": false,
+                "_id": "689a2767009ef897d7aa1f0c",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>2010માં મૂડીએટ્ટુ, છઉ અને કાલબેલિયા નૃત્યનો યુનેસ્કોની અમૂર્ત વિરાસતની સૂચીમાં સમાવેશ કરવામાં આવ્યો હતો.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d1e5182d070",
+            "name": "<p>યામિની કૃષ્ણમૂર્તિ (2024માં દેહાંત) કઈ નૃત્યકલા સાથે સંકળાયેલા હતા?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "યામિની કૃષ્ણમૂર્તિ (2024માં દેહાંત) કઈ નૃત્યકલા સાથે સંકળાયેલા હતા? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 29,
+            "questionSubmitOrder": 29,
+            "options": [
+              {
+                "name": "<p>(A) કુચીપુડી</p>",
+                "nameText": "(A) કુચીપુડી",
+                "isCorrect": true,
+                "_id": "689a2790009ef8a568aa1f10",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(B) સત્તરિયા&nbsp;</p>",
+                "nameText": " (B) સત્તરિયા ",
+                "isCorrect": false,
+                "_id": "689a2790009ef841c8aa1f11",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) યક્ષાન&nbsp;</p>",
+                "nameText": "(C) યક્ષાન ",
+                "isCorrect": false,
+                "_id": "689a2790009ef88c36aa1f12",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) કથ્થકલી</p>",
+                "nameText": "(D) કથ્થકલી",
+                "isCorrect": false,
+                "_id": "689a2790009ef80a3aaa1f13",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;અને તેઓ ભરતનાટ્યમ તથા ઓડીસી સાથે પણ સંકળાયેલા હતા.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d33ec82d075",
+            "name": "<p>નીચેનામાંથી કયા નૃત્યમાં જુગલબંધી મુખ્ય આકર્ષણ છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેનામાંથી કયા નૃત્યમાં જુગલબંધી મુખ્ય આકર્ષણ છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 30,
+            "questionSubmitOrder": 30,
+            "options": [
+              {
+                "name": "<p>(A) મણિપુરી&nbsp;</p>",
+                "nameText": "(A) મણિપુરી ",
+                "isCorrect": false,
+                "_id": "689a27b4396775c95c31794a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) કથ્થક&nbsp;</p>",
+                "nameText": "(B) કથ્થક ",
+                "isCorrect": true,
+                "_id": "689a27b439677585fc31794b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) કથ્થકલી&nbsp;</p>",
+                "nameText": "(C) કથ્થકલી ",
+                "isCorrect": false,
+                "_id": "689a27b4396775fceb31794c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) ઓડીસી</p>",
+                "nameText": "(D) ઓડીસી",
+                "isCorrect": false,
+                "_id": "689a27b4396775896b31794d",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d73fd82d07a",
+            "name": "<p>&lsquo;કુચીપુડી અને ભરતનાટ્યમ&rsquo; નૃત્યો વચ્ચેનો તફાવત દર્શાવતા વિધાનો તપાસો:</p>\n<p>1. કુચીપુડી નૃત્યમાં નર્તકો પ્રસંગોપાત સંવાદ કરતા જોવા મળે છે, જે ભરતનાટ્યમમાં જોવા મળતા નથી.</p>\n<p>2. કાંસાની થાળીની ધાર પર પગ રાખીને નૃત્ય કરવું તે ભરતનાટ્યમની લાક્ષણિ��તા છે, પરંતુ કુચી નૃત્યમાં આ પ્રકારનું હલનચલન જોવા મળતું નથી.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "‘કુચીપુડી અને ભરતનાટ્યમ’ નૃત્યો વચ્ચેનો તફાવત દર્શાવતા વિધાનો તપાસો:\n1. કુચીપુડી નૃત્યમાં નર્તકો પ્રસંગોપાત સંવાદ કરતા જોવા મળે છે, જે ભરતનાટ્યમમાં જોવા મળતા નથી.\n2. કાંસાની થાળીની ધાર પર પગ રાખીને નૃત્ય કરવું તે ભરતનાટ્યમની લાક્ષણિકતા છે, પરંતુ કુચી નૃત્યમાં આ પ્રકારનું હલનચલન જોવા મળતું નથી.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 31,
+            "questionSubmitOrder": 31,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 ",
+                "isCorrect": true,
+                "_id": "689a044ebc666d565d82d076",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2</p>",
+                "nameText": "(B) ફક્ત 2",
+                "isCorrect": false,
+                "_id": "689a044ebc666d16ef82d077",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(C) 1 અને 2 બંને&nbsp;</p>",
+                "nameText": " (C) 1 અને 2 બંને ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d379782d078",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) એક પણ નહીં</p>",
+                "nameText": "(D) એક પણ નહીં",
+                "isCorrect": false,
+                "_id": "689a044ebc666da1b082d079",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;કુચીપુડી નૃત્યમાં નર્તકો પ્રસંગોપાત સંવાદ કરતા જોવા મળે છે, જે ભરતનાટ્યમમાં જોવા મળતા નથી. કાંસાની થાળીની ધાર પર પગ રાખીને નૃત્ય કરવું તે કુચીપુડીની લાક્ષણિકતા છે, ભરતનાટ્યમની નહીં.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666df31482d07f",
+            "name": "<p>&lsquo;સત્તરિયા&rsquo; નૃત્ય બાબતે નીચેના પૈકી કયા વિધાનો સાચા છે?</p>\n<p>1. સત્તરિયા સંગીત, નૃત્ય અને નાટકનું સંયોજન છે.</p>\n<p>2. તે આસામની અંદર વૈષ્ણવ સંપ્રદાયની સદીઓ જૂની જીવંત પરંપરા છે.</p>\n<p>3. તુલસીદાસ, કબીર કે મીરાબાઈનો સત્તરિયા નૃત્ય જોડે સંબંધ છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "‘સત્તરિયા’ નૃત્ય બાબતે નીચેના પૈકી કયા વિધાનો સાચા છે?\n1. સત્તરિયા સંગીત, નૃત્ય અને નાટકનું સંયોજન છે.\n2. તે આસામની અંદર વૈષ્ણવ સંપ્રદાયની સદીઓ જૂની જીવંત પરંપરા છે.\n3. તુલસીદાસ, કબીર કે મીરાબાઈનો સત્તરિયા નૃત્ય જોડે સંબંધ છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 32,
+            "questionSubmitOrder": 32,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) ફક્ત 1&nbsp;</p>",
+                "nameText": " (A) ફક્ત 1 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d2df482d07b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(B) ફક્ત 1 અને 2 ",
+                "isCorrect": true,
+                "_id": "689a044ebc666dba9582d07c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d04b882d07d",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": false,
+                "_id": "689a044ebc666df92482d07e",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>સત્તરિયા સંગીત, નૃત્ય અને નાટકનું સંયોજન છે. તે આસામની અંદર વૈષ્ણવ સંપ્રદાયની સદીઓ જૂની જીવંત પરંપરા છે. તુલસીદાસ, કબીર કે મીરાબાઈનું સત્તરિયા નૃત્ય જોડે કોઈ સંબંધ નથી.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d188e82d084",
+            "name": "<p>&lsquo;થિલ્લ&rsquo; ક્યા નૃત્યનો એક ભાગ છે:</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "‘થિલ્લ’ ક્યા નૃત્યનો એક ભાગ છે:",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 33,
+            "questionSubmitOrder": 33,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) કુચીપુડી&nbsp;</p>",
+                "nameText": " (A) કુચીપુડી ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d648f82d080",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) કથ્થક&nbsp;</p>",
+                "nameText": "(B) કથ્થક ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d7e9882d081",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ભરતનાટ્યમ&nbsp;</p>",
+                "nameText": "(C) ભરતનાટ્યમ ",
+                "isCorrect": true,
+                "_id": "689a044ebc666dc9ea82d082",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) ઓડીસી</p>",
+                "nameText": "(D) ઓડીસી",
+                "isCorrect": false,
+                "_id": "689a044ebc666d07d882d083",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>થિલ્લ નૃત્યનો એક ભાગ છે &lsquo;તીલાના&rsquo;, જે ભરતનાટ્યમનો છેલ્લો ભાગ છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d154482d089",
+            "name": "<p>લોક નૃત્ય આધારિત નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. હોજાગીરી નૃત્ય ત્રિપુરામાં રિયાંગ સમુદાય દ્વારા કરવામાં આવે છે.</p>\n<p>2. ચેરાવ નૃત્ય મિઝોરમમાં મિઝો સમુદાય દ્વારા કરવામાં આવે છે.</p>\n<p>3. સાંથાલી નૃત્ય પશ્ચિમ બંગાળ, ઝારખંડ, ઓરિસ્સા અને આસામના સાંથાલી આદિજાતિના લોકો દ્વારા ભજવવામાં આવે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "લોક નૃત્ય આધારિત નીચેના વિધાનો ધ્યાનમાં લો:\n1. હોજાગીરી નૃત્ય ત્રિપુરામાં રિયાંગ સમુદાય દ્વારા કરવામાં આવે છે.\n2. ચેરાવ નૃત્ય મિઝોરમમાં મિઝો સમુદાય દ્વારા કરવામાં આવે છે.\n3. સાંથાલી નૃત્ય પશ્ચિમ બંગાળ, ઝારખંડ, ઓરિસ્સા અને આસામના સાંથાલી આદિજાતિના લોકો દ્વારા ભજવવામાં આવે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 34,
+            "questionSubmitOrder": 34,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": " (A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d405c82d085",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3</p>",
+                "nameText": "(B) ફક્ત 2 અને 3",
+                "isCorrect": false,
+                "_id": "689a044ebc666d4cfd82d086",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(C) ફક્ત 1 અને 3</p>",
+                "nameText": " (C) ફક્ત 1 અને 3",
+                "isCorrect": false,
+                "_id": "689a044ebc666dd36982d087",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(D) 1, 2 અને 3</p>",
+                "nameText": " (D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d07b782d088",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>હોજાગીરી નૃત્ય ત્રિપુરામાં રિયાંગ સમુદાય દ્વારા કરવામાં આવે છે. ચેરાવ નૃત્ય મિઝોરમમાં મિઝો સમુદાય દ્વારા કરવામાં આવે છે. સાંથાલી નૃત્ય પશ્ચિમ બંગાળ, ઝારખંડ, ઓરિસ્સા અને આસામના સાંથાલી આદિજાતિના લોકો દ્વારા ભજવવામાં આવે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d4a2d82d08e",
+            "name": "<p>&nbsp;શાસ્ત્રીય નૃત્ય અને લોકનૃત્ય વચ્ચેના ભેદ અંગેના વિધાનો તપાસો:</p>\n<p>1. શાસ્ત્રીય નૃત્ય નાટ્યશાસ્ત્રમાંથી ઉદભવ્યું છે અને તેની મુખ્ય બે વિભાવનાઓ લાસ્ય અને તાંડવ છે.</p>\n<p>2. લોકનૃત્ય પાક લણણી, લગ્ન વગેરે જેવા સામાજિક મેળાવડાઓની ઉજવણી સાથે સંકળાયેલા છે.</p>\n<p>3. આઠ પ્રકારના શાસ્ત્રીય નૃત્ય છે અને ભારતમાં 30થી વધુ લોકનૃત્ય છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " શાસ્ત્રીય નૃત્ય અને લોકનૃત્ય વચ્ચેના ભેદ અંગેના વિધાનો તપાસો:\n1. શાસ્ત્રીય નૃત્ય નાટ્યશાસ્ત્રમાંથી ઉદભવ્યું છે અને તેની મુખ્ય બે વિભાવનાઓ લાસ્ય અને તાંડવ છે.\n2. લોકનૃત્ય પાક લણણી, લગ્ન વગેરે જેવા સામાજિક મેળાવડાઓની ઉજવણી સાથે સંકળાયેલા છે.\n3. આઠ પ્રકારના શાસ્ત્રીય નૃત્ય છે અને ભારતમાં 30થી વધુ લોકનૃત્ય છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 35,
+            "questionSubmitOrder": 35,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666ddeba82d08a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d1c3f82d08b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666ddc3b82d08c",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d522282d08d",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>શાસ્ત્રીય નૃત્ય નાટ્યશાસ્ત્રમાંથી ઉદભવ્યું છે અને તેની મુખ્ય બે વિભાવનાઓ લાસ્ય અને તાંડવ છે. લોકનૃત્ય પાક લણણી, લગ્ન વગેરે જેવા સામાજિક મેળાવડાઓની ઉજવણી સાથે સંકળાયેલા છે. આઠ પ્રકારના શાસ્ત્રીય નૃત્ય છે અને ભારતમાં 30થી વધુ લોકનૃત્ય છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d9efb82d093",
+            "name": "<p>નીચેના પૈકી કયું નૃત્ય એક જ નૃત્યકાર (સોલો ડાન્સ) દ્વારા ભજવવામાં આવે છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેના પૈકી કયું નૃત્ય એક જ નૃત્યકાર (સોલો ડાન્સ) દ્વારા ભજવવામાં આવે છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 36,
+            "questionSubmitOrder": 36,
+            "options": [
+              {
+                "name": "<p>(A) કુચીપુડી&nbsp;</p>",
+                "nameText": "(A) કુચીપુડી ",
+                "isCorrect": false,
+                "_id": "689a044ebc666db26482d08f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) યક્ષ ગાન&nbsp;</p>",
+                "nameText": "(B) યક્ષ ગાન ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d066582d090",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) મણિપુરી&nbsp;</p>",
+                "nameText": "(C) મણિપુરી ",
+                "isCorrect": true,
+                "_id": "689a044ebc666d36a382d091",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) ઓડીસી</p>",
+                "nameText": "(D) ઓડીસી",
+                "isCorrect": false,
+                "_id": "689a044ebc666d704882d092",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d0a2f82d098",
+            "name": "<p>સૌરી, પ્રિયંકા, મુંદ્રી જેવા નૃત્યો કયા પ્રદેશમાં ભજવવામાં આવે છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "સૌરી, પ્રિયંકા, મુંદ્રી જેવા નૃત્યો કયા પ્રદેશમાં ભજવવામાં આવે છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 37,
+            "questionSubmitOrder": 37,
+            "options": [
+              {
+                "name": "<p>(A) આંધ્રપ્રદેશ&nbsp;</p>",
+                "nameText": "(A) આંધ્રપ્રદેશ ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d621082d094",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ઓડીસા&nbsp;</p>",
+                "nameText": "(B) ઓડીસા ",
+                "isCorrect": true,
+                "_id": "689a044ebc666d032282d095",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) કર્ણાટક&nbsp;</p>",
+                "nameText": "(C) કર્ણાટક ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d735d82d096",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) મહારાષ્ટ્ર</p>",
+                "nameText": "(D) મહારાષ્ટ્ર",
+                "isCorrect": false,
+                "_id": "689a044ebc666d39cd82d097",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d8efd82d09d",
+            "name": "<p>નીચેના પૈકી કયું એક નૃત્ય અને નાટકનું મિશ્રણ છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેના પૈકી કયું એક નૃત્ય અને નાટકનું મિશ્રણ છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 38,
+            "questionSubmitOrder": 38,
+            "options": [
+              {
+                "name": "<p>(A) યક્ષ ગાન&nbsp;</p>",
+                "nameText": "(A) યક્ષ ગાન ",
+                "isCorrect": true,
+                "_id": "689a044ebc666d3bb782d099",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ઓડીસી&nbsp;</p>",
+                "nameText": "(B) ઓડીસી ",
+                "isCorrect": false,
+                "_id": "689a044ebc666de1a682d09a",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ભરતનાટ્યમ</p>",
+                "nameText": "(C) ભરતનાટ્યમ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d9aec82d09b",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(D) કથ્થકલી</p>",
+                "nameText": " (D) કથ્થકલી",
+                "isCorrect": false,
+                "_id": "689a044ebc666dd14e82d09c",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666df68f82d0a2",
+            "name": "<p>ગુજરાતમાં આદિવાસી વસ્તી સંબંધિત નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. ગુજરાતમાં 14 જિલ્લા અને 48 તાલુકામાં આદિજાતિ વસ્તી જોવા મળે છે.</p>\n<p>2. ગુજરાતમાં કુલ 26 જેટલા આદિવાસી જૂથ જોવા મળે છે, જેમાં પાંચ આદિમ જૂથોનો સમાવેશ થાય છે.</p>\n<p>3. આદિવાસી સમુદાય મોટાભાગે ગુજરાતના પૂર્વોત્તરના વિસ્તારોમાં વસે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ગુજરાતમાં આદિવાસી વસ્તી સંબંધિત નીચેના વિધાનો ધ્યાનમાં લો:\n1. ગુજરાતમાં 14 જિલ્લા અને 48 તાલુકામાં આદિજાતિ વસ્તી જોવા મળે છે.\n2. ગુજરાતમાં કુલ 26 જેટલા આદિવાસી જૂથ જોવા મળે છે, જેમાં પાંચ આદિમ જૂથોનો સમાવેશ થાય છે.\n3. આદિવાસી સમુદાય મોટાભાગે ગુજરાતના પૂર્વોત્તરના વિસ્તારોમાં વસે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 39,
+            "questionSubmitOrder": 39,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d503482d09e",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d652f82d09f",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d66a182d0a0",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d34fa82d0a1",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d2df482d0a7",
+            "name": "<p>&nbsp;પ્રાચીન ભારતીય સ્થાપત્યકલામાં લાકડાનો ઉપયોગ સંબંધિત નીચેના વિધાનો તપાસો:</p>\n<p>1. સોમનાથ મંદિર એક સમયે સુખડના લાકડાનું બનેલું હતું.</p>\n<p>2. પાટણમાં આવેલ નગરદેવી લક્ષ્મી માતાના મંદિરમાં લાકડાની મૂર્તિઓ જોવા મળે છે.</p>\n<p>3. લાકડાના મંદિરો બનવાની કળા 1026 ADમાં મહમદ ગજનવીના આક્રમણ પછી બંધ થઈ ગઈ.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " પ્રાચીન ભારતીય સ્થાપત્યકલામાં લાકડાનો ઉપયોગ સંબંધિત નીચેના વિધાનો તપાસો:\n1. સોમનાથ મંદિર એક સમયે સુખડના લાકડાનું બનેલું હતું.\n2. પાટણમાં આવેલ નગરદેવી લક્ષ્મી માતાના મંદિરમાં લાકડાની મૂર્તિઓ જોવા મળે છે.\n3. લાકડાના મંદિરો બનવાની કળા 1026 ADમાં મહમદ ગજનવીના આક્રમણ પછી બંધ થઈ ગઈ.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 40,
+            "questionSubmitOrder": 40,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2</p>",
+                "nameText": "(A) ફક્ત 1 અને 2",
+                "isCorrect": false,
+                "_id": "689a044ebc666d565782d0a3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": " (B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d771182d0a4",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d33d782d0a5",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666da6d982d0a6",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d407582d0ac",
+            "name": "<p>&nbsp;ગુજરાતની ચિત્રકળા શૈલીઓ વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. &lsquo;સલાટી શૈલી&rsquo; ભાવનગરમાં જોવા મળે છે, જેના ઉદાહરણ તરીકે સિહોરના દરબારગઢના યુદ્ધચિત્રો છે.</p>\n<p>2. &lsquo;કામણગરી શૈલી&rsquo; કચ્છમાં કામણગારો સમુદાય દ્વારા દિવાલો પર બનાવાય છે, જેમાં કચ્છી લોકજીવન અને પ��રાણિક વિષયો હોય છે.</p>\n<p>3. &lsquo;સોલંકી ચિત્રકળા&rsquo;ને પોથી ચિત્રકળા કે લઘુ ચિત્રકળા પણ કહેવાય છે, જે જૈન ધર્મ સાથે સંબંધિત હતી.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ગુજરાતની ચિત્રકળા શૈલીઓ વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. ‘સલાટી શૈલી’ ભાવનગરમાં જોવા મળે છે, જેના ઉદાહરણ તરીકે સિહોરના દરબારગઢના યુદ્ધચિત્રો છે.\n2. ‘કામણગરી શૈલી’ કચ્છમાં કામણગારો સમુદાય દ્વારા દિવાલો પર બનાવાય છે, જેમાં કચ્છી લોકજીવન અને પૌરાણિક વિષયો હોય છે.\n3. ‘સોલંકી ચિત્રકળા’ને પોથી ચિત્રકળા કે લઘુ ચિત્રકળા પણ કહેવાય છે, જે જૈન ધર્મ સાથે સંબંધિત હતી.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 41,
+            "questionSubmitOrder": 41,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d09a882d0a8",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d561f82d0a9",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d211182d0aa",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d7c0382d0ab",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666da4c782d0b1",
+            "name": "<p>ગાયકવાડી સમયગાળાની ચિત્રકળા વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. સયાજીરાવ ત્રીજાના સમયગાળામાં રાજા રવિવર્મા અને નંદલાલ બોઝ જેવા જાણીતા ચિત્રકારો ગુજરાત આવ્યા હતા.</p>\n<p>2. રાજા રવિવર્માએ લક્ષ્મી વિલાસ પેલેસ અને બરોડા સેન્ટ્રલ મ્યુઝિયમમાં તૈલી ચિત્રો બનાવ્યા હતા.</p>\n<p>3. નંદલાલ બોઝના ચિત્રો વડોદરાના કીર્તિ મંદિરમાં જોવા મળે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ગાયકવાડી સમયગાળાની ચિત્રકળા વિશે નીચેના વિધાનો તપાસો:\n1. સયાજીરાવ ત્રીજાના સમયગાળામાં રાજા રવિવર્મા અને નંદલાલ બોઝ જેવા જાણીતા ચિત્રકારો ગુજરાત આવ્યા હતા.\n2. રાજા રવિવર્માએ લક્ષ્મી વિલાસ પેલેસ અને બરોડા સેન્ટ્રલ મ્યુઝિયમમાં તૈલી ચિત્રો બનાવ્યા હતા.\n3. નંદલાલ બોઝના ચિત્રો વડોદરાના કીર્તિ મંદિરમાં જોવા મળે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 42,
+            "questionSubmitOrder": 42,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d9fcb82d0ad",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d0e6c82d0ae",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d4b3482d0af",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d4fbb82d0b0",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d4d7282d0b6",
+            "name": "<p>&nbsp;ગુજરાતની લોકચિત્રકળા અને આધુનિક ચિત્રકારો વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. &lsquo;આડે&rsquo; એટલે પ્રતીક ચિત્ર અને &lsquo;ઓડીપા&rsquo; એટલે ગૃહ સજાવટનું ભીત ચિત્ર.</p>\n<p>2. &lsquo;ઓડીયા&rsquo; વસ્ત્રો પર દોરાતી પૌરાણિક કથાવસ્તુના ચિત્રો છે, જે વહીવંચા બારોટ દ્વારા કથા કહેવા માટે વપરાતા હતા.</p>\n<p>3. રવિશંકર રાવળને &lsquo;ધરતીના ચિત્રકાર&rsquo; કહેવાય છે, અને તેમના પ્રખ્યાત ચિત્રોમાં &lsquo;અખો&rsquo; અને &lsquo;નરસિંહ મહેતા&rsquo;નો સમાવેશ થાય છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ગુજરાતની લોકચિત્રકળા અને આધુનિક ચિત્રકારો વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. ‘આડે’ એટલે પ્રતીક ચિત્ર અને ‘ઓડીપા’ એટલે ગૃહ સજાવટનું ભીત ચિત્ર.\n2. ‘ઓડીયા’ વસ્ત્રો પર દોરાતી પૌરાણિક કથાવસ્તુના ચિત્રો છે, જે વહીવંચા બારોટ દ્વારા કથા કહેવા માટે વપરાતા હતા.\n3. રવિશંકર રાવળને ‘ધરતીના ચિત્રકાર’ કહેવાય છે, અને તેમના પ્રખ્યાત ચિત્રોમાં ‘અખો’ અને ‘નરસિંહ મહેતા’નો સમાવેશ થાય છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 43,
+            "questionSubmitOrder": 43,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": true,
+                "_id": "689a044ebc666d2c9582d0b2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666dd7b982d0b3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d4d2c82d0b4",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": false,
+                "_id": "689a044ebc666d230f82d0b5",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>&nbsp;&lsquo;આડે&rsquo; એટલે પ્રતીક ચિત્ર. &lsquo;ઓડીપા&rsquo; એટલે ગૃહ સજાવટનું ભીત ચિત્ર. &lsquo;ઓડીયા&rsquo; વસ્ત્રો પર દોરાતી પૌરાણિક કથાવસ્તુના ચિત્રો છે, જે વહીવંચા બારોટ દ્વારા કથા કહેવા માટે વપરાતા હતા. રવિશંકર રાવળને &lsquo;રંગના રાજા&rsquo; કહેવાય છે, &lsquo;ધરતીના ચિત્રકાર&rsquo; તો ખોડીદાસ પરમાર છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666db3ed82d0bb",
+            "name": "<p>ગુજરાતમાં મંદિર સ્થાપત્ય શૈલીઓ વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. ગુજરાતમાં મંદિર બનાવવાની નાગર શૈલીનો વિકાસ થયો છે, જેને &lsquo;મારુ-ગુર્જર શૈલી&rsquo; પણ કહેવાય છે.</p>\n<p>2. સોલંકી કાળ પહેલા બનેલા મંદિરોને &lsquo;પૂર્વ ચૌલુક્ય શૈલી&rsquo; કે &lsquo;ગોપ શૈલી&rsquo; પણ કહેવાય છે.</p>\n<p>3. આ સમયગાળાના મંદિરો કદમાં નાના હોય છે અને તેમાં ગુપ્તકાલીન નાગર શૈલીના લક્ષણો જોવા મળે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ગુજરાતમાં મંદિર સ્થાપત્ય શૈલીઓ વિશે નીચેના વિધાનો તપાસો:\n1. ગુજરાતમાં મંદિર બનાવવાની નાગર શૈલીનો વિકાસ થયો છે, જેને ‘મારુ-ગુર્જર શૈલી’ પણ કહેવાય છે.\n2. સોલંકી કાળ પહેલા બનેલા મંદિરોને ‘પૂર્વ ચૌલુક્ય શૈલી’ કે ‘ગોપ શૈલી’ પણ કહેવાય છે.\n3. �� સમયગાળાના મંદિરો કદમાં નાના હોય છે અને તેમાં ગુપ્તકાલીન નાગર શૈલીના લક્ષણો જોવા મળે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 44,
+            "questionSubmitOrder": 44,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d9b7882d0b7",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d99e482d0b8",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d79e882d0b9",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d721282d0ba",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666df19782d0c0",
+            "name": "<p>&nbsp;ગુજરાતમાં સોલંકી કાળ પહેલા બનેલા મંદિરો સંબંધિત જોડીઓ તપાસો:</p>\n<p>1. ગોપનું સૂર્ય મંદિર &ndash; 6ઠ્ઠી સદીમાં બનેલું ગુજરાતનું સૌથી જૂનું સૂર્ય મંદિર.</p>\n<p>2. રુદ્ર મહાલય &ndash; મૂળરાજ સોલંકીએ શરૂ કરાવેલું અને સિદ્ધરાજ જયસિંહે પૂરું કરાવેલું બહુમાળી શિવાલય.</p>\n<p>3. ધ્રાસણવેલનું મંદિર &ndash; મહેસાણા જિલ્લામાં આવેલું.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ગુજરાતમાં સોલંકી કાળ પહેલા બનેલા મંદિરો સંબંધિત જોડીઓ તપાસો:\n1. ગોપનું સૂર્ય મંદિર – 6ઠ્ઠી સદીમાં બનેલું ગુજરાતનું સૌથી જૂનું સૂર્ય મંદિર.\n2. રુદ્ર મહાલય – મૂળરાજ સોલંકીએ શરૂ કરાવેલું અને સિદ્ધરાજ જયસિંહે પૂરું કરાવેલું બહુમાળી શિવાલય.\n3. ધ્રાસણવેલનું મંદિર – મહેસાણા જિલ્લામાં આવેલું.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 45,
+            "questionSubmitOrder": 45,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 ",
+                "isCorrect": true,
+                "_id": "689a044ebc666d026482d0bc",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(B) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666dc67282d0bd",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d77a482d0be",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": false,
+                "_id": "689a044ebc666d6bef82d0bf",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>ગોપનું સૂર્ય મંદિર 6ઠ્ઠી સદીમાં બનેલું ગુજરાતનું સૌથી જૂનું સૂર્ય મંદિર છે. રુદ્ર મહાલય સોલંકી કાળમાં બનેલું છે, સોલંકી કાળ પહેલાં નહીં. ધ્રાસણવેલનું મંદિર સોલંકી કાળ પહેલાંનું છે, પરંતુ તેનું સ્થાન દેવભૂમિ દ્વારકામાં છે, મહેસાણા નહીં).</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d5c2e82d0c5",
+            "name": "<p>ગુજરાતમાં સોલંકીન તોરણો વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. ગુજરાતમાં 13 જેટલા સોલંકીન તોરણો જોવા મળે છે.</p>\n<p>2. વડનગરમાં આવેલું &lsquo;કીર્તિ તોરણ&rsquo; સિદ્ધરાજ જયસિંહએ બનાવ્યું છે.</p>\n<p>3. શામળાજીમાં આવેલી &lsquo;હરિશ્ચંદ્રની ચોરી&rsquo; ગુજરાતનું સૌથી જૂનું તોરણ છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ગુજરાતમાં સોલંકીન તોરણો વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. ગુજરાતમાં 13 જેટલા સોલંકીન તોરણો જોવા મળે છે.\n2. વડનગરમાં આવેલું ‘કીર્તિ તોરણ’ સિદ્ધરાજ જયસિંહએ બનાવ્યું છે.\n3. શામળાજીમાં આવેલી ‘હરિશ્ચંદ્રની ચોરી’ ગુજરાતનું સૌથી જૂનું તોરણ છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 46,
+            "questionSubmitOrder": 46,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": " (A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d504f82d0c1",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d3e5282d0c2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3</p>",
+                "nameText": "(C) ફક્ત 1 અને 3",
+                "isCorrect": false,
+                "_id": "689a044ebc666d7e1082d0c3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(D) 1, 2 અને 3</p>",
+                "nameText": " (D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d4aea82d0c4",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d156282d0ca",
+            "name": "<p>&nbsp;મોઢેરાના સૂર્ય મંદિર વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. આ મંદિર 11મી સદીમાં ભીમદેવ પહેલા દ્વારા કથ્થાય રેતીયા પથ્થરોનો ઉપયોગ કરીને બનાવવામાં આવ્યું છે.</p>\n<p>2. મંદિર પરિસરમાં રામાયણ અને મહાભારતના શિલ્પો ઈરાની શૈલીની ઝલક દર્શાવે છે.</p>\n<p>3. આ મંદિર પુષ્પાવતી નદીના કાંઠે આવેલું છે અને રામકુંડ/સૂર્યકુંડમાં 108 નાના મંદિરો છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " મોઢેરાના સૂર્ય મંદિર વિશે નીચેના વિધાનો તપાસો:\n1. આ મંદિર 11મી સદીમાં ભીમદેવ પહેલા દ્વારા કથ્થાય રેતીયા પથ્થરોનો ઉપયોગ કરીને બનાવવામાં આવ્યું છે.\n2. મંદિર પરિસરમાં રામાયણ અને મહાભારતના શિલ્પો ઈરાની શૈલીની ઝલક દર્શાવે છે.\n3. આ મંદિર પુષ્પાવતી નદીના કાંઠે આવેલું છે અને રામકુંડ/સૂર્યકુંડમાં 108 નાના મંદિરો છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 47,
+            "questionSubmitOrder": 47,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666dd70782d0c6",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3</p>",
+                "nameText": "(B) ફક્ત 2 અને 3",
+                "isCorrect": false,
+                "_id": "689a044ebc666d305482d0c7",
+                "isMarked": false
+              },
+              {
+                "name": "<p>&nbsp;(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": " (C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d3ab682d0c8",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d116f82d0c9",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d5b7182d0cf",
+            "name": "<p>સોલંકી કાળના અન્ય મંદિરો વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. જૂનાગઢમાં ગુરુ દત્તાત્રેય અને નેમિનાથના મંદિરો સજ્જન મંત્રી દ્વારા બનાવવામાં આવ્યા હતા.</p>\n<p>2. નવલખા મંદિર ઘૂમલી (દ્વારકા)માં આવેલું છે, જ્યારે નવલખા શિવ મંદિર સાયલા (સુરેન્દ્રનગર)માં છે.</p>\n<p>3. દેલવાડાના દેરા અને કુંભારિયાના દેરા વિમલ મંત્રી દ્વારા આરસમાંથી બનાવવામાં આવ્યા છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "સોલંકી કાળના અન્ય મંદિરો વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. જૂનાગઢમાં ગુરુ દત્તાત્રેય અને નેમિનાથના મંદિરો સજ્જન મંત્રી દ્વારા બનાવવામાં આવ્યા હતા.\n2. નવલખા મંદિર ઘૂમલી (દ્વારકા)માં આવેલું છે, જ્યારે નવલખા શિવ મંદિર સાયલા (સુરેન્દ્રનગર)માં છે.\n3. ��ેલવાડાના દેરા અને કુંભારિયાના દેરા વિમલ મંત્રી દ્વારા આરસમાંથી બનાવવામાં આવ્યા છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 48,
+            "questionSubmitOrder": 48,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666da2ac82d0cb",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d0b7e82d0cc",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d69ea82d0cd",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666db43382d0ce",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d51e482d0d4",
+            "name": "<p>પાલીતાણા જૈન દેરાસરો વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. પાલીતાણાનું જૂનું નામ &lsquo;પાદલિપ્તપુર&rsquo; છે અને ત્યાં 863 જૈન દેરાઓ છે.</p>\n<p>2. પાલીતાણાને &lsquo;મંદિરોનું શહેર&rsquo; અને &lsquo;અહિંસા નગરી&rsquo; તરીકે ઓળખવામાં આવે છે.</p>\n<p>3. શેત્રુંજય પર્વત (હસ્તગીરી/કદંબગીરી) પર આ દેરાસરો આવેલા છે અને હેમચંદ્રાચાર્યની સમાધિ પણ ત્યાં છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "પાલીતાણા જૈન દેરાસરો વિશે નીચેના વિધાનો તપાસો:\n1. પાલીતાણાનું જૂનું નામ ‘પાદલિપ્તપુર’ છે અને ત્યાં 863 જૈન દેરાઓ છે.\n2. પાલીતાણાને ‘મંદિરોનું શહેર’ અને ‘અહિંસા નગરી’ તરીકે ઓળખવામાં આવે છે.\n3. શેત્રુંજય પર્વત (હસ્તગીરી/કદંબગીરી) પર આ દેરાસરો આવેલા છે અને હેમચંદ્રાચાર્યની સમાધિ પણ ત્યાં છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 49,
+            "questionSubmitOrder": 49,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d1a3582d0d0",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d5f1282d0d1",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666ddfe682d0d2",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666dd2f082d0d3",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666de2b982d0d9",
+            "name": "<p>ગુજરાતના સૌથી જૂના મંદિર અને અન્ય મંદિરો વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. ગુજરાતનું સૌથી જૂનું મંદિર &lsquo;ગોરજ મંદિર&rsquo; (વડોદરા) છે.</p>\n<p>2. લકુલીશ ભગવાનનું મુખ્ય મંદિર &lsquo;કાયાવરોહણ&rsquo; (વડોદરા)માં આવેલું છે, જે પાશુપત સંપ્રદાયનું મંદિર છે.</p>\n<p>3. તરણેતર (ત્રિનેત્રેશ્વર) મંદિર સુરેન્દ્રનગર જિલ્લામાં આવેલું છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ગુજરાતના સૌથી જૂના મંદિર અને અન્ય મંદિરો વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. ગુજરાતનું સૌથી જૂનું મંદિર ‘ગોરજ મંદિર’ (વડોદરા) છે.\n2. લકુલીશ ભગવાનનું મુખ્ય મંદિર ‘કાયાવરોહણ’ (વડોદરા)માં આવેલું છે, જે પાશુપત સંપ્રદાયનું મંદિર છે.\n3. તરણેતર (ત્રિનેત્રેશ્વર) મંદિર સુરેન્દ્રનગર જિલ્લામાં આવેલું છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 50,
+            "questionSubmitOrder": 50,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d2e4782d0d5",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d4b1782d0d6",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d3d3682d0d7",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d5db382d0d8",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d724c82d0de",
+            "name": "<p>નીચેના વિધાનો તપાસો:</p>\n<p>1. દ્વારકાધીશ મંદિર પાંચ માળનું છે અને 72 સ્તંભો પર ઉભેલું છે, તેનું પ્રવેશદ્વાર &lsquo;સ્વર્ગદ્વાર&rsquo; કહેવાય છે.</p>\n<p>2. સ્ટેચ્યુ ઓફ યુનિટી નર્મદા જિલ્લામાં સાધુ બેટ પર આવેલી 185 મીટર ઊંચી પ્રતિમા છે, જેની ડિઝાઇન રામવનજી સુથારે તૈયાર કરી હતી.</p>\n<p>3. સીદી સૈયદની જાળી અમદાવાદમાં આવેલી છે અને IIM અમદાવાદના લોગોમાં જોવા મળે છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "નીચેના વિધાનો તપાસો:\n1. દ્વારકાધીશ મંદિર પાંચ માળનું છે અને 72 સ્તંભો પર ઉભેલું છે, તેનું પ્રવેશદ્વાર ‘સ્વર્ગદ્વાર’ કહેવાય છે.\n2. સ્ટેચ્યુ ઓફ યુનિટી નર્મદા જિલ્લામાં સાધુ બેટ પર આવેલી 185 મીટર ઊંચી પ્રતિમા છે, જેની ડિઝાઇન રામવનજી સુથારે તૈયાર કરી હતી.\n3. સીદી સૈયદની જાળી અમદાવાદમાં આવેલી છે અને IIM અમદાવાદના લોગોમાં જોવા મળે છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 51,
+            "questionSubmitOrder": 51,
+            "options": [
+              {
+                "name": "<p>&nbsp;(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": " (A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d8cbc82d0da",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d4f2e82d0db",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d4bb682d0dc",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d85d582d0dd",
+                "isMarked": false
+              }
+            ],
+            "solution": "<p>દ્વારકાધીશ મંદિર પાંચ માળનું અને 72 સ્તંભો પર ઉભેલું છે, તેનું પ્રવેશદ્વાર સ્વર્ગદ્વાર કહેવાય છે. સ્ટેચ્યુ ઓફ યુનિટી સાધુ બેટ પર આવેલી 185 મીટર ઊંચી પ્રતિમા છે, જેની ડિઝાઇન રામવનજી સુથારે તૈયાર કરી હતી. સીદી સૈયદની જાળી અમદાવાદમાં આવેલી છે અને IIM અમદાવાદના લોગોમાં જોવા મળે છે.</p>",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d0d0482d0e3",
+            "name": "<p>&nbsp;ભવાઈ કળા વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. ભવાઈનો સૌથી પ્રચલિત અર્થ &lsquo;ભાવની અભિવ્યક્તિ&rsquo; છે.</p>\n<p>2. ભવાઈની શરૂઆત 14મી સદીમાં અલાઉદ્દીન ખિલજીના શાસનકાળ દરમિયાન અસાઈત રાજારામ ઠાકર દ્વારા થઈ હતી, જેમને &lsquo;ભવાઈના પિતા&rsquo; કહેવાય છે.</p>\n<p>3. રામદેવપીરનો ��ેશ ભવાઈનો સૌથી જૂનો વેશ છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ભવાઈ કળા વિશે નીચેના વિધાનો તપાસો:\n1. ભવાઈનો સૌથી પ્રચલિત અર્થ ‘ભાવની અભિવ્યક્તિ’ છે.\n2. ભવાઈની શરૂઆત 14મી સદીમાં અલાઉદ્દીન ખિલજીના શાસનકાળ દરમિયાન અસાઈત રાજારામ ઠાકર દ્વારા થઈ હતી, જેમને ‘ભવાઈના પિતા’ કહેવાય છે.\n3. રામદેવપીરનો વેશ ભવાઈનો સૌથી જૂનો વેશ છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 52,
+            "questionSubmitOrder": 52,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d080882d0df",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666daee482d0e0",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d79a982d0e1",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d371682d0e2",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666db10082d0e8",
+            "name": "<p>ભારતમાં શિલ્પકળાના વિકાસ વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. મોર્યકાલીન સ્તંભો એક જ પથ્થરમાંથી બનેલા હતા અને તેમને ખૂબ ઉચ્ચ સ્તરનું પોલિસિંગ કરવામાં આવતું હતું.</p>\n<p>2. કુષાણ સમયગાળામાં ગાંધાર અને મથુરા શૈલી વિકસિત થઈ, જેમાં ગાંધાર શૈલી પર ગ્રીક/રોમન અસર હતી.</p>\n<p>3. ગુપ્તકાળ ભારતીય મંદિર સ્થાપત્યકલાના વિકાસ માટેનો સુવર્ણકાળ હતો.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભારતમાં શિલ્પકળાના વિકાસ વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. મોર્યકાલીન સ્તંભો એક જ પથ્થરમાંથી બનેલા હતા અને તેમને ખૂબ ઉચ્ચ સ્તરનું પોલિસિંગ કરવામાં આવતું હતું.\n2. કુષાણ સમયગાળામાં ગાંધાર અને મથુરા શૈલી વિકસિત થઈ, જેમાં ગાંધાર શૈલી પર ગ્રીક/રોમન અસર હતી.\n3. ગુપ્તકાળ ભારતીય મંદિર સ્થાપત્યકલાના વિકાસ માટેનો સુવર્ણકાળ હતો.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 53,
+            "questionSubmitOrder": 53,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d56fc82d0e4",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d793582d0e5",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d243b82d0e6",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d42b982d0e7",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d6c8982d0ed",
+            "name": "<p>ભારતીય શાસ્ત્રીય નૃત્યો અને તેમના પ્રખ્યાત કલાકારો વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. ભરતનાટ્યમમાં રુક્મિણી દેવી અરુંડલે, મૃણાલિની સારાભાઈ અને યામિની કૃષ્ણમૂર્તિ જેવા કલાકારો જાણીતા છે.</p>\n<p>2. કથકલીમાં ગુરુ કુંજુ કુરુપ અને રીતા ગાંગુલી પ્રખ્યાત છે.</p>\n<p>3. ઓડીસી નૃત્યમાં ગુરુ પંકજ ચરણ દાસ અને સોનલ માનસિંહ જેવા કલાકારો જાણીતા છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભારતીય શાસ્ત્રીય નૃત્યો અને તેમના પ્રખ્યાત કલાકારો વિશે નીચેના વિધાનો તપાસો:\n1. ભરતનાટ્યમમાં રુક્મિણી દેવી અરુંડલે, મૃણાલિની સારાભાઈ અને યામિની કૃષ્ણમૂર્તિ જેવા કલાકારો જાણીતા છે.\n2. કથકલીમાં ગુરુ કુંજુ કુરુપ અને રીતા ગાંગુલી પ્રખ્યાત છે.\n3. ઓડીસી નૃત્યમાં ગુરુ પંકજ ચરણ દાસ અને સોનલ માનસિંહ જેવા કલાકારો જાણીતા છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 54,
+            "questionSubmitOrder": 54,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d486f82d0e9",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d1f5782d0ea",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666de93182d0eb",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d65d782d0ec",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666dd1b682d0f2",
+            "name": "<p>ભારતીય લોકનૃત્યો અને યુનેસ્કોની અમૂર્ત વિરાસત યાદી વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. &lsquo;ગરબા&rsquo;ને 2023માં યુનેસ્કો દ્વારા અમૂર્ત વિરાસત સૂચીમાં સ્થાન મળ્યું છે.</p>\n<p>2. &lsquo;રામલીલા&rsquo; અને &lsquo;છઉ&rsquo; નૃત્યનો પણ યુનેસ્કોની અમૂર્ત વિરાસત યાદીમાં સમાવેશ થયેલો છે.</p>\n<p>3. &lsquo;કાલબેલિયા&rsquo; નૃત્યને 2010માં યુનેસ્કોની અમૂર્ત વિરાસત સૂચીમાં સમાવેશ કરાયો છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભારતીય લોકનૃત્યો અને યુનેસ્કોની અમૂર્ત વિરાસત યાદી વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. ‘ગરબા’ને 2023માં યુનેસ્કો દ્વારા અમૂર્ત વિરાસત સૂચીમાં સ્થાન મળ્યું છે.\n2. ‘રામલીલા’ અને ‘છઉ’ નૃત્યનો પણ યુનેસ્કોની અમૂર્ત વિરાસત યાદીમાં સમાવેશ થયેલો છે.\n3. ‘કાલબેલિયા’ નૃત્યને 2010માં યુનેસ્કોની અમૂર્ત વિરાસત સૂચીમાં સમાવેશ કરાયો છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 55,
+            "questionSubmitOrder": 55,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d6e0082d0ee",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d1dbd82d0ef",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d340382d0f0",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d81b882d0f1",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d8a7882d0f7",
+            "name": "<p>ભારતીય માર્શલ આર્ટ્સ અને તેમના રાજ્યો વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. &lsquo;થાંગ-તા&rsquo; મણિપુરનું માર્શલ આર્ટ છે.</p>\n<p>2. &lsquo;સિલમ્બમ&rsquo; તમિલનાડુનું પરંપરાગત લાકડી લડાઈ છે.</p>\n<p>3. &lsquo;ગતકા&rsquo; પંજાબનું સિખ સમુદાયનું માર્શલ આર્ટ છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભારતીય માર્શલ આર્ટ્સ અને તેમના રાજ્યો વિશે નીચેના વિધાનો તપાસો:\n1. ‘થાંગ-તા’ મણિપુરનું માર્શલ આર્ટ છે.\n2. ‘સિલમ્બમ’ તમિલનાડુનું પરંપરાગત લાકડી લડાઈ છે.\n3. ‘ગતકા’ પંજાબનું સિખ સમુદાયનું માર્શલ આર્ટ છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 56,
+            "questionSubmitOrder": 56,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666dd75d82d0f3",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d324782d0f4",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d939082d0f5",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666db91f82d0f6",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d13d182d0fc",
+            "name": "<p>ભારતીય કઠપૂતળી કલાના પ્રકારો વિશે નીચેના વિધાનો ધ્યાનમાં લો:</p>\n<p>1. કઠપૂતળી કલાના ચાર પ્રકાર છે: સ્ટ્રિંગ, રોડ, ગ્લોવ અને શેડો.</p>\n<p>2. રાજસ્થાનની &lsquo;કઠપુતલી&rsquo; અને કર્ણાટકની &lsquo;બોમ્મલાટ્ટમ&rsquo; સ્ટ્રિંગ&nbsp; કઠપૂતળીના ઉદાહરણ છે.</p>\n<p>3. ઓડીસાની &lsquo;રાવણછાયા&rsquo; અને આંધ્રપ્રદેશની &lsquo;થોલું બોમ્મલત્તા&rsquo; શેડો કઠપૂતળીના ઉદાહરણ છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": "ભારતીય કઠપૂતળી કલાના પ્રકારો વિશે નીચેના વિધાનો ધ્યાનમાં લો:\n1. કઠપૂતળી કલાના ચાર પ્રકાર છે: સ્ટ્રિંગ, રોડ, ગ્લોવ અને શેડો.\n2. રાજસ્થાનની ‘કઠપુતલી’ અને કર્ણાટકની ‘બોમ્મલાટ્ટમ’ સ્ટ્રિંગ  કઠપૂતળીના ઉદાહરણ છે.\n3. ઓડીસાની ‘રાવણછાયા’ અને આંધ્રપ્રદેશની ‘થોલું બોમ્મલત્તા’ શેડો કઠપૂતળીના ઉદાહરણ છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 57,
+            "questionSubmitOrder": 57,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d756082d0f8",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d0e6382d0f9",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d355c82d0fa",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666deef582d0fb",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          },
+          {
+            "_id": "689a044ebc666d612282d101",
+            "name": "<p>&nbsp;ગુજરાતની વાવ સ્થાપત્ય શૈલીઓ વિશે નીચેના વિધાનો તપાસો:</p>\n<p>1. &lsquo;નંદા&rsquo; પ્રકારની વાવમાં એક પ્રવેશદ્વાર અને ત્રણ માળ હોય છે, જ્યારે &lsquo;જયા&rsquo; પ્રકારની વાવમાં ત્રણ પ્રવેશદ્વાર અને નવ માળ હોય છે.</p>\n<p>2. રાણકી વાવ &lsquo;નંદા&rsquo; પ્રકારની છે અને અડાલજની વાવ &lsquo;જયા&rsquo; પ્રકારની છે.</p>\n<p>3. સોલંકી કાળમાં બનેલી વાવ &lsquo;મારુ-ગુર્જર શૈલી&rsquo;માં હોય છે, જ્યારે સલ્તનત કાળમાં બનેલી વાવ &lsquo;ઇન્ડો-ઇસ્લામિક શૈલી&rsquo;માં હોય છે.</p>\n<p></p>\n<p>ઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે?&nbsp;</p>",
+            "isComprehension": false,
+            "paragraph": null,
+            "paragraphText": null,
+            "fillUpsAnswers": [],
+            "nameText": " ગુજરાતની વાવ સ્થાપત્ય શૈલીઓ વિશે નીચેના વિધાનો તપાસો:\n1. ‘નંદા’ પ્રકારની વાવમાં એક પ્રવેશદ્વાર અને ત્રણ માળ હોય છે, જ્યારે ‘જયા’ પ્રકારની વાવમાં ત્રણ પ્રવેશદ્વાર અને નવ માળ હોય છે.\n2. રાણકી વાવ ‘નંદા’ પ્રકારની છે અને અડાલજની વાવ ‘જયા’ પ્રકારની છે.\n3. સોલંકી કાળમાં બનેલી વાવ ‘મારુ-ગુર્જર શૈલી’માં હોય છે, જ્યારે સલ્તનત કાળમાં બનેલી વાવ ‘ઇન્ડો-ઇસ્લામિક શૈલી’માં હોય છે.\n\nઉપરોક્ત વિધાનોમાંથી કયું/કયા વિધાન/વિધાનો સાચું/સાચા છે? ",
+            "sectionId": "689a043a161ad5850349fade",
+            "order": 58,
+            "questionSubmitOrder": 58,
+            "options": [
+              {
+                "name": "<p>(A) ફક્ત 1 અને 2&nbsp;</p>",
+                "nameText": "(A) ફક્ત 1 અને 2 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d2b8682d0fd",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(B) ફક્ત 2 અને 3&nbsp;</p>",
+                "nameText": "(B) ફક્ત 2 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d58b482d0fe",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(C) ફક્ત 1 અને 3&nbsp;</p>",
+                "nameText": "(C) ફક્ત 1 અને 3 ",
+                "isCorrect": false,
+                "_id": "689a044ebc666d642882d0ff",
+                "isMarked": false
+              },
+              {
+                "name": "<p>(D) 1, 2 અને 3</p>",
+                "nameText": "(D) 1, 2 અને 3",
+                "isCorrect": true,
+                "_id": "689a044ebc666d588182d100",
+                "isMarked": false
+              }
+            ],
+            "solution": " ",
+            "hasMultipleAnswers": false,
+            "type": "multiple_choice",
+            "isAttempted": false,
+            "isPartiallyCorrect": false,
+            "isCorrect": false,
+            "isGraceMarked": false,
+            "isReevaluated": false,
+            "marks": {
+              "positive": 0,
+              "negative": 0
+            },
+            "timeTaken": 0,
+            "markForReview": false,
+            "isGpscType": false,
+            "isSurrendered": false,
+            "difficultyLevel": null
+          }
+        ],
+        "numberOfQuestions": 58
+      }
+    ],
+    "userDetails": {
+      "name": "Ajay",
+      "userId": 92230062,
+      "orgId": 517121
+    },
+    "sts": 1765896738145,
+    "region": {
+      "timeFormat": "hh:mm a",
+      "dateTimeStamp": "yyyy/MM/dd"
+    }
+  },
+  "message": "Student Tests Fetched Successfully"
+}

@@ -3,30 +3,42 @@ import QuizEngine from './QuizEngine';
 import { notFound } from 'next/navigation';
 
 async function getQuizData(slug: string) {
-    // Fetch quiz metadata
-    const { data: quiz, error: quizError } = await supabase
+    // 1. Try to find in standard quizzes first
+    let { data: quiz, error: quizError } = await supabase
         .from('quizzes')
         .select('*')
         .eq('slug', slug)
         .single();
 
-    if (quizError || !quiz) {
-        return null;
+    let isSubjectQuiz = false;
+
+    // 2. If not found, try subject_quizzes
+    if (!quiz || quizError) {
+        const { data: sQuiz, error: sQuizError } = await supabase
+            .from('subject_quizzes')
+            .select('*')
+            .eq('slug', slug)
+            .single();
+
+        if (sQuiz) {
+            quiz = sQuiz;
+            isSubjectQuiz = true;
+        } else {
+            return null;
+        }
     }
 
-    // Fetch questions
+    // 3. Fetch questions from the appropriate table
+    const questionTable = isSubjectQuiz ? 'subject_questions' : 'questions';
     const { data: questions, error: questionsError } = await supabase
-        .from('questions')
+        .from(questionTable)
         .select('*')
         .eq('quiz_id', quiz.id)
         .order('q_index', { ascending: true });
 
-    if (questionsError) {
-        // Error fetching questions - return null for production
-        return null;
-    }
+    if (questionsError) return null;
 
-    return { quiz, questions };
+    return { quiz, questions, isSubjectQuiz };
 }
 
 export default async function QuizPage({ params }: { params: Promise<{ slug: string }> }) {
