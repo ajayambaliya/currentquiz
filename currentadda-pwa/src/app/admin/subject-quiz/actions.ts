@@ -7,8 +7,11 @@ function getSupabaseAdmin() {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (!url || !key) {
-        throw new Error('Missing Supabase environment variables. Check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.');
+    if (!url) {
+        throw new Error('Server Error: NEXT_PUBLIC_SUPABASE_URL is not defined in Vercel dashboard.');
+    }
+    if (!key) {
+        throw new Error('Server Error: SUPABASE_SERVICE_ROLE_KEY is not defined in Vercel dashboard. Please check your Environment Variables.');
     }
 
     return createClient(url, key, {
