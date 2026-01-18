@@ -174,20 +174,32 @@ export default function AdminSubjectQuiz() {
     };
 
     const createSlug = (text: string) => {
-        if (!text) return `item-${Date.now()}`;
+        if (!text) return '';
 
-        let slug = text
+        // Transliteration mapping for Gujarati to English
+        // Ordered by length (longest first) to prevent partial matching
+        const gujaratiToEnglish: [string, string][] = [
+            ['ક્ષ', 'ksh'], ['જ્ઞ', 'gn'], ['શ્ર', 'shr'],
+            ['અઃ', 'ah'], ['અં', 'an'], ['ઔ', 'au'], ['ઓ', 'o'], ['ઐ', 'ai'], ['એ', 'e'], ['ઋ', 'ru'], ['ઊ', 'oo'], ['ઉ', 'u'], ['ઈ', 'ee'], ['ઇ', 'i'], ['આ', 'aa'], ['અ', 'a'],
+            ['ખ', 'kh'], ['ઘ', 'gh'], ['ઙ', 'n'], ['છ', 'chh'], ['ઝ', 'jh'], ['ઞ', 'n'], ['ઠ', 'th'], ['ઢ', 'dh'], ['ણ', 'n'], ['થ', 'th'], ['ધ', 'dh'], ['ફ', 'ph'], ['ભ', 'bh'],
+            ['ક', 'k'], ['ગ', 'g'], ['ચ', 'ch'], ['જ', 'j'], ['ટ', 't'], ['ડ', 'd'], ['ત', 't'], ['દ', 'd'], ['ન', 'n'], ['પ', 'p'], ['બ', 'b'], ['મ', 'm'], ['ય', 'y'], ['ર', 'r'], ['લ', 'l'], ['વ', 'v'], ['શ', 'sh'], ['ષ', 'sh'], ['સ', 's'], ['હ', 'h'], ['ળ', 'l'],
+            ['ા', 'a'], ['િ', 'i'], ['ી', 'ee'], ['ુ', 'u'], ['ૂ', 'oo'], ['ૃ', 'ru'], ['ે', 'e'], ['ૈ', 'ai'], ['ો', 'o'], ['ૌ', 'au'], ['ં', 'n'], ['ઃ', 'h'], ['્', '']
+        ];
+
+        let result = text;
+        // Apply transliteration
+        gujaratiToEnglish.forEach(([gu, en]) => {
+            result = result.split(gu).join(en);
+        });
+
+        let slug = result
             .toLowerCase()
             .trim()
             .replace(/[\s_]+/g, '-') // Replace spaces and underscores with -
-            .replace(/[^\p{L}\p{N}-]+/gu, '') // Keep all Unicode letters and numbers
+            .replace(/[^\w-]+/g, '') // Keep ONLY English letters, numbers and hyphens
             .replace(/-+/g, '-') // Replace multiple hyphens with one
             .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
 
-        // Fallback if result is empty or just hyphens
-        if (!slug || slug === '-') {
-            return `topic-${Math.random().toString(36).substring(2, 7)}`;
-        }
         return slug;
     };
 
@@ -461,32 +473,42 @@ export default function AdminSubjectQuiz() {
                                             </button>
                                         )}
                                     </div>
-                                    <div className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            id="new-subject-input"
-                                            className="flex-1 bg-white border border-slate-100 rounded-xl text-xs font-bold p-3 outline-none focus:border-indigo-300 transition-all"
-                                            placeholder="Add new subject..."
-                                        />
-                                        <button
-                                            onClick={async () => {
-                                                const input = document.getElementById('new-subject-input') as HTMLInputElement;
-                                                if (!input.value) return;
-                                                setIsProcessing(true);
-                                                const res = await addSubjectAction(input.value, createSlug(input.value));
-                                                if (res.error) setImportStatus({ type: 'error', message: res.error });
-                                                else {
-                                                    setImportStatus({ type: 'success', message: 'Subject added!' });
-                                                    input.value = '';
-                                                    fetchSubjects();
-                                                    fetchTotals();
-                                                }
-                                                setIsProcessing(false);
-                                            }}
-                                            className="bg-slate-900 text-white px-4 rounded-xl hover:bg-indigo-600 transition-all"
-                                        >
-                                            <Plus size={18} />
-                                        </button>
+                                    <div className="space-y-1">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                id="new-subject-input"
+                                                className="flex-1 bg-white border border-slate-100 rounded-xl text-xs font-bold p-3 outline-none focus:border-indigo-300 transition-all"
+                                                placeholder="Add new subject..."
+                                                onChange={(e) => {
+                                                    const preview = document.getElementById('subject-slug-preview');
+                                                    if (preview) preview.innerText = createSlug(e.target.value);
+                                                }}
+                                            />
+                                            <button
+                                                onClick={async () => {
+                                                    const input = document.getElementById('new-subject-input') as HTMLInputElement;
+                                                    if (!input.value) return;
+                                                    setIsProcessing(true);
+                                                    const slug = createSlug(input.value) || `subject-${Date.now()}`;
+                                                    const res = await addSubjectAction(input.value, slug);
+                                                    if (res.error) setImportStatus({ type: 'error', message: res.error });
+                                                    else {
+                                                        setImportStatus({ type: 'success', message: 'Subject added!' });
+                                                        input.value = '';
+                                                        const preview = document.getElementById('subject-slug-preview');
+                                                        if (preview) preview.innerText = '';
+                                                        fetchSubjects();
+                                                        fetchTotals();
+                                                    }
+                                                    setIsProcessing(false);
+                                                }}
+                                                className="bg-slate-900 text-white px-4 rounded-xl hover:bg-indigo-600 transition-all"
+                                            >
+                                                <Plus size={18} />
+                                            </button>
+                                        </div>
+                                        <p className="text-[9px] font-black text-indigo-400/60 uppercase tracking-widest ml-2">Slug: <span id="subject-slug-preview" className="text-indigo-600"></span></p>
                                     </div>
                                 </div>
 
@@ -515,34 +537,44 @@ export default function AdminSubjectQuiz() {
                                             </button>
                                         )}
                                     </div>
-                                    <div className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            id="new-main-topic-input"
-                                            disabled={!selectedSubject}
-                                            className="flex-1 bg-white border border-slate-100 rounded-xl text-xs font-bold p-3 outline-none focus:border-indigo-300 transition-all"
-                                            placeholder="Add new main topic..."
-                                        />
-                                        <button
-                                            disabled={!selectedSubject || isProcessing}
-                                            onClick={async () => {
-                                                const input = document.getElementById('new-main-topic-input') as HTMLInputElement;
-                                                if (!input.value || !selectedSubject) return;
-                                                setIsProcessing(true);
-                                                const res = await addMainTopicAction(selectedSubject, input.value, createSlug(input.value));
-                                                if (res.error) setImportStatus({ type: 'error', message: res.error });
-                                                else {
-                                                    setImportStatus({ type: 'success', message: 'Main Topic added!' });
-                                                    input.value = '';
-                                                    fetchMainTopics(selectedSubject);
-                                                    fetchTotals();
-                                                }
-                                                setIsProcessing(false);
-                                            }}
-                                            className="bg-slate-900 text-white px-4 rounded-xl hover:bg-indigo-600 transition-all disabled:bg-slate-200"
-                                        >
-                                            <Plus size={18} />
-                                        </button>
+                                    <div className="space-y-1">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                id="new-main-topic-input"
+                                                disabled={!selectedSubject}
+                                                className="flex-1 bg-white border border-slate-100 rounded-xl text-xs font-bold p-3 outline-none focus:border-indigo-300 transition-all"
+                                                placeholder="Add new main topic..."
+                                                onChange={(e) => {
+                                                    const preview = document.getElementById('main-slug-preview');
+                                                    if (preview) preview.innerText = createSlug(e.target.value);
+                                                }}
+                                            />
+                                            <button
+                                                disabled={!selectedSubject || isProcessing}
+                                                onClick={async () => {
+                                                    const input = document.getElementById('new-main-topic-input') as HTMLInputElement;
+                                                    if (!input.value || !selectedSubject) return;
+                                                    setIsProcessing(true);
+                                                    const slug = createSlug(input.value) || `topic-${Date.now()}`;
+                                                    const res = await addMainTopicAction(selectedSubject, input.value, slug);
+                                                    if (res.error) setImportStatus({ type: 'error', message: res.error });
+                                                    else {
+                                                        setImportStatus({ type: 'success', message: 'Main Topic added!' });
+                                                        input.value = '';
+                                                        const preview = document.getElementById('main-slug-preview');
+                                                        if (preview) preview.innerText = '';
+                                                        fetchMainTopics(selectedSubject);
+                                                        fetchTotals();
+                                                    }
+                                                    setIsProcessing(false);
+                                                }}
+                                                className="bg-slate-900 text-white px-4 rounded-xl hover:bg-indigo-600 transition-all disabled:bg-slate-200"
+                                            >
+                                                <Plus size={18} />
+                                            </button>
+                                        </div>
+                                        <p className="text-[9px] font-black text-indigo-400/60 uppercase tracking-widest ml-2">Slug: <span id="main-slug-preview" className="text-indigo-600"></span></p>
                                     </div>
                                 </div>
 
@@ -571,34 +603,44 @@ export default function AdminSubjectQuiz() {
                                             </button>
                                         )}
                                     </div>
-                                    <div className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            id="new-sub-topic-input"
-                                            disabled={!selectedMainTopic}
-                                            className="flex-1 bg-white border border-slate-100 rounded-xl text-xs font-bold p-3 outline-none focus:border-indigo-300 transition-all"
-                                            placeholder="Add new sub topic..."
-                                        />
-                                        <button
-                                            disabled={!selectedMainTopic || isProcessing}
-                                            onClick={async () => {
-                                                const input = document.getElementById('new-sub-topic-input') as HTMLInputElement;
-                                                if (!input.value || !selectedMainTopic) return;
-                                                setIsProcessing(true);
-                                                const res = await addSubTopicAction(selectedMainTopic, input.value, createSlug(input.value));
-                                                if (res.error) setImportStatus({ type: 'error', message: res.error });
-                                                else {
-                                                    setImportStatus({ type: 'success', message: 'Sub Topic added!' });
-                                                    input.value = '';
-                                                    fetchSubTopics(selectedMainTopic);
-                                                    fetchTotals();
-                                                }
-                                                setIsProcessing(false);
-                                            }}
-                                            className="bg-slate-900 text-white px-4 rounded-xl hover:bg-indigo-600 transition-all disabled:bg-slate-200"
-                                        >
-                                            <Plus size={18} />
-                                        </button>
+                                    <div className="space-y-1">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                id="new-sub-topic-input"
+                                                disabled={!selectedMainTopic}
+                                                className="flex-1 bg-white border border-slate-100 rounded-xl text-xs font-bold p-3 outline-none focus:border-indigo-300 transition-all"
+                                                placeholder="Add new sub topic..."
+                                                onChange={(e) => {
+                                                    const preview = document.getElementById('sub-slug-preview');
+                                                    if (preview) preview.innerText = createSlug(e.target.value);
+                                                }}
+                                            />
+                                            <button
+                                                disabled={!selectedMainTopic || isProcessing}
+                                                onClick={async () => {
+                                                    const input = document.getElementById('new-sub-topic-input') as HTMLInputElement;
+                                                    if (!input.value || !selectedMainTopic) return;
+                                                    setIsProcessing(true);
+                                                    const slug = createSlug(input.value) || `subtopic-${Date.now()}`;
+                                                    const res = await addSubTopicAction(selectedMainTopic, input.value, slug);
+                                                    if (res.error) setImportStatus({ type: 'error', message: res.error });
+                                                    else {
+                                                        setImportStatus({ type: 'success', message: 'Sub Topic added!' });
+                                                        input.value = '';
+                                                        const preview = document.getElementById('sub-slug-preview');
+                                                        if (preview) preview.innerText = '';
+                                                        fetchSubTopics(selectedMainTopic);
+                                                        fetchTotals();
+                                                    }
+                                                    setIsProcessing(false);
+                                                }}
+                                                className="bg-slate-900 text-white px-4 rounded-xl hover:bg-indigo-600 transition-all disabled:bg-slate-200"
+                                            >
+                                                <Plus size={18} />
+                                            </button>
+                                        </div>
+                                        <p className="text-[9px] font-black text-indigo-400/60 uppercase tracking-widest ml-2">Slug: <span id="sub-slug-preview" className="text-indigo-600"></span></p>
                                     </div>
                                 </div>
                             </div>
