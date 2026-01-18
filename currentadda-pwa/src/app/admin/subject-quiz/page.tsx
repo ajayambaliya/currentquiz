@@ -203,6 +203,29 @@ export default function AdminSubjectQuiz() {
         return slug;
     };
 
+    const stripHtml = (html: string) => {
+        if (!html) return '';
+        let text = html;
+        // Replace block tags with newlines to maintain some readability
+        text = text.replace(/<\/p>|<\/div>|<\/li>|<\/h[1-6]>/gi, '\n');
+        text = text.replace(/<br\s*\/?>/gi, '\n');
+        // Remove all other tags
+        text = text.replace(/<[^>]*>/g, '');
+        // Decode entities
+        const entities: Record<string, string> = {
+            '&nbsp;': ' ', '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'",
+            '&bull;': '•', '&middot;': '·'
+        };
+        Object.keys(entities).forEach(entity => {
+            text = text.split(entity).join(entities[entity]);
+        });
+        // Clean up: remove multiple newlines and trim
+        return text.split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .join('\n');
+    };
+
     const handleDeleteItem = async (level: 'subject' | 'main' | 'sub') => {
         const id = level === 'subject' ? selectedSubject : level === 'main' ? selectedMainTopic : selectedSubTopic;
         if (!id) return;
@@ -324,17 +347,18 @@ export default function AdminSubjectQuiz() {
                 if (q.options) {
                     q.options.forEach((opt: any, i: number) => {
                         const label = String.fromCharCode(65 + i);
-                        const text = opt.nameText || opt.name || `Option ${label}`;
-                        options[label] = text.replace(/^(\([A-D]\)|[A-D]\)|\([A-D]\))\s*/, '').trim();
+                        const rawText = opt.nameText || opt.name || `Option ${label}`;
+                        const cleanedText = stripHtml(rawText);
+                        options[label] = cleanedText.replace(/^(\([A-D]\)|[A-D]\)|\([A-D]\))\s*/i, '').trim();
                         if (opt.isCorrect) correctAnswer = label;
                     });
                 }
 
                 return {
-                    text: q.nameText || q.name || 'No text',
+                    text: stripHtml(q.nameText || q.name || 'No text'),
                     options: options,
                     answer: correctAnswer,
-                    explanation: q.solution || ''
+                    explanation: stripHtml(q.solution || '')
                 };
             });
 
