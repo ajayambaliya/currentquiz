@@ -5,7 +5,8 @@ import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from '
 import {
     Check, ChevronLeft, ChevronRight, X, Trophy, HelpCircle,
     Loader2, BookOpen, ExternalLink, RotateCcw, Grid3x3,
-    Flame, Star, Award, Target, Sparkles, Home, XCircle
+    Flame, Star, Award, Target, Sparkles, Home, XCircle, Clock,
+    Users, TrendingUp, AlertCircle
 } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '../../../hooks/useAuth';
@@ -41,6 +42,13 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
     const [reviewMode, setReviewMode] = useState(false);
     const [showReviewGrid, setShowReviewGrid] = useState(false);
     const [streakData, setStreakData] = useState<{ oldStreak: number; newStreak: number } | null>(null);
+    const [timeLeft, setTimeLeft] = useState(questions.length * 60);
+    const [isTimeUp, setIsTimeUp] = useState(false);
+    const [leaderboardStats, setLeaderboardStats] = useState<{
+        totalParticipants: number;
+        rank: number;
+        percentile: number;
+    } | null>(null);
 
     const x = useMotionValue(0);
     const opacity = useTransform(x, [-200, 0, 200], [0.5, 1, 0.5]);
@@ -57,6 +65,66 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
     const currentQuestion = questions[currentIdx];
     const totalQuestions = questions.length;
     const progress = totalQuestions > 0 ? ((currentIdx + 1) / totalQuestions) * 100 : 0;
+
+    // Timer Logic
+    useEffect(() => {
+        if (showResults || !user || authLoading || isSubmitted) return;
+
+        if (timeLeft <= 0) {
+            handleTimeUp();
+            return;
+        }
+
+        const timer = setInterval(() => {
+            setTimeLeft(prev => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [timeLeft, showResults, user, authLoading, isSubmitted]);
+
+    const handleTimeUp = async () => {
+        setIsTimeUp(true);
+        setIsSubmitted(true);
+        const streakInfo = await saveScore();
+        setStreakData(streakInfo);
+        setShowResults(true);
+    };
+
+    const formatTime = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    const fetchLeaderboardContext = async (currentScore: number) => {
+        try {
+            // Get all scores for this quiz to calculate rank and percentile
+            const { data: scores } = await supabase
+                .from('scores')
+                .select('score')
+                .eq('quiz_id', quiz.id);
+
+            if (!scores || scores.length === 0) return;
+
+            const total = scores.length;
+            const betterThan = scores.filter(s => s.score < currentScore).length;
+            const sameAs = scores.filter(s => s.score === currentScore).length;
+
+            // Rank calculation (1-indexed)
+            const sortedUniqueScores = Array.from(new Set(scores.map(s => s.score))).sort((a, b) => b - a);
+            const rank = sortedUniqueScores.indexOf(currentScore) + 1;
+
+            const percentile = Math.round((betterThan / total) * 100);
+
+            setLeaderboardStats({
+                totalParticipants: total,
+                rank: rank > 0 ? rank : 1,
+                percentile
+            });
+        } catch (err) {
+            console.error('Leaderboard fetch failed:', err);
+        }
+    };
 
     useEffect(() => {
         if (!authLoading && !user) {
@@ -124,13 +192,12 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
         if (isSubmitted && !reviewMode) return;
         if (reviewMode) return;
 
-        const wasCorrect = selectedAnswers[currentIdx] === currentQuestion.answer;
-        setSelectedAnswers({ ...selectedAnswers, [currentIdx]: option });
-
-        // Celebrate if the new answer is correct and wasn't correct before
-        if (!wasCorrect && option === currentQuestion.answer) {
-            celebrateCorrectAnswer();
+        // Subtle haptic feedback for better engagement
+        if ('vibrate' in navigator) {
+            navigator.vibrate(10);
         }
+
+        setSelectedAnswers({ ...selectedAnswers, [currentIdx]: option });
     };
 
     const calculateScore = () => {
@@ -157,6 +224,10 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
             setIsSubmitted(true);
             const streakInfo = await saveScore();
             setStreakData(streakInfo);
+
+            const finalScore = calculateScore();
+            await fetchLeaderboardContext(finalScore);
+
             setShowResults(true);
         }
     };
@@ -364,6 +435,42 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                         </div>
                     </motion.div>
 
+                    {/* Leaderboard Context */}
+                    {leaderboardStats && (
+                        <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.75 }}
+                            className="bg-indigo-50/50 p-5 rounded-[2rem] border border-indigo-100/50 grid grid-cols-2 gap-4"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-indigo-100 rounded-xl">
+                                    <TrendingUp className="w-5 h-5 text-indigo-600" />
+                                </div>
+                                <div className="text-left">
+                                    <div className="text-[10px] font-black text-indigo-400 uppercase tracking-wider">Top</div>
+                                    <div className="text-sm font-black text-indigo-900">Better than {leaderboardStats.percentile}%</div>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3 border-l border-indigo-100 pl-4">
+                                <div className="p-2 bg-indigo-100 rounded-xl">
+                                    <Users className="w-5 h-5 text-indigo-600" />
+                                </div>
+                                <div className="text-left">
+                                    <div className="text-[10px] font-black text-indigo-400 uppercase tracking-wider">Rank</div>
+                                    <div className="text-sm font-black text-indigo-900">#{leaderboardStats.rank} Ranking</div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {isTimeUp && (
+                        <div className="flex items-center justify-center gap-2 text-rose-500 bg-rose-50 py-2 px-4 rounded-xl text-xs font-bold animate-pulse">
+                            <AlertCircle className="w-4 h-4" />
+                            Time limit reached!
+                        </div>
+                    )}
+
                     {/* Action Buttons */}
                     <motion.div
                         initial={{ y: 20, opacity: 0 }}
@@ -453,15 +560,16 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                                 className={`aspect-square rounded-2xl font-black text-sm transition-all relative
                                     ${isCurrent ? 'ring-4 ring-indigo-300 scale-110' : ''}
                                     ${!isAnswered ? 'bg-slate-100 text-slate-400' : ''}
-                                    ${isAnswered && isCorrect ? 'bg-emerald-500 text-white' : ''}
-                                    ${isAnswered && !isCorrect ? 'bg-rose-500 text-white' : ''}
+                                    ${isAnswered && !(isSubmitted || reviewMode) ? 'bg-indigo-600 text-white' : ''}
+                                    ${isAnswered && (isSubmitted || reviewMode) && isCorrect ? 'bg-emerald-500 text-white' : ''}
+                                    ${isAnswered && (isSubmitted || reviewMode) && !isCorrect ? 'bg-rose-500 text-white' : ''}
                                 `}
                             >
                                 {idx + 1}
-                                {isAnswered && isCorrect && (
+                                {isAnswered && (isSubmitted || reviewMode) && isCorrect && (
                                     <Check className="w-3 h-3 absolute top-1 right-1" />
                                 )}
-                                {isAnswered && !isCorrect && (
+                                {isAnswered && (isSubmitted || reviewMode) && !isCorrect && (
                                     <X className="w-3 h-3 absolute top-1 right-1" />
                                 )}
                             </button>
@@ -469,14 +577,23 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                     })}
                 </div>
                 <div className="mt-6 flex items-center justify-around text-xs font-bold">
-                    <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 rounded-md bg-emerald-500" />
-                        <span className="text-slate-600">Correct</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 rounded-md bg-rose-500" />
-                        <span className="text-slate-600">Wrong</span>
-                    </div>
+                    {!(isSubmitted || reviewMode) ? (
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-md bg-indigo-600" />
+                            <span className="text-slate-600">Answered</span>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded-md bg-emerald-500" />
+                                <span className="text-slate-600">Correct</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded-md bg-rose-500" />
+                                <span className="text-slate-600">Wrong</span>
+                            </div>
+                        </>
+                    )}
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded-md bg-slate-100" />
                         <span className="text-slate-600">Unanswered</span>
@@ -501,7 +618,7 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                             onClick={() => setCurrentIdx(idx)}
                             className={`flex-shrink-0 transition-all ${isCurrent ? 'w-8 h-2' : 'w-2 h-2'
                                 } rounded-full ${!isAnswered ? 'bg-slate-200' :
-                                    isCorrect ? 'bg-emerald-500' : 'bg-rose-500'
+                                    (isSubmitted || reviewMode) ? (isCorrect ? 'bg-emerald-500' : 'bg-rose-500') : 'bg-indigo-600'
                                 }`}
                         />
                     );
@@ -549,8 +666,15 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                     </div>
 
                     <div className="flex-1">
-                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
-                            {quiz.title.length > 30 ? quiz.title.substring(0, 30) + '...' : quiz.title}
+                        <div className="flex items-center justify-between mb-1">
+                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">
+                                {quiz.title}
+                            </div>
+                            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black transition-colors ${timeLeft < 30 ? 'bg-rose-100 text-rose-600 animate-pulse' : 'bg-slate-100 text-slate-600'
+                                }`}>
+                                <Clock className="w-3 h-3" />
+                                {formatTime(timeLeft)}
+                            </div>
                         </div>
                         <div className="text-xs font-bold text-indigo-600">
                             Question {currentIdx + 1} of {totalQuestions}
