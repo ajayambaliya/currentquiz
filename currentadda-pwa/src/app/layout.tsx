@@ -1,5 +1,18 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Noto_Serif_Gujarati } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const gujarati = Noto_Serif_Gujarati({
+  subsets: ["gujarati"],
+  variable: "--font-gujarati",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -83,7 +96,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="gu" suppressHydrationWarning>
+    <html lang="gu" suppressHydrationWarning className={`${inter.variable} ${gujarati.variable}`}>
       <body className="antialiased" suppressHydrationWarning>
         <OneSignalInit />
         <ProtectContent />

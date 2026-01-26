@@ -1,5 +1,29 @@
 import { motion } from 'framer-motion';
 
+export function FeaturedQuizSkeleton() {
+    return (
+        <div className="mb-8 block">
+            <div className="flex items-center gap-2 mb-4 opacity-50">
+                <div className="w-4 h-4 bg-slate-200 rounded" />
+                <div className="h-3 bg-slate-200 rounded w-24" />
+            </div>
+            <div className="relative bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm animate-pulse h-48">
+                <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-slate-100 rounded-xl" />
+                        <div className="h-3 bg-slate-100 rounded w-20" />
+                    </div>
+                    <div className="h-8 bg-slate-100 rounded w-3/4" />
+                    <div className="flex gap-4">
+                        <div className="h-4 bg-slate-100 rounded w-24" />
+                        <div className="h-4 bg-slate-100 rounded w-24" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export function QuizCardSkeleton() {
     return (
         <div className="block bg-white p-5 rounded-[1.75rem] border border-slate-100 animate-pulse">

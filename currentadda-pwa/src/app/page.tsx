@@ -14,7 +14,7 @@ import { format, subMonths, startOfMonth, endOfMonth, isToday, isYesterday, diff
 import { useAuth } from '@/hooks/useAuth';
 import { motion, AnimatePresence } from 'framer-motion';
 import { parseSearchDate } from '@/lib/searchUtils';
-import { QuizListSkeleton, SearchBarSkeleton } from '@/components/SkeletonLoader';
+import { QuizListSkeleton, SearchBarSkeleton, FeaturedQuizSkeleton, HeroSkeleton } from '@/components/SkeletonLoader';
 import NotificationBell from '@/components/NotificationBell';
 
 const ITEMS_PER_PAGE = 10;
@@ -27,7 +27,7 @@ export default function HomePage() {
   const [selectedMonth, setSelectedMonth] = useState<Date | null>(null);
   const [profile, setProfile] = useState<any>(null);
   const [userStats, setUserStats] = useState<any>(null);
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
 
   // Pagination State
   const [page, setPage] = useState(0);
@@ -173,6 +173,9 @@ export default function HomePage() {
     return format(date, 'MMM dd, yyyy');
   };
 
+  // Prevent hydration mismatch by handling auth loading
+  if (authLoading) return <HeroSkeleton />;
+
   return (
     <main className="min-h-screen pb-32 overflow-x-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50">
       {/* Modern Glassmorphic Header */}
@@ -307,7 +310,9 @@ export default function HomePage() {
       {/* Main Content */}
       <div className="max-w-xl mx-auto px-5 relative z-20">
         {/* Featured Quiz Spotlight */}
-        {!initialLoading && quizzes.length > 0 && (
+        {initialLoading ? (
+          <FeaturedQuizSkeleton />
+        ) : quizzes.length > 0 && (
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
