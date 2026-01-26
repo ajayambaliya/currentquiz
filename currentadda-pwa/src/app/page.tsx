@@ -183,7 +183,7 @@ export default function HomePage() {
               <div className="w-full h-full bg-white rounded-[0.875rem] flex items-center justify-center">
                 <Image
                   src="/newlogo.png"
-                  alt="Logo"
+                  alt="CurrentAdda - Daily Gujarati Current Affairs Quiz Logo"
                   width={36}
                   height={36}
                   className="object-contain mix-blend-multiply"
@@ -213,7 +213,7 @@ export default function HomePage() {
                 <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 p-0.5 shadow-lg shadow-indigo-100 group-hover:shadow-indigo-200 transition-all">
                   <div className="w-full h-full rounded-[0.875rem] bg-white flex items-center justify-center overflow-hidden">
                     {profile?.avatar_url ? (
-                      <img src={profile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
+                      <img src={profile.avatar_url} alt={`${profile.full_name}'s Profile Image`} className="w-full h-full object-cover" />
                     ) : (
                       <User className="w-5 h-5 text-indigo-600" />
                     )}
@@ -247,7 +247,7 @@ export default function HomePage() {
               <h2 className="text-2xl font-black text-slate-900 mb-1">
                 Welcome back, {profile?.full_name?.split(' ')[0] || 'Student'}! 👋
               </h2>
-              <p className="text-sm text-slate-500 font-medium">Let's continue your learning journey</p>
+              <p className="text-sm text-slate-500 font-medium">Let's continue your learning journey on CurrentAdda</p>
             </div>
 
             {/* Stats Grid */}
@@ -279,7 +279,7 @@ export default function HomePage() {
 
       {/* Guest Hero Section */}
       {!user && (
-        <section className="relative px-5 pt-10 pb-12 overflow-hidden">
+        <section className="relative px-5 pt-10 pb-12 overflow-hidden text-balance">
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-indigo-100 via-purple-50 to-transparent rounded-full blur-3xl opacity-40 -mr-48 -mt-48" />
 
           <motion.div
@@ -289,16 +289,16 @@ export default function HomePage() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 border border-indigo-100 rounded-full mb-6">
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-              <span className="text-[9px] font-black uppercase tracking-[0.15em] text-indigo-600">Daily Updated</span>
+              <span className="text-[9px] font-black uppercase tracking-[0.15em] text-indigo-600">Daily Updated Current Affairs</span>
             </div>
             <h2 className="text-4xl font-black tracking-tight leading-tight text-slate-900 mb-4">
               Master Your <br />
               <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Gujarat Exams
+                Gujarat Mock Exams
               </span>
             </h2>
             <p className="text-slate-600 font-medium text-sm max-w-md mx-auto leading-relaxed gujarati-text">
-              GPSC, GSSSB, તલાટી અને અન્ય તમામ સ્પર્ધાત્મક પરીક્ષાઓ માટે દૈનિક current affairs.
+              GPSC, GSSSB, તલાટી અને અન્ય તમામ ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓ માટે દૈનિક Current Affairs Quizzes.
             </p>
           </motion.div>
         </section>
@@ -531,6 +531,42 @@ export default function HomePage() {
             </>
           )}
         </div>
+
+        {/* SEO Content Section */}
+        <section className="mt-16 pb-8 border-t border-slate-100 pt-12">
+          <div className="bg-white/50 rounded-[2.5rem] p-8 border border-slate-100">
+            <h2 className="text-2xl font-black text-slate-900 mb-6 leading-tight">
+              Best <span className="text-indigo-600">Current Affairs Gujarati</span> for Exam Success
+            </h2>
+            <div className="space-y-4 text-slate-600 text-sm leading-relaxed gujarati-text font-medium">
+              <p>
+                તમે જો ગુજરાત સરકારની સ્પર્ધાત્મક પરીક્ષાઓ જેવી કે <strong>GPSC, GSSSB, Police Bharti, Talati</strong> વગેરેની તૈયારી કરી રહ્યા હોવ, તો
+                <strong> Current Affairs Gujarati (કરંટ અફેર્સ ગુજરાતી)</strong> તમારા માટે ખૂબ જ મહત્વનું છે.
+              </p>
+              <p>
+                CurrentAdda એપ પર અમે તમને દરરોજ ફ્રીમાં <strong>Daily Current Affairs Quiz</strong> પ્રદાન કરીએ છીએ. અહીં તમને
+                <strong> Gujarati Current Affairs 2026</strong> ની તમામ લેટેસ્ટ માહિતી અને પરીક્ષાલક્ષી મહત્વના પ્રશ્નો મળી રહેશે.
+              </p>
+              <ul className="grid grid-cols-1 gap-3 mt-4">
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                  <span>GPSC Class 1-2 કરંટ અફેર્સ</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                  <span>ગૌણ સેવા પસંદગી મંડળ (GSSSB) પરીક્ષા તૈયારી</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                  <span>પોલીસ કોન્સ્ટેબલ અને PSI માટે દૈનિક ક્વિઝ</span>
+                </li>
+              </ul>
+              <p className="mt-4">
+                તમારા જ્ઞાનની ચકાસણી કરવા માટે આજે જ અમારા વિષયવાર (Subject-wise) અને દૈનિક ક્વિઝમાં ભાગ લો અને તમારી પરીક્ષાની તૈયારીને મજબૂત બનાવો.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Motivational Footer */}
         <div className="py-16 text-center">

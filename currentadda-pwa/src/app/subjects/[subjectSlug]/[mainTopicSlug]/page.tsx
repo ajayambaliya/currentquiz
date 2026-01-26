@@ -63,6 +63,38 @@ export default function SubjectSubTopicsPage({ params }: { params: Promise<{ sub
                         <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Select Sub Topic</p>
                     </div>
                 </div>
+                {/* JSON-LD for Breadcrumbs */}
+                {topic && (
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@type": "BreadcrumbList",
+                                "itemListElement": [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Home",
+                                        "item": "https://currentadda.vercel.app"
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Subjects",
+                                        "item": "https://currentadda.vercel.app/subjects"
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "name": topic.name,
+                                        "item": `https://currentadda.vercel.app/subjects/${subjectSlug}/${mainTopicSlug}`
+                                    }
+                                ]
+                            })
+                        }}
+                    />
+                )}
             </header>
 
             <div className="max-w-xl mx-auto px-5 pt-8">

@@ -46,6 +46,23 @@ export default function SubjectsPage() {
                         <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Master every topic</p>
                     </div>
                 </div>
+                {!loading && subjects.length > 0 && (
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@type": "ItemList",
+                                "itemListElement": subjects.map((subject, index) => ({
+                                    "@type": "ListItem",
+                                    "position": index + 1,
+                                    "name": subject.name,
+                                    "url": `https://currentadda.vercel.app/subjects/${subject.slug}`
+                                }))
+                            })
+                        }}
+                    />
+                )}
             </header>
 
             <div className="max-w-xl mx-auto px-5 pt-8">

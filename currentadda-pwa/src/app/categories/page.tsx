@@ -112,6 +112,21 @@ export default function CategoriesPage() {
                         </div>
                     </div>
                 </div>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "ItemList",
+                            "itemListElement": categories.map((cat, index) => ({
+                                "@type": "ListItem",
+                                "position": index + 1,
+                                "name": cat.name,
+                                "url": `https://currentadda.vercel.app/categories/${encodeURIComponent(cat.name)}`
+                            }))
+                        })
+                    }}
+                />
             </header>
 
             <div className="max-w-xl mx-auto px-6 pt-8 space-y-8">
