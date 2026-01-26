@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   authors: [{ name: "CurrentAdda Team" }],
   creator: "CurrentAdda",
   publisher: "CurrentAdda",
+  verification: {
+    google: "kHbcgTTMqlyXfzurhxfvgm7Zw8ozz40__nRJlegsiBc",
+  },
   formatDetection: {
     email: false,
     address: false,
