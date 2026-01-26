@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+'use client';
+
+import { m } from 'framer-motion';
 
 export function FeaturedQuizSkeleton() {
     return (
@@ -51,14 +53,14 @@ export function QuizListSkeleton({ count = 5 }: { count?: number }) {
                 <div className="h-2 bg-slate-200 rounded w-32" />
             </div>
             {Array.from({ length: count }).map((_, i) => (
-                <motion.div
+                <m.div
                     key={i}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
                 >
                     <QuizCardSkeleton />
-                </motion.div>
+                </m.div>
             ))}
         </div>
     );
@@ -68,7 +70,7 @@ export function LeaderboardSkeleton({ count = 10 }: { count?: number }) {
     return (
         <div className="space-y-1">
             {Array.from({ length: count }).map((_, i) => (
-                <motion.div
+                <m.div
                     key={i}
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -86,7 +88,7 @@ export function LeaderboardSkeleton({ count = 10 }: { count?: number }) {
                         <div className="h-4 bg-slate-200 rounded w-12 ml-auto" />
                         <div className="h-2 bg-slate-100 rounded w-16" />
                     </div>
-                </motion.div>
+                </m.div>
             ))}
         </div>
     );
