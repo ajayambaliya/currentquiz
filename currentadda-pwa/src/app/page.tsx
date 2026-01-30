@@ -1,5 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 import HomeClient from '@/components/HomeClient';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 // Server-side fetch needs a standard client or we can use the one from lib (it's safe)
 // We create a fresh client here to be explicit about server-side usage, 

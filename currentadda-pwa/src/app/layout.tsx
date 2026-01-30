@@ -43,7 +43,9 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://currentadda.vercel.app'),
   alternates: {
-    canonical: '/',
+    languages: {
+      'gu-IN': '/',
+    },
   },
   manifest: "/manifest.json",
   icons: {

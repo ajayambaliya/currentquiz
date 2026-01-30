@@ -18,6 +18,14 @@ export async function generateMetadata({ params }: { params: Promise<{ subjectSl
     return {
         title,
         description,
+        alternates: {
+            canonical: `/subjects/${(await params).subjectSlug}/${mainTopicSlug}`,
+        },
+        openGraph: {
+            title,
+            description,
+            url: `https://currentadda.vercel.app/subjects/${(await params).subjectSlug}/${mainTopicSlug}`,
+        }
     };
 }
 
