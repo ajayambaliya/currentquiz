@@ -7,10 +7,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://currentadda.vercel.app'
     const urls = new Set<string>();
 
+    // Static routes
+    const routes = ['', '/subjects', '/leaderboard', '/categories'].map((route) => ({
+        url: `${baseUrl}${route}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 1.0,
+    }))
+
     // 1. Fetch all regular quizzes
     const { data: quizzes } = await supabase
         .from('quizzes')
-        .select('slug, created_at, category')
+        .select('*')
+        .order('created_at', { ascending: false });
 
     const quizEntries = (quizzes || []).map((q) => {
         const url = `${baseUrl}/quiz/${q.slug}`;
@@ -26,7 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 2. Fetch all subject quizzes
     const { data: subjectQuizzes } = await supabase
         .from('subject_quizzes')
-        .select('slug, created_at')
+        .select('*')
+        .order('created_at', { ascending: false });
 
     const subjectQuizEntries: MetadataRoute.Sitemap = [];
     (subjectQuizzes || []).forEach((q) => {
@@ -42,7 +52,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
     })
 
-    // 3. Fetch all subjects
+    // 3. Handle Unique Categories and their Page Sets (1-5 sets each)
+    const uniqueCategories = Array.from(new Set((quizzes || []).map(q => q.category).filter(Boolean)));
+    const categoryEntries: MetadataRoute.Sitemap = [];
+
+    uniqueCategories.forEach(cat => {
+        const encodedCat = encodeURIComponent(cat as string);
+        categoryEntries.push({
+            url: `${baseUrl}/categories/${encodedCat}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: 0.7,
+        });
+
+        for (let i = 1; i <= 5; i++) {
+            categoryEntries.push({
+                url: `${baseUrl}/categories/${encodedCat}/quiz/${i}`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly' as const,
+                priority: 0.6,
+            });
+        }
+    })
+
+    // 4. Fetch all subjects
     const { data: subjects } = await supabase
         .from('subjects')
         .select('slug, created_at')
@@ -54,70 +87,45 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
     }))
 
-    // 4. Fetch all main topics and their sub-topics
+    // 5. Fetch all main topics
     const { data: mainTopics } = await supabase
         .from('main_topics')
         .select('slug, subjects(slug), created_at')
 
-    const mainTopicEntries = (mainTopics || []).map((mt: any) => ({
-        url: `${baseUrl}/subjects/${mt.subjects.slug}/${mt.slug}`,
-        lastModified: new Date(mt.created_at || new Date()),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-    }))
+    const mainTopicEntries = (mainTopics || []).map((mt: any) => {
+        if (!mt.subjects?.slug) return null;
+        return {
+            url: `${baseUrl}/subjects/${mt.subjects.slug}/${mt.slug}`,
+            lastModified: new Date(mt.created_at || new Date()),
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+        };
+    }).filter(Boolean) as any[];
 
-    // 5. Fetch all sub-topics (The Deep Links)
+    // 6. Fetch all sub-topics
     const { data: subTopics } = await supabase
         .from('sub_topics')
         .select('slug, main_topics(slug, subjects(slug)), created_at')
 
-    const subTopicEntries = (subTopics || []).map((st: any) => ({
-        url: `${baseUrl}/subjects/${st.main_topics.subjects.slug}/${st.main_topics.slug}/${st.slug}`,
-        lastModified: new Date(st.created_at || new Date()),
-        changeFrequency: 'weekly' as const,
-        priority: 0.5,
-    }))
-
-    // 6. Handle Unique Categories and their Page Sets (1-5 sets each)
-    const uniqueCategories = Array.from(new Set((quizzes || []).map(q => q.category).filter(Boolean)));
-    const categoryEntries: MetadataRoute.Sitemap = [];
-
-    uniqueCategories.forEach(cat => {
-        const encodedCat = encodeURIComponent(cat as string);
-        // Category main page
-        categoryEntries.push({
-            url: `${baseUrl}/categories/${encodedCat}`,
-            lastModified: new Date(),
+    const subTopicEntries = (subTopics || []).map((st: any) => {
+        const sSlug = st.main_topics?.subjects?.slug;
+        const mSlug = st.main_topics?.slug;
+        if (!sSlug || !mSlug) return null;
+        return {
+            url: `${baseUrl}/subjects/${sSlug}/${mSlug}/${st.slug}`,
+            lastModified: new Date(st.created_at || new Date()),
             changeFrequency: 'weekly' as const,
-            priority: 0.7,
-        });
-
-        // Set pages (Adding 5 sets per category as safe baseline)
-        for (let i = 1; i <= 5; i++) {
-            categoryEntries.push({
-                url: `${baseUrl}/categories/${encodedCat}/quiz/${i}`,
-                lastModified: new Date(),
-                changeFrequency: 'weekly' as const,
-                priority: 0.6,
-            });
-        }
-    })
-
-    // Static routes
-    const routes = ['', '/subjects', '/leaderboard', '/categories'].map((route) => ({
-        url: `${baseUrl}${route}`,
-        lastModified: new Date(),
-        changeFrequency: 'daily' as const,
-        priority: 1.0,
-    }))
+            priority: 0.5,
+        };
+    }).filter(Boolean) as any[];
 
     return [
         ...routes,
+        ...quizEntries,
+        ...subjectQuizEntries,
+        ...categoryEntries,
         ...subjectEntries,
         ...mainTopicEntries,
         ...subTopicEntries,
-        ...categoryEntries,
-        ...quizEntries,
-        ...subjectQuizEntries,
     ]
 }
