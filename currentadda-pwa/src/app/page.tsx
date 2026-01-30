@@ -37,5 +37,51 @@ export default async function HomePage() {
     // Silent fail, client will attempt to fetch or show empty state
   }
 
-  return <HomeClient initialQuizzes={initialQuizzes} />;
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "CurrentAdda",
+    "url": "https://currentadda.vercel.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://currentadda.vercel.app/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const navigationSchema = {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "hasPart": [
+      {
+        "@type": "WebPage",
+        "name": "Subject Quizzes",
+        "url": "https://currentadda.vercel.app/subjects"
+      },
+      {
+        "@type": "WebPage",
+        "name": "Categories",
+        "url": "https://currentadda.vercel.app/categories"
+      },
+      {
+        "@type": "WebPage",
+        "name": "Leaderboard",
+        "url": "https://currentadda.vercel.app/leaderboard"
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(navigationSchema) }}
+      />
+      <HomeClient initialQuizzes={initialQuizzes} />
+    </>
+  );
 }

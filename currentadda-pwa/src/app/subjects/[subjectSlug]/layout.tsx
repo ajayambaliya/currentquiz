@@ -29,10 +29,52 @@ export async function generateMetadata({ params }: { params: Promise<{ subjectSl
     };
 }
 
-export default function SubjectLayout({
+export default async function SubjectLayout({
     children,
+    params,
 }: {
     children: React.ReactNode;
+    params: Promise<{ subjectSlug: string }>;
 }) {
-    return <>{children}</>;
+    const { subjectSlug } = await params;
+    const { data: subject } = await supabase
+        .from('subjects')
+        .select('name')
+        .eq('slug', subjectSlug)
+        .single();
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://currentadda.vercel.app/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Subjects",
+                "item": "https://currentadda.vercel.app/subjects"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": subject?.name || "Subject",
+                "item": `https://currentadda.vercel.app/subjects/${subjectSlug}`
+            }
+        ]
+    };
+
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            {children}
+        </>
+    );
 }
