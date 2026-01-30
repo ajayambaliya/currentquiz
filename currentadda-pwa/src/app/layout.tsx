@@ -115,6 +115,7 @@ export default function RootLayout({
             <a href="/subjects">Subject-wise Quizzes</a>
             <a href="/categories">Category-wise Quizzes</a>
             <a href="/leaderboard">Real-time Leaderboard</a>
+            <a href="/author">Content Expert Profile</a>
           </nav>
         </div>
         {children}

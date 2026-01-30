@@ -86,3 +86,29 @@ export function generateSeoContent(data: SeoDataInput) {
         gujaratiDateText
     };
 }
+
+export function generateAuthorSchema() {
+    return {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ajay Ambaliya",
+        "url": "https://currentadda.vercel.app/author",
+        "jobTitle": "Educational Content Expert",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "CurrentAdda"
+        },
+        "sameAs": [
+            "https://www.youtube.com/@ajayambaliya", // Example social links
+            "https://twitter.com/ajayambaliya"
+        ],
+        "description": "Ajay Ambaliya is a seasoned educator and content creator specialized in Gujarat government competitive exams preparation (GPSC, GSSSB)."
+    };
+}
+
+export const EXAM_CLUSTERS = [
+    { name: 'GPSC Preparation', tags: ['GPSC', 'Ancient History', 'Polity'] },
+    { name: 'GSSSB Bin Sachivalay', tags: ['Computer', 'English Grammar', 'Gujarati Grammar'] },
+    { name: 'Police Bharti', tags: ['Law', 'Constitution', 'General Science'] },
+    { name: 'Daily Current Affairs', tags: ['Daily', 'International', 'Sports'] }
+];
