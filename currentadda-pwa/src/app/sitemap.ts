@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 1. Fetch all regular quizzes
     const { data: quizzes } = await supabase
         .from('quizzes')
-        .select('slug, created_at')
+        .select('slug, created_at, category')
 
     const quizEntries = (quizzes || []).map((q) => {
         const url = `${baseUrl}/quiz/${q.slug}`;
@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         };
     })
 
-    // 2. Fetch all subject quizzes (only add if slug is unique)
+    // 2. Fetch all subject quizzes
     const { data: subjectQuizzes } = await supabase
         .from('subject_quizzes')
         .select('slug, created_at')
@@ -54,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
     }))
 
-    // 4. Fetch all main topics
+    // 4. Fetch all main topics and their sub-topics
     const { data: mainTopics } = await supabase
         .from('main_topics')
         .select('slug, subjects(slug), created_at')
@@ -65,6 +65,43 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'weekly' as const,
         priority: 0.6,
     }))
+
+    // 5. Fetch all sub-topics (The Deep Links)
+    const { data: subTopics } = await supabase
+        .from('sub_topics')
+        .select('slug, main_topics(slug, subjects(slug)), created_at')
+
+    const subTopicEntries = (subTopics || []).map((st: any) => ({
+        url: `${baseUrl}/subjects/${st.main_topics.subjects.slug}/${st.main_topics.slug}/${st.slug}`,
+        lastModified: new Date(st.created_at || new Date()),
+        changeFrequency: 'weekly' as const,
+        priority: 0.5,
+    }))
+
+    // 6. Handle Unique Categories and their Page Sets (1-5 sets each)
+    const uniqueCategories = Array.from(new Set((quizzes || []).map(q => q.category).filter(Boolean)));
+    const categoryEntries: MetadataRoute.Sitemap = [];
+
+    uniqueCategories.forEach(cat => {
+        const encodedCat = encodeURIComponent(cat as string);
+        // Category main page
+        categoryEntries.push({
+            url: `${baseUrl}/categories/${encodedCat}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: 0.7,
+        });
+
+        // Set pages (Adding 5 sets per category as safe baseline)
+        for (let i = 1; i <= 5; i++) {
+            categoryEntries.push({
+                url: `${baseUrl}/categories/${encodedCat}/quiz/${i}`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly' as const,
+                priority: 0.6,
+            });
+        }
+    })
 
     // Static routes
     const routes = ['', '/subjects', '/leaderboard', '/categories'].map((route) => ({
@@ -78,6 +115,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...routes,
         ...subjectEntries,
         ...mainTopicEntries,
+        ...subTopicEntries,
+        ...categoryEntries,
         ...quizEntries,
         ...subjectQuizEntries,
     ]
