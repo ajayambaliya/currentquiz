@@ -452,11 +452,17 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                         <QuizListSkeleton count={6} />
                     ) : (
                         <>
-                            <div className="flex items-center gap-2 px-2 mb-4">
-                                <BookOpen className="w-4 h-4 text-slate-400" />
-                                <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-[0.25em]">
-                                    {quizzes.length} Quizzes Available
-                                </h4>
+                            <div className="flex items-center justify-between px-2 mb-4">
+                                <div className="flex items-center gap-2">
+                                    <BookOpen className="w-4 h-4 text-slate-400" />
+                                    <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-[0.25em]">
+                                        {quizzes.length} Quizzes Available
+                                    </h4>
+                                </div>
+                                <Link href="/archive" className="text-[9px] font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
+                                    Browse Archive
+                                    <ChevronRight className="w-3 h-3" />
+                                </Link>
                             </div>
 
                             {quizzes.length === 0 && !loading && (

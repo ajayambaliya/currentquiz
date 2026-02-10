@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: '/',
+    canonical: 'https://currentadda.vercel.app',
   },
 };
 

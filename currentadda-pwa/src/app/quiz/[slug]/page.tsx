@@ -91,7 +91,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         description: seo.description,
         keywords: seo.keywords,
         alternates: {
-            canonical: `/quiz/${slug}`,
+            canonical: `https://currentadda.vercel.app/quiz/${slug}`,
         },
         openGraph: {
             title: `${data.quiz.title} - Solutions & Explanations`,

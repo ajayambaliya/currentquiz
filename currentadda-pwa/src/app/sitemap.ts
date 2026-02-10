@@ -119,6 +119,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         };
     }).filter(Boolean) as any[];
 
+    // 7. Add Archive routes
+    const archiveRoutes: MetadataRoute.Sitemap = [{
+        url: `${baseUrl}/archive`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 0.7,
+    }];
+
+    // Get all unique year-month combos from quizzes for archive sitemap
+    const yearMonths = Array.from(new Set((quizzes || []).map(q => {
+        const d = new Date(q.quiz_date);
+        return `${d.getFullYear()}/${(d.getMonth() + 1).toString().padStart(2, '0')}`;
+    })));
+
+    yearMonths.forEach(ym => {
+        archiveRoutes.push({
+            url: `${baseUrl}/archive/${ym}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.6,
+        });
+    });
+
     return [
         ...routes,
         ...quizEntries,
@@ -127,5 +150,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...subjectEntries,
         ...mainTopicEntries,
         ...subTopicEntries,
+        ...archiveRoutes,
     ]
 }
