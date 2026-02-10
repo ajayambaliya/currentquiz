@@ -48,6 +48,7 @@ jobs:
         run: |
           cd automation
           npx playwright install chromium
+          playwright install chromium
 
       - name: Run Scraper and Sync
         env:
