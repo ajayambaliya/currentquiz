@@ -10,6 +10,7 @@ from datetime import datetime
 from typing import List, Dict
 import pytz
 import base64
+import subprocess
 
 from .parser import QuizQuestion
 from .translator import TranslatedQuizData
@@ -432,7 +433,6 @@ class PDFGenerator:
             
             logger.info("Generating PDF with Playwright...")
             
-            import subprocess
             result = subprocess.run(
                 ["node", "generate_pdf.js", html_path, pdf_path],
                 capture_output=True,
@@ -447,6 +447,13 @@ class PDFGenerator:
             
             return pdf_path
             
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Error generating PDF (Exit Code {e.returncode})")
+            if e.stdout:
+                logger.error(f"Node STDOUT: {e.stdout}")
+            if e.stderr:
+                logger.error(f"Node STDERR: {e.stderr}")
+            raise
         except Exception as e:
             logger.error(f"Error generating PDF: {e}")
             raise

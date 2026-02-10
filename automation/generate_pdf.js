@@ -12,11 +12,18 @@ async function generatePDF() {
 
     console.log(`Generating PDF from ${htmlPath} to ${pdfPath}...`);
 
-    const browser = await playwright.chromium.launch({
-        headless: true
-    });
-
+    let browser;
     try {
+        browser = await playwright.chromium.launch({
+            headless: true,
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--font-render-hinting=none',
+            ]
+        });
+
         const page = await browser.newPage();
 
         // Convert relative path to absolute file URL
@@ -25,14 +32,15 @@ async function generatePDF() {
 
         console.log(`Loading URL: ${htmlUrl}`);
 
-        // Wait for network to be idle to ensure fonts/images are loaded
+        // Wait for page load
+        // 'load' is more reliable than 'networkidle' which can hang on CDNs/Fonts
         await page.goto(htmlUrl, {
-            waitUntil: 'networkidle',
+            waitUntil: 'load',
             timeout: 60000
         });
 
-        // Final wait for any late renders
-        await page.waitForTimeout(2000);
+        // Additional wait for fonts and Tailwind to settle
+        await page.waitForTimeout(3000);
 
         console.log('Rendering PDF...');
         await page.pdf({
@@ -44,19 +52,23 @@ async function generatePDF() {
                 right: '0px',
                 bottom: '0px',
                 left: '0px'
-            }
+            },
+            displayHeaderFooter: false,
+            preferCSSPageSize: true
         });
 
         console.log(`✓ PDF generated successfully: ${pdfPath}`);
     } catch (error) {
-        console.error(`✗ PDF Generation failed: ${error.message}`);
+        console.error(`✗ PDF Generation failed: ${error.stack || error.message}`);
         process.exit(1);
     } finally {
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
     }
 }
 
 generatePDF().catch(err => {
-    console.error(`✗ Fatal error: ${err.message}`);
+    console.error(`✗ Fatal error: ${err.stack || err.message}`);
     process.exit(1);
 });
