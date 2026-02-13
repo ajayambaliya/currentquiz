@@ -126,15 +126,12 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
         }
     };
 
-    // Removed automatic redirect to allow SEO indexing of quiz content
-    // Redirect only on protected actions (submitting score)
-    /*
+    // Enforce login redirect for all users
     useEffect(() => {
         if (!authLoading && !user) {
             router.push('/auth/login');
         }
     }, [user, authLoading, router]);
-    */
 
     // Confetti celebration on correct answer
     const celebrateCorrectAnswer = () => {
@@ -225,12 +222,6 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
         if (currentIdx < totalQuestions - 1) {
             setCurrentIdx(currentIdx + 1);
         } else if (!isSubmitted) {
-            // Handle guest submission
-            if (!user) {
-                router.push('/auth/login?redirect=' + encodeURIComponent(window.location.pathname));
-                return;
-            }
-
             setIsSubmitted(true);
             const streakInfo = await saveScore();
             setStreakData(streakInfo);
@@ -352,8 +343,7 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
         );
     }
 
-    // Removed to allow guest viewing for SEO
-    // if (!user) return null;
+    if (!user) return null;
 
     // Enhanced Results Screen
     if (showResults) {

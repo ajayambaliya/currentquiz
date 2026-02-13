@@ -7,9 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LogIn, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import LoginMigrationBanner from '@/components/LoginMigrationBanner';
 import LoginErrorMessage from '@/components/LoginErrorMessage';
-import { migrationState } from '@/lib/migrationState';
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -32,8 +31,6 @@ export default function LoginPage() {
             setError(error.message);
             setLoading(false);
         } else {
-            // Mark migration as acknowledged on successful login
-            migrationState.acknowledge();
             router.push('/');
             router.refresh();
         }
@@ -63,7 +60,7 @@ export default function LoginPage() {
                         </div>
                     </div>
 
-                    <LoginMigrationBanner />
+
 
                     {error && (
                         <LoginErrorMessage error={error} />
