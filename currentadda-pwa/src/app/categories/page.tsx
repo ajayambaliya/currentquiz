@@ -46,39 +46,55 @@ export default function CategoriesPage() {
     const [loadingCounts, setLoadingCounts] = useState(true);
 
     useEffect(() => {
-        fetchCategoryDistribution();
+        let isMounted = true;
+        fetchCategoryDistribution(isMounted);
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
-    async function fetchCategoryDistribution() {
+    async function fetchCategoryDistribution(isMounted: boolean) {
         try {
-            setLoadingCounts(true);
+            if (isMounted) setLoadingCounts(true);
 
-            // Perform parallel HEAD queries for each category to get exact counts
-            // This bypasses the 1000-row limit of .select() and is very accurate
-            const countPromises = categories.map(async (cat) => {
-                const { count, error } = await supabase
-                    .from('questions')
-                    .select('*', { count: 'exact', head: true })
-                    .eq('category', cat.name);
+            // Fetch in chunks to avoid overwhelming the browser's connection limit (usually 6)
+            // which causes requests to be stuck in 'pending' or 'loading loading' states.
+            const chunkSize = 4;
+            const results: { name: string, count: number }[] = [];
+            
+            for (let i = 0; i < categories.length; i += chunkSize) {
+                if (!isMounted) break;
+                
+                const chunk = categories.slice(i, i + chunkSize);
+                const countPromises = chunk.map(async (cat) => {
+                    const { count, error } = await supabase
+                        .from('questions')
+                        .select('*', { count: 'exact', head: true })
+                        .eq('category', cat.name);
 
-                if (error) {
-                    console.error(`Error counting ${cat.name}:`, error);
-                    return { name: cat.name, count: 0 };
+                    if (error) {
+                        console.error(`Error counting ${cat.name}:`, error);
+                        return { name: cat.name, count: 0 };
+                    }
+                    return { name: cat.name, count: count || 0 };
+                });
+
+                const chunkResults = await Promise.all(countPromises);
+                results.push(...chunkResults);
+                
+                // Progressively update the state so some counts appear immediately
+                if (isMounted) {
+                    const partialDistribution = results.reduce((acc: any, curr: any) => {
+                        acc[curr.name] = curr.count;
+                        return acc;
+                    }, {});
+                    setCounts(prev => ({...prev, ...partialDistribution}));
                 }
-                return { name: cat.name, count: count || 0 };
-            });
-
-            const results = await Promise.all(countPromises);
-            const distribution = results.reduce((acc: any, curr: any) => {
-                acc[curr.name] = curr.count;
-                return acc;
-            }, {});
-
-            setCounts(distribution);
+            }
         } catch (err) {
             console.error('Error fetching categories distribution:', err);
         } finally {
-            setLoadingCounts(false);
+            if (isMounted) setLoadingCounts(false);
         }
     }
 
@@ -209,7 +225,7 @@ export default function CategoriesPage() {
                                             <div className="space-y-0.5">
                                                 <span className="font-black text-slate-800 tracking-tight">{cat.name}</span>
                                                 <div className="flex items-center gap-2">
-                                                    {loadingCounts ? (
+                                                    {typeof counts[cat.name] !== 'number' ? (
                                                         <div className="w-12 h-2 bg-slate-50 rounded-full animate-pulse" />
                                                     ) : (
                                                         <span className={`text-[10px] font-bold uppercase tracking-widest ${counts[cat.name] > 0 ? 'text-indigo-400' : 'text-slate-200'}`}>

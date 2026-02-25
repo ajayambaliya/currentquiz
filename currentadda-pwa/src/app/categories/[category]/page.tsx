@@ -17,14 +17,22 @@ export default function CategorySetsPage() {
     const category = decodeURIComponent(params.category as string);
     const [totalQuestions, setTotalQuestions] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchCount();
+        let isMounted = true;
+        fetchCount(isMounted);
+        return () => {
+            isMounted = false;
+        };
     }, [category]);
 
-    async function fetchCount() {
+    async function fetchCount(isMounted: boolean) {
         try {
-            setLoading(true);
+            if (isMounted) {
+                setLoading(true);
+                setErrorMsg(null);
+            }
             const eightMonthsAgo = subMonths(new Date(), 8).toISOString();
 
             const { count, error } = await supabase
@@ -34,11 +42,12 @@ export default function CategorySetsPage() {
                 .gte('created_at', eightMonthsAgo);
 
             if (error) throw error;
-            setTotalQuestions(count || 0);
-        } catch (err) {
+            if (isMounted) setTotalQuestions(count || 0);
+        } catch (err: any) {
             console.error(err);
+            if (isMounted) setErrorMsg(err.message || 'Failed to fetch the category data. Please try again.');
         } finally {
-            setLoading(false);
+            if (isMounted) setLoading(false);
         }
     }
 
@@ -91,7 +100,27 @@ export default function CategorySetsPage() {
             </header>
 
             <div className="max-w-xl mx-auto px-6 pt-8">
-                {numSets === 0 ? (
+                {errorMsg ? (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-white py-20 rounded-[3rem] border border-red-50 text-center space-y-6 shadow-xl shadow-red-100/50 mt-10 relative overflow-hidden"
+                    >
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-300 to-transparent" />
+                        <div className="bg-red-50 w-20 h-20 rounded-[2rem] flex items-center justify-center mx-auto transition-transform hover:rotate-12">
+                            <svg className="w-10 h-10 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <div className="space-y-2">
+                            <p className="text-red-400 font-black text-sm uppercase tracking-widest">Connection Error</p>
+                            <p className="text-slate-500 font-bold gujarati-text px-10">નેટવર્ક સમસ્યાના કારણે ડેટા લોડ થઈ શક્યો નથી. કૃપા કરીને ફરી પ્રયાસ કરો.</p>
+                        </div>
+                        <button onClick={() => fetchCount(true)} className="inline-flex items-center gap-2 text-white font-black text-[10px] uppercase tracking-widest bg-red-500 px-6 py-3 rounded-2xl hover:bg-red-600 transition-all shadow-lg shadow-red-500/30">
+                            Retry / ફરી પ્રયાસ કરો
+                        </button>
+                    </motion.div>
+                ) : numSets === 0 ? (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}

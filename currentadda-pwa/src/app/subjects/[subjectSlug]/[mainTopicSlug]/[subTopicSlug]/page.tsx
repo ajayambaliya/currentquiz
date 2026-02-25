@@ -14,35 +14,72 @@ export default function SubjectQuizzesPage({ params }: { params: Promise<{ subje
     const [subTopic, setSubTopic] = useState<any>(null);
     const [quizzes, setQuizzes] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchData();
+        let isMounted = true;
+        fetchData(isMounted);
+        return () => {
+            isMounted = false;
+        };
     }, [subTopicSlug]);
 
-    const fetchData = async () => {
-        setLoading(true);
-        const { data: subData } = await supabase
-            .from('sub_topics')
-            .select('*')
-            .eq('slug', subTopicSlug)
-            .single();
-
-        if (subData) {
-            setSubTopic(subData);
-            const { data: quizData } = await supabase
-                .from('subject_quizzes')
+    const fetchData = async (isMounted: boolean) => {
+        try {
+            if (isMounted) {
+                setLoading(true);
+                setErrorMsg(null);
+            }
+            const { data: subData } = await supabase
+                .from('sub_topics')
                 .select('*')
-                .eq('sub_topic_id', subData.id)
-                .order('created_at', { ascending: false });
-            if (quizData) setQuizzes(quizData);
+                .eq('slug', subTopicSlug)
+                .single();
+
+            if (subData && isMounted) {
+                setSubTopic(subData);
+                const { data: quizData, error: quizError } = await supabase
+                    .from('subject_quizzes')
+                    .select('*')
+                    .eq('sub_topic_id', subData.id)
+                    .order('created_at', { ascending: false });
+                if (quizError) throw quizError;
+                if (quizData && isMounted) setQuizzes(quizData);
+            }
+        } catch (error: any) {
+            console.error('Error fetching subject quizzes:', error);
+            if (isMounted) setErrorMsg(error.message || 'Failed to load quizzes.');
+        } finally {
+            if (isMounted) setLoading(false);
         }
-        setLoading(false);
     };
 
     if (loading) return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center">
             <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mb-4" />
             <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest">Loading Sets...</p>
+        </div>
+    );
+
+    if (errorMsg) return (
+        <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-10 text-center">
+            <div className="bg-red-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-red-100">
+                <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h1 className="text-xl font-black text-slate-900 mb-2">Connection Error</h1>
+            <p className="text-slate-500 font-bold text-sm mb-6 max-w-sm">
+                નેટવર્ક સમસ્યાના કારણે ડેટા લોડ થઈ શક્યો નથી.
+            </p>
+            <div className="flex items-center gap-4">
+                <button onClick={() => fetchData(true)} className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-indigo-700 transition">
+                    Retry
+                </button>
+                <Link href={`/subjects/${subjectSlug}/${mainTopicSlug}`} className="text-slate-500 font-bold text-sm hover:text-indigo-600 transition">
+                    Go Back
+                </Link>
+            </div>
         </div>
     );
 

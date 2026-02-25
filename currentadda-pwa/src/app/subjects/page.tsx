@@ -13,20 +13,35 @@ export default function SubjectsPage() {
     const [subjects, setSubjects] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchSubjects();
+        let isMounted = true;
+        fetchSubjects(isMounted);
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
-    const fetchSubjects = async () => {
-        setLoading(true);
-        const { data, error } = await supabase
-            .from('subjects')
-            .select('*')
-            .order('name');
+    const fetchSubjects = async (isMounted: boolean) => {
+        try {
+            if (isMounted) {
+                setLoading(true);
+                setErrorMsg(null);
+            }
+            const { data, error } = await supabase
+                .from('subjects')
+                .select('*')
+                .order('name');
 
-        if (data) setSubjects(data);
-        setLoading(false);
+            if (error) throw error;
+            if (isMounted && data) setSubjects(data);
+        } catch (error: any) {
+            console.error('Error fetching subjects:', error);
+            if (isMounted) setErrorMsg(error.message || 'Failed to load subjects.');
+        } finally {
+            if (isMounted) setLoading(false);
+        }
     };
 
     const filteredSubjects = subjects.filter(s =>
@@ -78,7 +93,26 @@ export default function SubjectsPage() {
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
                 </div>
 
-                {loading ? (
+                {errorMsg ? (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-white py-16 rounded-[2.5rem] border border-red-50 text-center space-y-5 shadow-xl shadow-red-100/50"
+                    >
+                        <div className="bg-red-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-transform hover:rotate-12">
+                            <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-red-400 font-black text-xs uppercase tracking-widest">Connection Error</p>
+                            <p className="text-slate-500 font-bold gujarati-text text-sm px-8">વિષયો લોડ થઈ શક્યા નથી.</p>
+                        </div>
+                        <button onClick={() => fetchSubjects(true)} className="inline-flex items-center gap-2 text-white font-black text-[9px] uppercase tracking-widest bg-red-500 px-5 py-2.5 rounded-xl hover:bg-red-600 transition-all shadow-md shadow-red-500/20">
+                            Retry
+                        </button>
+                    </motion.div>
+                ) : loading ? (
                     <div className="flex flex-col items-center justify-center py-20">
                         <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mb-4" />
                         <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest">Loading Subjects...</p>

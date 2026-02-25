@@ -15,29 +15,44 @@ export default function SubjectMainTopicsPage({ params }: { params: Promise<{ su
     const [topics, setTopics] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchSubjectAndTopics();
+        let isMounted = true;
+        fetchSubjectAndTopics(isMounted);
+        return () => {
+            isMounted = false;
+        };
     }, [subjectSlug]);
 
-    const fetchSubjectAndTopics = async () => {
-        setLoading(true);
-        const { data: subjectData } = await supabase
-            .from('subjects')
-            .select('*')
-            .eq('slug', subjectSlug)
-            .single();
-
-        if (subjectData) {
-            setSubject(subjectData);
-            const { data: topicsData } = await supabase
-                .from('main_topics')
+    const fetchSubjectAndTopics = async (isMounted: boolean) => {
+        try {
+            if (isMounted) {
+                setLoading(true);
+                setErrorMsg(null);
+            }
+            const { data: subjectData } = await supabase
+                .from('subjects')
                 .select('*')
-                .eq('subject_id', subjectData.id)
-                .order('name');
-            if (topicsData) setTopics(topicsData);
+                .eq('slug', subjectSlug)
+                .single();
+
+            if (subjectData && isMounted) {
+                setSubject(subjectData);
+                const { data: topicsData, error: topicsError } = await supabase
+                    .from('main_topics')
+                    .select('*')
+                    .eq('subject_id', subjectData.id)
+                    .order('name');
+                if (topicsError) throw topicsError;
+                if (topicsData && isMounted) setTopics(topicsData);
+            }
+        } catch (error: any) {
+            console.error('Error fetching subject details:', error);
+            if (isMounted) setErrorMsg(error.message || 'Failed to load subject topics.');
+        } finally {
+            if (isMounted) setLoading(false);
         }
-        setLoading(false);
     };
 
     const filteredTopics = topics.filter(t =>
@@ -48,6 +63,28 @@ export default function SubjectMainTopicsPage({ params }: { params: Promise<{ su
         <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center">
             <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mb-4" />
             <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest">Loading Topics...</p>
+        </div>
+    );
+
+    if (errorMsg) return (
+        <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-10 text-center">
+            <div className="bg-red-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-red-100">
+                <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h1 className="text-xl font-black text-slate-900 mb-2">Connection Error</h1>
+            <p className="text-slate-500 font-bold text-sm mb-6 max-w-sm">
+                નેટવર્ક સમસ્યાના કારણે ડેટા લોડ થઈ શક્યો નથી.
+            </p>
+            <div className="flex items-center gap-4">
+                <button onClick={() => fetchSubjectAndTopics(true)} className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-indigo-700 transition">
+                    Retry
+                </button>
+                <Link href="/subjects" className="text-slate-500 font-bold text-sm hover:text-indigo-600 transition">
+                    Back Home
+                </Link>
+            </div>
         </div>
     );
 

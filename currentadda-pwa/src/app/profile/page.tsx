@@ -23,6 +23,7 @@ export default function UserProfile() {
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     const { scrollYProgress } = useScroll({
         offset: ["start start", "end end"]
@@ -32,28 +33,37 @@ export default function UserProfile() {
     const headerBlur = useTransform(scrollYProgress, [0, 0.05], [0, 10]);
 
     useEffect(() => {
+        let isMounted = true;
         if (!authLoading && !user) {
             router.push('/auth/login');
         }
         if (user) {
-            fetchStats();
+            fetchStats(isMounted);
         }
+        return () => {
+            isMounted = false;
+        };
     }, [user, authLoading]);
 
-    async function fetchStats() {
+    async function fetchStats(isMounted: boolean) {
         try {
-            setLoading(true);
+            if (isMounted) {
+                setLoading(true);
+                setErrorMsg(null);
+            }
             const [scoresRes, profileRes] = await Promise.all([
                 supabase.from('scores').select('*').eq('user_id', user?.id),
                 supabase.from('profiles').select('*').eq('id', user?.id).single()
             ]);
 
-            if (scoresRes.data) setScores(scoresRes.data);
-            if (profileRes.data) setProfile(profileRes.data);
-        } catch (err) {
-            console.error(err);
+            if (scoresRes.data && isMounted) setScores(scoresRes.data);
+            if (profileRes.data && isMounted) setProfile(profileRes.data);
+            if (profileRes.error) throw profileRes.error;
+        } catch (err: any) {
+            console.error('Error fetching profile:', err);
+            if (isMounted) setErrorMsg(err.message || 'Failed to load profile.');
         } finally {
-            setLoading(false);
+            if (isMounted) setLoading(false);
         }
     }
 
@@ -173,6 +183,30 @@ export default function UserProfile() {
                         </div>
                     </div>
                     <p className="text-slate-500 font-black uppercase tracking-[0.3em] text-[10px] animate-pulse">Building your empire</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (errorMsg) {
+        return (
+            <div className="min-h-screen bg-[#05060a] flex items-center justify-center p-6 text-center">
+                <div className="bg-[#1a1f2e] border border-red-500/20 p-8 rounded-[3rem] space-y-6 max-w-sm w-full">
+                    <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto border border-red-500/20">
+                        <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 className="text-white font-black text-xl mb-2 tracking-tight">Profile Load Failed</h2>
+                        <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">{errorMsg}</p>
+                    </div>
+                    <button onClick={() => fetchStats(true)} className="w-full py-4 bg-red-500 hover:bg-red-600 rounded-2xl text-white font-black uppercase tracking-widest text-[10px] transition-all">
+                        Retry Connection
+                    </button>
+                    <button onClick={handleLogout} className="w-full py-3 bg-white/5 hover:bg-white/10 rounded-2xl text-slate-400 font-black uppercase tracking-widest text-[10px] transition-all">
+                        Log out
+                    </button>
                 </div>
             </div>
         );
