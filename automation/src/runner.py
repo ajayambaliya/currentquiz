@@ -26,6 +26,9 @@ from src.telegram_text_sender import TelegramTextSender
 from src.date_extractor import DateExtractor
 from src.supabase_manager import SupabaseManager
 from src.notification_sender import NotificationSender
+from src.image_generator import ImageGenerator
+from src.instagram_sender import InstagramSender
+import subprocess
 
 # Load environment variables
 from dotenv import load_dotenv
@@ -100,6 +103,8 @@ def process_quiz(
     parser: QuizParser,
     translator: Translator,
     pdf_generator: PDFGenerator,
+    image_generator: ImageGenerator,
+    instagram_sender: InstagramSender,
     telegram_sender: TelegramSender,
     telegram_text_sender: TelegramTextSender,
     supabase_manager: SupabaseManager,
@@ -116,6 +121,8 @@ def process_quiz(
         parser: QuizParser instance
         translator: Translator instance
         pdf_generator: PDFGenerator instance
+        image_generator: ImageGenerator instance
+        instagram_sender: InstagramSender instance
         telegram_sender: TelegramSender instance
         state_manager: StateManager instance
         date_extractor: DateExtractor instance
@@ -162,8 +169,25 @@ def process_quiz(
         translated_data = translator.translate_quiz(quiz_data)
         logger.info("Translation completed")
         
-        # Step 4: Generate PDFs (both modes)
-        logger.info("Step 4: Generating PDFs...")
+        # Step 4: Generate PDFs (both modes) & Images
+        logger.info("Step 4: Generating PDFs and Images...")
+        
+        # --- Image Generation ---
+        try:
+            logger.info("  → Generating Instagram Image HTML...")
+            images_html_path = image_generator.generate_html_file(translated_data)
+            logger.info(f"  ✓ Image HTML: {images_html_path}")
+            
+            logger.info("  → Slicing HTML into Retinal Quality 1080x1080 PNG Cards...")
+            images_output_dir = os.path.join(image_generator.output_dir, date_filename)
+            subprocess.run(
+                ['node', str(project_root / 'automation' / 'generate_images.js'), images_html_path, images_output_dir],
+                check=True
+            )
+            logger.info(f"  ✓ Images saved to: {images_output_dir}")
+        except Exception as img_err:
+            logger.error(f"  ❌ Error generating Images: {img_err}")
+            # Continuing since PDFs are more critical to the flow
         
         # Generate Study Mode PDF
         logger.info("  → Generating Study Mode PDF...")
@@ -275,8 +299,35 @@ def process_quiz(
             if notification_sender:
                 logger.info("Step 7.1: Sending push notification...")
                 notification_sender.send_quiz_notification(date_gujarati, quiz_slug)
+                
+            # Step 7.2: Send to Instagram
+            logger.info("Step 7.2: Posting question to Instagram...")
+            if instagram_sender and instagram_sender.is_configured():
+                try:
+                    images_output_dir = os.path.join(image_generator.output_dir, date_filename)
+                    # Use the first question as a teaser post
+                    if len(translated_data.questions) > 0:
+                        first_q = translated_data.questions[0]
+                        card1 = os.path.join(images_output_dir, f"q{first_q.question_number}_card1.png")
+                        card2 = os.path.join(images_output_dir, f"q{first_q.question_number}_card2.png")
+                        
+                        if os.path.exists(card1) and os.path.exists(card2):
+                            insta_caption = f"🎯 આજની કરંટ અફેર્સ ક્વિઝ ({date_gujarati})\n\n" \
+                                            f"પ્રશ્ન નો જવાબ આપવા માટે સ્વાઇપ કરો ➡️\n\n" \
+                                            f"આખી ક્વિઝ રમો અને લીડરબોર્ડ માં રેન્ક મેળવો:\n" \
+                                            f"👉 {live_link}\n\n" \
+                                            f"રોજ કરંટ અફેર્સ ક્વિઝ માટે ફોલો કરો @currentaddaa 🚀\n\n" \
+                                            f"#CurrentAdda #CurrentAffairs #GPSC #GSSSB #GPRB #Constable #PSI #GujaratPolice #Talati #Clerk #GovernmentJobs #Gujarat"
+                            
+                            logger.info("[Instagram] Posting Card 1 and Card 2 as a Carousel...")
+                            instagram_sender.post_carousel([card1, card2], insta_caption)
+                        else:
+                            logger.warning("[Instagram] Generated card images not found, skipping post.")
+                except Exception as e:
+                    logger.error(f"❌ Error posting to Instagram: {e}")
+                    
         else:
-            logger.warning("⚠️  Supabase sync failed, skipping Live Quiz link")
+            logger.warning("⚠️  Supabase sync failed, skipping Live Quiz link and Instagram post")
 
         # Step 8: Mark as processed
         logger.info(f"Step {'8' if telegram_text_sender else '7'}: Marking quiz as processed...")
@@ -331,6 +382,8 @@ def main():
         parser = QuizParser()
         translator = Translator()
         pdf_generator = PDFGenerator()
+        image_generator = ImageGenerator()
+        instagram_sender = InstagramSender()
         date_extractor = DateExtractor()
         supabase_manager = SupabaseManager()
         notification_sender = NotificationSender()
@@ -412,6 +465,8 @@ def main():
                 parser=parser,
                 translator=translator,
                 pdf_generator=pdf_generator,
+                image_generator=image_generator,
+                instagram_sender=instagram_sender,
                 telegram_sender=telegram_sender,
                 telegram_text_sender=telegram_text_sender,
                 supabase_manager=supabase_manager,
