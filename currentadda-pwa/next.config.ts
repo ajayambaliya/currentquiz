@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/supabase-proxy/:path*',
+        destination: 'https://zoamwugxvboxgjxqvntw.supabase.co/:path*',
+      },
+    ]
+  },
 };
 
 export default nextConfig;
