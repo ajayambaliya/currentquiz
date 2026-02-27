@@ -212,7 +212,7 @@ class LoginManager:
         try:
             # Try to access a protected page to verify session
             test_url = "https://pendulumedu.com/quiz/current-affairs"
-            response = session.get(test_url, timeout=10, allow_redirects=False)
+            response = session.get(test_url, timeout=60, allow_redirects=False)
             
             # If we're redirected to login, session is invalid
             if response.status_code == 302 and 'login' in response.headers.get('Location', '').lower():
@@ -277,7 +277,7 @@ class LoginManager:
             }
             
             # First, get the login page to establish session
-            login_page = self.session.get(self.login_url, timeout=30)
+            login_page = self.session.get(self.login_url, timeout=60)
             
             # Set headers to mimic browser request
             headers = {
@@ -293,7 +293,7 @@ class LoginManager:
                 self.login_url,
                 data=payload,
                 headers=headers,
-                timeout=30,
+                timeout=60,
                 allow_redirects=True
             )
             
