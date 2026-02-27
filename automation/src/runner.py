@@ -181,7 +181,7 @@ def process_quiz(
             logger.info("  → Slicing HTML into Retinal Quality 1080x1080 PNG Cards...")
             images_output_dir = os.path.join(image_generator.output_dir, date_filename)
             subprocess.run(
-                ['node', str(project_root / 'automation' / 'generate_images.js'), images_html_path, images_output_dir],
+                ['node', str(project_root / 'generate_images.js'), images_html_path, images_output_dir],
                 check=True
             )
             logger.info(f"  ✓ Images saved to: {images_output_dir}")
