@@ -300,31 +300,81 @@ def process_quiz(
                 logger.info("Step 7.1: Sending push notification...")
                 notification_sender.send_quiz_notification(date_gujarati, quiz_slug)
                 
-            # Step 7.2: Send to Instagram
-            logger.info("Step 7.2: Posting question to Instagram...")
+            # Step 7.2: Send to Instagram (2 carousel posts)
+            logger.info("Step 7.2: Posting questions to Instagram...")
             if instagram_sender and instagram_sender.is_configured():
                 try:
                     images_output_dir = os.path.join(image_generator.output_dir, date_filename)
-                    # Use the first question as a teaser post
-                    if len(translated_data.questions) > 0:
-                        first_q = translated_data.questions[0]
-                        card1 = os.path.join(images_output_dir, f"q{first_q.question_number}_card1.png")
-                        card2 = os.path.join(images_output_dir, f"q{first_q.question_number}_card2.png")
-                        
-                        if os.path.exists(card1) and os.path.exists(card2):
-                            insta_caption = f"🎯 આજની કરંટ અફેર્સ ક્વિઝ ({date_gujarati})\n\n" \
-                                            f"પ્રશ્ન નો જવાબ આપવા માટે સ્વાઇપ કરો ➡️\n\n" \
-                                            f"આખી ક્વિઝ રમો અને લીડરબોર્ડ માં રેન્ક મેળવો:\n" \
-                                            f"👉 {live_link}\n\n" \
-                                            f"રોજ કરંટ અફેર્સ ક્વિઝ માટે ફોલો કરો @currentaddaa 🚀\n\n" \
-                                            f"#CurrentAdda #CurrentAffairs #GPSC #GSSSB #GPRB #Constable #PSI #GujaratPolice #Talati #Clerk #GovernmentJobs #Gujarat"
-                            
-                            logger.info("[Instagram] Posting Card 1 and Card 2 as a Carousel...")
-                            instagram_sender.post_carousel([card1, card2], insta_caption)
+                    num_q = len(translated_data.questions)
+                    
+                    # ── POST 1: Question + Answer Carousel (up to 10 card1 images) ──
+                    qa_images = []
+                    for q in translated_data.questions[:10]:
+                        card_path = os.path.join(images_output_dir, f"q{q.question_number}_card1.png")
+                        if os.path.exists(card_path):
+                            qa_images.append(card_path)
+                    
+                    if qa_images:
+                        qa_caption = (
+                            f"🎯 આજની કરંટ અફેર્સ ક્વિઝ - {date_gujarati}\n"
+                            f"📝 {num_q} પ્રશ્નો અને જવાબ\n\n"
+                            f"👉 સ્વાઇપ કરો બધા {num_q} પ્રશ્નો જોવા માટે ➡️\n\n"
+                            f"🏆 ઓનલાઇન ક્વિઝ રમો અને લીડરબોર્ડમાં રેન્ક મેળવો:\n"
+                            f"🔗 {live_link}\n\n"
+                            f"💡 સમજૂતી માટે અમારી બીજી પોસ્ટ જુઓ!\n\n"
+                            f"📲 રોજ કરંટ અફેર્સ ક્વિઝ માટે ફોલો કરો @currentaddaa\n\n"
+                            f".\n.\n.\n"
+                            f"#CurrentAdda #CurrentAffairs #DailyQuiz #GPSC #GSSSB #GPRB "
+                            f"#Constable #PSI #GujaratPolice #Talati #Clerk #BinSachivalay "
+                            f"#GovernmentJobs #Gujarat #GK #GeneralKnowledge #SarkariNaukri "
+                            f"#StudyMaterial #CompetitiveExam #QuizTime"
+                        )
+                        logger.info(f"[Instagram] Posting Question+Answer Carousel ({len(qa_images)} images)...")
+                        qa_success = instagram_sender.post_carousel(qa_images, qa_caption)
+                        if qa_success:
+                            logger.info("✅ [Instagram] Question+Answer carousel posted!")
                         else:
-                            logger.warning("[Instagram] Generated card images not found, skipping post.")
+                            logger.error("❌ [Instagram] Failed to post Question+Answer carousel")
+                    else:
+                        logger.warning("[Instagram] No card1 images found, skipping QA post.")
+                    
+                    # Wait between posts to avoid rate limiting
+                    import time
+                    time.sleep(30)
+                    
+                    # ── POST 2: Explanation Carousel (up to 10 card2 images) ──
+                    explain_images = []
+                    for q in translated_data.questions[:10]:
+                        card_path = os.path.join(images_output_dir, f"q{q.question_number}_card2.png")
+                        if os.path.exists(card_path):
+                            explain_images.append(card_path)
+                    
+                    if explain_images:
+                        explain_caption = (
+                            f"📖 સમજૂતી - કરંટ અફેર્સ ક્વિઝ - {date_gujarati}\n"
+                            f"📝 {num_q} પ્રશ્નોની વિગતવાર સમજૂતી\n\n"
+                            f"👉 સ્વાઇપ કરો બધી સમજૂતીઓ વાંચવા ➡️\n\n"
+                            f"❓ પહેલા પ્રશ્નો જુઓ અમારી પહેલી પોસ્ટમાં!\n\n"
+                            f"🏆 ઓનલાઇન ક્વિઝ રમો:\n"
+                            f"🔗 {live_link}\n\n"
+                            f"📲 રોજ કરંટ અફેર્સ ક્વિઝ માટે ફોલો કરો @currentaddaa\n\n"
+                            f".\n.\n.\n"
+                            f"#CurrentAdda #CurrentAffairs #Explanation #GPSC #GSSSB #GPRB "
+                            f"#Constable #PSI #GujaratPolice #Talati #Clerk #BinSachivalay "
+                            f"#GovernmentJobs #Gujarat #GK #GeneralKnowledge #SarkariNaukri "
+                            f"#StudyMaterial #CompetitiveExam #QuizExplanation"
+                        )
+                        logger.info(f"[Instagram] Posting Explanation Carousel ({len(explain_images)} images)...")
+                        exp_success = instagram_sender.post_carousel(explain_images, explain_caption)
+                        if exp_success:
+                            logger.info("✅ [Instagram] Explanation carousel posted!")
+                        else:
+                            logger.error("❌ [Instagram] Failed to post Explanation carousel")
+                    else:
+                        logger.warning("[Instagram] No card2 images found, skipping Explanation post.")
+                        
                 except Exception as e:
-                    logger.error(f"❌ Error posting to Instagram: {e}")
+                    logger.error(f"❌ Error posting to Instagram: {e}", exc_info=True)
                     
         else:
             logger.warning("⚠️  Supabase sync failed, skipping Live Quiz link and Instagram post")

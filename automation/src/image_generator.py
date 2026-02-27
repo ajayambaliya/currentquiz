@@ -30,7 +30,6 @@ class ImageGenerator:
         """Load logo.png and convert to base64 data URI"""
         logo_path = Path("logo.png")
         if not logo_path.exists():
-            # Try finding it in parent directory if we're in src
             logo_path = Path("../logo.png")
             
         if logo_path.exists():
@@ -42,13 +41,361 @@ class ImageGenerator:
                 logger.error(f"Failed to load logo: {e}")
         return ""
 
+    def _get_css(self) -> str:
+        """Return the shared premium CSS for all cards"""
+        return """
+    * { font-family: 'Noto Serif Gujarati', serif; box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0f0f1a; margin: 0; padding: 50px; display: flex; flex-direction: column; gap: 50px; align-items: center; }
+    
+    .instagram-card {
+        width: 1080px;
+        height: 1080px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* ── Question + Answer Card Styling ── */
+    .card-qa {
+        background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 40%, #312e81 100%);
+        padding: 55px 60px;
+    }
+    
+    .card-qa .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 28px;
+        border-bottom: 2px solid rgba(255,255,255,0.08);
+        margin-bottom: 35px;
+    }
+    
+    .card-qa .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+    
+    .card-qa .logo-img {
+        height: 65px;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    
+    .card-qa .brand-name {
+        font-size: 42px;
+        font-weight: 900;
+        background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+    }
+    
+    .card-qa .q-number {
+        font-size: 22px;
+        font-weight: 700;
+        color: #818cf8;
+        background: rgba(129, 140, 248, 0.1);
+        padding: 10px 24px;
+        border-radius: 50px;
+        border: 1px solid rgba(129, 140, 248, 0.2);
+    }
+    
+    .card-qa .content-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card-qa .question-box {
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(10px);
+        padding: 35px 40px;
+        border-radius: 24px;
+        margin-bottom: 35px;
+        border-left: 6px solid #818cf8;
+        border: 1px solid rgba(255,255,255,0.06);
+    }
+    
+    .card-qa .question-text {
+        font-size: 36px;
+        font-weight: 700;
+        color: #e2e8f0;
+        line-height: 1.55;
+    }
+    
+    .card-qa .options-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .card-qa .option-box {
+        background: rgba(255, 255, 255, 0.04);
+        padding: 22px 28px;
+        border-radius: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.06);
+        font-size: 28px;
+        font-weight: 600;
+        color: #cbd5e1;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+    
+    .card-qa .option-box.correct {
+        background: rgba(16, 185, 129, 0.12);
+        border-color: #10b981;
+        color: #6ee7b7;
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
+    }
+    
+    .card-qa .option-label {
+        background: rgba(255,255,255,0.06);
+        min-width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        font-weight: 800;
+        color: #818cf8;
+        flex-shrink: 0;
+        font-size: 24px;
+    }
+    
+    .card-qa .option-box.correct .option-label {
+        background: #10b981;
+        color: white;
+    }
+    
+    .card-qa .footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 28px;
+        border-top: 2px solid rgba(255,255,255,0.06);
+    }
+    
+    .card-qa .date-badge {
+        font-size: 22px;
+        font-weight: 700;
+        color: #94a3b8;
+    }
+    
+    .card-qa .social-handle {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 26px;
+        font-weight: 800;
+        color: #818cf8;
+        background: rgba(129, 140, 248, 0.08);
+        padding: 14px 30px;
+        border-radius: 100px;
+        border: 1px solid rgba(129, 140, 248, 0.15);
+    }
+    
+    .card-qa .social-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* ── Decorative Blobs ── */
+    .blob-purple { position: absolute; top: -120px; right: -100px; width: 450px; height: 450px; border-radius: 50%; background: radial-gradient(circle, rgba(129, 140, 248, 0.12), transparent 70%); pointer-events: none; }
+    .blob-pink { position: absolute; bottom: -150px; left: -120px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(244, 114, 182, 0.08), transparent 70%); pointer-events: none; }
+    
+    .watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.025;
+        width: 600px;
+        z-index: 0;
+        pointer-events: none;
+        filter: grayscale(100%) brightness(2);
+    }
+    
+    /* ── Explanation Card Styling ── */
+    .card-explain {
+        background: linear-gradient(145deg, #fefce8 0%, #ecfdf5 50%, #f0f9ff 100%);
+        padding: 55px 60px;
+    }
+    
+    .card-explain .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 28px;
+        border-bottom: 3px solid rgba(0,0,0,0.05);
+        margin-bottom: 35px;
+    }
+    
+    .card-explain .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+    
+    .card-explain .logo-img {
+        height: 65px;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+    
+    .card-explain .brand-name {
+        font-size: 42px;
+        font-weight: 900;
+        background: linear-gradient(90deg, #4f46e5, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .card-explain .explain-badge {
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(135deg, #10b981, #059669);
+        padding: 10px 28px;
+        border-radius: 50px;
+    }
+    
+    .card-explain .content-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card-explain .q-recap {
+        background: white;
+        padding: 30px 35px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        border-left: 6px solid #4f46e5;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+    
+    .card-explain .q-recap-label {
+        font-size: 20px;
+        font-weight: 700;
+        color: #4f46e5;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .card-explain .q-recap-text {
+        font-size: 30px;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.5;
+    }
+    
+    .card-explain .answer-highlight {
+        background: #ecfdf5;
+        border: 2px solid #10b981;
+        border-radius: 18px;
+        padding: 22px 30px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+    
+    .card-explain .answer-icon {
+        background: #10b981;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 900;
+        flex-shrink: 0;
+    }
+    
+    .card-explain .answer-text {
+        font-size: 28px;
+        font-weight: 700;
+        color: #047857;
+    }
+    
+    .card-explain .explanation-box {
+        background: white;
+        border-radius: 20px;
+        padding: 30px 35px;
+        flex: 1;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        overflow: hidden;
+    }
+    
+    .card-explain .explanation-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #2563eb;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .card-explain .explanation-text {
+        font-size: 28px;
+        font-weight: 500;
+        color: #334155;
+        line-height: 1.65;
+    }
+    
+    .card-explain .footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 28px;
+        border-top: 3px solid rgba(0,0,0,0.05);
+    }
+    
+    .card-explain .date-badge {
+        font-size: 22px;
+        font-weight: 700;
+        color: #64748b;
+    }
+    
+    .card-explain .social-handle {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 26px;
+        font-weight: 800;
+        color: #4f46e5;
+        background: white;
+        padding: 14px 30px;
+        border-radius: 100px;
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
+        border: 1px solid #e0e7ff;
+    }
+    
+    .card-explain .social-icon {
+        width: 32px;
+        height: 32px;
+    }
+"""
+
     def generate_html(self, quiz_data: TranslatedQuizData) -> str:
-        """Generate HTML with exactly 1080x1080 individual cards for each question"""
+        """Generate HTML with two card types per question: QA card + Explanation card"""
         
-        # Get IST current date for the cards
         ist = pytz.timezone('Asia/Kolkata')
         current_date = datetime.now(ist)
         date_gujarati = current_date.strftime("%d %B %Y")
+
+        css = self._get_css()
 
         html = f"""<!DOCTYPE html>
 <html lang="gu">
@@ -59,224 +406,8 @@ class ImageGenerator:
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Gujarati:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
 <style>
-    * {{ font-family: 'Noto Serif Gujarati', serif; box-sizing: border-box; }}
-    body {{ background: #1a1a2e; margin: 0; padding: 50px; display: flex; flex-direction: column; gap: 50px; align-items: center; }}
-    
-    .instagram-card {{
-        width: 1080px;
-        height: 1080px;
-        /* Premium deep gradient background */
-        background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        padding: 50px 60px;
-        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-        border-radius: 40px;
-    }}
-    
-    /* Decorative glassmorphism elements */
-    .blob-1 {{ position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(236, 72, 153, 0.1)); filter: blur(40px); pointer-events: none; }}
-    .blob-2 {{ position: absolute; bottom: -150px; left: -100px; width: 500px; height: 500px; border-radius: 50%; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1)); filter: blur(50px); pointer-events: none; }}
-
-    .card-border {{
-        position: absolute;
-        top: 20px; left: 20px; right: 20px; bottom: 20px;
-        border: 3px solid rgba(79, 70, 229, 0.15);
-        border-radius: 30px;
-        pointer-events: none;
-        z-index: 10;
-    }}
-
-    .watermark {{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0.04;
-        width: 650px;
-        z-index: 0;
-        pointer-events: none;
-        filter: grayscale(100%);
-    }}
-
-    .header {{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 2;
-        padding-bottom: 25px;
-        border-bottom: 2px solid rgba(0,0,0,0.06);
-        margin-bottom: 40px;
-    }}
-
-    .logo-container {{
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }}
-    
-    .logo-img {{
-        height: 75px;
-        border-radius: 18px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }}
-    
-    .brand-name {{
-        font-size: 44px;
-        font-weight: 900;
-        background: linear-gradient(90deg, #4f46e5, #ec4899);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        letter-spacing: -0.5px;
-    }}
-
-    .quiz-badge {{
-        font-size: 26px;
-        font-weight: 700;
-        color: white;
-        background: linear-gradient(135deg, #4f46e5, #3b82f6);
-        padding: 12px 28px;
-        border-radius: 50px;
-        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
-    }}
-
-    .content-area {{
-        flex: 1;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-    }}
-
-    .question-box {{
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 40px;
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-        margin-bottom: 40px;
-        border-left: 8px solid #4f46e5;
-    }}
-
-    .question-text {{
-        font-size: 40px;
-        font-weight: 800;
-        color: #1f2937;
-        line-height: 1.5;
-    }}
-
-    .options-grid {{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-    }}
-
-    .option-box {{
-        background: white;
-        padding: 25px 30px;
-        border-radius: 20px;
-        border: 2px solid #f1f5f9;
-        font-size: 30px;
-        font-weight: 600;
-        color: #4b5563;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        transition: all 0.3s ease;
-    }}
-    
-    .option-box.correct-answer {{
-        background: #ecfdf5;
-        border-color: #10b981;
-        color: #047857;
-        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
-    }}
-    
-    .option-label {{
-        background: #f1f5f9;
-        width: 55px;
-        height: 55px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 14px;
-        font-weight: 800;
-        color: #4f46e5;
-        flex-shrink: 0;
-        font-size: 26px;
-    }}
-    
-    .option-box.correct-answer .option-label {{
-        background: #10b981;
-        color: white;
-    }}
-
-    .footer {{
-        margin-top: auto;
-        z-index: 2;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 30px;
-        border-top: 2px solid rgba(0,0,0,0.06);
-    }}
-
-    .social-handle {{
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        font-size: 28px;
-        font-weight: 800;
-        color: #4f46e5;
-        background: white;
-        padding: 15px 35px;
-        border-radius: 100px;
-        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.1);
-        border: 1px solid #e0e7ff;
-    }}
-    
-    .social-icon {{
-        width: 38px;
-        height: 38px;
-    }}
-
-    .call-to-action {{
-        font-size: 26px;
-        font-weight: 700;
-        color: #64748b;
-        background: rgba(255,255,255,0.6);
-        padding: 15px 30px;
-        border-radius: 50px;
-    }}
-    
-    .explanation-box {{
-        background: #f8fafc;
-        border: 2px solid #e2e8f0;
-        border-radius: 20px;
-        padding: 25px 30px;
-        margin-top: 30px;
-        font-size: 26px;
-        color: #334155;
-        line-height: 1.6;
-        max-height: 240px;
-        overflow: hidden;
-        position: relative;
-    }}
-    
-    .explanation-title {{
-        color: #2563eb;
-        font-weight: 800;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 24px;
-    }}
-
+{css}
 </style>
 </head>
 <body>
@@ -288,18 +419,16 @@ class ImageGenerator:
             watermark_html = f'<img src="{self.logo_base64}" alt="Watermark" class="watermark" />'
             logo_html = f'<img src="{self.logo_base64}" alt="Logo" class="logo-img" />'
             
-        # Instagram/Telegram stylized icon
-        social_svg = '''<svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.84 1.18-5.21 3.45-.49.34-.94.5-1.35.49-.45-.01-1.3-.25-1.93-.46-.78-.26-1.39-.4-1.34-.84.03-.23.36-.47.98-.71 3.86-1.68 6.43-2.79 7.72-3.33 3.67-1.53 4.43-1.8 4.92-1.81.11 0 .35.03.48.14.11.09.14.22.15.34-.01.08-.01.17-.03.23z"/></svg>'''
+        # Instagram icon SVG
+        insta_svg = '<svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>'
         
-        # Build cards for each question
-        for q_idx, question in enumerate(quiz_data.questions):
-            # --------------------------------------------------------------------------------
-            # Card 1: Question Only (For the Front Slide)
-            # --------------------------------------------------------------------------------
+        # ═══════════════════════════════════════════════════════════════
+        # FIRST: Generate all card1 images (Question + Answer) — for Post 1
+        # ═══════════════════════════════════════════════════════════════
+        for question in quiz_data.questions:
             html += f"""
-            <div class="instagram-card" id="q{question.question_number}_card1">
-                <div class="blob-1"></div><div class="blob-2"></div>
-                <div class="card-border"></div>
+            <div class="instagram-card card-qa" id="q{question.question_number}_card1">
+                <div class="blob-purple"></div><div class="blob-pink"></div>
                 {watermark_html}
                 
                 <div class="header">
@@ -307,21 +436,23 @@ class ImageGenerator:
                         {logo_html}
                         <div class="brand-name">CurrentAdda</div>
                     </div>
-                    <div class="quiz-badge">કરંટ અફેર્સ • {date_gujarati}</div>
+                    <div class="q-number">પ્રશ્ન {question.question_number} / {len(quiz_data.questions)}</div>
                 </div>
                 
                 <div class="content-area">
                     <div class="question-box">
-                        <div style="color: #4f46e5; font-weight: 800; font-size: 24px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">પ્રશ્ન {question.question_number}</div>
                         <div class="question-text">{question.question_text}</div>
                     </div>
                     
                     <div class="options-grid">
             """
             for label, opt_text in question.options.items():
+                is_correct = label == question.correct_answer
+                correct_class = "correct" if is_correct else ""
+                check_mark = " ✓" if is_correct else ""
                 html += f"""
-                        <div class="option-box">
-                            <div class="option-label">{label}</div>
+                        <div class="option-box {correct_class}">
+                            <div class="option-label">{label}{check_mark}</div>
                             <div class="option-text">{opt_text}</div>
                         </div>
                 """
@@ -330,24 +461,24 @@ class ImageGenerator:
                 </div>
                 
                 <div class="footer">
-                    <div class="call-to-action">
-                        સ્વાઇપ કરો જવાબ માટે ➡️
-                    </div>
+                    <div class="date-badge">📅 {date_gujarati}</div>
                     <div class="social-handle">
-                        {social_svg}
+                        {insta_svg}
                         @currentaddaa
                     </div>
                 </div>
             </div>
             """
 
-            # --------------------------------------------------------------------------------
-            # Card 2: Question + Answer Highlighted + Explanation (For the Next Slide)
-            # --------------------------------------------------------------------------------
+        # ═══════════════════════════════════════════════════════════════
+        # SECOND: Generate all card2 images (Explanation) — for Post 2
+        # ═══════════════════════════════════════════════════════════════
+        for question in quiz_data.questions:
+            correct_text = question.options.get(question.correct_answer, "")
+            explanation_text = question.explanation if question.explanation else "સમજૂતી ઉપલબ્ધ નથી"
+            
             html += f"""
-            <div class="instagram-card" id="q{question.question_number}_card2">
-                <div class="blob-1"></div><div class="blob-2"></div>
-                <div class="card-border"></div>
+            <div class="instagram-card card-explain" id="q{question.question_number}_card2">
                 {watermark_html}
                 
                 <div class="header">
@@ -355,49 +486,33 @@ class ImageGenerator:
                         {logo_html}
                         <div class="brand-name">CurrentAdda</div>
                     </div>
-                    <div class="quiz-badge bg-gradient-to-r from-emerald-500 to-teal-500">પ્રશ્ન {question.question_number} - જવાબ</div>
+                    <div class="explain-badge">📖 સમજૂતી {question.question_number} / {len(quiz_data.questions)}</div>
                 </div>
                 
                 <div class="content-area">
-                    <div class="question-box" style="margin-bottom: 25px; padding: 30px;">
-                        <div class="question-text" style="font-size: 32px;">{question.question_text}</div>
+                    <div class="q-recap">
+                        <div class="q-recap-label">પ્રશ્ન {question.question_number}</div>
+                        <div class="q-recap-text">{question.question_text}</div>
                     </div>
                     
-                    <div class="options-grid" style="gap: 20px;">
-            """
-            for label, opt_text in question.options.items():
-                is_correct = label == question.correct_answer
-                correct_class = "correct-answer" if is_correct else ""
-                html += f"""
-                        <div class="option-box {correct_class}" style="padding: 18px 25px; font-size: 26px;">
-                            <div class="option-label" style="width: 48px; height: 48px; font-size: 22px;">{label}</div>
-                            <div class="option-text">{opt_text}</div>
-                        </div>
-                """
-            html += f"""
+                    <div class="answer-highlight">
+                        <div class="answer-icon">{question.correct_answer}</div>
+                        <div class="answer-text">✅ સાચો જવાબ: {correct_text}</div>
                     </div>
-            """
-            
-            if question.explanation:
-                html += f"""
+                    
                     <div class="explanation-box">
                         <div class="explanation-title">
                             <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             સમજૂતી (Explanation)
                         </div>
-                        <div style="font-size: 24px;">{question.explanation}</div>
+                        <div class="explanation-text">{explanation_text}</div>
                     </div>
-                """
-                
-            html += f"""
                 </div>
                 
                 <div class="footer">
-                    <div class="call-to-action">
-                        રોજ કરંટ અફેર્સ ક્વિઝ માટે ફોલો કરો
-                    </div>
+                    <div class="date-badge">📅 {date_gujarati}</div>
                     <div class="social-handle">
-                        {social_svg}
+                        {insta_svg}
                         @currentaddaa
                     </div>
                 </div>
@@ -414,7 +529,6 @@ class ImageGenerator:
         """Generate HTML file and return its path"""
         html_content = self.generate_html(quiz_data)
         
-        # Save HTML
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_path = os.path.join(self.html_output_dir, f"images_quiz_{timestamp}.html")
         
