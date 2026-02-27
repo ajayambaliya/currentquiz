@@ -11,7 +11,7 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRef, useState, useEffect, useMemo } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 
@@ -236,7 +236,7 @@ export default function UserProfile() {
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center overflow-hidden">
                             {profile?.avatar_url ? (
-                                <Image src={profile.avatar_url} alt="P" width={32} height={32} />
+                                <Image src={getProxiedImageUrl(profile.avatar_url)} alt="P" width={32} height={32} />
                             ) : (
                                 <UserIcon className="w-4 h-4 text-white" />
                             )}
@@ -271,7 +271,7 @@ export default function UserProfile() {
                                 <label htmlFor="avatar-upload" className="cursor-pointer block w-full h-full group">
                                     <div className="w-full h-full rounded-[2.5rem] bg-[#0d1117] overflow-hidden flex items-center justify-center border border-white/5 relative">
                                         {profile?.avatar_url ? (
-                                            <img src={profile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
+                                            <img src={getProxiedImageUrl(profile.avatar_url)} alt="Profile" className="w-full h-full object-cover" />
                                         ) : (
                                             <UserIcon className="w-12 h-12 text-indigo-400" />
                                         )}

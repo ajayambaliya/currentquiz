@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import {
     Trophy, Star, ArrowLeft, TrendingUp,
     Calendar, Crown, Medal, Timer,
@@ -270,7 +270,7 @@ export default function LeaderboardPage() {
                                             <div className="flex items-center gap-3">
                                                 <div className="w-11 h-11 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden">
                                                     {entry.profiles.avatar_url ? (
-                                                        <img src={entry.profiles.avatar_url} alt="Profile" className="w-full h-full object-cover" />
+                                                        <img src={getProxiedImageUrl(entry.profiles.avatar_url)} alt="Profile" className="w-full h-full object-cover" />
                                                     ) : (
                                                         <UserIcon className="w-5 h-5 text-slate-300" />
                                                     )}
@@ -374,7 +374,7 @@ function PodiumSlot({ entry, rank, color, delay }: { entry: any, rank: number, c
                 <div className={`relative ${isGold ? 'w-24 h-24' : 'w-20 h-20'} rounded-[2.5rem] bg-white shadow-2xl p-2 z-10 ${borderClass} border-[1px]`}>
                     <div className="w-full h-full rounded-[2rem] bg-slate-50 overflow-hidden relative border border-slate-100">
                         {entry.profiles.avatar_url ? (
-                            <img src={entry.profiles.avatar_url} alt="P" className="w-full h-full object-cover" />
+                            <img src={getProxiedImageUrl(entry.profiles.avatar_url)} alt="P" className="w-full h-full object-cover" />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center text-slate-300">
                                 <UserIcon className={`${isGold ? 'w-10 h-10' : 'w-8 h-8'}`} />

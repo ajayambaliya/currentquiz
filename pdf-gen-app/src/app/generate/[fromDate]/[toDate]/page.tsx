@@ -45,7 +45,7 @@ const Watermark = () => (
 // --- Data Fetching ---
 
 async function fetchQuestions(fromDate: string, toDate: string) {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     try {
         const res = await fetch(`${baseUrl}/api/questions?from=${fromDate}&to=${toDate}`, {
             cache: 'no-store',

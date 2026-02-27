@@ -38,7 +38,7 @@ async function generatePDF() {
 
         // Navigate to print page
         // Use port 3001 as default since 3000 is occupied by the main app
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
         const printUrl = `${baseUrl}/generate/${fromDate}/${toDate}`;
 
         console.log(`🔗 Loading page: ${printUrl}`);

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import {
     Book, BookOpen, ChevronRight, Trophy, Search, User, Loader2,
     ArrowDown, LayoutGrid, Flame, Sparkles, Clock,
@@ -223,7 +223,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                 <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 p-0.5 shadow-lg shadow-indigo-100 group-hover:shadow-indigo-200 transition-all">
                                     <div className="w-full h-full rounded-[0.875rem] bg-white flex items-center justify-center overflow-hidden">
                                         {profile?.avatar_url ? (
-                                            <img src={profile.avatar_url} alt={`${profile.full_name}'s Profile Image`} className="w-full h-full object-cover" />
+                                            <img src={getProxiedImageUrl(profile.avatar_url)} alt={`${profile.full_name}'s Profile Image`} className="w-full h-full object-cover" />
                                         ) : (
                                             <User className="w-5 h-5 text-indigo-600" />
                                         )}

@@ -10,3 +10,11 @@ const supabaseUrl = isClient
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+export function getProxiedImageUrl(url: string | null | undefined): string {
+    if (!url) return '';
+    if (typeof window !== 'undefined' && url.includes('zoamwugxvboxgjxqvntw.supabase.co')) {
+        return url.replace('https://zoamwugxvboxgjxqvntw.supabase.co', '/supabase-proxy');
+    }
+    return url;
+}
