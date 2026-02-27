@@ -6,8 +6,12 @@ Handles login and session management
 import os
 import json
 import requests
+import urllib3
 from typing import Optional, Dict
 from pathlib import Path
+
+# Suppress insecure request warnings if we bypass SSL
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class AuthenticationError(Exception):
@@ -242,6 +246,8 @@ class LoginManager:
         if stored_cookies:
             # Create session with stored cookies
             self.session = requests.Session()
+            self.session.verify = False  # Prevent SSL cert failures
+            
             for name, value in stored_cookies.items():
                 self.session.cookies.set(name, value, domain='pendulumedu.com')
             
@@ -268,6 +274,7 @@ class LoginManager:
         try:
             # Create new session
             self.session = requests.Session()
+            self.session.verify = False  # Prevent SSL cert failures
             
             # Prepare login payload (matching the form fields)
             payload = {
