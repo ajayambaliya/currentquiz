@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 import { Mail, ArrowLeft, AlertCircle, Loader2, CheckCircle2, Clock } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const RATE_LIMIT_KEY = 'forgot_password_last_request';
 const COOLDOWN_SECONDS = 60; // Match Supabase's 60-second cooldown
@@ -34,7 +33,7 @@ export default function ForgotPasswordPage() {
 
     const handleReset = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         // Check client-side rate limit
         const lastRequest = localStorage.getItem(RATE_LIMIT_KEY);
         if (lastRequest) {
@@ -55,7 +54,7 @@ export default function ForgotPasswordPage() {
 
         if (error) {
             // Handle rate limit errors specifically
-            if (error.message.toLowerCase().includes('rate limit') || 
+            if (error.message.toLowerCase().includes('rate limit') ||
                 error.message.toLowerCase().includes('email rate') ||
                 error.status === 429) {
                 setError('Too many password reset attempts. Please wait a few minutes and try again. Supabase allows only 2 password reset emails per hour.');
@@ -74,10 +73,8 @@ export default function ForgotPasswordPage() {
     if (success) {
         return (
             <main className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-white p-10 rounded-[2.5rem] shadow-xl w-full max-w-md text-center space-y-6"
+                <div
+                    className="bg-white p-10 rounded-[2.5rem] shadow-xl w-full max-w-md text-center space-y-6 animate-fade-in-up"
                 >
                     <div className="bg-emerald-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto text-emerald-500">
                         <CheckCircle2 className="w-12 h-12" />
@@ -87,17 +84,15 @@ export default function ForgotPasswordPage() {
                     <Link href="/auth/login" className="block w-full bg-slate-900 text-white py-4 rounded-2xl font-bold">
                         Back to Login
                     </Link>
-                </motion.div>
+                </div>
             </main>
         );
     }
 
     return (
         <main className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-white p-8 rounded-[2.5rem] shadow-xl w-full max-w-md space-y-8 border border-slate-100"
+            <div
+                className="bg-white p-8 rounded-[2.5rem] shadow-xl w-full max-w-md space-y-8 border border-slate-100 animate-fade-in-up"
             >
                 <div className="space-y-4">
                     <Link href="/auth/login" className="inline-flex items-center text-slate-400 hover:text-indigo-600 transition-colors gap-2 text-sm font-bold">
@@ -157,7 +152,7 @@ export default function ForgotPasswordPage() {
                         )}
                     </button>
                 </form>
-            </motion.div>
+            </div>
         </main>
     );
 }

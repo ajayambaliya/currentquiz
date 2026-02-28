@@ -12,7 +12,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format, subMonths, startOfMonth, endOfMonth, isToday, isYesterday, differenceInDays } from 'date-fns';
 import { useAuth } from '@/hooks/useAuth';
-import { motion, AnimatePresence } from 'framer-motion';
 import { parseSearchDate } from '@/lib/searchUtils';
 import { QuizListSkeleton, SearchBarSkeleton, FeaturedQuizSkeleton, HeroSkeleton } from '@/components/SkeletonLoader';
 import NotificationBell from '@/components/NotificationBell';
@@ -210,14 +209,12 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                     {user ? (
                         <div className="flex items-center gap-2">
                             {profile?.streak_count > 0 && (
-                                <motion.div
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-gradient-to-r from-orange-50 to-red-50 border border-orange-100/50"
+                                <div
+                                    className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-gradient-to-r from-orange-50 to-red-50 border border-orange-100/50 animate-fade-in"
                                 >
                                     <Flame className="w-4 h-4 text-orange-600 fill-orange-600 animate-pulse" />
                                     <span className="text-sm font-black text-orange-700">{profile.streak_count}</span>
-                                </motion.div>
+                                </div>
                             )}
                             <Link href="/profile" className="relative group">
                                 <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 p-0.5 shadow-lg shadow-indigo-100 group-hover:shadow-indigo-200 transition-all">
@@ -247,10 +244,8 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                     <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-indigo-100 via-purple-50 to-transparent rounded-full blur-3xl opacity-40 -mr-48 -mt-48" />
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-pink-100 via-rose-50 to-transparent rounded-full blur-3xl opacity-30 -ml-32 -mb-32" />
 
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="max-w-xl mx-auto relative z-10"
+                    <div
+                        className="max-w-xl mx-auto relative z-10 animate-fade-in-up"
                     >
                         {/* Welcome Message */}
                         <div className="mb-6">
@@ -283,7 +278,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                 />
                             </div>
                         )}
-                    </motion.div>
+                    </div>
                 </section>
             )}
 
@@ -292,10 +287,8 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                 <section className="relative px-5 pt-10 pb-12 overflow-hidden text-balance">
                     <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-indigo-100 via-purple-50 to-transparent rounded-full blur-3xl opacity-40 -mr-48 -mt-48" />
 
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="max-w-xl mx-auto text-center relative z-10"
+                    <div
+                        className="max-w-xl mx-auto text-center relative z-10 animate-fade-in-up"
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 border border-indigo-100 rounded-full mb-6">
                             <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
@@ -310,7 +303,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                         <p className="text-slate-600 font-medium text-sm max-w-md mx-auto leading-relaxed gujarati-text">
                             GPSC, GSSSB, તલાટી અને અન્ય તમામ ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓ માટે દૈનિક Current Affairs Quizzes.
                         </p>
-                    </motion.div>
+                    </div>
                 </section>
             )}
 
@@ -320,11 +313,8 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                 {initialLoading ? (
                     <FeaturedQuizSkeleton />
                 ) : quizzes.length > 0 && (
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.1 }}
-                        className="mb-8"
+                    <div
+                        className="mb-8 animate-fade-in-up"
                     >
                         <div className="flex items-center gap-2 mb-4">
                             <Sparkles className="w-4 h-4 text-indigo-600" />
@@ -364,7 +354,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                 </div>
                             </div>
                         </Link>
-                    </motion.div>
+                    </div>
                 )}
 
                 {/* Category Quick Access */}
@@ -399,10 +389,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                 {initialLoading ? (
                     <SearchBarSkeleton />
                 ) : (
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
+                    <div
                         className="bg-white p-5 rounded-[2rem] shadow-xl shadow-slate-200/40 mb-8 border border-slate-100"
                     >
                         <div className="relative group mb-4">
@@ -443,7 +430,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                 );
                             })}
                         </div>
-                    </motion.div>
+                    </div>
                 )}
 
                 {/* Quiz List */}
@@ -477,58 +464,49 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                 </div>
                             )}
 
-                            <AnimatePresence mode="popLayout">
-                                {quizzes.slice(1).map((quiz, index) => {
-                                    const isIndiaBix = quiz.source_url?.includes('indiabix.com');
-                                    const displayTitle = isIndiaBix && !quiz.title.includes('IndiaBix')
-                                        ? `IndiaBix - ${quiz.title}`
-                                        : quiz.title;
+                            {quizzes.slice(1).map((quiz, index) => {
+                                const isIndiaBix = quiz.source_url?.includes('indiabix.com');
+                                const displayTitle = isIndiaBix && !quiz.title.includes('IndiaBix')
+                                    ? `IndiaBix - ${quiz.title}`
+                                    : quiz.title;
 
-                                    return (
-                                        <motion.div
-                                            key={quiz.id}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, scale: 0.95 }}
-                                            transition={{ delay: index * 0.05 }}
-                                            layout
+                                return (
+                                    <div key={quiz.id}>
+                                        <Link
+                                            href={`/quiz/${quiz.slug}`}
+                                            className="block bg-white p-5 rounded-2xl border-2 border-slate-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/50 transition-all group"
                                         >
-                                            <Link
-                                                href={`/quiz/${quiz.slug}`}
-                                                className="block bg-white p-5 rounded-2xl border-2 border-slate-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/50 transition-all group"
-                                            >
-                                                <div className="flex justify-between items-center">
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center gap-2 mb-2">
-                                                            <div className={`w-2 h-2 rounded-full ${isIndiaBix ? 'bg-orange-500' : 'bg-indigo-500'}`} />
-                                                            <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
-                                                                {quiz.date_str || 'Practice Quiz'}
+                                            <div className="flex justify-between items-center">
+                                                <div className="flex-1">
+                                                    <div className="flex items-center gap-2 mb-2">
+                                                        <div className={`w-2 h-2 rounded-full ${isIndiaBix ? 'bg-orange-500' : 'bg-indigo-500'}`} />
+                                                        <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
+                                                            {quiz.date_str || 'Practice Quiz'}
+                                                        </span>
+                                                        {isIndiaBix && (
+                                                            <span className="text-[7px] font-black bg-orange-50 text-orange-600 px-2 py-0.5 rounded-lg uppercase tracking-tighter">
+                                                                IndiaBix
                                                             </span>
-                                                            {isIndiaBix && (
-                                                                <span className="text-[7px] font-black bg-orange-50 text-orange-600 px-2 py-0.5 rounded-lg uppercase tracking-tighter">
-                                                                    IndiaBix
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                        <h3 className="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4 line-clamp-2">
-                                                            {displayTitle}
-                                                        </h3>
-                                                        <div className="flex items-center gap-3 mt-2 text-[10px] font-bold text-slate-400">
-                                                            <div className="flex items-center gap-1">
-                                                                <Clock className="w-3 h-3" />
-                                                                <span>{getQuizDateLabel(quiz.quiz_date)}</span>
-                                                            </div>
-                                                        </div>
+                                                        )}
                                                     </div>
-                                                    <div className="bg-slate-50 p-3 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
-                                                        <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                                                    <h3 className="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors gujarati-text leading-snug pr-4 line-clamp-2">
+                                                        {displayTitle}
+                                                    </h3>
+                                                    <div className="flex items-center gap-3 mt-2 text-[10px] font-bold text-slate-400">
+                                                        <div className="flex items-center gap-1">
+                                                            <Clock className="w-3 h-3" />
+                                                            <span>{getQuizDateLabel(quiz.quiz_date)}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </Link>
-                                        </motion.div>
-                                    );
-                                })}
-                            </AnimatePresence>
+                                                <div className="bg-slate-50 p-3 rounded-xl group-hover:bg-indigo-600 transition-all flex-shrink-0">
+                                                    <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                );
+                            })}
 
                             {loading && !initialLoading && (
                                 <div className="flex flex-col items-center justify-center py-12">

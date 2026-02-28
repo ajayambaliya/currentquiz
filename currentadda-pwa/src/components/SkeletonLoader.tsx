@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 export function FeaturedQuizSkeleton() {
     return (
         <div className="mb-8 block">
@@ -51,14 +49,9 @@ export function QuizListSkeleton({ count = 5 }: { count?: number }) {
                 <div className="h-2 bg-slate-200 rounded w-32" />
             </div>
             {Array.from({ length: count }).map((_, i) => (
-                <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                >
+                <div key={i} className="animate-fade-in" style={{ animationDelay: `${i * 80}ms` }}>
                     <QuizCardSkeleton />
-                </motion.div>
+                </div>
             ))}
         </div>
     );
@@ -68,12 +61,10 @@ export function LeaderboardSkeleton({ count = 10 }: { count?: number }) {
     return (
         <div className="space-y-1">
             {Array.from({ length: count }).map((_, i) => (
-                <motion.div
+                <div
                     key={i}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
                     className="flex items-center justify-between p-4 rounded-2xl animate-pulse"
+                    style={{ animationDelay: `${i * 40}ms` }}
                 >
                     <div className="flex items-center gap-4">
                         <div className="w-8 h-8 bg-slate-200 rounded-full" />
@@ -86,7 +77,7 @@ export function LeaderboardSkeleton({ count = 10 }: { count?: number }) {
                         <div className="h-4 bg-slate-200 rounded w-12 ml-auto" />
                         <div className="h-2 bg-slate-100 rounded w-16" />
                     </div>
-                </motion.div>
+                </div>
             ))}
         </div>
     );

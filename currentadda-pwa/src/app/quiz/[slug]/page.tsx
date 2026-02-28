@@ -6,8 +6,9 @@ import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import { generateSeoContent, generateAuthorSchema } from '@/lib/seo-brain';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { cache } from 'react';
 
-async function getQuizData(slug: string) {
+const getQuizData = cache(async function getQuizData(slug: string) {
     // 1. Try to find in standard quizzes first
     let { data: quiz, error: quizError } = await supabase
         .from('quizzes')
@@ -69,7 +70,7 @@ async function getQuizData(slug: string) {
         .limit(3);
 
     return { quiz, questions, isSubjectQuiz, breadcrumbs, related };
-}
+});
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;

@@ -5,8 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LogIn, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { LogIn, Mail, Lock, Loader2 } from 'lucide-react';
 import LoginErrorMessage from '@/components/LoginErrorMessage';
 
 
@@ -38,10 +37,8 @@ export default function LoginPage() {
 
     return (
         <main className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="w-full max-w-md space-y-8"
+            <div
+                className="w-full max-w-md space-y-8 animate-fade-in-up"
             >
                 <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 space-y-8">
                     <div className="text-center space-y-4">
@@ -49,7 +46,8 @@ export default function LoginPage() {
                             <Image
                                 src="/newlogo.png"
                                 alt="CurrentAdda Logo"
-                                fill
+                                width={96}
+                                height={96}
                                 className="object-contain"
                                 priority
                             />
@@ -129,7 +127,7 @@ export default function LoginPage() {
                         By Ajay Ambaliya
                     </p>
                 </div>
-            </motion.div>
+            </div>
         </main>
     );
 }

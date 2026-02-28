@@ -12,7 +12,9 @@ import Link from 'next/link';
 import { useAuth } from '../../../hooks/useAuth';
 import { supabase } from '../../../lib/supabase';
 import { useRouter } from 'next/navigation';
-import confetti from 'canvas-confetti';
+
+// Dynamic import for confetti - only loaded when actually needed
+const loadConfetti = () => import('canvas-confetti').then(m => m.default);
 
 interface Question {
     id: string;
@@ -134,7 +136,8 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
     }, [user, authLoading, router]);
 
     // Confetti celebration on correct answer
-    const celebrateCorrectAnswer = () => {
+    const celebrateCorrectAnswer = async () => {
+        const confetti = await loadConfetti();
         confetti({
             particleCount: 50,
             spread: 60,
@@ -144,8 +147,9 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
     };
 
     // Celebration for high score
-    const celebrateHighScore = (percentage: number) => {
+    const celebrateHighScore = async (percentage: number) => {
         if (percentage >= 80) {
+            const confetti = await loadConfetti();
             const duration = 3000;
             const end = Date.now() + duration;
 

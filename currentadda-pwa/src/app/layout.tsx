@@ -89,9 +89,7 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-import ProtectContent from "@/components/ProtectContent";
-import OneSignalInit from "@/components/OneSignalInit";
-import InstallPrompt from "@/components/InstallPrompt";
+import ClientProviders from '@/components/ClientProviders';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -103,8 +101,7 @@ export default function RootLayout({
   return (
     <html lang="gu" suppressHydrationWarning className={`${inter.variable} ${gujarati.variable}`}>
       <body className="antialiased" suppressHydrationWarning>
-        <OneSignalInit />
-        <ProtectContent />
+        <ClientProviders />
         {/* Globally Hidden SEO Context */}
         <div className="sr-only">
           <h1>CurrentAdda - Best Platform for Gujarati Current Affairs Quizzes</h1>
@@ -122,7 +119,6 @@ export default function RootLayout({
           </nav>
         </div>
         {children}
-        <InstallPrompt />
         <Analytics />
         <SpeedInsights />
       </body>
