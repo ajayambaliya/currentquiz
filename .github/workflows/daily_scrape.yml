@@ -9,7 +9,7 @@ on:
 jobs:
   automation:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     permissions:
       contents: write
 
@@ -40,6 +40,12 @@ jobs:
         run: |
           cd automation
           npm ci
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version
 
       - name: Install Playwright System Deps
         run: |

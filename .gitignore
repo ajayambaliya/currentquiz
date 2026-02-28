@@ -112,8 +112,14 @@ pdfs/
 **/*.pdf
 output/
 **/output/
+output_reels/
+**/output_reels/
+output_images/
+**/output_images/
 *.html
 **/debug_*.html
+*.mp4
+**/*.mp4
 debug_playwright_page.png
 debug_scraped_quiz.html
 

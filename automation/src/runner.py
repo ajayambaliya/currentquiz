@@ -28,6 +28,9 @@ from src.supabase_manager import SupabaseManager
 from src.notification_sender import NotificationSender
 from src.image_generator import ImageGenerator
 from src.instagram_sender import InstagramSender
+from src.reel_generator import ReelGenerator
+from src.reel_video_builder import ReelVideoBuilder
+from src.instagram_reel_sender import InstagramReelSender
 import subprocess
 
 # Load environment variables
@@ -110,7 +113,10 @@ def process_quiz(
     supabase_manager: SupabaseManager,
     notification_sender: NotificationSender,
     state_manager: StateManager,
-    date_extractor: DateExtractor
+    date_extractor: DateExtractor,
+    reel_generator: 'ReelGenerator' = None,
+    reel_video_builder: 'ReelVideoBuilder' = None,
+    reel_sender: 'InstagramReelSender' = None
 ) -> bool:
     """
     Process a single quiz through the complete pipeline.
@@ -377,6 +383,85 @@ def process_quiz(
                         
                 except Exception as e:
                     logger.error(f"❌ Error posting to Instagram: {e}", exc_info=True)
+            
+            # Step 7.3: Generate and Post Instagram Reel
+            if reel_generator and reel_video_builder and reel_sender and reel_sender.is_configured():
+                logger.info("Step 7.3: Generating Instagram Reel...")
+                try:
+                    reel_count = reel_generator.get_reel_count(translated_data)
+                    logger.info(f"  → Will generate {reel_count} reel(s) from {len(translated_data.questions)} questions")
+                    
+                    for reel_idx in range(reel_count):
+                        logger.info(f"\n  ── Reel {reel_idx + 1}/{reel_count} ──")
+                        
+                        # Generate reel HTML frames
+                        reel_html_path = reel_generator.generate_reel_html_file(translated_data, reel_idx)
+                        if not reel_html_path:
+                            logger.error(f"  ❌ Failed to generate reel HTML for reel {reel_idx}")
+                            continue
+                        logger.info(f"  ✓ Reel HTML: {reel_html_path}")
+                        
+                        # Take screenshots of frames using Playwright
+                        reel_frames_dir = os.path.join(reel_generator.output_dir, date_filename, f"reel_{reel_idx}")
+                        os.makedirs(reel_frames_dir, exist_ok=True)
+                        
+                        logger.info(f"  → Capturing reel frames via Playwright...")
+                        subprocess.run(
+                            ['node', str(project_root / 'generate_reel_frames.js'), reel_html_path, reel_frames_dir],
+                            check=True,
+                            timeout=120
+                        )
+                        logger.info(f"  ✓ Frames saved to: {reel_frames_dir}")
+                        
+                        # Build video with FFmpeg + audio
+                        reel_video_dir = os.path.join(reel_generator.output_dir, date_filename)
+                        reel_video_path = os.path.join(reel_video_dir, f"reel_{reel_idx}_{date_filename}.mp4")
+                        
+                        logger.info(f"  → Building reel video with FFmpeg...")
+                        video_path = reel_video_builder.build_video(reel_frames_dir, reel_video_path)
+                        
+                        if not video_path:
+                            logger.error(f"  ❌ Failed to build reel video {reel_idx}")
+                            continue
+                        logger.info(f"  ✓ Reel video: {video_path}")
+                        
+                        # Publish to Instagram
+                        q_start = reel_idx * reel_generator.MAX_QUESTIONS_PER_REEL + 1
+                        q_end = min((reel_idx + 1) * reel_generator.MAX_QUESTIONS_PER_REEL, len(translated_data.questions))
+                        
+                        reel_caption = (
+                            f"🎬 કરંટ અફેર્સ ક્વિઝ - {date_gujarati}\n"
+                            f"📝 પ્રશ્ન {q_start}-{q_end} | જવાબ વિચારો! 🤔\n\n"
+                            f"👀 રીલ જુઓ, જવાબ વિચારો, પછી ચેક કરો!\n"
+                            f"💬 Comment માં જણાવો તમે કેટલા સાચા કર્યા!\n\n"
+                            f"🏆 ઓનલાઇન ક્વિઝ રમો:\n"
+                            f"🔗 {live_link}\n\n"
+                            f"📲 ફોલો કરો @currentaddaa\n"
+                            f"🔔 Daily Quiz Notifications ચાલુ કરો!\n\n"
+                            f".\n.\n.\n"
+                            f"#CurrentAdda #CurrentAffairs #DailyQuiz #GPSC #GSSSB #GPRB "
+                            f"#Constable #PSI #GujaratPolice #Talati #Clerk #BinSachivalay "
+                            f"#GovernmentJobs #Gujarat #GK #GeneralKnowledge #SarkariNaukri "
+                            f"#QuizTime #Reels #ReelsIndia #ReelsViral #ViralReels"
+                        )
+                        
+                        logger.info(f"  → Publishing Reel {reel_idx + 1} to Instagram...")
+                        reel_success = reel_sender.post_reel(video_path, reel_caption)
+                        
+                        if reel_success:
+                            logger.info(f"  ✅ Reel {reel_idx + 1} published!")
+                        else:
+                            logger.error(f"  ❌ Failed to publish Reel {reel_idx + 1}")
+                        
+                        # Wait between reels
+                        if reel_idx < reel_count - 1:
+                            logger.info("  ⏳ Waiting 30s before next reel...")
+                            time.sleep(30)
+                    
+                except Exception as e:
+                    logger.error(f"❌ Error in Reel pipeline: {e}", exc_info=True)
+            else:
+                logger.info("ℹ️  Reel generation skipped (not configured or missing FFmpeg)")
                     
         else:
             logger.warning("⚠️  Supabase sync failed, skipping Live Quiz link and Instagram post")
@@ -437,6 +522,18 @@ def main():
         image_generator = ImageGenerator()
         instagram_sender = InstagramSender()
         logger.info(f"✓ Instagram sender configured: {instagram_sender.is_configured()}")
+        
+        # Initialize Reel components
+        reel_generator = ReelGenerator()
+        reel_sender = InstagramReelSender()
+        logger.info(f"✓ Reel sender configured: {reel_sender.is_configured()}")
+        try:
+            reel_video_builder = ReelVideoBuilder()
+            logger.info("✓ Reel video builder initialized (FFmpeg found)")
+        except RuntimeError:
+            reel_video_builder = None
+            logger.warning("⚠️  Reel video builder disabled (FFmpeg not found)")
+        
         date_extractor = DateExtractor()
         supabase_manager = SupabaseManager()
         notification_sender = NotificationSender()
@@ -525,7 +622,10 @@ def main():
                 supabase_manager=supabase_manager,
                 notification_sender=notification_sender,
                 state_manager=state_manager,
-                date_extractor=date_extractor
+                date_extractor=date_extractor,
+                reel_generator=reel_generator,
+                reel_video_builder=reel_video_builder,
+                reel_sender=reel_sender
             )
             
             if success:
