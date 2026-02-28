@@ -302,6 +302,8 @@ def process_quiz(
                 
             # Step 7.2: Send to Instagram (2 carousel posts)
             logger.info("Step 7.2: Posting questions to Instagram...")
+            logger.info(f"  instagram_sender exists: {instagram_sender is not None}")
+            logger.info(f"  instagram_sender.is_configured(): {instagram_sender.is_configured() if instagram_sender else 'N/A'}")
             if instagram_sender and instagram_sender.is_configured():
                 try:
                     images_output_dir = os.path.join(image_generator.output_dir, date_filename)
@@ -434,6 +436,7 @@ def main():
         pdf_generator = PDFGenerator()
         image_generator = ImageGenerator()
         instagram_sender = InstagramSender()
+        logger.info(f"✓ Instagram sender configured: {instagram_sender.is_configured()}")
         date_extractor = DateExtractor()
         supabase_manager = SupabaseManager()
         notification_sender = NotificationSender()
