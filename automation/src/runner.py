@@ -144,15 +144,22 @@ def process_quiz(
         if date_info:
             date_obj, date_english, date_gujarati = date_info
             date_filename = date_extractor.get_filename_date(url)
-            logger.info(f"✓ Extracted date: {date_english}")
+            logger.info(f"✓ Extracted date (English): {date_english}")
+            logger.info(f"✓ Extracted date (Gujarati): {date_gujarati}")
         else:
-            # Fallback to current date
+            # Fallback to current date — use Gujarati month names, not English strftime
             import pytz
             ist = pytz.timezone('Asia/Kolkata')
             current_date = datetime.now(ist)
             date_obj = current_date
             date_english = current_date.strftime("%d %B %Y")
-            date_gujarati = current_date.strftime("%d %B %Y")
+            # Build Gujarati date using DateExtractor's month map
+            _guj_months = {
+                1: 'જાન્યુઆરી', 2: 'ફેબ્રુઆરી', 3: 'માર્ચ', 4: 'એપ્રિલ',
+                5: 'મે', 6: 'જૂન', 7: 'જુલાઈ', 8: 'ઓગસ્ટ',
+                9: 'સપ્ટેમ્બર', 10: 'ઓક્ટોબર', 11: 'નવેમ્બર', 12: 'ડિસેમ્બર'
+            }
+            date_gujarati = f"{current_date.day} {_guj_months[current_date.month]} {current_date.year}"
             date_filename = current_date.strftime("%Y%m%d")
             logger.warning(f"Could not extract date from URL, using current date: {date_english}")
         
@@ -181,7 +188,7 @@ def process_quiz(
         # --- Image Generation ---
         try:
             logger.info("  → Generating Instagram Image HTML...")
-            images_html_path = image_generator.generate_html_file(translated_data)
+            images_html_path = image_generator.generate_html_file(translated_data, date_gujarati=date_gujarati)
             logger.info(f"  ✓ Image HTML: {images_html_path}")
             
             logger.info("  → Slicing HTML into Retinal Quality 1080x1080 PNG Cards...")
@@ -395,7 +402,7 @@ def process_quiz(
                         logger.info(f"\n  ── Reel {reel_idx + 1}/{reel_count} ──")
                         
                         # Generate reel HTML frames
-                        reel_html_path = reel_generator.generate_reel_html_file(translated_data, reel_idx)
+                        reel_html_path = reel_generator.generate_reel_html_file(translated_data, reel_idx, date_gujarati=date_gujarati)
                         if not reel_html_path:
                             logger.error(f"  ❌ Failed to generate reel HTML for reel {reel_idx}")
                             continue

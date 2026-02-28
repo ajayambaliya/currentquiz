@@ -724,20 +724,27 @@ class ReelGenerator:
     }
 """
 
-    def generate_reel_html(self, quiz_data: TranslatedQuizData, reel_index: int = 0) -> str:
+    def generate_reel_html(self, quiz_data: TranslatedQuizData, reel_index: int = 0, date_gujarati: str = None) -> str:
         """
         Generate all reel frames as HTML for a set of questions.
 
         Args:
             quiz_data: Translated quiz data
             reel_index: Which reel (0 = first 5 questions, 1 = next 5, etc.)
+            date_gujarati: Optional Gujarati date to display (extracted from quiz)
 
         Returns:
             Complete HTML string with all frames
         """
-        ist = pytz.timezone('Asia/Kolkata')
-        current_date = datetime.now(ist)
-        date_gujarati = current_date.strftime("%d %B %Y")
+        if not date_gujarati:
+            ist = pytz.timezone('Asia/Kolkata')
+            current_date = datetime.now(ist)
+            _guj_months = {
+                1: 'જાન્યુઆરી', 2: 'ફેબ્રુઆરી', 3: 'માર્ચ', 4: 'એપ્રિલ',
+                5: 'મે', 6: 'જૂન', 7: 'જુલાઈ', 8: 'ઓગસ્ટ',
+                9: 'સપ્ટેમ્બર', 10: 'ઓક્ટોબર', 11: 'નવેમ્બર', 12: 'ડિસેમ્બર'
+            }
+            date_gujarati = f"{current_date.day} {_guj_months[current_date.month]} {current_date.year}"
 
         # Select questions for this reel
         start = reel_index * self.MAX_QUESTIONS_PER_REEL
@@ -954,9 +961,9 @@ class ReelGenerator:
 """
         return html
 
-    def generate_reel_html_file(self, quiz_data: TranslatedQuizData, reel_index: int = 0) -> str:
+    def generate_reel_html_file(self, quiz_data: TranslatedQuizData, reel_index: int = 0, date_gujarati: str = None) -> str:
         """Generate reel HTML file and return its path"""
-        html_content = self.generate_reel_html(quiz_data, reel_index)
+        html_content = self.generate_reel_html(quiz_data, reel_index, date_gujarati)
 
         if not html_content:
             return ""

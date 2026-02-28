@@ -388,12 +388,18 @@ class ImageGenerator:
     }
 """
 
-    def generate_html(self, quiz_data: TranslatedQuizData) -> str:
+    def generate_html(self, quiz_data: TranslatedQuizData, date_gujarati: str = None) -> str:
         """Generate HTML with two card types per question: QA card + Explanation card"""
         
-        ist = pytz.timezone('Asia/Kolkata')
-        current_date = datetime.now(ist)
-        date_gujarati = current_date.strftime("%d %B %Y")
+        if not date_gujarati:
+            ist = pytz.timezone('Asia/Kolkata')
+            current_date = datetime.now(ist)
+            _guj_months = {
+                1: 'જાન્યુઆરી', 2: 'ફેબ્રુઆરી', 3: 'માર્ચ', 4: 'એપ્રિલ',
+                5: 'મે', 6: 'જૂન', 7: 'જુલાઈ', 8: 'ઓગસ્ટ',
+                9: 'સપ્ટેમ્બર', 10: 'ઓક્ટોબર', 11: 'નવેમ્બર', 12: 'ડિસેમ્બર'
+            }
+            date_gujarati = f"{current_date.day} {_guj_months[current_date.month]} {current_date.year}"
 
         css = self._get_css()
 
@@ -525,9 +531,9 @@ class ImageGenerator:
 """
         return html
 
-    def generate_html_file(self, quiz_data: TranslatedQuizData) -> str:
+    def generate_html_file(self, quiz_data: TranslatedQuizData, date_gujarati: str = None) -> str:
         """Generate HTML file and return its path"""
-        html_content = self.generate_html(quiz_data)
+        html_content = self.generate_html(quiz_data, date_gujarati)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_path = os.path.join(self.html_output_dir, f"images_quiz_{timestamp}.html")
