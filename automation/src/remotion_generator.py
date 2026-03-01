@@ -32,12 +32,14 @@ class RemotionReelGenerator:
 
     def prepare_data_json(self, quiz_data: QuizData, translated_data: TranslatedQuizData, date_english: str, date_gujarati: str, date_filename: str) -> None:
         """Prepares the JSON data for the Remotion project to consume."""
-        quiz_slug = quiz_data.url.rstrip('/').split('/')[-1] if quiz_data.url else "quiz"
+        # QuizData uses source_url, not url
+        url = getattr(quiz_data, 'source_url', getattr(quiz_data, 'url', ''))
+        quiz_slug = url.rstrip('/').split('/')[-1] if url else "quiz"
         live_link = f"https://currentadda.vercel.app/quiz/{quiz_slug}"
         
         export = {
             "meta": {
-                "source_url": quiz_data.url,
+                "source_url": url,
                 "quiz_slug": quiz_slug,
                 "live_quiz_link": live_link,
                 "date_english": date_english,
