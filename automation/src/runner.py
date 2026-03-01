@@ -356,35 +356,38 @@ def process_quiz(
                     time.sleep(30)
                     
                     # ── POST 2: Explanation Carousel (up to 10 card2 images) ──
-                    explain_images = []
-                    for q in translated_data.questions[:10]:
-                        card_path = os.path.join(images_output_dir, f"q{q.question_number}_card2.png")
-                        if os.path.exists(card_path):
-                            explain_images.append(card_path)
-                    
-                    if explain_images:
-                        explain_caption = (
-                            f"📖 સમજૂતી - કરંટ અફેર્સ ક્વિઝ - {date_gujarati}\n"
-                            f"📝 {num_q} પ્રશ્નોની વિગતવાર સમજૂતી\n\n"
-                            f"👉 સ્વાઇપ કરો બધી સમજૂતીઓ વાંચવા ➡️\n\n"
-                            f"❓ પહેલા પ્રશ્નો જુઓ અમારી પહેલી પોસ્ટમાં!\n\n"
-                            f"🏆 ઓનલાઇન ક્વિઝ રમો:\n"
-                            f"🔗 {live_link}\n\n"
-                            f"📲 રોજ કરંટ અફેર્સ ક્વિઝ માટે ફોલો કરો @currentaddaa\n\n"
-                            f".\n.\n.\n"
-                            f"#CurrentAdda #CurrentAffairs #Explanation #GPSC #GSSSB #GPRB "
-                            f"#Constable #PSI #GujaratPolice #Talati #Clerk #BinSachivalay "
-                            f"#GovernmentJobs #Gujarat #GK #GeneralKnowledge #SarkariNaukri "
-                            f"#StudyMaterial #CompetitiveExam #QuizExplanation"
-                        )
-                        logger.info(f"[Instagram] Posting Explanation Carousel ({len(explain_images)} images)...")
-                        exp_success = instagram_sender.post_carousel(explain_images, explain_caption)
-                        if exp_success:
-                            logger.info("✅ [Instagram] Explanation carousel posted!")
+                    if os.environ.get('POST_EXPLANATION_CAROUSEL', 'true').lower() == 'true':
+                        explain_images = []
+                        for q in translated_data.questions[:10]:
+                            card_path = os.path.join(images_output_dir, f"q{q.question_number}_card2.png")
+                            if os.path.exists(card_path):
+                                explain_images.append(card_path)
+                        
+                        if explain_images:
+                            explain_caption = (
+                                f"📖 સમજૂતી - કરંટ અફેર્સ ક્વિઝ - {date_gujarati}\n"
+                                f"📝 {num_q} પ્રશ્નોની વિગતવાર સમજૂતી\n\n"
+                                f"👉 સ્વાઇપ કરો બધી સમજૂતીઓ વાંચવા ➡️\n\n"
+                                f"❓ પહેલા પ્રશ્નો જુઓ અમારી પહેલી પોસ્ટમાં!\n\n"
+                                f"🏆 ઓનલાઇન ક્વિઝ રમો:\n"
+                                f"🔗 {live_link}\n\n"
+                                f"📲 રોજ કરંટ અફેર્સ ક્વિઝ માટે ફોલો કરો @currentaddaa\n\n"
+                                f".\n.\n.\n"
+                                f"#CurrentAdda #CurrentAffairs #Explanation #GPSC #GSSSB #GPRB "
+                                f"#Constable #PSI #GujaratPolice #Talati #Clerk #BinSachivalay "
+                                f"#GovernmentJobs #Gujarat #GK #GeneralKnowledge #SarkariNaukri "
+                                f"#StudyMaterial #CompetitiveExam #QuizExplanation"
+                            )
+                            logger.info(f"[Instagram] Posting Explanation Carousel ({len(explain_images)} images)...")
+                            exp_success = instagram_sender.post_carousel(explain_images, explain_caption)
+                            if exp_success:
+                                logger.info("✅ [Instagram] Explanation carousel posted!")
+                            else:
+                                logger.error("❌ [Instagram] Failed to post Explanation carousel")
                         else:
-                            logger.error("❌ [Instagram] Failed to post Explanation carousel")
+                            logger.warning("[Instagram] No card2 images found, skipping Explanation post.")
                     else:
-                        logger.warning("[Instagram] No card2 images found, skipping Explanation post.")
+                        logger.info("ℹ️  Skipping Explanation Carousel post (POST_EXPLANATION_CAROUSEL is set to false)")
                         
                 except Exception as e:
                     logger.error(f"❌ Error posting to Instagram: {e}", exc_info=True)
