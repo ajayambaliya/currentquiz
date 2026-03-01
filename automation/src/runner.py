@@ -28,8 +28,7 @@ from src.supabase_manager import SupabaseManager
 from src.notification_sender import NotificationSender
 from src.image_generator import ImageGenerator
 from src.instagram_sender import InstagramSender
-from src.reel_generator import ReelGenerator
-from src.reel_video_builder import ReelVideoBuilder
+from src.remotion_generator import RemotionReelGenerator
 from src.instagram_reel_sender import InstagramReelSender
 import subprocess
 
@@ -114,8 +113,7 @@ def process_quiz(
     notification_sender: NotificationSender,
     state_manager: StateManager,
     date_extractor: DateExtractor,
-    reel_generator: 'ReelGenerator' = None,
-    reel_video_builder: 'ReelVideoBuilder' = None,
+    remotion_generator: 'RemotionReelGenerator' = None,
     reel_sender: 'InstagramReelSender' = None
 ) -> bool:
     """
@@ -391,50 +389,35 @@ def process_quiz(
                 except Exception as e:
                     logger.error(f"❌ Error posting to Instagram: {e}", exc_info=True)
             
-            # Step 7.3: Generate and Post Instagram Reel
-            if reel_generator and reel_video_builder and reel_sender and reel_sender.is_configured():
-                logger.info("Step 7.3: Generating Instagram Reel...")
+            # Step 7.3: Generate and Post Instagram Reel via Remotion
+            if remotion_generator and reel_sender and reel_sender.is_configured():
+                logger.info("Step 7.3: Generating Instagram Reel via Remotion...")
                 try:
-                    reel_count = reel_generator.get_reel_count(translated_data)
+                    reel_count = remotion_generator.get_reel_count(translated_data)
                     logger.info(f"  → Will generate {reel_count} reel(s) from {len(translated_data.questions)} questions")
+                    
+                    # Prepare data for Remotion
+                    remotion_generator.prepare_data_json(
+                        quiz_data, 
+                        translated_data, 
+                        date_english, 
+                        date_gujarati, 
+                        date_filename
+                    )
                     
                     for reel_idx in range(reel_count):
                         logger.info(f"\n  ── Reel {reel_idx + 1}/{reel_count} ──")
                         
-                        # Generate reel HTML frames
-                        reel_html_path = reel_generator.generate_reel_html_file(translated_data, reel_idx, date_gujarati=date_gujarati)
-                        if not reel_html_path:
-                            logger.error(f"  ❌ Failed to generate reel HTML for reel {reel_idx}")
-                            continue
-                        logger.info(f"  ✓ Reel HTML: {reel_html_path}")
-                        
-                        # Take screenshots of frames using Playwright
-                        reel_frames_dir = os.path.join(reel_generator.output_dir, date_filename, f"reel_{reel_idx}")
-                        os.makedirs(reel_frames_dir, exist_ok=True)
-                        
-                        logger.info(f"  → Capturing reel frames via Playwright...")
-                        subprocess.run(
-                            ['node', str(project_root / 'generate_reel_frames.js'), reel_html_path, reel_frames_dir],
-                            check=True,
-                            timeout=120
-                        )
-                        logger.info(f"  ✓ Frames saved to: {reel_frames_dir}")
-                        
-                        # Build video with FFmpeg + audio
-                        reel_video_dir = os.path.join(reel_generator.output_dir, date_filename)
-                        reel_video_path = os.path.join(reel_video_dir, f"reel_{reel_idx}_{date_filename}.mp4")
-                        
-                        logger.info(f"  → Building reel video with FFmpeg...")
-                        video_path = reel_video_builder.build_video(reel_frames_dir, reel_video_path)
+                        # Build video via Remotion Render
+                        video_path = remotion_generator.build_reel(reel_idx, date_filename)
                         
                         if not video_path:
                             logger.error(f"  ❌ Failed to build reel video {reel_idx}")
                             continue
-                        logger.info(f"  ✓ Reel video: {video_path}")
-                        
+                            
                         # Publish to Instagram
-                        q_start = reel_idx * reel_generator.MAX_QUESTIONS_PER_REEL + 1
-                        q_end = min((reel_idx + 1) * reel_generator.MAX_QUESTIONS_PER_REEL, len(translated_data.questions))
+                        q_start = reel_idx * remotion_generator.MAX_QUESTIONS_PER_REEL + 1
+                        q_end = min((reel_idx + 1) * remotion_generator.MAX_QUESTIONS_PER_REEL, len(translated_data.questions))
                         
                         reel_caption = (
                             f"🎬 કરંટ અફેર્સ ક્વિઝ - {date_gujarati}\n"
@@ -466,9 +449,9 @@ def process_quiz(
                             time.sleep(30)
                     
                 except Exception as e:
-                    logger.error(f"❌ Error in Reel pipeline: {e}", exc_info=True)
+                    logger.error(f"❌ Error in Remotion Reel pipeline: {e}", exc_info=True)
             else:
-                logger.info("ℹ️  Reel generation skipped (not configured or missing FFmpeg)")
+                logger.info("ℹ️  Reel generation skipped (not configured)")
                     
         else:
             logger.warning("⚠️  Supabase sync failed, skipping Live Quiz link and Instagram post")
@@ -531,15 +514,12 @@ def main():
         logger.info(f"✓ Instagram sender configured: {instagram_sender.is_configured()}")
         
         # Initialize Reel components
-        reel_generator = ReelGenerator()
+        remotion_generator = RemotionReelGenerator(
+            remotion_dir=str(project_root / "reel_generator" / "remotion-quiz"),
+            output_dir=str(project_root / "output_reels")
+        )
         reel_sender = InstagramReelSender()
         logger.info(f"✓ Reel sender configured: {reel_sender.is_configured()}")
-        try:
-            reel_video_builder = ReelVideoBuilder()
-            logger.info("✓ Reel video builder initialized (FFmpeg found)")
-        except RuntimeError:
-            reel_video_builder = None
-            logger.warning("⚠️  Reel video builder disabled (FFmpeg not found)")
         
         date_extractor = DateExtractor()
         supabase_manager = SupabaseManager()
@@ -630,8 +610,7 @@ def main():
                 notification_sender=notification_sender,
                 state_manager=state_manager,
                 date_extractor=date_extractor,
-                reel_generator=reel_generator,
-                reel_video_builder=reel_video_builder,
+                remotion_generator=remotion_generator,
                 reel_sender=reel_sender
             )
             

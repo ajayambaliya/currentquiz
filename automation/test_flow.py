@@ -22,6 +22,11 @@ try:
     from src.state_manager import StateManager
     from src.supabase_manager import SupabaseManager
     from src.date_extractor import DateExtractor
+    from src.image_generator import ImageGenerator
+    from src.instagram_sender import InstagramSender
+    from src.notification_sender import NotificationSender
+    from src.remotion_generator import RemotionReelGenerator
+    from src.instagram_reel_sender import InstagramReelSender
 except ImportError as e:
     print(f"Import Error: {e}")
     print(f"Current sys.path: {sys.path}")
@@ -71,6 +76,16 @@ def run_test(target_url):
     state_manager = StateManager()
     supabase_manager = SupabaseManager()
     date_extractor = DateExtractor()
+    image_generator = ImageGenerator()
+    instagram_sender = InstagramSender()
+    notification_sender = NotificationSender()
+    
+    automation_dir_path = Path(__file__).parent.absolute()
+    remotion_generator = RemotionReelGenerator(
+        remotion_dir=str(automation_dir_path / "reel_generator" / "remotion-quiz"),
+        output_dir=str(automation_dir_path / "output_reels")
+    )
+    reel_sender = InstagramReelSender()
 
     # Run the processing logic
     success = process_quiz(
@@ -79,11 +94,16 @@ def run_test(target_url):
         parser=parser,
         translator=translator,
         pdf_generator=pdf_generator,
+        image_generator=image_generator,
+        instagram_sender=instagram_sender,
         telegram_sender=telegram_sender,
         telegram_text_sender=telegram_text_sender,
         supabase_manager=supabase_manager,
+        notification_sender=notification_sender,
         state_manager=state_manager,
-        date_extractor=date_extractor
+        date_extractor=date_extractor,
+        remotion_generator=remotion_generator,
+        reel_sender=reel_sender
     )
 
     if success:
