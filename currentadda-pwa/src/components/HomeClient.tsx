@@ -536,7 +536,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                         </h2>
                         <div className="space-y-4 text-slate-600 text-sm leading-relaxed gujarati-text font-medium">
                             <p>
-                                તમે જો ગુજરાત સરકારની સ્પર્ધાત્મક પરીક્ષાઓ જેવી કે <strong>GPSC, GSSSB, Police Bharti, Talati</strong> વગેરેની તૈયારી કરી રહ્યા હોવ, તો
+                                તમે જો ગુજરાત સરકારની સ્પર્ધાત્મક પરીક્ષાઓ જેવી કે <strong>GSSSB CCE 2026 (7338 જગ્યા, 30 Marks CA)</strong>, <strong>GPSC, GSSSB, Police Bharti, Talati</strong> વગેરેની તૈયારી કરી રહ્યા હોવ, તો
                                 <strong> <Link href="/current-affairs-in-gujarati" className="text-indigo-600 hover:underline">Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી)</Link></strong> તમારા માટે ખૂબ જ મહત્વનું છે.
                             </p>
                             <p>

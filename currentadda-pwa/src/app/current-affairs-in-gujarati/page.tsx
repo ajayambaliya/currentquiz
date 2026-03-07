@@ -5,8 +5,8 @@ import { format, subMonths, eachMonthOfInterval } from 'date-fns';
 import { BookOpen, ChevronRight, Calendar, Sparkles, Trophy, Target, Clock, ArrowLeft, PlayCircle, FileText, BarChart3 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Current Affairs in Gujarati 2026 - Daily Quiz, MCQs & Notes | કરંટ અફેર્સ ગુજરાતી',
-  description: 'Free Daily Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026) for GPSC, GSSSB, PSI, Constable, Talati & Bin Sachivalay Exams. 10,000+ MCQs, Live Quizzes, Leaderboard, PDF Downloads. Updated daily with explanations!',
+  title: 'Current Affairs in Gujarati 2026 - Daily Quiz, MCQs & Notes | CCE, GPSC | કરંટ અફેર્સ ગુજરાતી',
+  description: 'Free Daily Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026) for GSSSB CCE (7338 Posts, 30 Marks CA), GPSC, PSI, Constable, Talati & Bin Sachivalay. 10,000+ MCQs, Live Quizzes, Leaderboard. Updated daily!',
   keywords: [
     'Current Affairs in Gujarati',
     'current affairs in gujarati',
@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     'GSSSB Current Affairs',
     'Current Affairs PDF Gujarati',
     'Monthly Current Affairs Gujarati',
+    'CCE Current Affairs Gujarati',
+    'GSSSB CCE 2026 Current Affairs',
+    'CCE Exam Preparation Gujarati',
+    'Gujarat CCE Current Affairs',
+    'CCE 2026 Syllabus Current Affairs',
   ].join(', '),
   alternates: {
     canonical: 'https://currentadda.vercel.app/current-affairs-in-gujarati',
@@ -92,15 +97,23 @@ export default async function CurrentAffairsGujaratiPage() {
         "name": "What is Current Affairs in Gujarati?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી) refers to the latest national and international news events presented in the Gujarati language, specifically curated for competitive exam preparation like GPSC, GSSSB, PSI, Constable, and Talati exams."
+          "text": "Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી) refers to the latest national and international news events presented in the Gujarati language, specifically curated for competitive exam preparation like GPSC, GSSSB CCE, PSI, Constable, and Talati exams."
         }
       },
       {
         "@type": "Question",
-        "name": "How can I prepare Current Affairs in Gujarati for GPSC?",
+        "name": "How many marks does Current Affairs carry in GSSSB CCE 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "CurrentAdda provides free daily current affairs quizzes in Gujarati with detailed explanations. You can practice MCQs, take live quizzes, track your progress on the leaderboard, and use our subject-wise question banks covering all GPSC exam topics."
+          "text": "In the GSSSB CCE 2026 exam (Advt. No. 378/202526), Current Affairs carries 30 marks in the Preliminary Exam (out of 150 total) and another 30 marks in the Group B Mains exam (out of 200 total). This covers Regional, National and International Important Events."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I prepare Current Affairs in Gujarati for GPSC and CCE?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CurrentAdda provides free daily current affairs quizzes in Gujarati with detailed explanations. You can practice MCQs, take live quizzes, track your progress on the leaderboard, and use our subject-wise question banks covering all GPSC and CCE exam topics."
         }
       },
       {
@@ -108,7 +121,15 @@ export default async function CurrentAffairsGujaratiPage() {
         "name": "Which exams require Current Affairs in Gujarati?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Major Gujarat government exams that require Gujarati current affairs include GPSC Class 1-2, GSSSB Bin Sachivalay Clerk, Police Constable, PSI, Talati cum Mantri, TET/TAT/HTAT, GPRB, and various Panchayat level exams."
+          "text": "Major Gujarat government exams that require Gujarati current affairs include GSSSB CCE 2026 (7338 posts), GPSC Class 1-2, GSSSB Bin Sachivalay Clerk, Police Constable, PSI, Talati cum Mantri, TET/TAT/HTAT, GPRB, and various Panchayat level exams."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the GSSSB CCE 2026 exam syllabus for Current Affairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The GSSSB CCE 2026 syllabus for Current Affairs covers Regional, National and International Important Events. In Prelims, it's part of General Awareness (30 marks out of 150). In Group B Mains, Current Affairs gets a dedicated section of 30 marks out of 200. There is negative marking of 0.25 for incorrect answers."
         }
       },
       {
@@ -160,7 +181,7 @@ export default async function CurrentAffairsGujaratiPage() {
               Best <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Current Affairs in Gujarati</span> for Exam Success
             </h2>
             <p className="text-slate-600 font-medium text-sm md:text-base max-w-2xl mx-auto leading-relaxed gujarati-text">
-              GPSC, GSSSB, PSI, Constable, Talati અને તમામ ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓ માટે દૈનિક <strong>Current Affairs Quiz</strong> ગુજરાતી ભાષામાં. <strong>{totalQuestions?.toLocaleString() || '10,000'}+</strong> MCQs સાથે.
+              <strong>GSSSB CCE 2026 (7338 જગ્યા)</strong>, GPSC, PSI, Constable, Talati અને તમામ ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓ માટે દૈનિક <strong>Current Affairs Quiz</strong> ગુજરાતી ભાષામાં. <strong>{totalQuestions?.toLocaleString() || '10,000'}+</strong> MCQs સાથે.
             </p>
           </div>
 
@@ -251,20 +272,23 @@ export default async function CurrentAffairsGujaratiPage() {
             <h3 className="text-xs font-black uppercase tracking-widest text-slate-900">Monthly Current Affairs</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {months.map((month) => (
-              <Link
-                key={month.toISOString()}
-                href={`/archive/${format(month, 'yyyy')}/${format(month, 'MM')}`}
-                className="bg-white p-4 rounded-2xl border border-slate-100 hover:border-indigo-300 hover:shadow-md transition-all group text-center"
-              >
-                <div className="text-xs font-black text-slate-900 group-hover:text-indigo-600 uppercase transition-colors">
-                  {format(month, 'MMMM yyyy')}
-                </div>
-                <span className="text-[8px] font-bold text-slate-300 uppercase tracking-widest">
-                  Current Affairs
-                </span>
-              </Link>
-            ))}
+            {months.map((month) => {
+              const monthSlug = format(month, 'MMMM').toLowerCase() + '-' + format(month, 'yyyy');
+              return (
+                <Link
+                  key={month.toISOString()}
+                  href={`/current-affairs-in-gujarati/${monthSlug}`}
+                  className="bg-white p-4 rounded-2xl border border-slate-100 hover:border-indigo-300 hover:shadow-md transition-all group text-center"
+                >
+                  <div className="text-xs font-black text-slate-900 group-hover:text-indigo-600 uppercase transition-colors">
+                    {format(month, 'MMMM yyyy')}
+                  </div>
+                  <span className="text-[8px] font-bold text-slate-300 uppercase tracking-widest">
+                    Current Affairs
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
@@ -304,7 +328,7 @@ export default async function CurrentAffairsGujaratiPage() {
             <div className="space-y-4 text-slate-600 text-sm leading-relaxed gujarati-text font-medium">
               <p>
                 <strong>Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી)</strong> એ ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓની તૈયારીનો સૌથી મહત્વનો ભાગ છે.
-                ગુજરાત સરકારની તમામ પરીક્ષાઓમાં — પછી તે <strong>GPSC Class 1-2</strong> હોય, <strong>GSSSB Bin Sachivalay Clerk</strong> હોય,
+                ગુજરાત સરકારની તમામ પરીક્ષાઓમાં — પછી તે <strong>GSSSB CCE 2026 (7338 જગ્યા)</strong> હોય, <strong>GPSC Class 1-2</strong> હોય, <strong>GSSSB Bin Sachivalay Clerk</strong> હોય,
                 <strong>Police Constable / PSI</strong> હોય, <strong>Talati</strong> હોય કે <strong>TET/TAT/HTAT</strong> — કરંટ અફેર્સના પ્રશ્નો 25-30% વેઇટેજ ધરાવે છે.
               </p>
 
@@ -342,14 +366,14 @@ export default async function CurrentAffairsGujaratiPage() {
                 CurrentAdda ખાસ કરીને ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓની તૈયારી કરતા વિદ્યાર્થીઓ માટે બનાવવામાં આવ્યું છે:
               </p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> <strong>GSSSB CCE 2026</strong> (7338 જગ્યા — 30 Marks CA)</li>
                 <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> GPSC Class 1-2 કરંટ અફેર્સ</li>
                 <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> GSSSB Bin Sachivalay Clerk</li>
                 <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> Police Constable & PSI</li>
                 <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> Talati cum Mantri</li>
                 <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> TET / TAT / HTAT</li>
                 <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> GPRB Exams</li>
-                <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> Revenue Talati</li>
-                <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> Panchayat Level Exams</li>
+                <li className="flex items-center gap-2"><span className="text-indigo-500">✅</span> Revenue Talati & Panchayat Level</li>
               </ul>
 
               <h3 className="text-lg font-black text-slate-800 pt-4">Why Choose CurrentAdda for Current Affairs in Gujarati?</h3>
@@ -375,6 +399,129 @@ export default async function CurrentAffairsGujaratiPage() {
           </div>
         </section>
 
+        {/* GSSSB CCE 2026 Dedicated Section */}
+        <section className="mb-12">
+          <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-[2.5rem] p-8 border border-amber-100">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white text-lg">🔥</div>
+              <div>
+                <h2 className="text-xl font-black text-slate-900 leading-tight">GSSSB CCE 2026 - Current Affairs Preparation</h2>
+                <span className="text-[9px] font-black text-amber-600 uppercase tracking-widest">Trending • 7338 Vacancies • Advt. No. 378/202526</span>
+              </div>
+            </div>
+            <div className="space-y-4 text-slate-700 text-sm leading-relaxed gujarati-text font-medium">
+              <p>
+                <strong>GSSSB CCE (Combined Competitive Examination) 2026</strong> એ ગુજરાતમાં સૌથી મોટી ભરતી છે — <strong>7338 જગ્યાઓ</strong> માટે.
+                Junior Clerk, Senior Clerk, Head Clerk, Office Superintendent, Social Welfare Inspector, Revenue Clerk, અને Assistant Manager જેવી
+                Class III Group A અને Group B ની જગ્યાઓ માટે આ પરીક્ષા GSSSB દ્વારા લેવામાં આવે છે.
+              </p>
+
+              <h3 className="text-lg font-black text-slate-800 pt-2">CCE 2026 માં Current Affairs ના Marks</h3>
+
+              {/* CCE Exam Pattern Table */}
+              <div className="overflow-x-auto mt-3">
+                <table className="w-full text-left text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-amber-100/50">
+                      <th className="px-4 py-3 font-black text-slate-800 rounded-tl-xl">Exam Stage</th>
+                      <th className="px-4 py-3 font-black text-slate-800">Current Affairs Marks</th>
+                      <th className="px-4 py-3 font-black text-slate-800">Total Marks</th>
+                      <th className="px-4 py-3 font-black text-slate-800 rounded-tr-xl">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white/60">
+                    <tr className="border-t border-amber-100/50">
+                      <td className="px-4 py-3 font-bold">Preliminary (Prelims)</td>
+                      <td className="px-4 py-3"><span className="bg-amber-500 text-white px-2 py-0.5 rounded-lg font-black text-xs">30 Marks</span></td>
+                      <td className="px-4 py-3">150 Marks</td>
+                      <td className="px-4 py-3 text-xs text-slate-500">General Awareness & Current Affairs section</td>
+                    </tr>
+                    <tr className="border-t border-amber-100/50">
+                      <td className="px-4 py-3 font-bold">Mains (Group B)</td>
+                      <td className="px-4 py-3"><span className="bg-orange-500 text-white px-2 py-0.5 rounded-lg font-black text-xs">30 Marks</span></td>
+                      <td className="px-4 py-3">200 Marks</td>
+                      <td className="px-4 py-3 text-xs text-slate-500">Regional, National & International Events</td>
+                    </tr>
+                    <tr className="border-t border-amber-100/50">
+                      <td className="px-4 py-3 font-bold">Mains (Group A)</td>
+                      <td className="px-4 py-3"><span className="bg-slate-400 text-white px-2 py-0.5 rounded-lg font-black text-xs">Integrated</span></td>
+                      <td className="px-4 py-3">150 Marks (GS)</td>
+                      <td className="px-4 py-3 text-xs text-slate-500">Part of General Studies descriptive paper</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="bg-white/80 rounded-2xl p-4 border border-amber-100/50 mt-4">
+                <h4 className="font-black text-slate-800 text-sm mb-2">⚠️ Important: 0.25 Negative Marking</h4>
+                <p className="text-xs text-slate-600">
+                  CCE Prelims માં ખોટા જવાબ માટે <strong>0.25 marks negative marking</strong> છે. જો "Not attempted" option select ન કરો તો પણ negative marks લાગે છે.
+                  તેથી accuracy ખૂબ જ મહત્વની છે — CurrentAdda ની daily quiz practice થી accuracy improve કરો.
+                </p>
+              </div>
+
+              <h3 className="text-lg font-black text-slate-800 pt-2">CCE Prelims Syllabus Breakdown (150 Marks)</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">Reasoning</span>
+                  <span className="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-lg font-black text-xs">60 Marks</span>
+                </div>
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">Quantitative Aptitude</span>
+                  <span className="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-lg font-black text-xs">30 Marks</span>
+                </div>
+                <div className="flex items-center justify-between bg-amber-100/80 px-4 py-2.5 rounded-xl border border-amber-200">
+                  <span className="font-black text-amber-700">Current Affairs & GK</span>
+                  <span className="bg-amber-500 text-white px-2 py-0.5 rounded-lg font-black text-xs">30 Marks ⭐</span>
+                </div>
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">English + Gujarati</span>
+                  <span className="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-lg font-black text-xs">30 Marks</span>
+                </div>
+              </div>
+
+              <h3 className="text-lg font-black text-slate-800 pt-2">CCE Group B Mains Syllabus (200 Marks)</h3>
+              <div className="grid grid-cols-1 gap-2 mt-2">
+                <div className="flex items-center justify-between bg-amber-100/80 px-4 py-2.5 rounded-xl border border-amber-200">
+                  <span className="font-black text-amber-700">Current Affairs (Regional, National, International)</span>
+                  <span className="bg-amber-500 text-white px-2 py-0.5 rounded-lg font-black text-xs">30 Marks ⭐</span>
+                </div>
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">Government Schemes Info</span>
+                  <span className="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-lg font-black text-xs">30 Marks</span>
+                </div>
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">Indian Constitution & State System</span>
+                  <span className="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-lg font-black text-xs">20 Marks</span>
+                </div>
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">Indian Economy, NITI Aayog</span>
+                  <span className="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-lg font-black text-xs">20 Marks</span>
+                </div>
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">Gujarat History & Geography</span>
+                  <span className="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-lg font-black text-xs">20 Marks</span>
+                </div>
+                <div className="flex items-center justify-between bg-white/60 px-4 py-2.5 rounded-xl">
+                  <span className="font-bold">Other Subjects (Admin, Ethics, Science, etc.)</span>
+                  <span className="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-lg font-black text-xs">80 Marks</span>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link href="/" className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:shadow-lg hover:shadow-amber-200 transition-all">
+                  <PlayCircle className="w-3.5 h-3.5" />
+                  Practice CCE Current Affairs
+                </Link>
+                <Link href="/categories" className="inline-flex items-center gap-2 bg-white text-amber-600 border-2 border-amber-200 px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:border-amber-400 transition-all">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  Category-wise MCQs
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section (Visible to users) */}
         <section className="mb-12">
           <div className="bg-white/50 rounded-[2.5rem] p-8 border border-slate-100">
@@ -395,9 +542,21 @@ export default async function CurrentAffairsGujaratiPage() {
                 </p>
               </div>
               <div>
+                <h3 className="text-sm font-black text-slate-800 mb-2">❓ GSSSB CCE 2026 માં Current Affairs ના કેટલા marks છે?</h3>
+                <p className="text-sm text-slate-600 font-medium gujarati-text leading-relaxed">
+                  GSSSB CCE 2026 (Advt. No. 378/202526) માં Prelims માં General Awareness & Current Affairs માટે <strong>30 marks</strong> (150 માંથી) છે. Group B Mains માં Regional, National and International Current Affairs માટે <strong>30 marks</strong> (200 માંથી) છે. 0.25 negative marking છે.
+                </p>
+              </div>
+              <div>
                 <h3 className="text-sm font-black text-slate-800 mb-2">❓ કયા exams માટે Gujarati Current Affairs જરૂરી છે?</h3>
                 <p className="text-sm text-slate-600 font-medium gujarati-text leading-relaxed">
-                  GPSC Class 1-2, GSSSB Bin Sachivalay, Police Constable, PSI, Talati cum Mantri, TET/TAT/HTAT, GPRB, અને અન્ય તમામ Gujarat Government Exams માટે Gujarati Current Affairs Essential છે.
+                  GSSSB CCE 2026 (7338 જગ્યા), GPSC Class 1-2, GSSSB Bin Sachivalay, Police Constable, PSI, Talati cum Mantri, TET/TAT/HTAT, GPRB, અને અન્ય તમામ Gujarat Government Exams માટે Gujarati Current Affairs Essential છે.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-sm font-black text-slate-800 mb-2">❓ CCE 2026 Prelims Syllabus શું છે?</h3>
+                <p className="text-sm text-slate-600 font-medium gujarati-text leading-relaxed">
+                  CCE Prelims 150 marks ની છે: Reasoning (60), Quantitative Aptitude (30), General Awareness & Current Affairs (30), English (15), Gujarati (15). 2 કલાકની CBRT (Computer Based) exam છે. 0.25 negative marking છે.
                 </p>
               </div>
               <div>

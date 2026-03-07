@@ -142,6 +142,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         });
     });
 
+    // 8. Add Daily text-content pages
+    const MONTH_NAMES_MAP: Record<number, string> = {
+        0: 'january', 1: 'february', 2: 'march', 3: 'april',
+        4: 'may', 5: 'june', 6: 'july', 7: 'august',
+        8: 'september', 9: 'october', 10: 'november', 11: 'december',
+    };
+
+    const uniqueDates = Array.from(new Set((quizzes || []).map(q => q.quiz_date).filter(Boolean)));
+    const dailyEntries = uniqueDates.map(date => ({
+        url: `${baseUrl}/daily/${date}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.85,
+    }));
+
+    // 9. Add Monthly landing pages for current-affairs-in-gujarati
+    const monthlyCAEntries = yearMonths.map(ym => {
+        const [yr, mo] = ym.split('/');
+        const monthName = MONTH_NAMES_MAP[parseInt(mo) - 1] || 'january';
+        return {
+            url: `${baseUrl}/current-affairs-in-gujarati/${monthName}-${yr}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        };
+    });
+
     return [
         ...routes,
         ...quizEntries,
@@ -151,5 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...mainTopicEntries,
         ...subTopicEntries,
         ...archiveRoutes,
+        ...dailyEntries,
+        ...monthlyCAEntries,
     ]
 }

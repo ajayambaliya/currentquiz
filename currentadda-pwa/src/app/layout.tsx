@@ -16,10 +16,10 @@ const gujarati = Noto_Serif_Gujarati({
 
 export const metadata: Metadata = {
   title: {
-    default: "Current Affairs in Gujarati 2026 | Daily Quiz & MCQs | CurrentAdda",
+    default: "Current Affairs in Gujarati 2026 | Daily Quiz & MCQs | CCE, GPSC | CurrentAdda",
     template: "%s | CurrentAdda - કરંટ અફેર્સ ગુજરાતી"
   },
-  description: "Free Daily Current Affairs Quiz in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026). 10,000+ MCQs for GPSC, GSSSB, PSI, Constable & Talati Exams. Play live quizzes, track your rank on leaderboard. Updated daily!",
+  description: "Free Daily Current Affairs Quiz in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026). 10,000+ MCQs for GSSSB CCE (7338 Posts), GPSC, PSI, Constable & Talati. Play live quizzes, track your rank on leaderboard. Updated daily!",
   keywords: [
     "Current Affairs in Gujarati",
     "કરંટ અફેર્સ ગુજરાતી",
@@ -39,7 +39,10 @@ export const metadata: Metadata = {
     "PSI Current Affairs Gujarati",
     "Constable Exam Current Affairs",
     "Talati Exam Preparation Gujarati",
-    "Bin Sachivalay Current Affairs"
+    "Bin Sachivalay Current Affairs",
+    "CCE Current Affairs Gujarati",
+    "GSSSB CCE 2026",
+    "CCE 2026 Current Affairs"
   ],
   authors: [{ name: "Ajay Ambaliya", url: "https://currentadda.vercel.app/author" }],
   creator: "CurrentAdda",

@@ -62,7 +62,7 @@ export function generateSeoContent(data: SeoDataInput) {
         `Looking for ${title} MCQs in Gujarati?`,
         `CurrentAdda presents a high-authority mock test based on ${sourceName} for competitive Gujarat government exams.`,
         date ? `This daily quiz for ${date} (${gujaratiDateText}) covers all major events of the day.` : '',
-        `Prepare effectively for GPSC Class 1-2, GSSSB Bin Sachivalay, Talati, and Police Bharti exams with our targeted practice questions.`,
+        `Prepare effectively for GSSSB CCE 2026 (30 Marks CA), GPSC Class 1-2, GSSSB Bin Sachivalay, Talati, and Police Bharti exams with our targeted practice questions.`,
         questions && questions.length > 0 ? `This set contains ${questions.length} questions with deep-dive explanations in Gujarati (કરંટ અફેર્સ ગુજરાતી).` : ''
     ].filter(Boolean);
 
@@ -74,6 +74,8 @@ export function generateSeoContent(data: SeoDataInput) {
         `GPSC Question Bank`,
         `GSSSB Practice Sets`,
         `Police Bharti Preparation Gujarati`,
+        `CCE 2026 Current Affairs`,
+        `GSSSB CCE Preparation Gujarati`,
         `IndiaBix Gujarati Translation`,
         `Today's News Analysis for Exams`
     ];
@@ -107,6 +109,7 @@ export function generateAuthorSchema() {
 }
 
 export const EXAM_CLUSTERS = [
+    { name: 'GSSSB CCE 2026', tags: ['Current Affairs', 'General Awareness', 'Government Schemes'] },
     { name: 'GPSC Preparation', tags: ['GPSC', 'Ancient History', 'Polity'] },
     { name: 'GSSSB Bin Sachivalay', tags: ['Computer', 'English Grammar', 'Gujarati Grammar'] },
     { name: 'Police Bharti', tags: ['Law', 'Constitution', 'General Science'] },
