@@ -16,21 +16,32 @@ const gujarati = Noto_Serif_Gujarati({
 
 export const metadata: Metadata = {
   title: {
-    default: "CurrentAdda - Best Current Affairs Gujarati for GPSC & GSSSB",
-    template: "%s | CurrentAdda Gujarati"
+    default: "Current Affairs in Gujarati 2026 | Daily Quiz & MCQs | CurrentAdda",
+    template: "%s | CurrentAdda - કરંટ અફેર્સ ગુજરાતી"
   },
-  description: "Daily Updated Current Affairs Gujarati (કરંટ અફેર્સ ગુજરાતી) for GPSC, GSSSB, Police Bharti, and all Gujarat Government Exams. High-quality daily quizzes and study material.",
+  description: "Free Daily Current Affairs Quiz in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026). 10,000+ MCQs for GPSC, GSSSB, PSI, Constable & Talati Exams. Play live quizzes, track your rank on leaderboard. Updated daily!",
   keywords: [
-    "Current Affairs Gujarati",
+    "Current Affairs in Gujarati",
     "કરંટ અફેર્સ ગુજરાતી",
-    "Daily Current Affairs Gujarati",
+    "current affairs in gujarati",
+    "Daily Current Affairs Gujarati 2026",
     "GPSC Current Affairs",
+    "GPSC Current Affairs in Gujarati",
     "GSSSB Current Affairs Gujarati",
     "Gujarat Government Jobs Preparation",
     "Current Affairs 2026 Gujarati",
-    "Latest Current Affairs Gujarat"
+    "Latest Current Affairs Gujarat",
+    "Current Affairs Quiz Gujarati",
+    "કરંટ અફેર્સ ક્વિઝ",
+    "Current Affairs MCQ Gujarati",
+    "Monthly Current Affairs Gujarati",
+    "Daily GK Quiz Gujarati",
+    "PSI Current Affairs Gujarati",
+    "Constable Exam Current Affairs",
+    "Talati Exam Preparation Gujarati",
+    "Bin Sachivalay Current Affairs"
   ],
-  authors: [{ name: "CurrentAdda Team" }],
+  authors: [{ name: "Ajay Ambaliya", url: "https://currentadda.vercel.app/author" }],
   creator: "CurrentAdda",
   publisher: "CurrentAdda",
   verification: {
@@ -54,8 +65,8 @@ export const metadata: Metadata = {
     apple: "/newlogo.png",
   },
   openGraph: {
-    title: "CurrentAdda - Daily Gujarati Current Affairs Quiz",
-    description: "Daily live current affairs quizzes in Gujarati for GPSC and GSSSB exams.",
+    title: "Current Affairs in Gujarati 2026 | Daily Quiz & MCQs | CurrentAdda",
+    description: "Free Daily Current Affairs Quiz in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026). 10,000+ MCQs for GPSC, GSSSB, PSI & more. Play live quizzes, compete on leaderboard!",
     url: "https://currentadda.vercel.app",
     siteName: "CurrentAdda",
     images: [
@@ -70,8 +81,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CurrentAdda - Daily Gujarati Current Affairs",
-    description: "Play daily live current affairs quizzes in Gujarati for GPSC and GSSSB exams.",
+    title: "Current Affairs in Gujarati 2026 | Daily Quiz & MCQs",
+    description: "Free Daily Current Affairs Quiz in Gujarati. 10,000+ MCQs for GPSC, GSSSB, PSI, Constable & Talati. Play live quizzes, track rank on leaderboard!",
     images: ["/newlogo.png"],
   },
   appleWebApp: {
@@ -85,8 +96,6 @@ export const viewport: Viewport = {
   themeColor: "#4f46e5",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 import ClientProviders from '@/components/ClientProviders';
@@ -112,6 +121,7 @@ export default function RootLayout({
             Join thousands of candidates on our leaderboard and track your daily progress with our streak system.
           </p>
           <nav>
+            <a href="/current-affairs-in-gujarati">Current Affairs in Gujarati</a>
             <a href="/subjects">Subject-wise Quizzes</a>
             <a href="/categories">Category-wise Quizzes</a>
             <a href="/leaderboard">Real-time Leaderboard</a>

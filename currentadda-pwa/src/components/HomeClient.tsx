@@ -532,12 +532,12 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                 <section className="mt-16 pb-8 border-t border-slate-100 pt-12">
                     <div className="bg-white/50 rounded-[2.5rem] p-8 border border-slate-100">
                         <h2 className="text-2xl font-black text-slate-900 mb-6 leading-tight">
-                            Best <span className="text-indigo-600">Current Affairs Gujarati</span> for Exam Success
+                            Best <span className="text-indigo-600"><Link href="/current-affairs-in-gujarati" className="hover:underline">Current Affairs in Gujarati</Link></span> for Exam Success
                         </h2>
                         <div className="space-y-4 text-slate-600 text-sm leading-relaxed gujarati-text font-medium">
                             <p>
                                 તમે જો ગુજરાત સરકારની સ્પર્ધાત્મક પરીક્ષાઓ જેવી કે <strong>GPSC, GSSSB, Police Bharti, Talati</strong> વગેરેની તૈયારી કરી રહ્યા હોવ, તો
-                                <strong> Current Affairs Gujarati (કરંટ અફેર્સ ગુજરાતી)</strong> તમારા માટે ખૂબ જ મહત્વનું છે.
+                                <strong> <Link href="/current-affairs-in-gujarati" className="text-indigo-600 hover:underline">Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી)</Link></strong> તમારા માટે ખૂબ જ મહત્વનું છે.
                             </p>
                             <p>
                                 CurrentAdda એપ પર અમે તમને દરરોજ ફ્રીમાં <strong>Daily Current Affairs Quiz</strong> પ્રદાન કરીએ છીએ. અહીં તમને
@@ -556,10 +556,20 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                     <div className="w-2 h-2 rounded-full bg-indigo-500" />
                                     <span>પોલીસ કોન્સ્ટેબલ અને PSI માટે દૈનિક ક્વિઝ</span>
                                 </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                                    <span>તલાટી, Bin Sachivalay Clerk, TET/TAT/HTAT</span>
+                                </li>
                             </ul>
                             <p className="mt-4">
-                                તમારા જ્ઞાનની ચકાસણી કરવા માટે આજે જ અમારા વિષયવાર (Subject-wise) અને દૈનિક ક્વિઝમાં ભાગ લો અને તમારી પરીક્ષાની તૈયારીને મજબૂત બનાવો.
+                                તમારા જ્ઞાનની ચકાસણી કરવા માટે આજે જ અમારા વિષયવાર (<Link href="/subjects" className="text-indigo-600 hover:underline">Subject-wise</Link>) અને દૈનિક ક્વિઝમાં ભાગ લો અને તમારી પરીક્ષાની તૈયારીને મજબૂત બનાવો.
                             </p>
+                            <div className="mt-6">
+                                <Link href="/current-affairs-in-gujarati" className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:shadow-lg hover:shadow-indigo-200 transition-all">
+                                    View Complete Current Affairs Guide
+                                    <ChevronRight className="w-3 h-3" />
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </section>

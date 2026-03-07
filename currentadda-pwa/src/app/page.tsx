@@ -55,6 +55,11 @@ export default async function HomePage() {
     "hasPart": [
       {
         "@type": "WebPage",
+        "name": "Current Affairs in Gujarati",
+        "url": "https://currentadda.vercel.app/current-affairs-in-gujarati"
+      },
+      {
+        "@type": "WebPage",
         "name": "Subject Quizzes",
         "url": "https://currentadda.vercel.app/subjects"
       },
