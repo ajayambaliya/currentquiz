@@ -81,7 +81,8 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: Pr
 
   // Fetch all quizzes for this month
   const startDate = `${year}-${month}-01`;
-  const endDate = `${year}-${month}-31`;
+  const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
+  const endDate = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
 
   const { data: quizzes } = await supabase
     .from('quizzes')

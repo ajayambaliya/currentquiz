@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, ChevronRight, Calendar, BookOpen, CheckCircle2, XCircle, HelpCircle, PlayCircle, Sparkles } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import SoftAuthWall from '@/components/SoftAuthWall';
 
 export const revalidate = 3600;
 
@@ -185,62 +186,21 @@ export default async function DailyNotesPage({ params }: { params: Promise<{ dat
             <h3 className="text-xs font-black uppercase tracking-widest text-slate-900">All Questions & Answers</h3>
           </div>
 
-          {(questions || []).map((q: any, index: number) => (
-            <article key={q.id} className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md transition-shadow">
-              {/* Question */}
-              <div className="flex items-start gap-3 mb-4">
-                <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs font-black text-indigo-600">Q{index + 1}</span>
-                </div>
-                <h4 className="text-sm font-black text-slate-900 gujarati-text leading-relaxed flex-1">
-                  {q.text}
-                </h4>
-              </div>
-
-              {/* Options */}
-              <div className="space-y-2 ml-11 mb-4">
-                {q.options && (() => {
-                  try {
-                    const opts = Array.isArray(q.options) ? q.options : JSON.parse(q.options);
-                    return opts.map((opt: string, optIndex: number) => {
-                      const isCorrect = opt === q.answer;
-                      return (
-                        <div
-                          key={optIndex}
-                          className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium gujarati-text ${
-                            isCorrect
-                              ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
-                              : 'bg-slate-50 border border-slate-100 text-slate-600'
-                          }`}
-                        >
-                          {isCorrect ? (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                          ) : (
-                            <div className="w-4 h-4 rounded-full border-2 border-slate-200 flex-shrink-0" />
-                          )}
-                          <span>{opt}</span>
-                          {isCorrect && <span className="text-[8px] font-black text-emerald-600 uppercase tracking-widest ml-auto">✓ Correct</span>}
-                        </div>
-                      );
-                    });
-                  } catch { return null; }
-                })()}
-              </div>
-
-              {/* Explanation */}
-              {q.explanation && (
-                <div className="ml-11 bg-blue-50/50 border border-blue-100 rounded-xl p-4">
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <HelpCircle className="w-3.5 h-3.5 text-blue-500" />
-                    <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Explanation</span>
-                  </div>
-                  <p className="text-xs text-slate-600 font-medium gujarati-text leading-relaxed">
-                    {q.explanation}
-                  </p>
-                </div>
-              )}
-            </article>
+          {/* First 3 Questions (Preview) */}
+          {(questions || []).slice(0, 3).map((q: any, index: number) => (
+            <QuestionCard key={q.id} q={q} index={index} />
           ))}
+
+          {/* Remaining Questions (Behind SoftAuthWall) */}
+          {(questions?.length || 0) > 3 && (
+            <SoftAuthWall>
+              <div className="space-y-6 mt-6">
+                {(questions || []).slice(3).map((q: any, index: number) => (
+                  <QuestionCard key={q.id} q={q} index={index + 3} />
+                ))}
+              </div>
+            </SoftAuthWall>
+          )}
         </section>
 
         {/* Quiz CTA */}
@@ -295,5 +255,64 @@ export default async function DailyNotesPage({ params }: { params: Promise<{ dat
         </section>
       </div>
     </main>
+  );
+}
+
+function QuestionCard({ q, index }: { q: any; index: number }) {
+  return (
+    <article className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md transition-shadow">
+      {/* Question */}
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center flex-shrink-0">
+          <span className="text-xs font-black text-indigo-600">Q{index + 1}</span>
+        </div>
+        <h4 className="text-sm font-black text-slate-900 gujarati-text leading-relaxed flex-1">
+          {q.text}
+        </h4>
+      </div>
+
+      {/* Options */}
+      <div className="space-y-2 ml-11 mb-4">
+        {q.options && (() => {
+          try {
+            const opts = Array.isArray(q.options) ? q.options : JSON.parse(q.options);
+            return opts.map((opt: string, optIndex: number) => {
+              const isCorrect = opt === q.answer;
+              return (
+                <div
+                  key={optIndex}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium gujarati-text ${
+                    isCorrect
+                      ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
+                      : 'bg-slate-50 border border-slate-100 text-slate-600'
+                  }`}
+                >
+                  {isCorrect ? (
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                  ) : (
+                    <div className="w-4 h-4 rounded-full border-2 border-slate-200 flex-shrink-0" />
+                  )}
+                  <span>{opt}</span>
+                  {isCorrect && <span className="text-[8px] font-black text-emerald-600 uppercase tracking-widest ml-auto">✓ Correct</span>}
+                </div>
+              );
+            });
+          } catch { return null; }
+        })()}
+      </div>
+
+      {/* Explanation */}
+      {q.explanation && (
+        <div className="ml-11 bg-blue-50/50 border border-blue-100 rounded-xl p-4">
+          <div className="flex items-center gap-1.5 mb-2">
+            <HelpCircle className="w-3.5 h-3.5 text-blue-500" />
+            <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Explanation</span>
+          </div>
+          <p className="text-xs text-slate-600 font-medium gujarati-text leading-relaxed">
+            {q.explanation}
+          </p>
+        </div>
+      )}
+    </article>
   );
 }
