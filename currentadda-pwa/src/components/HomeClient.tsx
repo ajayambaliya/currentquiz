@@ -6,7 +6,7 @@ import {
     Book, BookOpen, ChevronRight, Trophy, Search, User, Loader2,
     ArrowDown, LayoutGrid, Flame, Sparkles, Clock,
     Target, Award,
-    PlayCircle, Calendar
+    PlayCircle, Calendar, FileText
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -347,13 +347,24 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                             <span>{getQuizDateLabel(quizzes[0].quiz_date)}</span>
                                         </div>
                                     </div>
-                                    <div className="mt-4 inline-flex items-center gap-2 bg-white text-indigo-600 px-4 py-2 rounded-xl font-black text-xs uppercase tracking-wide group-hover:shadow-lg transition-all">
-                                        Start Quiz
-                                        <ChevronRight className="w-4 h-4" />
+                                    <div className="mt-4 flex items-center gap-2">
+                                        <div className="inline-flex items-center gap-2 bg-white text-indigo-600 px-4 py-2 rounded-xl font-black text-xs uppercase tracking-wide group-hover:shadow-lg transition-all">
+                                            Start Quiz
+                                            <ChevronRight className="w-4 h-4" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </Link>
+                        {quizzes[0].quiz_date && (
+                            <Link
+                                href={`/daily/${quizzes[0].quiz_date}`}
+                                className="mt-2 flex items-center justify-center gap-2 bg-white border-2 border-slate-100 py-3 rounded-2xl text-[10px] font-black text-slate-500 uppercase tracking-widest hover:border-indigo-200 hover:text-indigo-600 hover:shadow-md transition-all"
+                            >
+                                <FileText className="w-3.5 h-3.5" />
+                                Read Notes & Answers
+                            </Link>
+                        )}
                     </div>
                 )}
 
@@ -382,6 +393,38 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                 </div>
                             </Link>
                         ))}
+                    </div>
+                </div>
+
+                {/* Current Affairs Guide & Monthly Access */}
+                <div className="mb-8">
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                            <FileText className="w-4 h-4 text-indigo-600" />
+                            <h3 className="text-xs font-black uppercase tracking-widest text-slate-900">Current Affairs Notes</h3>
+                        </div>
+                        <Link href="/current-affairs-in-gujarati" className="text-[9px] font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
+                            Full Guide
+                            <ChevronRight className="w-3 h-3" />
+                        </Link>
+                    </div>
+                    <div className="grid grid-cols-3 gap-3">
+                        {recentMonths.slice(0, 3).map((month) => {
+                            const monthSlug = format(month, 'MMMM').toLowerCase() + '-' + format(month, 'yyyy');
+                            return (
+                                <Link
+                                    key={month.toISOString()}
+                                    href={`/current-affairs-in-gujarati/${monthSlug}`}
+                                    className="bg-white p-4 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all group text-center"
+                                >
+                                    <Calendar className="w-4 h-4 text-indigo-400 mx-auto mb-1.5 group-hover:text-indigo-600 transition-colors" />
+                                    <div className="text-[10px] font-black text-slate-900 group-hover:text-indigo-600 uppercase transition-colors">
+                                        {format(month, 'MMM yyyy')}
+                                    </div>
+                                    <span className="text-[7px] font-bold text-slate-300 uppercase tracking-widest">Monthly CA</span>
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -504,6 +547,18 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                                                 </div>
                                             </div>
                                         </Link>
+                                        {quiz.quiz_date && (
+                                            <div className="flex justify-end mt-1.5 mr-1">
+                                                <Link
+                                                    href={`/daily/${quiz.quiz_date}`}
+                                                    className="flex items-center gap-1 text-[8px] font-bold text-slate-400 hover:text-indigo-600 transition-colors uppercase tracking-widest"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    <FileText className="w-3 h-3" />
+                                                    Read Notes
+                                                </Link>
+                                            </div>
+                                        )}
                                     </div>
                                 );
                             })}

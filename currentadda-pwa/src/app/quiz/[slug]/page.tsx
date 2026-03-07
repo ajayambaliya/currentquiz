@@ -3,7 +3,7 @@ import QuizEngine from './QuizEngine';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, FileText, BookOpen } from 'lucide-react';
 import { generateSeoContent, generateAuthorSchema } from '@/lib/seo-brain';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { cache } from 'react';
@@ -183,6 +183,37 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <QuizEngine quiz={quiz} questions={questions || []} />
+
+            {/* Read Notes / Daily Text Link */}
+            {quiz.quiz_date && (
+                <section className="mt-10 border-t border-slate-100 pt-8">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-indigo-100">
+                        <h3 className="text-xs font-black uppercase tracking-widest text-indigo-600 mb-3 flex items-center gap-2">
+                            <FileText className="w-3.5 h-3.5" />
+                            Study Notes
+                        </h3>
+                        <p className="text-xs text-slate-600 font-medium mb-4 gujarati-text leading-relaxed">
+                            આ quiz ના તમામ પ્રશ્નો, જવાબો અને વિગતવાર સમજૂતી text format માં વાંચો — revision માટે ઉપયોગી.
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            <Link
+                                href={`/daily/${quiz.quiz_date}`}
+                                className="inline-flex items-center gap-2 bg-white text-indigo-600 border border-indigo-200 px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:shadow-md hover:border-indigo-300 transition-all"
+                            >
+                                <FileText className="w-3.5 h-3.5" />
+                                Read Daily Notes
+                            </Link>
+                            <Link
+                                href="/current-affairs-in-gujarati"
+                                className="inline-flex items-center gap-2 bg-white text-slate-500 border border-slate-200 px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:text-indigo-600 hover:border-indigo-200 transition-all"
+                            >
+                                <BookOpen className="w-3.5 h-3.5" />
+                                Monthly Compilation
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Related Quizzes Section - Topic Clustering */}
             {related && related.length > 0 && (
