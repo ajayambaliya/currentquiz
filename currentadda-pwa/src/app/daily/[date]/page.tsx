@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, ChevronRight, Calendar, BookOpen, CheckCircle2, XCircle, HelpCircle, PlayCircle, Sparkles } from 'lucide-react';
@@ -6,10 +6,7 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 3600;
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+
 
 const GUJARATI_MONTHS: Record<string, string> = {
   '01': 'જાન્યુઆરી', '02': 'ફેબ્રુઆરી', '03': 'માર્ચ', '04': 'એપ્રિલ',
@@ -17,8 +14,8 @@ const GUJARATI_MONTHS: Record<string, string> = {
   '09': 'સપ્ટેમ્બર', '10': 'ઓક્ટોબર', '11': 'નવેમ્બર', '12': 'ડિસેમ્બર',
 };
 
-export async function generateMetadata({ params }: { params: { date: string } }): Promise<Metadata> {
-  const { date } = params;
+export async function generateMetadata({ params }: { params: Promise<{ date: string }> }): Promise<Metadata> {
+  const { date } = await params;
   const parts = date.split('-');
   if (parts.length !== 3) return { title: 'Not Found' };
 
@@ -44,8 +41,8 @@ export async function generateMetadata({ params }: { params: { date: string } })
   };
 }
 
-export default async function DailyNotesPage({ params }: { params: { date: string } }) {
-  const { date } = params;
+export default async function DailyNotesPage({ params }: { params: Promise<{ date: string }> }) {
+  const { date } = await params;
 
   // Validate date format
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
@@ -59,7 +56,7 @@ export default async function DailyNotesPage({ params }: { params: { date: strin
   // Fetch quizzes for this date
   const { data: quizzes } = await supabase
     .from('quizzes')
-    .select('id, title, slug, quiz_date, date_str, question_count')
+    .select('id, title, slug, quiz_date, date_str')
     .eq('quiz_date', date)
     .order('created_at', { ascending: true });
 
@@ -71,7 +68,7 @@ export default async function DailyNotesPage({ params }: { params: { date: strin
     .from('questions')
     .select('*')
     .in('quiz_id', quizIds)
-    .order('question_number', { ascending: true });
+    .order('q_index', { ascending: true });
 
   // Fetch adjacent dates for navigation
   const { data: prevQuiz } = await supabase
@@ -196,33 +193,38 @@ export default async function DailyNotesPage({ params }: { params: { date: strin
                   <span className="text-xs font-black text-indigo-600">Q{index + 1}</span>
                 </div>
                 <h4 className="text-sm font-black text-slate-900 gujarati-text leading-relaxed flex-1">
-                  {q.question_text}
+                  {q.text}
                 </h4>
               </div>
 
               {/* Options */}
               <div className="space-y-2 ml-11 mb-4">
-                {q.options && (Array.isArray(q.options) ? q.options : JSON.parse(q.options)).map((opt: string, optIndex: number) => {
-                  const isCorrect = opt === q.correct_answer;
-                  return (
-                    <div
-                      key={optIndex}
-                      className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium gujarati-text ${
-                        isCorrect
-                          ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
-                          : 'bg-slate-50 border border-slate-100 text-slate-600'
-                      }`}
-                    >
-                      {isCorrect ? (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                      ) : (
-                        <div className="w-4 h-4 rounded-full border-2 border-slate-200 flex-shrink-0" />
-                      )}
-                      <span>{opt}</span>
-                      {isCorrect && <span className="text-[8px] font-black text-emerald-600 uppercase tracking-widest ml-auto">✓ Correct</span>}
-                    </div>
-                  );
-                })}
+                {q.options && (() => {
+                  try {
+                    const opts = Array.isArray(q.options) ? q.options : JSON.parse(q.options);
+                    return opts.map((opt: string, optIndex: number) => {
+                      const isCorrect = opt === q.answer;
+                      return (
+                        <div
+                          key={optIndex}
+                          className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium gujarati-text ${
+                            isCorrect
+                              ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
+                              : 'bg-slate-50 border border-slate-100 text-slate-600'
+                          }`}
+                        >
+                          {isCorrect ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                          ) : (
+                            <div className="w-4 h-4 rounded-full border-2 border-slate-200 flex-shrink-0" />
+                          )}
+                          <span>{opt}</span>
+                          {isCorrect && <span className="text-[8px] font-black text-emerald-600 uppercase tracking-widest ml-auto">✓ Correct</span>}
+                        </div>
+                      );
+                    });
+                  } catch { return null; }
+                })()}
               </div>
 
               {/* Explanation */}

@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, ChevronRight, Calendar, BookOpen, PlayCircle, Target, Sparkles, FileText } from 'lucide-react';
@@ -6,10 +6,7 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 3600;
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+
 
 const MONTH_NAMES: Record<string, string> = {
   '01': 'January', '02': 'February', '03': 'March', '04': 'April',
@@ -46,8 +43,9 @@ function parseMonthYear(slug: string): { month: string; year: string } | null {
   return { month, year };
 }
 
-export async function generateMetadata({ params }: { params: { monthYear: string } }): Promise<Metadata> {
-  const parsed = parseMonthYear(params.monthYear);
+export async function generateMetadata({ params }: { params: Promise<{ monthYear: string }> }): Promise<Metadata> {
+  const { monthYear } = await params;
+  const parsed = parseMonthYear(monthYear);
   if (!parsed) return { title: 'Not Found' };
 
   const { month, year } = parsed;
@@ -59,12 +57,12 @@ export async function generateMetadata({ params }: { params: { monthYear: string
     description: `Complete ${monthName} ${year} Current Affairs in Gujarati (${guMonth} ${year} કરંટ અફેર્સ). All daily quizzes compiled with MCQs & explanations for GSSSB CCE 2026, GPSC, PSI, Constable & Talati exam preparation.`,
     keywords: `Current Affairs ${monthName} ${year} Gujarati, ${guMonth} ${year} કરંટ અફેર્સ, Monthly Current Affairs Gujarati, CCE ${monthName} ${year} Current Affairs, GPSC ${monthName} ${year}`,
     alternates: {
-      canonical: `https://currentadda.vercel.app/current-affairs-in-gujarati/${params.monthYear}`,
+      canonical: `https://currentadda.vercel.app/current-affairs-in-gujarati/${monthYear}`,
     },
     openGraph: {
       title: `Current Affairs ${monthName} ${year} in Gujarati | Monthly Compilation`,
       description: `Free monthly current affairs ${monthName} ${year} in Gujarati. Complete MCQ compilation for GSSSB CCE, GPSC & all Gujarat govt exams.`,
-      url: `https://currentadda.vercel.app/current-affairs-in-gujarati/${params.monthYear}`,
+      url: `https://currentadda.vercel.app/current-affairs-in-gujarati/${monthYear}`,
       type: 'article',
       siteName: 'CurrentAdda',
       locale: 'gu_IN',
@@ -72,8 +70,9 @@ export async function generateMetadata({ params }: { params: { monthYear: string
   };
 }
 
-export default async function MonthlyCurrentAffairsPage({ params }: { params: { monthYear: string } }) {
-  const parsed = parseMonthYear(params.monthYear);
+export default async function MonthlyCurrentAffairsPage({ params }: { params: Promise<{ monthYear: string }> }) {
+  const { monthYear } = await params;
+  const parsed = parseMonthYear(monthYear);
   if (!parsed) notFound();
 
   const { month, year } = parsed;
@@ -86,15 +85,15 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: { 
 
   const { data: quizzes } = await supabase
     .from('quizzes')
-    .select('id, title, slug, quiz_date, date_str, question_count')
+    .select('id, title, slug, quiz_date, date_str')
     .gte('quiz_date', startDate)
     .lte('quiz_date', endDate)
     .order('quiz_date', { ascending: false });
 
   if (!quizzes || quizzes.length === 0) notFound();
 
-  // Calculate total question count
-  const totalQuestions = quizzes.reduce((sum: number, q: any) => sum + (q.question_count || 0), 0);
+  // Calculate total question count (estimate ~10-15 questions per quiz)
+  const totalQuestions = quizzes.length * 10;
 
   // Fetch adjacent months
   const prevMonthNum = parseInt(month) - 1;
@@ -116,7 +115,7 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: { 
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://currentadda.vercel.app" },
       { "@type": "ListItem", "position": 2, "name": "Current Affairs in Gujarati", "item": "https://currentadda.vercel.app/current-affairs-in-gujarati" },
-      { "@type": "ListItem", "position": 3, "name": `${monthName} ${year}`, "item": `https://currentadda.vercel.app/current-affairs-in-gujarati/${params.monthYear}` }
+      { "@type": "ListItem", "position": 3, "name": `${monthName} ${year}`, "item": `https://currentadda.vercel.app/current-affairs-in-gujarati/${monthYear}` }
     ]
   };
 
@@ -125,7 +124,7 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: { 
     "@type": "CollectionPage",
     "name": `Current Affairs ${monthName} ${year} in Gujarati`,
     "description": `Monthly compilation of ${totalQuestions}+ current affairs MCQs for ${monthName} ${year} in Gujarati`,
-    "url": `https://currentadda.vercel.app/current-affairs-in-gujarati/${params.monthYear}`,
+    "url": `https://currentadda.vercel.app/current-affairs-in-gujarati/${monthYear}`,
     "numberOfItems": quizzes.length,
     "hasPart": quizzes.map((q: any) => ({
       "@type": "Quiz",
@@ -226,11 +225,6 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: { 
                         <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
                           {quiz.date_str || qDate}
                         </span>
-                        {quiz.question_count && (
-                          <span className="bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-lg text-[8px] font-black">
-                            {quiz.question_count} MCQs
-                          </span>
-                        )}
                       </div>
                       <h4 className="text-sm font-black text-slate-900 gujarati-text leading-snug line-clamp-2">
                         {quiz.title}

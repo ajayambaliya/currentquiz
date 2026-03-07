@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { format, subMonths, eachMonthOfInterval } from 'date-fns';
@@ -39,10 +39,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600;
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+
 
 export default async function CurrentAffairsGujaratiPage() {
   // Fetch latest quizzes
