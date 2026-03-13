@@ -1,18 +1,18 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Categorized Current Affairs Quizzes - CurrentAdda",
-    description: "Explore current affairs quizzes by category: Sports, Technology, Politics, and more in Gujarati for Gujarat competitive exams.",
-    keywords: ["Current Affairs Categories", "Gujarati Quiz Topics", "GPSC Category-wise Quiz", "Sports Current Affairs Gujarati"],
-    alternates: {
-        canonical: '/categories',
-    },
+  title: 'Quiz Categories - Current Affairs in Gujarati | CurrentAdda',
+  description: 'Explore 25+ categories of current affairs in Gujarati including Politics, Sports, Science, Economy, and more. Practice MCQs for GPSC and CCE exams.',
+  keywords: 'Current Affairs Categories Gujarati, Politics Quiz Gujarati, Sports Current Affairs, Science MCQs Gujarati',
+  alternates: {
+    canonical: 'https://currentadda.vercel.app/categories',
+  },
 };
 
 export default function CategoriesLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return <>{children}</>;
+  return <>{children}</>;
 }

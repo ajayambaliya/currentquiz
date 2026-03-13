@@ -114,23 +114,6 @@ export default function RootLayout({
     <html lang="gu" suppressHydrationWarning className={`${inter.variable} ${gujarati.variable}`}>
       <body className="antialiased" suppressHydrationWarning>
         <ClientProviders />
-        {/* Globally Hidden SEO Context */}
-        <div className="sr-only">
-          <h1>CurrentAdda - Best Platform for Gujarati Current Affairs Quizzes</h1>
-          <p>
-            CurrentAdda is the premier destination for students preparing for Gujarat Government competitive exams like GPSC, GSSSB, Police Bharti, and Bin Sachivalay.
-            We provide daily updated current affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી), subject-wise MCQs, and category-wise practice tests.
-            Our platform features regular quizzes on History, Politics, Geography, Science, and more, helping you stay ahead in your preparation.
-            Join thousands of candidates on our leaderboard and track your daily progress with our streak system.
-          </p>
-          <nav>
-            <a href="/current-affairs-in-gujarati">Current Affairs in Gujarati</a>
-            <a href="/subjects">Subject-wise Quizzes</a>
-            <a href="/categories">Category-wise Quizzes</a>
-            <a href="/leaderboard">Real-time Leaderboard</a>
-            <a href="/author">Content Expert Profile</a>
-          </nav>
-        </div>
         {children}
         <Analytics />
         <SpeedInsights />
