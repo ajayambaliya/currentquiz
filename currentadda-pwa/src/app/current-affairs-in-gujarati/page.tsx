@@ -612,6 +612,17 @@ export default async function CurrentAffairsGujaratiPage() {
               </div>
             </div>
           </Link>
+          <Link href="/indiabix-current-affairs-gujarati" className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-lg transition-all group">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-rose-50 rounded-2xl flex items-center justify-center group-hover:bg-rose-600 transition-all">
+                <Sparkles className="w-6 h-6 text-rose-600 group-hover:text-white" />
+              </div>
+              <div>
+                <h3 className="font-black text-slate-800 group-hover:text-rose-600 transition-colors">IndiaBIX Gujarati</h3>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">National MCQs in Gujarati</p>
+              </div>
+            </div>
+          </Link>
         </section>
 
         {/* Footer Content */}
