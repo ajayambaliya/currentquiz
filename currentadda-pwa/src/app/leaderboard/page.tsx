@@ -1,401 +1,487 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import {
-    Trophy, Star, ArrowLeft, TrendingUp,
-    Calendar, Crown, Medal, Timer,
-    ChevronRight, Sparkles, User as UserIcon,
-    LayoutGrid, Home, Target
+    Trophy, ArrowLeft, Crown, Medal, Star, Zap,
+    Search, Users, ChevronDown, Home, LayoutGrid,
+    User as UserIcon, Flame, Target, TrendingUp
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LeaderboardSkeleton } from '@/components/SkeletonLoader';
-import { startOfWeek, startOfMonth, format } from 'date-fns';
+import { startOfWeek, startOfMonth } from 'date-fns';
 import { useAuth } from '@/hooks/useAuth';
 
 type TimeFilter = 'all' | 'monthly' | 'weekly';
 
 export default function LeaderboardPage() {
     const { user } = useAuth();
-    const [leaders, setLeaders] = useState<any[]>([]);
+    const [allLeaders, setAllLeaders] = useState<any[]>([]);
+    const [filteredLeaders, setFilteredLeaders] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [timeFilter, setTimeFilter] = useState<TimeFilter>('all');
     const [currentUserRank, setCurrentUserRank] = useState<any>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [displayLimit, setDisplayLimit] = useState(30);
 
     useEffect(() => {
-        let isMounted = true;
-        fetchLeaders(isMounted);
-        return () => {
-            isMounted = false;
-        };
+        let mounted = true;
+        fetchLeaders(mounted);
+        return () => { mounted = false; };
     }, [timeFilter]);
 
-    async function fetchLeaders(isMounted: boolean) {
+    useEffect(() => {
+        const q = searchQuery.toLowerCase().trim();
+        if (!q) return setFilteredLeaders(allLeaders);
+        setFilteredLeaders(allLeaders.filter(l =>
+            l.profiles.full_name.toLowerCase().includes(q)
+        ));
+    }, [searchQuery, allLeaders]);
+
+    const fetchLeaders = useCallback(async (mounted: boolean) => {
         try {
-            if (isMounted) {
-                setLoading(true);
-                setErrorMsg(null);
-            }
+            if (mounted) { setLoading(true); setErrorMsg(null); setSearchQuery(''); setDisplayLimit(30); }
 
-            let query = supabase
-                .from('scores')
-                .select('user_id, quiz_id, score, created_at')
-                .order('created_at', { ascending: true });
+            let allScores: any[] = [];
+            let from = 0;
+            const step = 1000;
+            let hasMore = true;
 
-            // Apply date filters
-            if (timeFilter === 'weekly') {
-                const start = startOfWeek(new Date(), { weekStartsOn: 1 }).toISOString();
-                query = query.gte('created_at', start);
-            } else if (timeFilter === 'monthly') {
-                const start = startOfMonth(new Date()).toISOString();
-                query = query.gte('created_at', start);
-            }
+            while (hasMore && from < 15000) {
+                let query = supabase
+                    .from('scores')
+                    .select('user_id, quiz_id, score, created_at')
+                    .order('created_at', { ascending: true })
+                    .range(from, from + step - 1);
 
-            const { data: allScores, error: scoresError } = await query;
-
-            if (scoresError) throw scoresError;
-
-            if (!allScores || allScores.length === 0) {
-                if (isMounted) {
-                    setLeaders([]);
-                    setLoading(false);
+                if (timeFilter === 'weekly') {
+                    query = query.gte('created_at', startOfWeek(new Date(), { weekStartsOn: 1 }).toISOString());
+                } else if (timeFilter === 'monthly') {
+                    query = query.gte('created_at', startOfMonth(new Date()).toISOString());
                 }
+
+                const { data, error } = await query;
+                if (error) throw error;
+                if (!data || data.length === 0) { hasMore = false; break; }
+                allScores = [...allScores, ...data];
+                from += step;
+                if (data.length < step) hasMore = false;
+            }
+
+            if (allScores.length === 0) {
+                if (mounted) { setAllLeaders([]); setFilteredLeaders([]); setLoading(false); }
                 return;
             }
 
-            // Step 2: Extract only the FIRST attempt for each (user, quiz) pair
-            const firstAttemptsOnly: Record<string, any> = {};
-            allScores.forEach(s => {
-                const key = `${s.user_id}_${s.quiz_id}`;
-                if (!firstAttemptsOnly[key]) {
-                    firstAttemptsOnly[key] = s;
-                }
+            // ⚠️ Filter out rows with no user_id (prevents duplicate empty-string keys)
+            const validScores = allScores.filter(s => s.user_id && s.user_id.trim() !== '');
+
+            if (validScores.length === 0) {
+                if (mounted) { setAllLeaders([]); setFilteredLeaders([]); setLoading(false); }
+                return;
+            }
+
+            // Deduplicate: first attempt per user+quiz
+            const firstAttempts: Record<string, any> = {};
+            [...validScores].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+                .forEach(s => {
+                    const key = `${s.user_id}_${s.quiz_id}`;
+                    if (!firstAttempts[key]) firstAttempts[key] = s;
+                });
+
+            // Aggregate
+            const agg: Record<string, any> = {};
+            Object.values(firstAttempts).forEach((s: any) => {
+                const uid = s.user_id;
+                if (!agg[uid]) agg[uid] = { user_id: uid, total_score: 0, quiz_count: 0 };
+                agg[uid].total_score += s.score;
+                agg[uid].quiz_count += 1;
             });
 
-            // Step 3: Aggregate by user_id
-            const finalScores = Object.values(firstAttemptsOnly).reduce((acc: any, curr: any) => {
-                const uid = curr.user_id;
-                if (!acc[uid]) {
-                    acc[uid] = { user_id: uid, total_score: 0, quiz_count: 0 };
-                }
-                acc[uid].total_score += curr.score;
-                acc[uid].quiz_count += 1;
-                return acc;
-            }, {});
+            const sortedIds = Object.keys(agg).sort((a, b) => agg[b].total_score - agg[a].total_score);
 
-            const sortedUserIds = Object.keys(finalScores).sort((a, b) =>
-                finalScores[b].total_score - finalScores[a].total_score
-            );
+            // Fetch profiles in batches of 100
+            let allProfiles: any[] = [];
+            for (let i = 0; i < sortedIds.length; i += 100) {
+                const { data } = await supabase.from('profiles').select('id, full_name, avatar_url').in('id', sortedIds.slice(i, i + 100));
+                if (data) allProfiles = [...allProfiles, ...data];
+            }
+            const profileMap = allProfiles.reduce((acc: any, p) => { acc[p.id] = p; return acc; }, {});
 
-            // Step 4: Fetch profiles
-            const { data: profiles, error: profilesError } = await supabase
-                .from('profiles')
-                .select('id, full_name, avatar_url')
-                .in('id', sortedUserIds.slice(0, 50)); // Limit to top 50
-
-            if (profilesError) throw profilesError;
-
-            const profileMap = (profiles || []).reduce((acc: any, p) => {
-                acc[p.id] = p;
-                return acc;
-            }, {});
-
-            const mergedData = sortedUserIds.map((uid, index) => {
-                const entry = {
-                    ...finalScores[uid],
-                    profiles: profileMap[uid] || { full_name: 'Anonymous User' },
-                    rank: index + 1
-                };
-
-                // Track current user's rank
-                if (user && uid === user.id) {
-                    setCurrentUserRank(entry);
-                }
-
+            const merged = sortedIds.map((uid, index) => {
+                const entry = { ...agg[uid], profiles: profileMap[uid] || { full_name: 'Anonymous' }, rank: index + 1 };
+                if (user && uid === user.id) setCurrentUserRank(entry);
                 return entry;
-            }).slice(0, 50);
+            });
 
-            if (isMounted) setLeaders(mergedData);
-        } catch (error: any) {
-            console.error('Error fetching leaders:', error);
-            if (isMounted) setErrorMsg(error.message || 'Failed to load leaderboard data.');
+            if (mounted) { setAllLeaders(merged); setFilteredLeaders(merged); }
+        } catch (err: any) {
+            console.error(err);
+            if (mounted) setErrorMsg(err.message || 'Failed to load');
         } finally {
-            if (isMounted) setLoading(false);
+            if (mounted) setLoading(false);
         }
-    }
+    }, [timeFilter, user]);
 
-    const top3 = leaders.slice(0, 3);
-    const rest = leaders.slice(3);
+    const top3 = filteredLeaders.slice(0, 3);
+    const rest = filteredLeaders.slice(3, displayLimit);
+    const hasMore = displayLimit < filteredLeaders.length;
 
     return (
-        <main className="min-h-screen bg-[#f8fafc] max-w-xl mx-auto pb-44 selection:bg-indigo-100">
-            {/* Premium Glass Header */}
-            <header className="px-6 py-6 sticky top-0 z-[60] bg-white/80 backdrop-blur-xl border-b border-slate-100 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                    <Link href="/" className="p-2.5 bg-slate-50 hover:bg-slate-100 transition-all rounded-2xl text-slate-500">
-                        <ArrowLeft className="w-5 h-5" />
-                    </Link>
-                    <div>
-                        <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none">Leaderboard</h1>
-                        <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest mt-1.5 ml-0.5">Top Candidates</p>
-                    </div>
+        <main className="min-h-screen max-w-xl mx-auto relative overflow-x-hidden bg-[#08081a]">
+            {/* ── BG Orbs ── */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+                <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-indigo-700/20 blur-[120px]" />
+                <div className="absolute top-[40%] -left-24 w-64 h-64 rounded-full bg-purple-700/15 blur-[80px]" />
+                <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-blue-700/10 blur-[100px]" />
+            </div>
+
+            {/* ── Header ── */}
+            <header className="relative z-20 px-5 pt-6 pb-4 flex items-center justify-between">
+                <Link href="/" className="w-10 h-10 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/15 transition-all active:scale-95">
+                    <ArrowLeft className="w-4 h-4" />
+                </Link>
+                <div className="text-center">
+                    <h1 className="text-white font-black text-lg tracking-tight flex items-center gap-2 justify-center">
+                        <Trophy className="w-5 h-5 text-amber-400 fill-amber-400" />
+                        Leaderboard
+                    </h1>
+                    <p className="text-white/30 text-[9px] uppercase tracking-[0.25em] font-bold mt-0.5">Honor Roll</p>
                 </div>
-                <div className="bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100/50 flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[9px] font-black text-emerald-600 uppercase tracking-widest leading-none">Real-time</span>
+                <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse block" />
+                    <span className="text-emerald-400 text-[9px] font-black uppercase tracking-widest">Live</span>
                 </div>
             </header>
 
-            {/* Time Filter Tabs */}
-            <div className="px-6 mt-8">
-                <div className="bg-slate-100/50 p-1.5 rounded-[1.5rem] flex items-center gap-1 border border-slate-200/50">
-                    {(['all', 'monthly', 'weekly'] as TimeFilter[]).map((filter) => (
-                        <button
-                            key={filter}
-                            onClick={() => setTimeFilter(filter)}
-                            className={`flex-1 py-3.5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all relative
-                                ${timeFilter === filter
-                                    ? 'bg-white text-indigo-600 shadow-sm border border-indigo-50'
-                                    : 'text-slate-400 hover:text-slate-600'}`}
-                        >
-                            <span className="relative z-10">{filter} Time</span>
-                            {timeFilter === filter && (
-                                <motion.div
-                                    layoutId="activeFilter"
-                                    className="absolute inset-0 bg-white rounded-2xl shadow-indigo-100/50 shadow-lg"
-                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                />
+            {/* ── Tab Switcher ── */}
+            <div className="relative z-20 px-5 mt-2">
+                <div className="grid grid-cols-3 gap-1.5 bg-white/5 p-1.5 rounded-[1.5rem] border border-white/10">
+                    {(['all', 'monthly', 'weekly'] as TimeFilter[]).map(f => (
+                        <button key={f} onClick={() => setTimeFilter(f)}
+                            className="relative py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-[0.15em] transition-all z-10">
+                            <span className={`relative z-10 ${timeFilter === f ? 'text-white' : 'text-white/30 hover:text-white/60'}`}>
+                                {f === 'all' ? 'All Time' : f === 'monthly' ? 'Monthly' : 'Weekly'}
+                            </span>
+                            {timeFilter === f && (
+                                <motion.div layoutId="tab" transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                                    className="absolute inset-0 bg-indigo-600 rounded-2xl -z-10 shadow-lg shadow-indigo-500/30" />
                             )}
                         </button>
                     ))}
                 </div>
             </div>
 
-            <div className="px-6 py-8">
+            {/* ── Main Content ── */}
+            <div className="relative z-10 px-5 pb-52 mt-6">
                 {errorMsg ? (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="bg-white py-16 rounded-[2.5rem] border border-red-50 text-center space-y-5 shadow-xl shadow-red-100/50"
-                    >
-                        <div className="bg-red-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto transition-transform hover:rotate-12">
-                            <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
+                    <div className="mt-16 flex flex-col items-center gap-5 text-center">
+                        <div className="w-20 h-20 rounded-[2rem] bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+                            <Zap className="w-8 h-8 text-red-400" />
                         </div>
-                        <div className="space-y-1">
+                        <div>
                             <p className="text-red-400 font-black text-xs uppercase tracking-widest">Connection Error</p>
-                            <p className="text-slate-500 font-bold gujarati-text text-sm px-8">લીડરબોર્ડ ડેટા લોડ થઈ શક્યો નથી.</p>
+                            <p className="text-white/40 text-sm font-bold mt-1">ડેટા લોડ કરવામાં સમસ્યા</p>
                         </div>
-                        <button onClick={() => fetchLeaders(true)} className="inline-flex items-center gap-2 text-white font-black text-[9px] uppercase tracking-widest bg-red-500 px-5 py-2.5 rounded-xl hover:bg-red-600 transition-all shadow-md shadow-red-500/20">
-                            Retry
+                        <button onClick={() => fetchLeaders(true)}
+                            className="px-8 py-3 bg-red-500 text-white font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-red-400 active:scale-95 transition-all shadow-lg shadow-red-500/30">
+                            Try Again
                         </button>
-                    </motion.div>
+                    </div>
                 ) : loading ? (
-                    <LeaderboardSkeleton count={10} />
-                ) : leaders.length === 0 ? (
-                    <div className="py-24 text-center space-y-4">
-                        <div className="w-20 h-20 bg-slate-50 rounded-[2.5rem] flex items-center justify-center mx-auto border border-slate-100">
-                            <Sparkles className="w-8 h-8 text-slate-200" />
-                        </div>
-                        <p className="text-slate-400 font-bold gujarati-text">આ ફિલ્ટર માટે હજી કોઈ રેકોર્ડ નથી.</p>
+                    <LoadingSkeleton />
+                ) : allLeaders.length === 0 ? (
+                    <div className="mt-24 text-center">
+                        <Trophy className="w-16 h-16 text-white/10 mx-auto mb-4" />
+                        <p className="text-white/30 font-bold uppercase text-xs tracking-widest">No Data Yet</p>
                     </div>
                 ) : (
-                    <>
-                        {/* Podium - Visual Top 3 */}
-                        <div className="mb-12 relative">
-                            {/* Background Aura */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/5 blur-[80px] rounded-full pointer-events-none" />
+                    <AnimatePresence mode="wait">
+                        {/* ── Podium ── */}
+                        {!searchQuery && (
+                            <motion.div key="podium" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                                {/* #1 Hero Card */}
+                                {top3[0] && <HeroCard entry={top3[0]} />}
 
-                            <div className="flex items-end justify-center gap-2 md:gap-4 pt-10 px-2 relative z-10">
-                                {/* Rank 2 */}
-                                {top3[1] && (
-                                    <PodiumSlot
-                                        entry={top3[1]}
-                                        rank={2}
-                                        color="silver"
-                                        delay={0.1}
-                                    />
-                                )}
+                                {/* #2 and #3 */}
+                                <div className="grid grid-cols-2 gap-3 mt-3">
+                                    {[top3[1], top3[2]].map((entry, i) => entry && (
+                                        <SilverBronzeCard key={`rank-${entry.rank}`} entry={entry} rank={i + 2} delay={0.1 * (i + 1)} />
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
 
-                                {/* Rank 1 */}
-                                {top3[0] && (
-                                    <PodiumSlot
-                                        entry={top3[0]}
-                                        rank={1}
-                                        color="gold"
-                                        delay={0}
-                                    />
-                                )}
+                        {/* ── Stats Bar ── */}
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                            className="mt-5 grid grid-cols-3 gap-2">
+                            <StatPill icon={<Users className="w-3 h-3 text-indigo-400" />} label="Players" value={allLeaders.length.toString()} />
+                            <StatPill icon={<TrendingUp className="w-3 h-3 text-amber-400" />} label="Top Score" value={allLeaders[0]?.total_score?.toString() ?? '—'} />
+                            <StatPill icon={<Target className="w-3 h-3 text-emerald-400" />} label="Filter" value={timeFilter === 'all' ? 'All' : timeFilter === 'monthly' ? 'Month' : 'Week'} />
+                        </motion.div>
 
-                                {/* Rank 3 */}
-                                {top3[2] && (
-                                    <PodiumSlot
-                                        entry={top3[2]}
-                                        rank={3}
-                                        color="bronze"
-                                        delay={0.2}
-                                    />
-                                )}
+                        {/* ── Search ── */}
+                        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+                            className="mt-4 relative">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+                            <input
+                                type="text" placeholder="Search candidates..." value={searchQuery}
+                                onChange={e => setSearchQuery(e.target.value)}
+                                className="w-full pl-11 pr-4 py-4 bg-white/5 border border-white/10 rounded-[1.5rem] text-white text-sm font-medium placeholder:text-white/20 focus:outline-none focus:border-indigo-500/50 focus:bg-white/8 transition-all"
+                            />
+                        </motion.div>
+
+                        {/* ── Full List ── */}
+                        <div className="mt-4">
+                            <div className="flex items-center justify-between mb-3 px-1">
+                                <span className="text-white/40 text-[9px] font-black uppercase tracking-[0.25em]">Full Ranking</span>
+                                <span className="text-white/20 text-[9px] font-bold">{filteredLeaders.length} candidates</span>
                             </div>
-                        </div>
-
-                        {/* Search/Stats indicator */}
-                        <div className="flex items-center justify-between mb-6 px-2">
-                            <div className="flex items-center gap-2">
-                                <TrendingUp className="w-4 h-4 text-slate-400" />
-                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] leading-none">Complete Breakdown</span>
+                            <div className="space-y-2">
+                                <AnimatePresence>
+                                    {rest.map((entry, idx) => (
+                                        <RankRow key={`rank-${entry.rank}`} entry={entry}
+                                            isMe={user ? entry.user_id === user.id : false}
+                                            delay={idx < 10 ? idx * 0.025 : 0}
+                                        />
+                                    ))}
+                                </AnimatePresence>
                             </div>
-                            <span className="text-[9px] font-black text-indigo-500 leading-none">{leaders.length} Players Active</span>
-                        </div>
 
-                        {/* Remaining List */}
-                        <div className="space-y-3">
-                            <AnimatePresence mode="popLayout">
-                                {rest.map((entry, idx) => (
-                                    <motion.div
-                                        key={entry.user_id}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, scale: 0.95 }}
-                                        transition={{ delay: idx * 0.03 }}
-                                        className="bg-white p-4 rounded-[1.75rem] border border-slate-100 flex items-center justify-between group hover:shadow-xl hover:shadow-indigo-50/50 hover:border-indigo-100 transition-all cursor-default"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-2xl bg-slate-50 flex items-center justify-center font-black text-slate-400 text-xs border border-slate-100/50 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
-                                                #{entry.rank}
-                                            </div>
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-11 h-11 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden">
-                                                    {entry.profiles.avatar_url ? (
-                                                        <img src={getProxiedImageUrl(entry.profiles.avatar_url)} alt="Profile" className="w-full h-full object-cover" />
-                                                    ) : (
-                                                        <UserIcon className="w-5 h-5 text-slate-300" />
-                                                    )}
-                                                </div>
-                                                <div>
-                                                    <h3 className="font-black text-slate-800 text-[13px] leading-tight flex items-center gap-1.5">
-                                                        {entry.profiles.full_name}
-                                                        {user && entry.user_id === user.id && (
-                                                            <span className="bg-indigo-600 text-[8px] text-white px-1.5 py-0.5 rounded-md uppercase tracking-tighter">You</span>
-                                                        )}
-                                                    </h3>
-                                                    <p className="text-[9px] font-bold text-slate-400 mt-1 uppercase tracking-tight flex items-center gap-1.5">
-                                                        <Target className="w-2.5 h-2.5" />
-                                                        {entry.quiz_count} Unique Quizzes
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="text-right">
-                                            <div className="flex items-center gap-2 justify-end">
-                                                <span className="text-lg font-black text-slate-800 leading-none">{entry.total_score}</span>
-                                                <div className="p-1.5 bg-amber-50 rounded-lg">
-                                                    <Medal className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                                                </div>
-                                            </div>
-                                            <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest mt-1 block">Total Points</span>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </AnimatePresence>
+                            {hasMore && (
+                                <motion.button whileTap={{ scale: 0.97 }} onClick={() => setDisplayLimit(p => p + 30)}
+                                    className="mt-4 w-full py-4 rounded-[1.5rem] border border-white/10 bg-white/5 text-white/50 text-[10px] font-black uppercase tracking-widest hover:bg-white/10 hover:text-white/80 transition-all flex items-center justify-center gap-2">
+                                    Load More
+                                    <ChevronDown className="w-3.5 h-3.5" />
+                                </motion.button>
+                            )}
                         </div>
-                    </>
+                    </AnimatePresence>
                 )}
             </div>
 
-            {/* Bottom Your Rank Sticky (if not loading and user rank exists) */}
+            {/* ── Floating Rank Banner ── */}
             {user && currentUserRank && !loading && (
-                <motion.div
-                    initial={{ y: 100 }}
-                    animate={{ y: 0 }}
-                    className="fixed bottom-[110px] left-0 w-full px-6 z-40 pointer-events-none"
-                >
-                    <div className="max-w-xl mx-auto pointer-events-auto">
-                        <div className="bg-indigo-900 shadow-2xl shadow-indigo-200/50 p-5 rounded-[2.5rem] flex items-center justify-between border-4 border-white/10 backdrop-blur-md">
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 bg-white/10 rounded-2xl flex flex-col items-center justify-center border border-white/5">
-                                    <span className="text-[8px] uppercase font-black text-indigo-300 mb-0.5">Rank</span>
-                                    <span className="text-xl font-black text-white">#{currentUserRank.rank}</span>
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-[10px] uppercase font-black text-indigo-400 tracking-widest mb-1">Your Stats</span>
-                                    <span className="text-lg font-black text-white leading-none">Great job, {currentUserRank.profiles.full_name.split(' ')[0]}!</span>
-                                </div>
+                <motion.div initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, type: 'spring' }}
+                    className="fixed bottom-[100px] left-0 w-full px-5 z-40 pointer-events-none max-w-xl mx-auto" style={{ left: '50%', transform: 'translateX(-50%)' }}>
+                    <div className="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 border border-indigo-600/30 rounded-[2rem] p-4 flex items-center justify-between shadow-[0_20px_60px_rgba(79,70,229,0.5)] pointer-events-auto overflow-hidden relative">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+                        <div className="flex items-center gap-3 relative z-10">
+                            <div className="w-12 h-12 bg-white/10 rounded-2xl flex flex-col items-center justify-center border border-white/10">
+                                <span className="text-[7px] font-black text-indigo-300 uppercase tracking-wider opacity-70">Rank</span>
+                                <span className="text-lg font-black text-white leading-none">#{currentUserRank.rank}</span>
                             </div>
-                            <div className="text-right pr-2">
-                                <div className="text-2xl font-black text-white leading-none">{currentUserRank.total_score}</div>
-                                <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest mt-1 block">Points</span>
+                            <div>
+                                <div className="flex items-center gap-1.5 mb-0.5">
+                                    <Flame className="w-3 h-3 text-orange-400 fill-orange-400" />
+                                    <span className="text-[8px] font-black text-indigo-300 uppercase tracking-[0.2em]">Your Score</span>
+                                </div>
+                                <p className="text-white font-black text-sm leading-none">
+                                    {currentUserRank.profiles?.full_name?.split(' ')[0]} · {currentUserRank.quiz_count} quizzes
+                                </p>
                             </div>
+                        </div>
+                        <div className="relative z-10 text-right">
+                            <div className="text-2xl font-black text-white tabular-nums leading-none">{currentUserRank.total_score}</div>
+                            <div className="text-[8px] font-black text-indigo-400 uppercase tracking-widest mt-1">points</div>
                         </div>
                     </div>
                 </motion.div>
             )}
 
-            {/* Navigation Tab Bar */}
-            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-6 pb-8 pt-2">
-                <div className="glass p-2 rounded-[2rem] modern-shadow border border-white/40 flex justify-around items-center shadow-2xl">
-                    <Link href="/" className="p-3 text-slate-400 hover:text-indigo-500 transition-all rounded-2xl"><Home className="w-6 h-6" /></Link>
-                    <Link href="/categories" className="p-3 text-slate-400 hover:text-indigo-500 transition-all rounded-2xl"><LayoutGrid className="w-6 h-6" /></Link>
-                    <Link href="/leaderboard" className="bg-indigo-600 text-white p-4 rounded-2xl shadow-lg shadow-indigo-100 flex items-center justify-center transition-all scale-105"><Trophy className="w-6 h-6" /></Link>
-                    <Link href="/profile" className="p-3 text-slate-400 hover:text-indigo-500 transition-all rounded-2xl"><div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center overflow-hidden"><UserIcon className="w-4 h-4" /></div></Link>
+            {/* ── Bottom Nav ── */}
+            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-5 pb-7 pt-2">
+                <div className="bg-[#141428]/90 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-2.5 flex justify-around items-center shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+                    <NavBtn href="/" icon={<Home className="w-5 h-5" />} />
+                    <NavBtn href="/categories" icon={<LayoutGrid className="w-5 h-5" />} />
+                    <Link href="/leaderboard" className="bg-amber-500 text-white p-4 rounded-[1.5rem] shadow-[0_8px_24px_rgba(245,158,11,0.4)] flex items-center justify-center scale-105 hover:scale-110 active:scale-95 transition-all">
+                        <Trophy className="w-5 h-5 fill-white" />
+                    </Link>
+                    <NavBtn href="/profile" icon={
+                        <div className="w-6 h-6 rounded-xl bg-white/10 border border-white/10 overflow-hidden flex items-center justify-center">
+                            {user?.user_metadata?.avatar_url
+                                ? <img src={getProxiedImageUrl(user.user_metadata.avatar_url)} alt="" className="w-full h-full object-cover" />
+                                : <UserIcon className="w-3.5 h-3.5 text-white/40" />}
+                        </div>
+                    } />
                 </div>
             </nav>
         </main>
     );
 }
 
-function PodiumSlot({ entry, rank, color, delay }: { entry: any, rank: number, color: 'gold' | 'silver' | 'bronze', delay: number }) {
-    const isGold = color === 'gold';
-    const bgClass = isGold ? 'bg-amber-500' : (color === 'silver' ? 'bg-slate-400' : 'bg-orange-600');
-    const borderClass = isGold ? 'border-amber-100/30' : (color === 'silver' ? 'border-slate-100/30' : 'border-orange-100/30');
-    const ringClass = isGold ? 'ring-amber-400/20 shadow-amber-500/20' : (color === 'silver' ? 'ring-slate-400/20 shadow-slate-400/20' : 'ring-orange-600/20 shadow-orange-600/20');
+// ─────────────────────────────────────────────────────────────────────────────
+// Sub-Components
+// ─────────────────────────────────────────────────────────────────────────────
 
+function NavBtn({ href, icon }: { href: string; icon: React.ReactNode }) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay, duration: 0.6 }}
-            className={`flex flex-col items-center flex-1 ${isGold ? '-mt-10' : ''}`}
-        >
-            <div className="relative mb-4">
-                {isGold && (
-                    <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-x-0 -top-8 flex justify-center opacity-40"
-                    >
-                        <Sparkles className="w-8 h-8 text-amber-500" />
-                    </motion.div>
-                )}
+        <Link href={href} className="p-3 text-white/30 hover:text-white/70 transition-all rounded-2xl">
+            {icon}
+        </Link>
+    );
+}
 
-                <div className={`relative ${isGold ? 'w-24 h-24' : 'w-20 h-20'} rounded-[2.5rem] bg-white shadow-2xl p-2 z-10 ${borderClass} border-[1px]`}>
-                    <div className="w-full h-full rounded-[2rem] bg-slate-50 overflow-hidden relative border border-slate-100">
-                        {entry.profiles.avatar_url ? (
-                            <img src={getProxiedImageUrl(entry.profiles.avatar_url)} alt="P" className="w-full h-full object-cover" />
-                        ) : (
-                            <div className="w-full h-full flex items-center justify-center text-slate-300">
-                                <UserIcon className={`${isGold ? 'w-10 h-10' : 'w-8 h-8'}`} />
-                            </div>
-                        )}
+function StatPill({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+    return (
+        <div className="bg-white/5 border border-white/8 rounded-2xl p-3 flex flex-col gap-1">
+            <div className="flex items-center gap-1.5">{icon}<span className="text-white/30 text-[8px] font-black uppercase tracking-wider">{label}</span></div>
+            <div className="text-white font-black text-sm leading-none">{value}</div>
+        </div>
+    );
+}
+
+function HeroCard({ entry }: { entry: any }) {
+    return (
+        <motion.div initial={{ opacity: 0, y: 30, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, type: 'spring' }}
+            className="relative rounded-[2.5rem] overflow-hidden">
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-950/80 via-amber-900/60 to-indigo-950/80" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.25),transparent_60%)]" />
+            {/* Shiny top border */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent" />
+
+            <div className="relative z-10 p-6 flex items-center gap-5">
+                {/* Avatar */}
+                <div className="relative flex-shrink-0">
+                    <div className="w-20 h-20 rounded-[1.75rem] overflow-hidden border-2 border-amber-400/40 shadow-[0_0_30px_rgba(245,158,11,0.4)]">
+                        {entry.profiles?.avatar_url
+                            ? <img src={getProxiedImageUrl(entry.profiles.avatar_url)} alt="" className="w-full h-full object-cover" />
+                            : <div className="w-full h-full bg-gradient-to-br from-amber-900/50 to-indigo-900/50 flex items-center justify-center">
+                                <UserIcon className="w-8 h-8 text-amber-400/50" />
+                              </div>}
                     </div>
-                    {/* Rank Indicator */}
-                    <div className={`absolute -bottom-2 -right-2 ${isGold ? 'w-10 h-10' : 'w-8 h-8'} rounded-2xl flex items-center justify-center shadow-lg border-4 border-white ${bgClass}`}>
-                        {isGold ? <Crown className="w-4 h-4 text-white fill-white" /> : <Medal className="w-3.5 h-3.5 text-white fill-white" />}
+                    {/* Crown */}
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <Crown className="w-8 h-8 text-amber-400 fill-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+                    </div>
+                    {/* Badge */}
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-amber-500 rounded-xl flex items-center justify-center border-2 border-[#08081a] shadow-lg">
+                        <span className="text-white font-black text-[10px]">#1</span>
                     </div>
                 </div>
-            </div>
 
-            <div className="text-center space-y-1">
-                <h3 className="font-black text-slate-900 text-sm tracking-tight truncate max-w-[100px] leading-none">
-                    {entry.profiles.full_name.split(' ')[0]}
-                </h3>
-                <div className={`${isGold ? 'bg-amber-100/50 text-amber-700' : 'bg-slate-100 text-slate-500'} px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest`}>
-                    {entry.total_score}
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                        <span className="text-amber-400 text-[8px] font-black uppercase tracking-[0.25em]">Champion</span>
+                        <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                    </div>
+                    <h2 className="text-white font-black text-xl leading-none truncate mb-3">
+                        {entry.profiles?.full_name}
+                    </h2>
+                    <div className="flex items-end gap-1.5">
+                        <span className="text-amber-400 font-black text-3xl leading-none tabular-nums">{entry.total_score}</span>
+                        <span className="text-amber-600 text-[9px] font-black uppercase tracking-widest mb-1">pts</span>
+                    </div>
+                    <p className="text-white/30 text-[9px] font-bold uppercase tracking-wide mt-1">{entry.quiz_count} quizzes played</p>
                 </div>
             </div>
         </motion.div>
+    );
+}
+
+function SilverBronzeCard({ entry, rank, delay }: { entry: any; rank: number; delay: number }) {
+    const isSilver = rank === 2;
+    const colors = isSilver
+        ? { from: 'from-slate-700/60', via: 'via-slate-600/40', badge: 'bg-slate-400', glow: 'shadow-[0_0_20px_rgba(148,163,184,0.2)]', text: 'text-slate-300', border: 'border-slate-500/30' }
+        : { from: 'from-orange-950/60', via: 'via-orange-900/40', badge: 'bg-orange-500', glow: 'shadow-[0_0_20px_rgba(234,88,12,0.2)]', text: 'text-orange-300', border: 'border-orange-600/30' };
+
+    return (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay, duration: 0.5, type: 'spring' }}
+            className={`relative rounded-[2rem] overflow-hidden border ${colors.border} ${colors.glow}`}>
+            <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.via} to-indigo-950/60`} />
+            <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${isSilver ? 'via-slate-400/30' : 'via-orange-500/30'} to-transparent`} />
+
+            <div className="relative z-10 p-4 flex flex-col items-center text-center gap-3">
+                <div className="relative">
+                    <div className={`w-14 h-14 rounded-2xl overflow-hidden border border-white/10`}>
+                        {entry.profiles?.avatar_url
+                            ? <img src={getProxiedImageUrl(entry.profiles.avatar_url)} alt="" className="w-full h-full object-cover" />
+                            : <div className="w-full h-full bg-white/5 flex items-center justify-center"><UserIcon className="w-6 h-6 text-white/20" /></div>}
+                    </div>
+                    <div className={`absolute -bottom-2 -right-2 w-7 h-7 ${colors.badge} rounded-xl flex items-center justify-center border-2 border-[#08081a] shadow-md`}>
+                        <span className="text-white font-black text-[9px]">#{rank}</span>
+                    </div>
+                </div>
+                <div>
+                    <p className="text-white font-black text-[13px] leading-tight truncate max-w-[90px]">{entry.profiles?.full_name?.split(' ')[0]}</p>
+                    <div className={`${colors.text} font-black text-xl leading-none mt-1 tabular-nums`}>{entry.total_score}</div>
+                    <p className="text-white/20 text-[8px] font-bold uppercase tracking-wide mt-0.5">points</p>
+                </div>
+            </div>
+        </motion.div>
+    );
+}
+
+function RankRow({ entry, isMe, delay }: { entry: any; isMe: boolean; delay: number }) {
+    return (
+        <motion.div initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
+            transition={{ delay, duration: 0.35 }}
+            className={`flex items-center gap-3 p-3.5 rounded-[1.5rem] border transition-all relative overflow-hidden group
+                ${isMe
+                    ? 'bg-gradient-to-r from-indigo-900/80 to-purple-900/60 border-indigo-500/40 shadow-lg shadow-indigo-500/20'
+                    : 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/10'}`}>
+            {/* Number */}
+            <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-[11px] flex-shrink-0
+                ${isMe ? 'bg-indigo-500/30 text-indigo-200' : 'bg-white/5 text-white/30 group-hover:text-white/60'}`}>
+                #{entry.rank}
+            </div>
+
+            {/* Avatar */}
+            <div className={`w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 border
+                ${isMe ? 'border-indigo-400/30' : 'border-white/5'}`}>
+                {entry.profiles?.avatar_url
+                    ? <img src={getProxiedImageUrl(entry.profiles.avatar_url)} alt="" className="w-full h-full object-cover" />
+                    : <div className="w-full h-full bg-white/5 flex items-center justify-center"><UserIcon className="w-4 h-4 text-white/20" /></div>}
+            </div>
+
+            {/* Name & Quizzes */}
+            <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                    <h3 className={`font-black text-[13px] leading-tight truncate ${isMe ? 'text-white' : 'text-white/70 group-hover:text-white/90'}`}>
+                        {entry.profiles?.full_name}
+                    </h3>
+                    {isMe && <span className="bg-indigo-500 text-[7px] text-white font-black px-1.5 py-0.5 rounded-lg uppercase tracking-wide flex-shrink-0">You</span>}
+                </div>
+                <p className={`text-[9px] font-bold uppercase tracking-wide mt-0.5 ${isMe ? 'text-indigo-300/60' : 'text-white/20'}`}>
+                    {entry.quiz_count} quizzes
+                </p>
+            </div>
+
+            {/* Score */}
+            <div className="text-right flex-shrink-0">
+                <div className={`font-black text-base tabular-nums leading-none ${isMe ? 'text-white' : 'text-white/60 group-hover:text-white/80'}`}>
+                    {entry.total_score}
+                </div>
+                {entry.rank <= 10 && (
+                    <div className="flex justify-end mt-0.5">
+                        <Star className="w-2.5 h-2.5 text-amber-500 fill-amber-500" />
+                    </div>
+                )}
+            </div>
+        </motion.div>
+    );
+}
+
+function LoadingSkeleton() {
+    return (
+        <div className="space-y-4 animate-pulse mt-2">
+            {/* Hero skeleton */}
+            <div className="h-36 bg-white/5 rounded-[2.5rem]" />
+            <div className="grid grid-cols-2 gap-3">
+                <div className="h-32 bg-white/5 rounded-[2rem]" />
+                <div className="h-32 bg-white/5 rounded-[2rem]" />
+            </div>
+            <div className="grid grid-cols-3 gap-2 mt-3">
+                {[0,1,2].map(i => <div key={i} className="h-14 bg-white/5 rounded-2xl" />)}
+            </div>
+            {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="h-16 bg-white/5 rounded-[1.5rem]" />
+            ))}
+        </div>
     );
 }
