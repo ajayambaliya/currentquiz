@@ -5,7 +5,7 @@ import { getCategorySeo, ALL_CATEGORY_NAMES } from '@/lib/category-seo';
 import Link from 'next/link';
 
 export async function generateStaticParams() {
-    return ALL_CATEGORY_NAMES.map((cat) => ({ category: encodeURIComponent(cat) }));
+    return ALL_CATEGORY_NAMES.map((cat) => ({ category: cat }));
 }
 
 export const dynamicParams = true;
