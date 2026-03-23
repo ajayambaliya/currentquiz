@@ -8,6 +8,24 @@ import { generateSeoContent, generateAuthorSchema } from '@/lib/seo-brain';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { cache } from 'react';
 
+// Pre-render the 50 most recent quiz pages at build time for better SEO indexing
+export async function generateStaticParams() {
+    const [{ data: quizzes }, { data: subjectQuizzes }] = await Promise.all([
+        supabase.from('quizzes').select('slug').order('created_at', { ascending: false }).limit(50),
+        supabase.from('subject_quizzes').select('slug').order('created_at', { ascending: false }).limit(25),
+    ]);
+
+    const slugs = new Set<string>();
+    (quizzes || []).forEach((q) => slugs.add(q.slug));
+    (subjectQuizzes || []).forEach((q) => slugs.add(q.slug));
+
+    return Array.from(slugs).map((slug) => ({ slug }));
+}
+
+// Allow on-demand ISR for dynamic slugs not pre-rendered
+export const dynamicParams = true;
+export const revalidate = 3600; // Revalidate every hour
+
 const getQuizData = cache(async function getQuizData(slug: string) {
     // 1. Try to find in standard quizzes first
     let { data: quiz, error: quizError } = await supabase

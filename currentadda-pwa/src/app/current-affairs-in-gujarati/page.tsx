@@ -5,11 +5,24 @@ import { format, subMonths, eachMonthOfInterval } from 'date-fns';
 import { BookOpen, ChevronRight, Calendar, Sparkles, Trophy, Target, Clock, ArrowLeft, PlayCircle, FileText, BarChart3 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Current Affairs in Gujarati 2026 - Daily Quiz, MCQs & Notes | CCE, GPSC | કરંટ અફેર્સ ગુજરાતી',
-  description: 'Free Daily Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026) for GSSSB CCE (7338 Posts, 30 Marks CA), GPSC, PSI, Constable, Talati & Bin Sachivalay. 10,000+ MCQs, Live Quizzes, Leaderboard. Updated daily!',
+  title: 'Best Current Affairs in Gujarati 2026 - Daily Questions & Answers, MCQ | CCE, GPSC | CurrentAdda',
+  description: 'Best Daily Current Affairs in Gujarati 2026 (કરંટ અફેર્સ ગુજરાતી). Current Affairs 2026 Questions and Answers for GSSSB CCE (7338 Posts, 30 Marks), GPSC, PSI, Constable, Talati & Bin Sachivalay. 10,000+ MCQs. Updated daily!',
   keywords: [
-    'Current Affairs in Gujarati',
     'current affairs in gujarati',
+    'current affairs 2026 in gujarati',
+    'current affairs 2026 gujarati',
+    'daily current affairs gujarati',
+    'best current affairs in gujarati',
+    'current affairs in gujarati 2026',
+    'current affairs gujarati',
+    'current affairs 2026 questions and answers in gujarati',
+    'current affairs 2026 questions and answers',
+    'current affairs january 2026 in gujarati',
+    'current affairs mcq in gujarati',
+    'current affairs for gpsc',
+    'cce current affairs',
+    'current affairs today in gujarati',
+    'current affairs in gujarati pdf 2026',
     'કરંટ અફેર્સ ગુજરાતી',
     'GPSC Current Affairs in Gujarati',
     'Daily Current Affairs Gujarati 2026',
@@ -20,16 +33,13 @@ export const metadata: Metadata = {
     'Monthly Current Affairs Gujarati',
     'CCE Current Affairs Gujarati',
     'GSSSB CCE 2026 Current Affairs',
-    'CCE Exam Preparation Gujarati',
-    'Gujarat CCE Current Affairs',
-    'CCE 2026 Syllabus Current Affairs',
   ].join(', '),
   alternates: {
     canonical: 'https://currentadda.vercel.app/current-affairs-in-gujarati',
   },
   openGraph: {
-    title: 'Current Affairs in Gujarati 2026 | Daily Quiz & MCQs | CurrentAdda',
-    description: 'Free daily current affairs quiz in Gujarati. 10,000+ MCQs for GPSC, GSSSB, PSI & all Gujarat govt exams. Live quizzes with leaderboard!',
+    title: 'Best Current Affairs in Gujarati 2026 | Daily Quiz, MCQs & Q&A | CurrentAdda',
+    description: 'Best daily current affairs in Gujarati 2026. Questions & Answers with explanations for GPSC, GSSSB CCE, PSI, Constable, Talati. 10,000+ free MCQs. Updated daily!',
     url: 'https://currentadda.vercel.app/current-affairs-in-gujarati',
     type: 'website',
     siteName: 'CurrentAdda',
@@ -136,6 +146,38 @@ export default async function CurrentAffairsGujaratiPage() {
           "@type": "Answer",
           "text": "Yes! CurrentAdda is completely free. We provide daily updated current affairs quizzes, MCQs, live quizzes with leaderboard, subject-wise practice, and PDF downloads — all at no cost."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Best current affairs in Gujarati website 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CurrentAdda is the best current affairs in Gujarati website for 2026. It offers daily updated quizzes, 10,000+ MCQs with Gujarati explanations, live leaderboard, category-wise and subject-wise practice, and IndiaBix Gujarati translation — all free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Current affairs 2026 questions and answers in Gujarati — where to practice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CurrentAdda.vercel.app provides daily current affairs 2026 questions and answers in Gujarati. Each question has a verified answer and detailed Gujarati explanation. 10,000+ Q&As for GSSSB CCE, GPSC, PSI, Constable, and Talati exams — all free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Daily current affairs Gujarati — free quiz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! CurrentAdda provides free daily current affairs Gujarati quiz. New questions covering National, International, Sports, Economy, Science, Defence topics added every day for all Gujarat government competitive exams."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Current affairs in Gujarati PDF 2026 free download?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Current affairs PDF in Gujarati 2026 is available via CurrentAdda Telegram channel. The website also provides study mode for each daily quiz in text/PDF-like format at no cost."
+        }
       }
     ]
   };
@@ -174,9 +216,9 @@ export default async function CurrentAffairsGujaratiPage() {
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
               <span className="text-[9px] font-black uppercase tracking-[0.15em] text-indigo-600">Daily Updated • Free Forever</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-tight text-slate-900 mb-4">
-              Best <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Current Affairs in Gujarati</span> for Exam Success
-            </h2>
+            <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-tight text-slate-900 mb-4">
+              Best <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Current Affairs in Gujarati 2026</span> — Questions &amp; Answers
+            </h1>
             <p className="text-slate-600 font-medium text-sm md:text-base max-w-2xl mx-auto leading-relaxed gujarati-text">
               <strong>GSSSB CCE 2026 (7338 જગ્યા)</strong>, GPSC, PSI, Constable, Talati અને તમામ ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓ માટે દૈનિક <strong>Current Affairs Quiz</strong> ગુજરાતી ભાષામાં. <strong>{totalQuestions?.toLocaleString() || '10,000'}+</strong> MCQs સાથે.
             </p>
@@ -297,16 +339,16 @@ export default async function CurrentAffairsGujaratiPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { name: 'Politics', emoji: '🏛️', color: 'from-blue-400 to-blue-600' },
-              { name: 'Sports', emoji: '⚽', color: 'from-orange-400 to-red-600' },
-              { name: 'Science', emoji: '🔬', color: 'from-purple-400 to-purple-600' },
-              { name: 'Technology', emoji: '💻', color: 'from-emerald-400 to-teal-600' },
-              { name: 'Economy', emoji: '💰', color: 'from-amber-400 to-yellow-600' },
-              { name: 'International', emoji: '🌍', color: 'from-sky-400 to-blue-600' },
-              { name: 'Defence', emoji: '🛡️', color: 'from-slate-500 to-slate-700' },
-              { name: 'Environment', emoji: '🌿', color: 'from-green-400 to-emerald-600' },
+              { name: 'Politics', emoji: '🏛️', color: 'from-blue-400 to-blue-600', href: '/categories/Politics' },
+              { name: 'Sports', emoji: '⚽', color: 'from-orange-400 to-red-600', href: '/categories/Sports' },
+              { name: 'Science', emoji: '🔬', color: 'from-purple-400 to-purple-600', href: '/categories/Science' },
+              { name: 'Technology', emoji: '💻', color: 'from-emerald-400 to-teal-600', href: '/categories/Technology' },
+              { name: 'Economy', emoji: '📈', color: 'from-amber-400 to-yellow-600', href: '/categories/Economy' },
+              { name: 'International', emoji: '🌍', color: 'from-sky-400 to-blue-600', href: '/categories/International' },
+              { name: 'Defence', emoji: '🛡️', color: 'from-slate-500 to-slate-700', href: '/categories/Defence' },
+              { name: 'Environment', emoji: '🌿', color: 'from-green-400 to-emerald-600', href: '/categories/Environment' },
             ].map((cat) => (
-              <Link key={cat.name} href="/categories" className="group">
+              <Link key={cat.name} href={cat.href} aria-label={`${cat.name} Current Affairs in Gujarati`} className="group">
                 <div className={`bg-gradient-to-br ${cat.color} p-4 rounded-2xl text-center shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all`}>
                   <div className="text-2xl mb-1">{cat.emoji}</div>
                   <span className="text-[8px] font-black text-white uppercase tracking-wide">{cat.name}</span>
