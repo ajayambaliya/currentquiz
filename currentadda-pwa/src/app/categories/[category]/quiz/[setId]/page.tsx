@@ -104,13 +104,35 @@ export default async function CategoryQuizPage({ params }: PageProps) {
         ]
     };
 
+    const scrollScript = `
+        (function() {
+            function focusQuiz() {
+                const quiz = document.getElementById('quiz-focused-section');
+                if (quiz) {
+                    const rect = quiz.getBoundingClientRect();
+                    const absoluteTop = window.pageYOffset + rect.top;
+                    window.scrollTo({ top: absoluteTop, behavior: 'auto' });
+                }
+            }
+            focusQuiz();
+            window.addEventListener('load', focusQuiz);
+            document.addEventListener('DOMContentLoaded', focusQuiz);
+            let attempts = 0;
+            const interval = setInterval(() => {
+                focusQuiz();
+                if (++attempts > 10) clearInterval(interval);
+            }, 150);
+        })();
+    `;
+
     return (
-        <main className="min-h-screen pb-20">
+        <div className="bg-white scroll-smooth pb-20">
+            <script dangerouslySetInnerHTML={{ __html: scrollScript }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(quizSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-            
-            {/* SEO Text Hidden Visually for Robots */}
-            <div className="sr-only">
+
+            {/* Hidden for Bots but Snapped for Consistency */}
+            <div className="snap-start sr-only">
                 <h1>{quiz.title}</h1>
                 <p>Preparation questions for {category} in Gujarati (કરંટ અફેર્સ ગુજરાતી).</p>
                 {questions.slice(0, 3).map((q, i) => (
@@ -121,7 +143,13 @@ export default async function CategoryQuizPage({ params }: PageProps) {
                 ))}
             </div>
 
-            <QuizEngine quiz={quiz as any} questions={questions} />
-        </main>
+            {/* Focused Quiz Engine Viewport */}
+            <div id="quiz-focused-section" className="h-[100dvh] overflow-hidden">
+                <QuizEngine quiz={quiz as any} questions={questions} />
+            </div>
+
+            {/* Bottom area for spacing/future content */}
+            <div className="h-20" />
+        </div>
     );
 }

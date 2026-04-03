@@ -38,6 +38,14 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
     const router = useRouter();
 
     const [currentIdx, setCurrentIdx] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // Auto-focus on quiz area on mount to ensure footer is visible
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, []);
     const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
     const [showResults, setShowResults] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -609,96 +617,80 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
     );
 
     return (
-        <div className="min-h-[100dvh] bg-white max-w-2xl mx-auto flex flex-col relative">
-            {/* Question Navigator Dots */}
-            <div className="px-4 pt-4 pb-2 flex items-center justify-center gap-1 overflow-x-auto no-scrollbar">
-                {questions.map((_, idx) => {
-                    const isAnswered = selectedAnswers[idx] !== undefined;
-                    const isCorrect = selectedAnswers[idx] === questions[idx].answer;
-                    const isCurrent = idx === currentIdx;
+        <div ref={containerRef} className="h-[100dvh] bg-white max-w-2xl mx-auto flex flex-col relative overflow-hidden focus-within:ring-0">
+            {/* Real-App Sticky Header */}
+            <header className="border-b border-slate-100 bg-white/95 backdrop-blur-xl sticky top-0 z-30 shadow-sm">
+                {/* Slim Navigator Lines */}
+                <div className="flex gap-0.5 w-full h-1 px-1 pt-0.5">
+                    {questions.map((_, idx) => {
+                        const isAnswered = selectedAnswers[idx] !== undefined;
+                        const isCorrect = (isSubmitted || reviewMode) && selectedAnswers[idx] === questions[idx].answer;
+                        const isWrong = (isSubmitted || reviewMode) && selectedAnswers[idx] !== undefined && selectedAnswers[idx] !== questions[idx].answer;
+                        const isCurrent = idx === currentIdx;
 
-                    return (
-                        <button
-                            key={idx}
-                            onClick={() => setCurrentIdx(idx)}
-                            className={`flex-shrink-0 transition-all ${isCurrent ? 'w-8 h-2' : 'w-2 h-2'
-                                } rounded-full ${!isAnswered ? 'bg-slate-200' :
+                        return (
+                            <div
+                                key={idx}
+                                className={`flex-1 h-full rounded-full transition-all duration-300 ${
+                                    isCurrent ? 'opacity-100' : 'opacity-30'
+                                } ${
+                                    !isAnswered ? 'bg-slate-200' :
                                     (isSubmitted || reviewMode) ? (isCorrect ? 'bg-emerald-500' : 'bg-rose-500') : 'bg-indigo-600'
                                 }`}
-                        />
-                    );
-                })}
-            </div>
-
-            {/* Circular Progress Header */}
-            <header className="px-5 py-3 flex items-center justify-between border-b border-slate-100 bg-white/95 backdrop-blur-xl sticky top-0 z-20">
-                <Link href="/" className="p-2 hover:bg-slate-50 rounded-xl transition-colors">
-                    <ChevronLeft className="w-6 h-6 text-slate-600" />
-                </Link>
-
-                <div className="flex-1 px-4 flex items-center gap-4">
-                    {/* Circular Progress */}
-                    <div className="relative w-14 h-14">
-                        <svg className="w-14 h-14 -rotate-90">
-                            <circle
-                                cx="28"
-                                cy="28"
-                                r="24"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                                fill="none"
-                                className="text-slate-100"
                             />
-                            <motion.circle
-                                cx="28"
-                                cy="28"
-                                r="24"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                                fill="none"
-                                strokeDasharray={`${2 * Math.PI * 24}`}
-                                strokeDashoffset={`${2 * Math.PI * 24 * (1 - progress / 100)}`}
-                                className="text-indigo-600"
-                                strokeLinecap="round"
-                                initial={{ strokeDashoffset: 2 * Math.PI * 24 }}
-                                animate={{ strokeDashoffset: 2 * Math.PI * 24 * (1 - progress / 100) }}
-                                transition={{ duration: 0.5 }}
-                            />
-                        </svg>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-xs font-black text-slate-900">{currentIdx + 1}</span>
-                        </div>
-                    </div>
-
-                    <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">
-                                {quiz.title}
-                            </div>
-                            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black transition-colors ${timeLeft < 30 ? 'bg-rose-100 text-rose-600 animate-pulse' : 'bg-slate-100 text-slate-600'
-                                }`}>
-                                <Clock className="w-3 h-3" />
-                                {formatTime(timeLeft)}
-                            </div>
-                        </div>
-                        <div className="text-xs font-bold text-indigo-600">
-                            Question {currentIdx + 1} of {totalQuestions}
-                        </div>
-                    </div>
+                        );
+                    })}
                 </div>
 
-                {reviewMode && (
-                    <button
-                        onClick={() => setShowReviewGrid(true)}
-                        className="p-2 bg-indigo-50 text-indigo-600 rounded-xl hover:bg-indigo-100 transition-colors"
-                    >
-                        <Grid3x3 className="w-5 h-5" />
-                    </button>
-                )}
+                <div className="px-4 py-2.5 flex items-center justify-between">
+                    <Link href="/" className="p-1.5 hover:bg-slate-50 rounded-xl transition-colors">
+                        <ChevronLeft className="w-5 h-5 text-slate-500" />
+                    </Link>
+
+                    <div className="flex-1 px-3 flex items-center gap-3">
+                        <div className="relative w-10 h-10 flex-shrink-0">
+                            <svg className="w-10 h-10 -rotate-90">
+                                <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="3" fill="none" className="text-slate-100" />
+                                <motion.circle
+                                    cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="3" fill="none"
+                                    strokeDasharray={`${2 * Math.PI * 18}`}
+                                    strokeDashoffset={`${2 * Math.PI * 18 * (1 - progress / 100)}`}
+                                    className="text-indigo-600" strokeLinecap="round"
+                                    initial={{ strokeDashoffset: 2 * Math.PI * 18 }}
+                                    animate={{ strokeDashoffset: 2 * Math.PI * 18 * (1 - progress / 100) }}
+                                />
+                            </svg>
+                            <span className="absolute inset-0 flex items-center justify-center text-[10px] font-black">{currentIdx + 1}</span>
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                            <h1 className="text-[10px] font-black text-slate-400 uppercase tracking-widest truncate">
+                                {quiz.title}
+                            </h1>
+                            <div className="flex items-center gap-2">
+                                <span className="text-xs font-black text-indigo-600">Q{currentIdx + 1}/{totalQuestions}</span>
+                                {reviewMode && <span className="text-[8px] font-black bg-purple-100 text-purple-600 px-1.5 py-0.5 rounded-full uppercase">Review</span>}
+                            </div>
+                        </div>
+
+                        <div className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[10px] font-black transition-colors ${
+                            timeLeft < 30 ? 'bg-rose-100 text-rose-600 animate-pulse' : 'bg-slate-100 text-slate-600'
+                        }`}>
+                            <Clock className="w-3.5 h-3.5" />
+                            {formatTime(timeLeft)}
+                        </div>
+                    </div>
+
+                    {reviewMode && (
+                        <button onClick={() => setShowReviewGrid(true)} className="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
+                            <Grid3x3 className="w-4 h-4" />
+                        </button>
+                    )}
+                </div>
             </header>
 
             {/* Question Section with Swipe */}
-            <main className="flex-1 p-5 space-y-6 overflow-y-auto pb-32">
+            <main className="flex-1 p-5 space-y-6 overflow-y-auto pb-10">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIdx}
@@ -804,8 +796,8 @@ export default function QuizEngine({ quiz, questions }: { quiz: Quiz; questions:
                 </AnimatePresence>
             </main>
 
-            {/* Footer Navigation */}
-            <footer className="p-5 pb-6 border-t border-slate-100 bg-white/95 backdrop-blur-xl fixed bottom-0 max-w-2xl w-full z-20">
+            {/* Footer Navigation - Properly Aligned at bottom */}
+            <footer className="flex-shrink-0 p-4 border-t border-slate-100 bg-white/95 backdrop-blur-xl relative z-40 max-w-2xl mx-auto w-full">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={prevQuestion}

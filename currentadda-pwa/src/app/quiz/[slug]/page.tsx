@@ -144,6 +144,32 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
 
     const authorSchema = generateAuthorSchema();
 
+    // Use a client-side component to handle initial scroll if needed
+    // But since this is a server component, we use a simple script for immediate effect
+    const scrollScript = `
+        (function() {
+            function focusQuiz() {
+                const quiz = document.getElementById('quiz-focused-section');
+                if (quiz) {
+                    const rect = quiz.getBoundingClientRect();
+                    const absoluteTop = window.pageYOffset + rect.top;
+                    window.scrollTo({ top: absoluteTop, behavior: 'auto' });
+                }
+            }
+            // Execute on multiple events to ensure it works after hard refresh
+            focusQuiz();
+            window.addEventListener('load', focusQuiz);
+            document.addEventListener('DOMContentLoaded', focusQuiz);
+            
+            // Repeat for a few seconds to handle late hydration/layout shifts
+            let attempts = 0;
+            const interval = setInterval(() => {
+                focusQuiz();
+                if (++attempts > 10) clearInterval(interval);
+            }, 150);
+        })();
+    `;
+
     // Build FAQ Schema
     const faqSchema = {
         "@context": "https://schema.org",
@@ -171,7 +197,8 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
     };
 
     return (
-        <div className="max-w-xl mx-auto px-5 py-4 min-h-screen pb-32">
+        <div className="bg-white scroll-smooth">
+            <script dangerouslySetInnerHTML={{ __html: scrollScript }} />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(authorSchema) }}
@@ -185,107 +212,97 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
 
-            <Breadcrumbs items={breadcrumbs} />
+            {/* Culprit Breadcrumbs: Moved to off-screen absolute to prevent pushing the UI down */}
+            <div className="absolute left-0 right-0 -top-8 px-5 z-0 opacity-20 hover:opacity-100 transition-opacity">
+                <Breadcrumbs items={breadcrumbs} />
+            </div>
 
-            <QuizEngine quiz={quiz} questions={questions || []} />
+            {/* Focused: Quiz Content (Self-contained app-like block) */}
+            <div id="quiz-focused-section" className="h-[100dvh] max-w-xl mx-auto relative z-10 overflow-hidden bg-white">
+                <QuizEngine quiz={quiz} questions={questions || []} />
+            </div>
 
-            {/* Premium SEO Study Resource Section - Visible to Google + Users */}
-            <section className="mt-12 bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
-                <div className="flex items-center gap-2 mb-6">
-                    <Sparkles className="w-5 h-5 text-indigo-500" />
-                    <h2 className="text-base font-black text-slate-800 uppercase tracking-widest leading-none">
-                        Exam Analysis & Resources
-                    </h2>
-                </div>
-                
-                <div className="prose prose-slate prose-sm max-w-none mb-8 text-slate-600 font-medium leading-relaxed gujarati-text">
-                    <div dangerouslySetInnerHTML={{ __html: seo.narrativeHtml }} />
-                </div>
-
-                <div className="grid gap-4">
-                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-2">Key Topics Covered</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {seo.keywords.slice(0, 5).split(',').map((kw: string) => (
-                            <span key={kw} className="bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-xl text-[10px] font-bold border border-indigo-100/50">
-                                {kw.trim()}
-                            </span>
-                        ))}
+            {/* Below: Study & SEO Material */}
+            <div className="snap-start max-w-xl mx-auto px-5 pt-12 pb-32 space-y-12">
+                {/* Premium SEO Study Resource Section - Visible to Google + Users */}
+                <section className="bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
+                    <div className="flex items-center gap-2 mb-6">
+                        <Sparkles className="w-5 h-5 text-indigo-500" />
+                        <h2 className="text-base font-black text-slate-800 uppercase tracking-widest leading-none">
+                            Exam Analysis & Resources
+                        </h2>
                     </div>
-                </div>
-
-                {/* Important study snippet */}
-                <div className="mt-8 p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                    <h3 className="text-xs font-black text-slate-700 uppercase tracking-widest mb-3 flex items-center gap-2">
-                         <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
-                         Sample Study Content
-                    </h3>
-                    <div className="space-y-4">
-                        {questions?.slice(0, 3).map((q: any, i: number) => (
-                            <div key={i} className="border-b border-white pb-3 last:border-0 last:pb-0">
-                                <h4 className="text-[13px] font-black text-slate-800 gujarati-text mb-1">{q.text}</h4>
-                                <p className="text-[11px] text-slate-500 gujarati-text line-clamp-1">{q.explanation || `The correct answer isOption ${q.answer}`}</p>
-                            </div>
-                        ))}
+                    
+                    <div className="prose prose-slate prose-sm max-w-none mb-8 text-slate-600 font-medium leading-relaxed gujarati-text">
+                        <div dangerouslySetInnerHTML={{ __html: seo.narrativeHtml }} />
                     </div>
-                </div>
-            </section>
 
-            {/* Read Notes / Daily Text Link */}
-            {quiz.quiz_date && (
-                <section className="mt-10 border-t border-slate-100 pt-8">
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-indigo-100">
+                    <div className="grid gap-4">
+                        <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-2">Key Topics Covered</h3>
+                        <div className="flex flex-wrap gap-2">
+                            {seo.keywords.slice(0, 5).split(',').map((kw: string) => (
+                                <span key={kw} className="bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-xl text-[10px] font-bold border border-indigo-100/50">
+                                    {kw.trim()}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="mt-8 p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 className="text-xs font-black text-slate-700 uppercase tracking-widest mb-3 flex items-center gap-2">
+                             <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
+                             Sample Study Content
+                        </h3>
+                        <div className="space-y-4">
+                            {questions?.slice(0, 3).map((q: any, i: number) => (
+                                <div key={i} className="border-b border-white pb-3 last:border-0 last:pb-0">
+                                    <h4 className="text-[13px] font-black text-slate-800 gujarati-text mb-1">{q.text}</h4>
+                                    <p className="text-[11px] text-slate-500 gujarati-text line-clamp-1">{q.explanation || `The correct answer is Option ${q.answer}`}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {quiz.quiz_date && (
+                    <section className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-[2rem] p-8 border border-indigo-100">
                         <h3 className="text-xs font-black uppercase tracking-widest text-indigo-600 mb-3 flex items-center gap-2">
                             <FileText className="w-3.5 h-3.5" />
                             Study Notes
                         </h3>
-                        <p className="text-xs text-slate-600 font-medium mb-4 gujarati-text leading-relaxed">
+                        <p className="text-xs text-slate-600 font-medium mb-6 gujarati-text leading-relaxed">
                             આ quiz ના તમામ પ્રશ્નો, જવાબો અને વિગતવાર સમજૂતી text format માં વાંચો — revision માટે ઉપયોગી.
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <Link
-                                href={`/daily/${quiz.quiz_date}`}
-                                className="inline-flex items-center gap-2 bg-white text-indigo-600 border border-indigo-200 px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:shadow-md hover:border-indigo-300 transition-all"
-                            >
-                                <FileText className="w-3.5 h-3.5" />
-                                Read Daily Notes
+                            <Link href={`/daily/${quiz.quiz_date}`} className="inline-flex items-center gap-2 bg-white text-indigo-600 border border-indigo-200 px-6 py-3 rounded-xl font-black text-[11px] uppercase tracking-widest hover:shadow-md transition-all">
+                                <FileText className="w-4 h-4" /> Read Daily Notes
                             </Link>
-                            <Link
-                                href="/current-affairs-in-gujarati"
-                                className="inline-flex items-center gap-2 bg-white text-slate-500 border border-slate-200 px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:text-indigo-600 hover:border-indigo-200 transition-all"
-                            >
-                                <BookOpen className="w-3.5 h-3.5" />
-                                Monthly Compilation
+                            <Link href="/current-affairs-in-gujarati" className="inline-flex items-center gap-2 bg-white text-slate-500 border border-slate-200 px-6 py-3 rounded-xl font-black text-[11px] uppercase tracking-widest hover:text-indigo-600 transition-all">
+                                <BookOpen className="w-4 h-4" /> Monthly Compilation
                             </Link>
                         </div>
-                    </div>
-                </section>
-            )}
+                    </section>
+                )}
 
-            {/* Related Quizzes Section - Topic Clustering */}
-            {related && related.length > 0 && (
-                <section className="mt-16 border-t border-slate-100 pt-10">
-                    <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Continue your preparation</h3>
-                    <div className="grid gap-3">
-                        {related.map((r: any) => (
-                            <Link
-                                key={r.id}
-                                href={`/quiz/${r.slug}`}
-                                className="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl hover:border-indigo-200 hover:shadow-lg transition-all group"
-                            >
-                                <div className="flex-1 pr-4">
-                                    <h4 className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors gujarati-text line-clamp-1">
-                                        {r.title}
-                                    </h4>
-                                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">Recommended for you</p>
-                                </div>
-                                <div className="bg-slate-50 p-2 rounded-xl group-hover:bg-indigo-600 transition-all">
-                                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-white" />
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                </section>
-            )}
+                {related && related.length > 0 && (
+                    <section>
+                        <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6 px-1">Continue your preparation</h3>
+                        <div className="grid gap-3">
+                            {related.map((r: any) => (
+                                <Link key={r.id} href={`/quiz/${r.slug}`} className="flex items-center justify-between p-5 bg-white border border-slate-100 rounded-3xl hover:border-indigo-200 hover:shadow-lg transition-all group">
+                                    <div className="flex-1 pr-4">
+                                        <h4 className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors gujarati-text line-clamp-1">{r.title}</h4>
+                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">Recommended quiz</p>
+                                    </div>
+                                    <div className="bg-slate-50 p-2.5 rounded-xl group-hover:bg-indigo-600 transition-all">
+                                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-white" />
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+                )}
+            </div>
         </div>
     );
 }
