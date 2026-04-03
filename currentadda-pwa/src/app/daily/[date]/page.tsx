@@ -110,6 +110,27 @@ export default async function DailyNotesPage({ params }: { params: Promise<{ dat
     "inLanguage": "gu"
   };
 
+  // Learning Resource Schema (Crucial for AI Education Search)
+  const learningResourceSchema = {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": `Current Affairs ${displayDate} Notes in Gujarati`,
+    "description": `Comprehensive study notes and MCQs for current affairs dated ${displayDate} specifically for Gujarat Govt Exams.`,
+    "learningResourceType": "Study Guide",
+    "educationalLevel": ["GSSSB CCE", "GPSC", "Gujarat Govt Exams"],
+    "author": {
+      "@type": "Person",
+      "name": "Ajay Ambaliya",
+      "url": "https://currentadda.vercel.app/author"
+    },
+    "datePublished": `${date}T00:00:00+05:30`,
+    "inLanguage": "gu-IN",
+    "about": {
+      "@type": "Thing",
+      "name": "Current Affairs"
+    }
+  };
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -124,6 +145,21 @@ export default async function DailyNotesPage({ params }: { params: Promise<{ dat
     <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 pb-32">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }} />
+
+      {/* Bot-friendly Direct Answer Block (Targeting ChatGPT Search) */}
+      <div className="sr-only" aria-hidden="true" id="ai-search-summary">
+          <h2>Summary: {displayDate} Current Affairs in Gujarati</h2>
+          <p>This page contains comprehensive daily current affairs for {displayDate} specifically for Gujarat Govt Exams.</p>
+          <ul>
+              {questions?.slice(0, 15).map((q: any, i: number) => (
+                  <li key={i}>
+                      <strong>Q:</strong> {q.text} 
+                      <strong>A:</strong> {q.explanation || `Correct: ${q.answer}`}
+                  </li>
+              ))}
+          </ul>
+      </div>
 
       {/* Header */}
       <header className="bg-white/70 backdrop-blur-2xl sticky top-0 z-50 border-b border-slate-100/50 shadow-sm">

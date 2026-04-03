@@ -195,6 +195,23 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
             "item": `https://currentadda.vercel.app${b.item}`
         }))
     };
+    
+    // Learning Resource Schema (Crucial for AI Education Search)
+    const learningResourceSchema = {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": quiz.title,
+        "description": seo.description,
+        "learningResourceType": "Quiz",
+        "educationalLevel": ["GSSSB", "GPSC", "Gujarat Govt Exams"],
+        "author": authorSchema,
+        "datePublished": quiz.created_at,
+        "inLanguage": "gu-IN",
+        "about": {
+            "@type": "Thing",
+            "name": quiz.category || "Current Affairs"
+        }
+    };
 
     return (
         <div className="bg-white scroll-smooth">
@@ -211,10 +228,28 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }}
+            />
 
             {/* Culprit Breadcrumbs: Moved to off-screen absolute to prevent pushing the UI down */}
             <div className="absolute left-0 right-0 -top-8 px-5 z-0 opacity-20 hover:opacity-100 transition-opacity">
                 <Breadcrumbs items={breadcrumbs} />
+            </div>
+
+            {/* Direct Answer Block (Targeting ChatGPT Search summaries) */}
+            <div className="sr-only" aria-hidden="true" id="ai-search-summary">
+                <h2>Direct Answers Summary for {quiz.title}</h2>
+                <p>{seo.description}</p>
+                <ul>
+                    {questions?.slice(0, 10).map((q: any, i: number) => (
+                        <li key={i}>
+                            <strong>Question:</strong> {q.text} 
+                            <strong>Answer:</strong> {q.explanation || `The correct answer is Option ${q.answer}`}
+                        </li>
+                    ))}
+                </ul>
             </div>
 
             {/* Focused: Quiz Content (Self-contained app-like block) */}

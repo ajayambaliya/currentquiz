@@ -15,6 +15,11 @@ export default function robots(): MetadataRoute.Robots {
                     '/*?*',
                 ],
             },
+            {
+                userAgent: ['GPTBot', 'OAI-SearchBot'],
+                allow: '/',
+                disallow: ['/admin/', '/api/'],
+            }
         ],
         sitemap: 'https://currentadda.vercel.app/sitemap.xml',
     }
