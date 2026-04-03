@@ -5,810 +5,496 @@ import {
   ArrowLeft,
   ExternalLink,
   BookOpen,
-  Sparkles,
-  Calendar,
   CheckCircle2,
   Trophy,
-  AlertCircle,
   Send,
+  Users,
+  Award,
+  BookMarked,
+  Download,
+  ChevronDown,
+  ChevronRight,
+  Landmark,
+  Globe2,
+  FlaskConical,
+  Trees,
+  Shield,
+  MapPin,
+  ClipboardList,
+  Users2
 } from 'lucide-react';
 
-// ─── SEO Metadata ───────────────────────────────────────────────────────────
+// SEO Meta Data
 export const metadata: Metadata = {
-  title: 'Current Affairs PDF in Gujarati 2026 Free Download | Monthly | GPSC GSSSB | CurrentAdda',
-  description:
-    'Download Monthly Current Affairs PDF in Gujarati 2026 for free. January, February, December PDF in Gujarati for GPSC, GSSSB CCE, PSI, Constable, Talati. Best Gujarati current affairs PDF — updated every month!',
-  keywords: [
-    'current affairs pdf in gujarati',
-    'current affairs pdf in gujarati 2026',
-    'monthly current affairs pdf gujarati',
-    'gujarati current affairs pdf download',
-    'current affairs in gujarati pdf free download',
-    'january 2026 current affairs pdf gujarati',
-    'february 2026 current affairs pdf gujarati',
-    'december 2025 current affairs pdf gujarati',
-    'gpsc current affairs pdf gujarati',
-    'gsssb cce current affairs pdf gujarati',
-    'psi current affairs gujarati pdf',
-    'talati current affairs pdf in gujarati',
-    'constable current affairs gujarati pdf',
-    'current affairs gujarati pdf 2025',
-    'current affairs gujarati pdf 2026',
-    'best current affairs pdf gujarati',
-    'free current affairs pdf gujarati',
-    'monthly current affairs gujarati 2026',
-    'currentadda pdf download',
-    'current affairs notes gujarati pdf',
-    'ગુજરાતી કરંટ અફેર્સ PDF',
-    'ગુજરાતી current affairs PDF 2026',
-    'monthly current affairs in gujarati',
-    'ice rajkot current affairs gujarati alternative',
-    'crack gpsc current affairs gujarati pdf',
-  ].join(', '),
-  alternates: {
-    canonical: 'https://currentadda.vercel.app/current-affairs-pdf-gujarati',
-  },
+  title: 'Current Affairs in Gujarati PDF 2025-2026 | GPSC UPSC | VisionIAS Gujarati | કરંટ અફેર્સ',
+  description: 'ગુજરાતી કરંટ અફેર્સ 2025-2026 – VisionIAS-level quality, Gujarati language. Free PDF download for GPSC, UPSC, Talati, PSI. Oct 2025 to Mar 2026. Download directly from Telegram.',
+  keywords: 'Current Affairs in Gujarati, Current Affairs in Gujarati PDF, VisionIAS Current Affairs Gujarati, GPSC Current Affairs Gujarati, ગુજરાતી કરંટ અફેર્સ, Monthly Current Affairs Gujarati PDF, UPSC Gujarati Notes, Current Affairs PDF Download Gujarati 2025 2026',
   openGraph: {
-    title: 'Current Affairs PDF in Gujarati 2026 Free Download | CurrentAdda',
-    description:
-      'Free monthly current affairs PDF in Gujarati — January, February, December 2026 & more. Best resource for GPSC, GSSSB CCE, PSI, Talati, Constable exam preparation.',
+    title: 'Gujarati Current Affairs PDF 2025-2026 – GPSC/UPSC Ready',
+    description: '224+ Articles per month. VisionIAS quality in Gujarati. Free Download on Telegram.',
     url: 'https://currentadda.vercel.app/current-affairs-pdf-gujarati',
     type: 'website',
-    siteName: 'CurrentAdda',
-    locale: 'gu_IN',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Current Affairs PDF in Gujarati 2026 Free Download | CurrentAdda',
-    description:
-      'Free monthly current affairs PDF in Gujarati for GPSC, GSSSB CCE, PSI, Talati. Updated every month on our Telegram channel.',
-  },
+  alternates: {
+    canonical: 'https://currentadda.vercel.app/current-affairs-pdf-gujarati',
+  }
 };
 
 export const revalidate = 86400;
 
-// ─── PDF Data — easy to edit each month ─────────────────────────────────────
+// Data Definitions
 const PDF_LIST = [
   {
+    id: 'mar-2026',
+    monthEn: 'March 2026',
+    monthGu: 'માર્ચ 2026',
+    articles: '227 Articles',
+    size: '59.38 MB',
+    telegramUrl: 'https://t.me/currentadda/20718',
+  },
+  {
     id: 'feb-2026',
-    month: 'February 2026',
-    monthGu: 'ફેબ્રુઆરી ૨૦૨૬',
-    label: 'Latest',
-    labelColor: 'bg-emerald-500',
-    size: '~4 MB',
-    pages: '80+',
-    topics: ['National Events', 'Awards', 'Sports', 'Economy', 'Science', 'Defence'],
-    telegramUrl: 'https://t.me/currentadda/20530',
-    gradient: 'from-indigo-500 via-purple-500 to-pink-500',
-    badge: '🔥 Most Downloaded',
-    badgeColor: 'text-orange-600 bg-orange-50 border-orange-200',
-    exams: ['GPSC', 'GSSSB CCE', 'PSI', 'Talati', 'Constable'],
+    monthEn: 'February 2026',
+    monthGu: 'ફેબ્રુઆરી 2026',
+    articles: '224+ Articles',
+    size: '58+ MB',
+    telegramUrl: 'https://t.me/currentadda/20529',
   },
   {
     id: 'jan-2026',
-    month: 'January 2026',
-    monthGu: 'જાન્યુઆરી ૨૦૨૬',
-    label: 'New Year Edition',
-    labelColor: 'bg-blue-500',
-    size: '~4 MB',
-    pages: '80+',
-    topics: ['Republic Day', 'Budget Session', 'Sports', 'International', 'Science'],
-    telegramUrl: 'https://t.me/currentadda/20351',
-    gradient: 'from-blue-500 via-cyan-500 to-teal-500',
-    badge: '⭐ High Demand',
-    badgeColor: 'text-blue-600 bg-blue-50 border-blue-200',
-    exams: ['GPSC', 'GSSSB CCE', 'PSI', 'Talati', 'Constable'],
+    monthEn: 'January 2026',
+    monthGu: 'જાન્યુઆરી 2026',
+    articles: '224 Articles',
+    size: '58.89 MB',
+    telegramUrl: 'https://t.me/currentadda/20733',
   },
   {
     id: 'dec-2025',
-    month: 'December 2025',
-    monthGu: 'ડિસેમ્બર ૨૦૨૫',
-    label: 'Year-end Edition',
-    labelColor: 'bg-rose-500',
-    size: '~4 MB',
-    pages: '80+',
-    topics: ['Year Review', 'Awards', 'Sports', 'National', 'Economy'],
-    telegramUrl: 'https://t.me/currentadda/20075',
-    gradient: 'from-rose-500 via-pink-500 to-fuchsia-500',
-    badge: '📅 Year-End Revision',
-    badgeColor: 'text-rose-600 bg-rose-50 border-rose-200',
-    exams: ['GPSC', 'GSSSB CCE', 'PSI', 'Talati', 'Constable'],
+    monthEn: 'December 2025',
+    monthGu: 'ડિસેમ્બર 2025',
+    articles: '162 Articles',
+    size: '46.11 MB',
+    telegramUrl: 'https://t.me/currentadda/20733',
   },
   {
-    id: 'jul-nov-2025',
-    month: 'July – November 2025',
-    monthGu: 'જુલાઈ – નવેમ્બર ૨૦૨૫',
-    label: '5-Month Mega Bundle',
-    labelColor: 'bg-amber-500',
-    size: '~18 MB',
-    pages: '400+',
-    topics: ['Complete 5-Month Coverage', 'All Categories', 'Exam-Ready Notes'],
-    telegramUrl: 'https://t.me/currentadda/19692',
-    gradient: 'from-amber-500 via-orange-500 to-red-500',
-    badge: '📦 Mega Bundle',
-    badgeColor: 'text-amber-700 bg-amber-50 border-amber-200',
-    exams: ['GPSC', 'GSSSB CCE', 'PSI', 'Talati', 'Constable'],
+    id: 'nov-2025',
+    monthEn: 'November 2025',
+    monthGu: 'નવેમ્બર 2025',
+    articles: '224 Articles',
+    size: '58.88 MB',
+    telegramUrl: 'https://t.me/currentadda/20734',
   },
+  {
+    id: 'oct-2025',
+    monthEn: 'October 2025',
+    monthGu: 'ઓક્ટોબર 2025',
+    articles: '224 Articles',
+    size: '58.86 MB',
+    telegramUrl: 'https://t.me/currentadda/20735',
+  },
+];
+
+const CATEGORIES = [
+  { icon: <Landmark className="w-5 h-5 text-[#f4900c]" />, en: 'Economy', gu: 'અર્થતંત્ર', count: '30 per month' },
+  { icon: <Globe2 className="w-5 h-5 text-[#f4900c]" />, en: 'International Relations', gu: 'આંતરરાષ્ટ્રીય સંબંધો', count: '30 per month' },
+  { icon: <FlaskConical className="w-5 h-5 text-[#f4900c]" />, en: 'Science & Tech', gu: 'વિજ્ઞાન અને ટેકનોલોજી', count: '30 per month' },
+  { icon: <Trees className="w-5 h-5 text-[#f4900c]" />, en: 'Environment', gu: 'પર્યાવરણ', count: '29 per month' },
+  { icon: <BookMarked className="w-5 h-5 text-[#f4900c]" />, en: 'Polity & Governance', gu: 'રાજનીતિ અને શાસન', count: '30 per month' },
+  { icon: <Shield className="w-5 h-5 text-[#f4900c]" />, en: 'Defence & Security', gu: 'સુરક્ષા', count: '16 per month' },
+  { icon: <MapPin className="w-5 h-5 text-[#f4900c]" />, en: 'Places in News', gu: 'સમાચારમાં સ્થળો', count: '10 per month' },
+  { icon: <ClipboardList className="w-5 h-5 text-[#f4900c]" />, en: 'Schemes in News', gu: 'સમાચારમાં યોજનાઓ', count: '12 per month' },
+  { icon: <Users2 className="w-5 h-5 text-[#f4900c]" />, en: 'Social Issues', gu: 'સામાજિક મુદ્દા', count: '29 per month' },
+];
+
+const EXAMS = [
+  {
+    titleEn: 'GPSC Current Affairs',
+    titleGu: 'GPSC Current Affairs in Gujarati',
+    desc: 'GPSC Class 1-2 Prelims અને Mains માટે સંપૂર્ણ exam-oriented coverage. VisionIAS level depth જે competitive advantage આપશે.'
+  },
+  {
+    titleEn: 'UPSC Current Affairs',
+    titleGu: 'UPSC Current Affairs in Gujarati',
+    desc: 'UPSC CSE aspirants જે ગુજરાતી માધ્યમમાં તૈયારી કરે છે તેમના માટે સર્વશ્રેષ્ઠ source વિચાર્યા વગર.'
+  },
+  {
+    titleEn: 'Talati / Mantri',
+    titleGu: 'Talati Current Affairs Gujarati',
+    desc: 'તલાટી અને ક્લાર્કની પરીક્ષાઓ માટે જરૂરી સચોટ અને મુદ્દાસર કરંટ અફેર્સ ડેટા.'
+  },
+  {
+    titleEn: 'PSI / ASI / Police',
+    titleGu: 'Police Bharti Current Affairs Gujarati',
+    desc: 'ગુજરાત પોલીસ ભરતીની લેખિત પરીક્ષા માટે અત્યંત જરૂરી સંરક્ષણ અને ગુજરાતના વર્તમાન પ્રવાહો.'
+  },
+  {
+    titleEn: 'GSSSB Exams',
+    titleGu: 'GSSSB Current Affairs Gujarati',
+    desc: 'GSSSB CCE (Group A & B) પરીક્ષા માટે MCQs અને સચોટ માહિતી જે સિલેબસ સ્પષ્ટપણે આવરી લે છે.'
+  }
 ];
 
 const FAQS = [
   {
-    q: 'Current Affairs PDF in Gujarati free download ક્યાં મળે?',
-    a: 'CurrentAdda Telegram channel (t.me/currentadda) પર દর મહિને Current Affairs PDF in Gujarati free download માટે ઉપલબ્ધ છે. આ page પર download links update થતા રહે છે.',
+    q: "Current Affairs in Gujarati PDF free download ક્યાંથી મળે?",
+    a: "Telegram channel @currentadda પર free download available છે. દર મહિને 224+ articles સાથે professional PDF publish થાય છે."
   },
   {
-    q: 'CurrentAdda Current Affairs PDF Gujarati — GPSC, GSSSB, PSI Exam mates useful che ke?',
-    a: 'હા! CurrentAdda monthly current affairs PDF ખાસ GPSC Class 1-2, GSSSB CCE 2026, PSI, Police Constable, Talati cum Mantri, And Bin Sachivalay Clerk exam mates design karelī che. Darak PDF maa National, International, Sports, Economy, Science, Awards categories cover thay che.',
+    q: "VisionIAS Current Affairs Gujarati PDF ક્યાં મળે?",
+    a: "VisionIAS-level quality ની Gujarati Current Affairs PDF currentadda.in પર free available છે — same depth, same coverage, Gujarati language માં."
   },
   {
-    q: 'Monthly Current Affairs PDF Gujarati — exam mate keva topics cover thay che?',
-    a: 'National Events, International Affairs, Sports (Cricket, Olympics, Asian Games), Economy (RBI, GDP, Budget), Science (ISRO, DRDO, Nobel Prize), Awards (Padma, Oscar, Filmfare), Important Days, Persons (New Appointments), Defence and Environment — badha categories cover thay che.',
+    q: "GPSC exam માટે best current affairs source ક્યો છે?",
+    a: "GPSC preparation માટે monthly Gujarati current affairs PDF best છે — 14 categories, 224+ articles, exam-oriented coverage."
   },
   {
-    q: 'Current Affairs PDF Gujarati download karva mate Telegram join karvu pade?',
-    a: 'CurrentAdda Telegram channel (t.me/currentadda) public che — join karya vagar pan PDF open thashe. Parantu channel join karva thi darak mahine notification maltu rhashe jyare navo PDF upload thay.',
+    q: "Gujarati Current Affairs PDF ની size કેટલી છે?",
+    a: "દર monthly PDF approx. 58–59 MB છે, જેમાં 224+ clean, formatted articles include છે."
   },
   {
-    q: 'Best Monthly Current Affairs Gujarati PDF — 2026?',
-    a: 'CurrentAdda ej 2026 maa best monthly current affairs PDF in Gujarati provide kare chhe — Scribd, CrackGPSC, Praajasv Foundation karta CurrentAdda PDF maa MCQs, explanations, and topic-wise coverage included hoy che. All free!',
+    q: "Current Affairs ક્યા categories cover થાય છે?",
+    a: "14 categories: રાજનીતિ, આંતરરાષ્ટ્રીય, અર્થતંત્ર, પર્યાવરણ, વિજ્ઞાન/ટેક, સુરક્ષા, સામાજિક, ઇતિહાસ, ભૂગોળ, સ્થળો, યોજનાઓ, વ્યક્તિત્વ, સંસ્કૃતિ, નીતિશાસ્ત્ર."
   },
   {
-    q: 'January 2026 Current Affairs PDF Gujarati ky thi download karu?',
-    a: 'CurrentAdda na is page par Jan 2026 PDF link available che. Direct Telegram link par click karo ane PDF open thashe. No login required.',
-  },
-  {
-    q: 'February 2026 Current Affairs PDF in Gujarati — free download?',
-    a: 'Haa! February 2026 Current Affairs PDF in Gujarati is page par available je. Telegram link click karva thi direct PDF open thashe — bilkul free!',
-  },
-  {
-    q: 'GSSSB CCE 2026 mate Current Affairs PDF kevo hovo joive?',
-    a: 'GSSSB CCE 2026 (7338 Vacancy) maa Prelims maa 30 marks ane Group B Mains maa 30 marks Current Affairs mathi aave chhe. CurrentAdda PDF maa badha important topic cover thay chhe ane MCQ format maa practice pan kari shakay chhe.',
-  },
+    q: "કયા months ની Current Affairs Gujarati PDF available છે?",
+    a: "અત્યારે October 2025 થી લય ને March 2026 સુધી ના તમામ Current Affairs PDF available છે. દરેક month ની સીધી Telegram link થી ડાઉનલોડ કરી શકો છો."
+  }
 ];
 
-// ─── Structured Data ─────────────────────────────────────────────────────────
-const BREADCRUMB_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://currentadda.vercel.app' },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Current Affairs PDF in Gujarati',
-      item: 'https://currentadda.vercel.app/current-affairs-pdf-gujarati',
-    },
-  ],
-};
-
-const COLLECTION_PAGE_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'Current Affairs PDF in Gujarati 2026 Free Download',
-  description:
-    'Monthly Current Affairs PDF in Gujarati for GPSC, GSSSB CCE, PSI, Constable, Talati. Free download every month.',
-  url: 'https://currentadda.vercel.app/current-affairs-pdf-gujarati',
-  inLanguage: 'gu',
-  publisher: { '@type': 'Organization', name: 'CurrentAdda', url: 'https://currentadda.vercel.app' },
-  hasPart: PDF_LIST.map((p) => ({
-    '@type': 'DigitalDocument',
-    name: `${p.month} Current Affairs PDF in Gujarati`,
-    description: `Monthly current affairs PDF in Gujarati for ${p.month}. Topics: ${p.topics.join(', ')}.`,
-    url: p.telegramUrl,
-    encodingFormat: 'application/pdf',
-    inLanguage: 'gu',
-    keywords: p.exams.join(', '),
-  })),
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Current Adda – Gujarati Current Affairs",
+  "description": "Gujarati Current Affairs PDF for GPSC UPSC – VisionIAS quality translated content",
+  "url": "https://currentadda.vercel.app/current-affairs-pdf-gujarati",
+  "sameAs": ["https://t.me/currentadda"],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "INR",
+    "description": "Free Gujarati Current Affairs PDF Download"
+  }
 };
 
 const FAQ_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQS.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": FAQS.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
 };
 
-// ─── Page Component ───────────────────────────────────────────────────────────
-export default function CurrentAffairsPdfGujaratiPage() {
+export default function GujaratiCurrentAffairsPdfPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 pb-32">
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(COLLECTION_PAGE_SCHEMA) }} />
+    <main lang="gu" className="min-h-screen bg-[#f8fafc] text-[#1e293b] font-sans pb-32 gujarati-text">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }} />
 
-      {/* ── Header ── */}
-      <header className="bg-white/80 backdrop-blur-2xl sticky top-0 z-50 border-b border-slate-100 shadow-sm">
-        <div className="max-w-3xl mx-auto px-5 py-3 flex items-center gap-3">
-          <Link href="/" className="p-2 hover:bg-slate-50 rounded-xl transition-colors" aria-label="Go to Home">
-            <ArrowLeft className="w-5 h-5 text-slate-500" />
-          </Link>
-          <div className="flex flex-col">
-            <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">
-              Current Affairs PDF Gujarati
-            </h1>
-            <span className="text-[8px] font-black text-indigo-500 uppercase tracking-[0.15em] mt-0.5 gujarati-text">
-              ગુજરાતી PDF – Free Download 2026
-            </span>
+      {/* Header Sticky */}
+      <header className="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div className="max-w-4xl mx-auto px-5 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="p-2 hover:bg-slate-100 rounded-xl transition-colors">
+              <ArrowLeft className="w-5 h-5 text-slate-700" />
+            </Link>
+            <div>
+              <h1 className="text-base md:text-lg font-black tracking-tight text-[#1a2744] leading-none">
+                CurrentAdda
+              </h1>
+            </div>
           </div>
+          <Link href="https://t.me/currentadda" target="_blank" className="font-bold text-xs bg-[#f4900c]/10 text-[#f4900c] px-4 py-2 rounded-full hidden sm:flex items-center gap-2">
+            Join Telegram <Send className="w-3 h-3" />
+          </Link>
         </div>
       </header>
 
-      {/* ── Hero ── */}
-      <section className="relative px-5 pt-12 pb-14 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-indigo-100 via-purple-50 to-transparent rounded-full blur-3xl opacity-50 -mr-48 -mt-48" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-pink-100 via-rose-50 to-transparent rounded-full blur-3xl opacity-30 -ml-32 -mb-32" />
+      {/* Hero Section */}
+      <section className="bg-[#1a2744] text-white pt-16 pb-20 px-5 relative overflow-hidden">
+        {/* Abstract background blobs */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#f4900c] rounded-full blur-[100px] opacity-10" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500 rounded-full blur-[100px] opacity-10" />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* Freshness Signal */}
+          <time dateTime="2026-04" className="inline-block text-[10px] uppercase font-bold tracking-widest text-[#f4900c] bg-[#f4900c]/10 px-3 py-1 rounded-full border border-[#f4900c]/20 mb-6">
+            Last Updated: April 2026
+          </time>
 
-        <div className="max-w-3xl mx-auto relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 border border-indigo-100 rounded-full mb-5">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            <span className="text-[9px] font-black uppercase tracking-[0.15em] text-indigo-600">
-              Free Download • Updated Monthly • 100% Gujarati
-            </span>
-          </div>
-
-          <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-tight text-slate-900 mb-4">
-            Monthly{' '}
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Current Affairs PDF in Gujarati
-            </span>{' '}
-            2026 — Free Download
+          <h1 className="text-3xl sm:text-5xl font-black mb-6 leading-tight">
+            <span className="block mb-2">ગુજરાતી કરંટ અફેર્સ 2025-2026</span>
+            <span className="text-2xl sm:text-3xl text-slate-300 font-bold font-serif italic">Current Affairs in Gujarati – GPSC / UPSC Edition</span>
           </h1>
 
-          <p className="text-slate-600 font-medium text-sm md:text-base max-w-2xl mx-auto leading-relaxed gujarati-text mb-2">
-            <strong>GPSC, GSSSB CCE 2026, PSI, Constable, Talati</strong> exam mates best monthly current affairs PDF
-            in Gujarati — bilkul <strong>free</strong>. Darak mahine new PDF add thay chhe.
-          </p>
-          <p className="text-slate-500 font-medium text-xs max-w-xl mx-auto leading-relaxed gujarati-text">
-            ગુજરાતી ભાષામાં માસિક કરંટ અફેર્સ PDF — National, International, Sports, Economy, Awards, Science
-            categories cover thay che. Telegram thi direct download karo.
+          <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+            VisionIAS-level Current Affairs <br className="hidden sm:block" />
+            <span className="font-bold text-white">— હવે સંપૂર્ણ ગુજરાતી ભાષામાં</span>
           </p>
 
-          {/* Stats row */}
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            {[
-              { icon: '📄', val: '4+', label: 'PDFs Available' },
-              { icon: '📅', val: 'Monthly', label: 'New PDF Added' },
-              { icon: '🆓', val: '100%', label: 'Free Forever' },
-              { icon: '📲', val: 'Telegram', label: 'Instant Access' },
-            ].map((s) => (
-              <div
-                key={s.label}
-                className="bg-white px-5 py-3 rounded-2xl border border-slate-100 shadow-sm text-center"
-              >
-                <div className="text-lg mb-0.5">{s.icon}</div>
-                <div className="text-base font-black text-slate-900">{s.val}</div>
-                <div className="text-[8px] font-black text-slate-400 uppercase tracking-widest">{s.label}</div>
-              </div>
+          <div className="flex justify-center mb-10 flex-wrap gap-x-6 gap-y-3">
+            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">✅ VisionIAS Quality</span>
+            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📚 224+ Articles/Month</span>
+            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg text-[#16a34a] bg-[#16a34a]/10">🆓 Free PDF</span>
+            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📱 10,000+ Students</span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#pdf-grid" className="w-full sm:w-auto bg-[#f4900c] hover:bg-[#d97c0a] text-white px-8 py-4 rounded-xl font-black text-sm uppercase tracking-wide transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#f4900c]/20">
+              <Download className="w-5 h-5" /> 📥 Free PDF Download કરો
+            </a>
+            <a href="https://t.me/currentadda" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-black text-sm transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+              Join Telegram Channel <Send className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Section */}
+      <section className="py-16 px-5 max-w-4xl mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#1a2744] mb-4">
+            VisionIAS Current Affairs Gujarati <br /> <span className="text-[#f4900c]">India's Best, Now In Your Language</span>
+          </h2>
+          <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            અમારી Gujarati Current Affairs PDF <strong className="text-[#1a2744]">Vision IAS</strong> ના સ્ત્રોત પર આધારિત છે —
+            ભારતની #1 IAS coaching — અને સંપૂર્ણ ગુજરાતી ભાષામાં ઉપલબ્ધ છે.
+            GPSC Class 1-2, UPSC CSE, PSI, Talati, GSSSB, અને અન્ય
+            competitive exams માટે exam-oriented content. દર મહિને 224+
+            important articles, 14 categories, clean PDF format.
+            આ Gujarati Current Affairs PDF ખાસ GPSC aspirants માટે design
+            કરવામાં આવ્યો છે જેઓ VisionIAS-level preparation Gujarati medium માં ઇચ્છે છે.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-slate-50 border-b border-slate-200 text-sm">
+                <th className="p-4 font-black text-slate-800">Feature</th>
+                <th className="p-4 font-black text-slate-500">Other Sites</th>
+                <th className="p-4 font-black text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">Current Adda</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100/50">
+                <td className="p-4 font-bold text-slate-700">Quality Source</td>
+                <td className="p-4 text-slate-500">Unknown / Varied</td>
+                <td className="p-4 font-bold text-[#f4900c] bg-[#ffecd0]/30 border-l border-[#f4900c]/20"><span className="text-[#1a2744]">VisionIAS</span> (India's Best)</td>
+              </tr>
+              <tr className="border-b border-slate-100/50">
+                <td className="p-4 font-bold text-slate-700">Language</td>
+                <td className="p-4 text-slate-500">Mixed (Guj/Eng)</td>
+                <td className="p-4 font-bold text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">100% Gujarati</td>
+              </tr>
+              <tr className="border-b border-slate-100/50">
+                <td className="p-4 font-bold text-slate-700">Articles / Month</td>
+                <td className="p-4 text-slate-500">50–100 articles</td>
+                <td className="p-4 font-black text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">224+ Articles</td>
+              </tr>
+              <tr className="border-b border-slate-100/50">
+                <td className="p-4 font-bold text-slate-700">Categories</td>
+                <td className="p-4 text-slate-500">5–8 Basic</td>
+                <td className="p-4 font-bold text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">14 Categories Depth</td>
+              </tr>
+              <tr className="border-b border-slate-100/50">
+                <td className="p-4 font-bold text-slate-700">PDF Depth</td>
+                <td className="p-4 text-slate-500">Small summaries</td>
+                <td className="p-4 font-bold text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">58+ MB Professional</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-bold text-slate-700">Cost</td>
+                <td className="p-4 text-slate-500">Paid / Partial Free</td>
+                <td className="p-4 font-black text-[#16a34a] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">Free</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Monthly PDF Grid */}
+      <section id="pdf-grid" className="py-16 bg-[#1a2744]/5 border-y border-[#1a2744]/10">
+        <div className="max-w-4xl mx-auto px-5">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-black text-[#1a2744]">Monthly Current Affairs in Gujarati PDF – 2025-2026</h2>
+            <p className="text-slate-600 mt-2">Direct Telegram links for the highest quality monthly PDFs available.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PDF_LIST.map((pdf) => (
+              <article key={pdf.id} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-[#f4900c]/50 hover:shadow-xl hover:shadow-[#f4900c]/5 transition-all group flex flex-col" itemScope itemType="https://schema.org/DigitalDocument">
+                <div className="inline-block bg-[#1a2744] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full self-start mb-4">
+                  {pdf.monthEn}
+                </div>
+                
+                <h3 itemProp="name" className="text-base sm:text-lg font-black text-[#1a2744] mb-3 leading-tight">
+                  {pdf.monthEn} Current Affairs in Gujarati PDF <br />
+                  <span className="text-[#f4900c] text-sm mt-1 inline-block">{pdf.monthGu} ગુજરાતી કરંટ અફેર્સ</span>
+                </h3>
+                
+                <div className="flex gap-2 flex-wrap mb-4">
+                  <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">📚 {pdf.articles}</span>
+                  <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">📦 {pdf.size}</span>
+                  <span className="text-[10px] font-bold bg-[#16a34a]/10 text-[#16a34a] px-2 py-1 rounded">✅ GPSC Ready</span>
+                </div>
+                
+                <p itemProp="description" className="text-xs text-slate-500 mb-6 flex-grow leading-relaxed">
+                  {pdf.monthEn} 2025/2026 ના સૌથી important current affairs ગુજરાતી ભાષામાં.
+                  GPSC, UPSC, Talati, PSI, GSSSB exam preparation માટે
+                  exclusively exam-oriented articles. VisionIAS quality Gujarati PDF free download.
+                </p>
+
+                <a 
+                  href={pdf.telegramUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full bg-[#ffecd0] hover:bg-[#f4900c] text-[#f4900c] hover:text-white border border-[#f4900c]/30 font-bold p-3 rounded-xl text-xs text-center transition-all flex justify-center items-center gap-2 group-hover:bg-[#f4900c] group-hover:text-white"
+                  aria-label={`Download ${pdf.monthEn} Current Affairs in Gujarati PDF`}
+                >
+                  <Download className="w-4 h-4" /> 📥 Download PDF on Telegram
+                </a>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-5">
-        {/* ── Telegram CTA Banner ── */}
-        <section className="mb-10">
-          <a
-            href="https://t.me/currentadda"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="join-telegram-btn"
-            className="flex items-center justify-between gap-4 bg-gradient-to-r from-[#229ED9] to-[#1A7FBF] text-white px-6 py-5 rounded-3xl shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-100 transition-all group"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <Send className="w-6 h-6" />
-              </div>
-              <div className="text-left">
-                <div className="font-black text-base leading-tight">Join @CurrentAdda on Telegram</div>
-                <div className="text-[10px] font-bold text-white/80 uppercase tracking-widest mt-0.5 gujarati-text">
-                  નવો PDF upload થાય ત્યારે notification મળશે • Free
-                </div>
-              </div>
-            </div>
-            <ExternalLink className="w-5 h-5 flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity" />
-          </a>
-        </section>
-
-        {/* ── PDF Cards ── */}
-        <section className="mb-14" aria-label="Current Affairs PDF Downloads in Gujarati">
-          <div className="flex items-center gap-2 mb-6">
-            <FileDown className="w-4 h-4 text-indigo-600" />
-            <h2 className="text-xs font-black uppercase tracking-widest text-slate-900">
-              Monthly Current Affairs PDF — Free Download
-            </h2>
-          </div>
-
-          <div className="grid gap-5">
-            {PDF_LIST.map((pdf) => (
-              <article
-                key={pdf.id}
-                id={`pdf-${pdf.id}`}
-                className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all group"
-              >
-                {/* Top gradient strip */}
-                <div className={`h-1.5 w-full bg-gradient-to-r ${pdf.gradient}`} />
-
-                <div className="p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                    {/* Icon */}
-                    <div
-                      className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${pdf.gradient} flex items-center justify-center text-white flex-shrink-0 shadow-md`}
-                    >
-                      <span className="text-2xl">📄</span>
-                    </div>
-
-                    {/* Info */}
-                    <div className="flex-1">
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="text-lg font-black text-slate-900 leading-tight">
-                          {pdf.month} Current Affairs PDF in Gujarati
-                        </h3>
-                        <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${pdf.badgeColor}`}>
-                          {pdf.badge}
-                        </span>
-                      </div>
-
-                      <p className="text-xs font-bold text-slate-400 gujarati-text mb-3">
-                        {pdf.monthGu} — કરંટ અફેર્સ PDF ગુજરાતીમાં
-                      </p>
-
-                      {/* Meta */}
-                      <div className="flex flex-wrap gap-3 mb-4">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-wide">
-                          <Calendar className="w-3 h-3" /> {pdf.month}
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-wide">
-                          📑 {pdf.pages} pages
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-wide">
-                          💾 {pdf.size}
-                        </span>
-                      </div>
-
-                      {/* Topics */}
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {pdf.topics.map((t) => (
-                          <span
-                            key={t}
-                            className="text-[9px] font-black uppercase tracking-wider bg-slate-50 text-slate-600 border border-slate-100 px-2 py-1 rounded-full"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Exams */}
-                      <div className="flex flex-wrap gap-1.5 mb-5">
-                        {pdf.exams.map((e) => (
-                          <span
-                            key={e}
-                            className="text-[9px] font-black uppercase tracking-wider bg-indigo-50 text-indigo-600 border border-indigo-100 px-2 py-1 rounded-full"
-                          >
-                            {e}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Download CTA */}
-                      <a
-                        href={pdf.telegramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id={`download-${pdf.id}`}
-                        className={`inline-flex items-center gap-2 bg-gradient-to-r ${pdf.gradient} text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wide shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-100 transition-all`}
-                      >
-                        <FileDown className="w-4 h-4" />
-                        Download Free PDF — Telegram
-                        <ExternalLink className="w-3.5 h-3.5 opacity-70" />
-                      </a>
-
-                      <p className="text-[9px] text-slate-400 mt-2 font-medium">
-                        Opens in Telegram. No login required. 100% Free.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* ── How to Download Steps ── */}
-        <section className="mb-14">
-          <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-[2.5rem] p-8 border border-indigo-100">
-            <h2 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2">
-              <span className="text-2xl">📲</span>
-              Current Affairs PDF Gujarati — Download કેવી રીતે કરવી?
-            </h2>
-            <ol className="space-y-4">
-              {[
-                {
-                  step: '1',
-                  title: 'PDF Card પર Click કરો',
-                  desc: 'ઉપર listed PDF cards માં Download બટન click કરો.',
-                },
-                {
-                  step: '2',
-                  title: 'Telegram ખૂલશે',
-                  desc: 'Telegram app અથવા web browser માં file automatically open થશે.',
-                },
-                {
-                  step: '3',
-                  title: 'PDF Save કરો',
-                  desc: 'Download button click કરીને PDF phone/computer માં save કરો.',
-                },
-                {
-                  step: '4',
-                  title: 'Channel Join કરો',
-                  desc: '@currentadda join કરો — new PDF upload ત્‍યારે instant notification.',
-                },
-              ].map((s) => (
-                <li key={s.step} className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-black text-xs flex-shrink-0">
-                    {s.step}
-                  </div>
-                  <div>
-                    <div className="font-black text-slate-800 text-sm">{s.title}</div>
-                    <div className="text-xs text-slate-500 font-medium mt-0.5 gujarati-text">{s.desc}</div>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* ── Why CurrentAdda PDF ── */}
-        <section className="mb-14">
-          <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100">
-            <h2 className="text-xl font-black text-slate-900 mb-6 leading-tight">
-              CurrentAdda Current Affairs PDF{' '}
-              <span className="text-indigo-600">Gujarati</span> — Best Resources 2026?
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-medium text-slate-600 gujarati-text leading-relaxed">
-              {[
-                {
-                  emoji: '🎯',
-                  title: '100% Gujarati Language',
-                  desc: 'PDF સંપૂર્ણ ગુજરાતી ભાષામાં — Gujarat exam aspirants માટે best.',
-                },
-                {
-                  emoji: '📋',
-                  title: 'MCQ Format With Explanations',
-                  desc: 'Simple notes નહીં — MCQ format + detailed Gujarati explanations.',
-                },
-                {
-                  emoji: '🔄',
-                  title: 'Monthly Updated',
-                  desc: 'દર મહિને fresh PDF — January, February, March … December 2026.',
-                },
-                {
-                  emoji: '✅',
-                  title: 'Expert Verified Content',
-                  desc: 'Questions verified by GPSC & GSSSB exam experts before publishing.',
-                },
-                {
-                  emoji: '📲',
-                  title: 'Instant via Telegram',
-                  desc: 'PDF Telegram channel પરથી instantly download — no sign-up needed.',
-                },
-                {
-                  emoji: '🆓',
-                  title: 'Completely Free',
-                  desc: 'No paid subscription — forever free. Subscribe for updates.',
-                },
-              ].map((f) => (
-                <div key={f.title} className="flex items-start gap-3 bg-slate-50 rounded-2xl p-4">
-                  <span className="text-2xl flex-shrink-0">{f.emoji}</span>
-                  <div>
-                    <div className="font-black text-slate-800 text-sm mb-0.5">{f.title}</div>
-                    <div className="text-xs text-slate-500">{f.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Content Coverage ── */}
-        <section className="mb-14">
-          <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-[2.5rem] p-8 border border-amber-100">
-            <h2 className="text-lg font-black text-slate-900 mb-2 flex items-center gap-2">
-              <span>📚</span> Monthly PDF maa shu cover thay che?
-            </h2>
-            <p className="text-xs text-slate-500 font-medium gujarati-text mb-6">
-              (What topics are covered in Current Affairs PDF Gujarati?)
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {[
-                { emoji: '🏛️', cat: 'National Events', gu: 'રાષ્ટ્રીય ઘટનાઓ' },
-                { emoji: '🌍', cat: 'International', gu: 'આંતરરાષ્ટ્રીય' },
-                { emoji: '🏅', cat: 'Sports', gu: 'રમત-ગમત' },
-                { emoji: '📈', cat: 'Economy', gu: 'અર્થતંત્ર' },
-                { emoji: '🔬', cat: 'Science & Tech', gu: 'વિજ્ઞાન' },
-                { emoji: '🏆', cat: 'Awards', gu: 'પુરસ્કાર' },
-                { emoji: '🛡️', cat: 'Defence', gu: 'સંરક્ષણ' },
-                { emoji: '📅', cat: 'Important Days', gu: 'મહત્વના દિવસો' },
-                { emoji: '👤', cat: 'Appointments', gu: 'નિમણૂક' },
-                { emoji: '🌿', cat: 'Environment', gu: 'પર્યાવરણ' },
-                { emoji: '📜', cat: 'Bills & Acts', gu: 'બિલ અને અધિનિયમ' },
-                { emoji: '🎨', cat: 'Art & Culture', gu: 'કળા-સંસ્કૃતિ' },
-              ].map((c) => (
-                <div
-                  key={c.cat}
-                  className="bg-white/80 border border-amber-100 rounded-2xl p-3 flex items-center gap-2"
-                >
-                  <span className="text-xl">{c.emoji}</span>
-                  <div>
-                    <div className="text-[10px] font-black text-slate-700 uppercase tracking-wide">{c.cat}</div>
-                    <div className="text-[9px] text-slate-400 gujarati-text">{c.gu}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Exam Relevance ── */}
-        <section className="mb-14">
-          <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100">
-            <h2 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-amber-500" />
-              Kon Kon exams mate CurrentAdda PDF useful che?
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {[
-                { exam: 'GSSSB CCE 2026', detail: '7338 Posts — 30 Marks Current Affairs in Prelims & Mains', hot: true },
-                { exam: 'GPSC Class 1-2', detail: 'General Studies maa Current Affairs high weightage', hot: true },
-                { exam: 'PSI (Police Sub-Inspector)', detail: 'Current Affairs part of General Knowledge section', hot: false },
-                { exam: 'Police Constable', detail: 'Gujarat & National Current Events important', hot: false },
-                { exam: 'Talati cum Mantri', detail: 'Local + National Current Affairs tested', hot: false },
-                { exam: 'Bin Sachivalay Clerk', detail: 'GK & Current Affairs section in exam', hot: false },
-                { exam: 'TET / TAT / HTAT', detail: 'Current Events in General Knowledge', hot: false },
-                { exam: 'Revenue Talati', detail: 'Gujarat State + National events tested', hot: false },
-              ].map((e) => (
-                <div
-                  key={e.exam}
-                  className={`flex items-start gap-3 p-4 rounded-2xl border ${
-                    e.hot ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-100'
-                  }`}
-                >
-                  <CheckCircle2
-                    className={`w-4 h-4 mt-0.5 flex-shrink-0 ${e.hot ? 'text-amber-500' : 'text-indigo-400'}`}
-                  />
-                  <div>
-                    <div className={`text-sm font-black ${e.hot ? 'text-amber-800' : 'text-slate-700'}`}>
-                      {e.exam} {e.hot && <span className="text-[9px] bg-amber-500 text-white px-1.5 py-0.5 rounded-full ml-1">Hot</span>}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium mt-0.5 gujarati-text">{e.detail}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── SEO Rich Text Content ── */}
-        <section className="mb-14">
-          <div className="bg-white/60 rounded-[2.5rem] p-8 border border-slate-100 space-y-5 text-slate-600 text-sm leading-relaxed gujarati-text font-medium">
-            <h2 className="text-2xl font-black text-slate-900 leading-tight">
-              Current Affairs PDF in Gujarati 2026 — Free Monthly Download
-            </h2>
-
-            <p>
-              <strong>Current Affairs PDF in Gujarati</strong> (ગુજરાતી current affairs PDF) ગુજરાત ના
-              competitive exam aspirants માટે સૌથી ઉપયોગી study material છે. GPSC, GSSSB CCE 2026, PSI, Police
-              Constable, Talati, Bin Sachivalay — તમામ Gujarat Government Exams અ current affairs PDF ની
-              direct demand છે.
-            </p>
-
-            <p>
-              CurrentAdda ના monthly current affairs PDF ખાસ ગુજરાતી ભાષામાં design kerel chhe. PDF maa MCQ
-              questions, detailed Gujarati explanations, important events summary, ane exam-relevant
-              highlights included hoy chhe — je other websites kem provide karta nathi.
-            </p>
-
-            <h3 className="text-lg font-black text-slate-800 pt-2">
-              Monthly Current Affairs PDF Gujarati 2026 — Available Months
-            </h3>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {[
-                'February 2026 Current Affairs PDF Gujarati',
-                'January 2026 Current Affairs PDF Gujarati',
-                'December 2025 Current Affairs PDF Gujarati',
-                'July–November 2025 Current Affairs PDF Gujarati (Mega Bundle)',
-              ].map((m) => (
-                <li key={m} className="flex items-center gap-2 text-sm">
-                  <span className="text-indigo-500">✅</span>
-                  {m}
-                </li>
-              ))}
-            </ul>
-
-            <h3 className="text-lg font-black text-slate-800 pt-4">
-              Current Affairs PDF Gujarati vs Other Sources — Why CurrentAdda?
-            </h3>
-            <p>
-              CrackGPSC, Praajasv Foundation, RIJADEJA, Scribd — badha platforms current affairs provide
-              kare chhe, parantu CurrentAdda na PDF exclusively Gujarati maa chhe, MCQ format maa chhe, ane
-              exam-ready chhe. No watermarks, no paid access — completely free on our public Telegram channel
-              <strong> @currentadda</strong>.
-            </p>
-
-            <h3 className="text-lg font-black text-slate-800 pt-4">
-              GSSSB CCE 2026 — Current Affairs PDF Gujarati
-            </h3>
-            <p>
-              GSSSB CCE 2026 (7338 vacancies, Advt. No. 378/202526) maa Prelims maa{' '}
-              <strong>30 marks</strong> ane Group B Mains maa <strong>30 marks</strong> — kul 60 marks Current
-              Affairs mathi! Aa PDF thi revision fast ane effective bane chhe. 0.25 negative marking chhe,
-              etle accuracy jaruri chhe — MCQ practice thi accuracy improve thay chhe.
-            </p>
-
-            <div className="flex gap-3 flex-wrap pt-2">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:shadow-lg hover:shadow-indigo-200 transition-all"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                Practice Daily Quiz Free
-              </Link>
-              <Link
-                href="/current-affairs-in-gujarati"
-                className="inline-flex items-center gap-2 bg-white text-indigo-600 border-2 border-indigo-100 px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:border-indigo-300 transition-all"
-              >
-                Current Affairs in Gujarati
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ── FAQ ── */}
-        <section className="mb-14">
-          <h2 className="text-lg font-black text-slate-900 mb-5 flex items-center gap-2">
-            <span>❓</span> Frequently Asked Questions — Current Affairs PDF Gujarati
-          </h2>
-          <div className="space-y-3">
-            {FAQS.map((faq, i) => (
-              <details
-                key={i}
-                className="bg-white border border-slate-100 rounded-2xl overflow-hidden group"
-                open={i === 0}
-              >
-                <summary className="px-5 py-4 cursor-pointer font-bold text-sm text-slate-800 list-none flex items-start justify-between gap-3 hover:text-indigo-600 transition-colors">
-                  <span className="gujarati-text leading-snug">{faq.q}</span>
-                  <svg
-                    className="w-4 h-4 text-slate-300 flex-shrink-0 mt-0.5 transition-transform group-open:rotate-180"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <div className="px-5 pb-4 text-sm text-slate-600 font-medium leading-relaxed gujarati-text border-t border-slate-50 pt-3">
-                  {faq.a}
-                </div>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Notice Banner ── */}
-        <section className="mb-14">
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
-            <div>
-              <div className="font-black text-amber-800 text-sm mb-1">📢 New PDF Every Month!</div>
-              <p className="text-xs text-amber-700 font-medium gujarati-text leading-relaxed">
-                CurrentAdda Telegram channel (@currentadda) join karo — darak mahine navo current affairs PDF
-                upload thay tyare direct notification malashe. Channel bilkul public ane free chhe.
-              </p>
-              <a
-                href="https://t.me/currentadda"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-3 text-[10px] font-black uppercase tracking-widest text-amber-800 hover:text-amber-900 transition-colors"
-              >
-                Join Telegram Channel <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Internal Links ── */}
-        <section className="mb-14 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link
-            href="/current-affairs-in-gujarati"
-            id="link-current-affairs"
-            className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-lg transition-all group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 transition-all">
-                <BookOpen className="w-5 h-5 text-indigo-600 group-hover:text-white" />
-              </div>
-              <div>
-                <h3 className="font-black text-slate-800 group-hover:text-indigo-600 transition-colors text-sm">
-                  Current Affairs in Gujarati
-                </h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Daily MCQ Quiz</p>
-              </div>
-            </div>
-          </Link>
-          <Link
-            href="/categories"
-            id="link-categories"
-            className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-purple-200 hover:shadow-lg transition-all group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center group-hover:bg-purple-600 transition-all">
-                <span className="text-lg">🗂️</span>
-              </div>
-              <div>
-                <h3 className="font-black text-slate-800 group-hover:text-purple-600 transition-colors text-sm">
-                  Category-wise Current Affairs
-                </h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                  Sports, National, Economy...
-                </p>
-              </div>
-            </div>
-          </Link>
-          <Link
-            href="/subjects"
-            id="link-subjects"
-            className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-amber-200 hover:shadow-lg transition-all group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center group-hover:bg-amber-600 transition-all">
-                <span className="text-lg">📚</span>
-              </div>
-              <div>
-                <h3 className="font-black text-slate-800 group-hover:text-amber-600 transition-colors text-sm">
-                  Subject-wise Practice
-                </h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                  History, Geography, Polity...
-                </p>
-              </div>
-            </div>
-          </Link>
-          <Link
-            href="/leaderboard"
-            id="link-leaderboard"
-            className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-emerald-200 hover:shadow-lg transition-all group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center group-hover:bg-emerald-600 transition-all">
-                <Trophy className="w-5 h-5 text-emerald-600 group-hover:text-white" />
-              </div>
-              <div>
-                <h3 className="font-black text-slate-800 group-hover:text-emerald-600 transition-colors text-sm">
-                  Leaderboard
-                </h3>
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                  Compete & rank with students
-                </p>
-              </div>
-            </div>
-          </Link>
-        </section>
-
-        {/* Footer credit */}
-        <div className="py-8 text-center">
-          <Link href="/author" className="inline-block group">
-            <span className="text-[8px] font-black text-slate-300 uppercase tracking-[0.3em] opacity-60">
-              Crafted with ❤️ by
-            </span>
-            <br />
-            <span className="text-base font-black text-slate-900 group-hover:text-indigo-600 transition-all">
-              Ajay Ambaliya
-            </span>
-          </Link>
+      {/* Categories Section */}
+      <section className="py-16 px-5 max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#1a2744]">વિભાગ મુજબ Current Affairs Coverage</h2>
+          <p className="text-slate-600 mt-2">Comprehensive 14 category mapping matching the syllabus exactly.</p>
         </div>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {CATEGORIES.map((cat, i) => (
+            <div key={i} className="bg-white p-5 rounded-2xl border border-slate-200">
+              <div className="flex items-center gap-3 mb-2">
+                {cat.icon}
+                <div className="font-bold text-[#1a2744] text-sm">
+                  {cat.gu} <br />
+                  <span className="text-xs font-medium text-slate-500">{(cat.en)}</span>
+                </div>
+              </div>
+              <div className="text-[10px] uppercase font-black tracking-widest text-[#f4900c] mt-3 bg-[#ffecd0]/50 inline-block px-2 py-1 rounded">
+                Approx. {cat.count}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Exam Specific Sections */}
+      <section className="py-16 bg-[#1a2744] text-white">
+        <div className="max-w-4xl mx-auto px-5">
+           <h2 className="text-2xl sm:text-3xl font-black text-center mb-12 text-white">Targeted Exam Preparation</h2>
+           <div className="grid sm:grid-cols-2 gap-6">
+             {EXAMS.map((exam, i) => (
+               <div key={i} className="bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/10">
+                 <h2 className="text-xl font-bold mb-1 text-[#f4900c]">{exam.titleEn}</h2>
+                 <h3 className="text-sm font-medium mb-3 text-slate-300">{exam.titleGu}</h3>
+                 <p className="text-sm leading-relaxed text-slate-300 opacity-90">{exam.desc}</p>
+               </div>
+             ))}
+           </div>
+        </div>
+      </section>
+
+      {/* Stats Counter Section */}
+      <section className="py-16 border-y border-slate-200 bg-white">
+        <div className="max-w-4xl mx-auto px-5">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">6</div>
+              <div className="text-xs font-bold text-slate-500 uppercase">Months Available</div>
+            </div>
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">1,285+</div>
+              <div className="text-xs font-bold text-slate-500 uppercase">Articles Total</div>
+            </div>
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">10K+</div>
+              <div className="text-xs font-bold text-slate-500 uppercase">Students</div>
+            </div>
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">14</div>
+              <div className="text-xs font-bold text-slate-500 uppercase">Categories</div>
+            </div>
+            <div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2 text-[#16a34a]">Free</div>
+              <div className="text-xs font-bold text-slate-500 uppercase">Telegram Channel</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 px-5 max-w-4xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-black text-[#1a2744] text-center mb-10">Students ની Success Stories</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-[#ffecd0]/30 p-6 rounded-2xl border border-[#f4900c]/20 relative">
+            <span className="text-4xl absolute top-4 left-4 opacity-10">❝</span>
+            <p className="text-sm text-slate-700 leading-relaxed font-medium relative z-10 pl-6 pt-2">
+              GPSC Class 1-2 Prelims clear થઈ ગઈ. Current Adda ની PDF daily revision
+              માટે best છે. 224 articles sufficient છે complete coverage માટે.
+            </p>
+            <div className="font-black text-[#1a2744] mt-4 pl-6 flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#1a2744] text-white flex justify-center items-center text-xs">RP</div>
+              Rajesh P., <span className="text-slate-500 font-medium">Ahmedabad</span>
+            </div>
+          </div>
+          <div className="bg-[#ffecd0]/30 p-6 rounded-2xl border border-[#f4900c]/20 relative">
+            <span className="text-4xl absolute top-4 left-4 opacity-10">❝</span>
+            <p className="text-sm text-slate-700 leading-relaxed font-medium relative z-10 pl-6 pt-2">
+              Vision IAS જેટલી quality, ગુજરાતી ભાષામાં — આ combination powerful છે. કોઈ અન્ય platform પાસે આટલું detail analysis નથી.
+            </p>
+            <div className="font-black text-[#1a2744] mt-4 pl-6 flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#f4900c] text-white flex justify-center items-center text-xs">KS</div>
+              Kavita S., <span className="text-slate-500 font-medium">Rajkot</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-5">
+           <h2 className="text-2xl sm:text-3xl font-black text-[#1a2744] text-center mb-10">વારંવાર પૂછાતા પ્રશ્નો (FAQ)</h2>
+           <div className="space-y-4">
+             {FAQS.map((faq, i) => (
+                <details key={i} className="bg-white border border-slate-200 rounded-2xl group overflow-hidden">
+                  <summary className="p-5 font-bold cursor-pointer flex justify-between items-center text-[#1a2744] list-none">
+                    {faq.q}
+                    <ChevronDown className="w-5 h-5 group-open:rotate-180 transition-transform text-[#f4900c]" />
+                  </summary>
+                  <div className="p-5 pt-0 text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-[#f8fafc]">
+                    {faq.a}
+                  </div>
+                </details>
+             ))}
+           </div>
+        </div>
+      </section>
+
+      {/* Footer Text */}
+      <footer className="bg-slate-900 text-slate-400 py-12 px-5 text-center pb-32 sm:pb-12 text-sm leading-loose border-t border-slate-800">
+        <div className="max-w-4xl mx-auto">
+          Current Affairs in Gujarati | ગુજરાતી કરંટ અફેર્સ | GPSC Current Affairs | UPSC Gujarati Notes | VisionIAS Gujarati PDF | Monthly Current Affairs Gujarati | Competitive Exam Gujarati Notes | Current Adda
+        </div>
+      </footer>
+
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-lg border-t border-slate-200 p-4 sm:hidden z-50 flex gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
+        <a href="#pdf-grid" className="flex-1 bg-[#f4900c] text-white text-xs font-black p-3 rounded-xl flex items-center justify-center gap-1.5 uppercase transition-transform active:scale-95">
+           <Download className="w-4 h-4" /> Download PDF
+        </a>
+        <a href="https://t.me/currentadda" target="_blank" className="flex-1 bg-[#1a2744] text-white text-xs font-black p-3 rounded-xl flex items-center justify-center gap-1.5 uppercase transition-transform active:scale-95">
+           <Send className="w-4 h-4" /> Join Telegram
+        </a>
       </div>
     </main>
   );

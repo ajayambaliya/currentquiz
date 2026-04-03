@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import {
     ChevronLeft, LogOut, TrendingUp, Star, Target,
-    User as UserIcon, ArrowRight,
+    User as UserIcon, ArrowRight, FileDown,
     BarChart3, Clock, Flame, Shield, BookOpen,
     Share2, Rocket, Zap, Sparkles, MessageCircle,
     LayoutGrid, Home, Trophy, Github, Instagram, Mail
@@ -14,6 +14,7 @@ import { useRef, useState, useEffect, useMemo } from 'react';
 import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import BottomNav from '@/components/BottomNav';
 
 export default function UserProfile() {
     const { user, loading: authLoading } = useAuth();
@@ -425,15 +426,7 @@ export default function UserProfile() {
                 </div>
             </div>
 
-            {/* Navigation Tab Bar */}
-            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-6 pb-8 pt-2">
-                <div className="glass-profile p-2.5 rounded-[2.5rem] border border-white/10 flex justify-around items-center shadow-2xl bg-[#0a0d14]/90 backdrop-blur-3xl">
-                    <Link href="/" className="p-4 text-slate-500 hover:text-indigo-400 transition-all rounded-2xl"><Home className="w-6 h-6" /></Link>
-                    <Link href="/categories" className="p-4 text-slate-500 hover:text-indigo-400 transition-all rounded-2xl"><LayoutGrid className="w-6 h-6" /></Link>
-                    <Link href="/leaderboard" className="p-4 text-slate-500 hover:text-indigo-400 transition-all rounded-2xl"><Trophy className="w-6 h-6" /></Link>
-                    <Link href="/profile" className="p-4 bg-indigo-600 text-white rounded-[1.5rem] shadow-xl shadow-indigo-600/30"><UserIcon className="w-6 h-6" /></Link>
-                </div>
-            </nav>
+            <BottomNav theme="dark" />
 
             {/* Share Modal */}
             <AnimatePresence>

@@ -15,6 +15,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { parseSearchDate } from '@/lib/searchUtils';
 import { QuizListSkeleton, SearchBarSkeleton, FeaturedQuizSkeleton, HeroSkeleton } from '@/components/SkeletonLoader';
 import NotificationBell from '@/components/NotificationBell';
+import BottomNav from '@/components/BottomNav';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -647,29 +648,7 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                 </div>
             </div>
 
-            {/* Modern Bottom Navigation */}
-            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-5 pb-6 pt-2">
-                <div className="bg-white/80 backdrop-blur-2xl p-2.5 rounded-[2rem] shadow-2xl shadow-slate-900/10 border border-slate-200/50 flex justify-around items-center">
-                    <Link href="/" className="relative">
-                        <div className="bg-gradient-to-br from-indigo-600 to-purple-600 text-white p-3.5 rounded-2xl shadow-lg shadow-indigo-200">
-                            <BookOpen className="w-5 h-5" />
-                        </div>
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full" />
-                    </Link>
-                    <Link href="/subjects" className="p-3.5 text-slate-400 hover:text-indigo-600 transition-all rounded-2xl hover:bg-slate-50">
-                        <Book className="w-5 h-5" />
-                    </Link>
-                    <Link href="/categories" className="p-3.5 text-slate-400 hover:text-indigo-600 transition-all rounded-2xl hover:bg-slate-50">
-                        <LayoutGrid className="w-5 h-5" />
-                    </Link>
-                    <Link href="/leaderboard" className="p-3.5 text-slate-400 hover:text-indigo-600 transition-all rounded-2xl hover:bg-slate-50">
-                        <Trophy className="w-5 h-5" />
-                    </Link>
-                    <Link href="/profile" className="p-3.5 text-slate-400 hover:text-indigo-600 transition-all rounded-2xl hover:bg-slate-50">
-                        <User className="w-5 h-5" />
-                    </Link>
-                </div>
-            </nav>
+            <BottomNav />
         </main>
     );
 }

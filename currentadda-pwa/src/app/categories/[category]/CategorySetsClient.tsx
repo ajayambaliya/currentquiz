@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import {
     ArrowLeft, ChevronRight, Inbox, LayoutGrid, Trophy, Home, User,
-    Clock, Sparkles, Book, PlayCircle
+    Clock, Sparkles, Book, PlayCircle, FileDown
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { subMonths } from 'date-fns';
+import BottomNav from '@/components/BottomNav';
 
 export default function CategorySetsClient({ category }: { category: string }) {
     const [totalQuestions, setTotalQuestions] = useState<number | null>(null);
@@ -181,26 +182,7 @@ export default function CategorySetsClient({ category }: { category: string }) {
                 )}
             </div>
 
-            {/* Bottom Nav */}
-            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-5 pb-6 pt-2">
-                <div className="bg-white/90 backdrop-blur-xl p-2 rounded-[2rem] border border-slate-100 flex justify-around items-center shadow-2xl shadow-slate-900/10">
-                    <Link href="/" className="p-3 text-slate-400 hover:text-indigo-500 transition-colors">
-                        <Home className="w-6 h-6" />
-                    </Link>
-                    <Link href="/subjects" className="p-3 text-slate-400 hover:text-indigo-500 transition-colors">
-                        <Book className="w-6 h-6" />
-                    </Link>
-                    <Link href="/categories" className="flex items-center justify-center bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-500/25">
-                        <LayoutGrid className="w-6 h-6" />
-                    </Link>
-                    <Link href="/leaderboard" className="p-3 text-slate-400 hover:text-indigo-500 transition-colors">
-                        <Trophy className="w-6 h-6" />
-                    </Link>
-                    <Link href="/profile" className="p-3 text-slate-400 hover:text-indigo-500 transition-colors">
-                        <User className="w-6 h-6" />
-                    </Link>
-                </div>
-            </nav>
+            <BottomNav theme="light" />
         </div>
     );
 }

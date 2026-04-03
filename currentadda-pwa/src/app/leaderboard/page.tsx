@@ -5,12 +5,13 @@ import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import {
     Trophy, ArrowLeft, Crown, Medal, Star, Zap,
     Search, Users, ChevronDown, Home, LayoutGrid,
-    User as UserIcon, Flame, Target, TrendingUp
+    User as UserIcon, Flame, Target, TrendingUp, FileDown
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { startOfWeek, startOfMonth } from 'date-fns';
 import { useAuth } from '@/hooks/useAuth';
+import BottomNav from '@/components/BottomNav';
 
 type TimeFilter = 'all' | 'monthly' | 'weekly';
 
@@ -204,10 +205,10 @@ export default function LeaderboardPage() {
                                 {/* #1 Hero Card */}
                                 {top3[0] && <HeroCard entry={top3[0]} />}
 
-                                {/* #2 and #3 */}
+                                { /* #2 and #3 cards with unique keys */ }
                                 <div className="grid grid-cols-2 gap-3 mt-3">
-                                    {[top3[1], top3[2]].map((entry, i) => entry && (
-                                        <SilverBronzeCard key={`rank-${entry.rank}`} entry={entry} rank={i + 2} delay={0.1 * (i + 1)} />
+                                    {[top3[1], top3[2]].filter(Boolean).map((entry, i) => (
+                                        <SilverBronzeCard key={`top-${entry.user_id}-${entry.rank}`} entry={entry} rank={entry.rank} delay={0.1 * (i + 1)} />
                                     ))}
                                 </div>
                             </motion.div>
@@ -241,7 +242,7 @@ export default function LeaderboardPage() {
                             <div className="space-y-2">
                                 <AnimatePresence>
                                     {rest.map((entry, idx) => (
-                                        <RankRow key={`rank-${entry.rank}`} entry={entry}
+                                        <RankRow key={`row-${entry.user_id}-${entry.rank}`} entry={entry}
                                             isMe={user ? entry.user_id === user.id : false}
                                             delay={idx < 10 ? idx * 0.025 : 0}
                                         />
@@ -290,23 +291,7 @@ export default function LeaderboardPage() {
                 </motion.div>
             )}
 
-            {/* ── Bottom Nav ── */}
-            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 px-5 pb-7 pt-2">
-                <div className="bg-[#141428]/90 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-2.5 flex justify-around items-center shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
-                    <NavBtn href="/" icon={<Home className="w-5 h-5" />} />
-                    <NavBtn href="/categories" icon={<LayoutGrid className="w-5 h-5" />} />
-                    <Link href="/leaderboard" className="bg-amber-500 text-white p-4 rounded-[1.5rem] shadow-[0_8px_24px_rgba(245,158,11,0.4)] flex items-center justify-center scale-105 hover:scale-110 active:scale-95 transition-all">
-                        <Trophy className="w-5 h-5 fill-white" />
-                    </Link>
-                    <NavBtn href="/profile" icon={
-                        <div className="w-6 h-6 rounded-xl bg-white/10 border border-white/10 overflow-hidden flex items-center justify-center">
-                            {user?.user_metadata?.avatar_url
-                                ? <img src={getProxiedImageUrl(user.user_metadata.avatar_url)} alt="" className="w-full h-full object-cover" />
-                                : <UserIcon className="w-3.5 h-3.5 text-white/40" />}
-                        </div>
-                    } />
-                </div>
-            </nav>
+            <BottomNav theme="dark" />
         </main>
     );
 }
@@ -477,10 +462,10 @@ function LoadingSkeleton() {
                 <div className="h-32 bg-white/5 rounded-[2rem]" />
             </div>
             <div className="grid grid-cols-3 gap-2 mt-3">
-                {[0,1,2].map(i => <div key={i} className="h-14 bg-white/5 rounded-2xl" />)}
+                {[0, 1, 2].map(i => <div key={`stat-skel-${i}`} className="h-14 bg-white/5 rounded-2xl" />)}
             </div>
             {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="h-16 bg-white/5 rounded-[1.5rem]" />
+                <div key={`row-skel-${i}`} className="h-16 bg-white/5 rounded-[1.5rem]" />
             ))}
         </div>
     );

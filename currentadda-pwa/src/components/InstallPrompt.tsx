@@ -73,8 +73,8 @@ export default function InstallPrompt() {
     if (!showPrompt || isStandalone) return null;
 
     return (
-        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50 animate-in slide-in-from-bottom-5 fade-in duration-500">
-            <div className="premium-card glass p-4 shadow-2xl relative overflow-hidden">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-5 sm:p-0 sm:bottom-4 sm:top-auto sm:left-auto sm:right-4 sm:block pointer-events-none">
+            <div className="premium-card glass p-4 shadow-2xl relative overflow-hidden w-full max-w-[360px] md:w-96 pointer-events-auto animate-in zoom-in-95 sm:slide-in-from-bottom-5 fade-in duration-500 mx-auto">
                 {/* Glow effect background */}
                 <div className="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl"></div>
