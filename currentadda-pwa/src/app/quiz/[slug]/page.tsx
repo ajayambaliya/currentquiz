@@ -3,7 +3,7 @@ import QuizEngine from './QuizEngine';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ChevronRight, FileText, BookOpen } from 'lucide-react';
+import { ChevronRight, FileText, BookOpen, Sparkles, HelpCircle } from 'lucide-react';
 import { generateSeoContent, generateAuthorSchema } from '@/lib/seo-brain';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { cache } from 'react';
@@ -187,20 +187,48 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
 
             <Breadcrumbs items={breadcrumbs} />
 
-            {/* Dynamic SEO Narrative - Visually Hidden */}
-            <div className="sr-only">
-                <h2>{quiz.title} Analysis by {authorSchema.name}</h2>
-                <div dangerouslySetInnerHTML={{ __html: seo.narrativeHtml }} />
-                <h3>Study Material Questions</h3>
-                {questions?.slice(0, 5).map((q: any, i: number) => (
-                    <div key={i}>
-                        <h4>{q.text}</h4>
-                        <p>{q.explanation || `Answer: ${q.answer}`}</p>
-                    </div>
-                ))}
-            </div>
-
             <QuizEngine quiz={quiz} questions={questions || []} />
+
+            {/* Premium SEO Study Resource Section - Visible to Google + Users */}
+            <section className="mt-12 bg-white rounded-3xl border border-slate-100 p-8 shadow-sm">
+                <div className="flex items-center gap-2 mb-6">
+                    <Sparkles className="w-5 h-5 text-indigo-500" />
+                    <h2 className="text-base font-black text-slate-800 uppercase tracking-widest leading-none">
+                        Exam Analysis & Resources
+                    </h2>
+                </div>
+                
+                <div className="prose prose-slate prose-sm max-w-none mb-8 text-slate-600 font-medium leading-relaxed gujarati-text">
+                    <div dangerouslySetInnerHTML={{ __html: seo.narrativeHtml }} />
+                </div>
+
+                <div className="grid gap-4">
+                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-2">Key Topics Covered</h3>
+                    <div className="flex flex-wrap gap-2">
+                        {seo.keywords.slice(0, 5).split(',').map((kw: string) => (
+                            <span key={kw} className="bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-xl text-[10px] font-bold border border-indigo-100/50">
+                                {kw.trim()}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Important study snippet */}
+                <div className="mt-8 p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                    <h3 className="text-xs font-black text-slate-700 uppercase tracking-widest mb-3 flex items-center gap-2">
+                         <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
+                         Sample Study Content
+                    </h3>
+                    <div className="space-y-4">
+                        {questions?.slice(0, 3).map((q: any, i: number) => (
+                            <div key={i} className="border-b border-white pb-3 last:border-0 last:pb-0">
+                                <h4 className="text-[13px] font-black text-slate-800 gujarati-text mb-1">{q.text}</h4>
+                                <p className="text-[11px] text-slate-500 gujarati-text line-clamp-1">{q.explanation || `The correct answer isOption ${q.answer}`}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             {/* Read Notes / Daily Text Link */}
             {quiz.quiz_date && (

@@ -1,74 +1,127 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { useParams, notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
-import QuizEngine from '@/app/quiz/[slug]/QuizEngine';
-import { Loader2 } from 'lucide-react';
+import { notFound } from 'next/navigation';
 import { subMonths } from 'date-fns';
+import QuizEngine from '@/app/quiz/[slug]/QuizEngine';
+import { Metadata } from 'next';
+import { getCategorySeo } from '@/lib/category-seo';
 
-export default function CategoryQuizPage() {
-    const params = useParams();
-    const category = decodeURIComponent(params.category as string);
-    const setId = parseInt(params.setId as string);
-    const [questions, setQuestions] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+interface PageProps {
+    params: Promise<{ category: string; setId: string }>;
+}
 
-    useEffect(() => {
-        fetchQuestions();
-    }, [category, setId]);
+async function getQuizData(categoryName: string, setIdStr: string) {
+    const category = decodeURIComponent(categoryName);
+    const setId = parseInt(setIdStr);
+    const eightMonthsAgo = subMonths(new Date(), 8);
 
-    async function fetchQuestions() {
-        try {
-            setLoading(true);
-            const eightMonthsAgo = subMonths(new Date(), 8);
+    const setSize = 10;
+    const from = (setId - 1) * setSize;
+    const to = from + setSize - 1;
 
-            const setSize = 10;
-            const from = (setId - 1) * setSize;
-            const to = from + setSize - 1;
+    const { data: questions, error } = await supabase
+        .from('questions')
+        .select('*')
+        .eq('category', category)
+        .gte('created_at', eightMonthsAgo.toISOString())
+        .order('created_at', { ascending: false })
+        .range(from, to);
 
-            const { data, error } = await supabase
-                .from('questions')
-                .select('*')
-                .eq('category', category)
-                .gte('created_at', eightMonthsAgo.toISOString())
-                .order('created_at', { ascending: false })
-                .range(from, to);
-
-            if (error) throw error;
-            if (!data || data.length === 0) {
-                setQuestions([]);
-            } else {
-                setQuestions(data);
-            }
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    if (loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-white">
-                <div className="text-center space-y-4">
-                    <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mx-auto" />
-                    <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Loading Questions</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (questions.length === 0) {
-        notFound();
+    if (error || !questions || questions.length === 0) {
+        return null;
     }
 
     const quiz = {
-        id: 'category-quiz', // Placeholder, QuizEngine will handle this
-        title: `${category} - Set ${setId}`,
-        slug: `category/${encodeURIComponent(category)}/quiz/${setId}`,
+        id: `category-${category}-${setId}`,
+        title: `${category} Current Affairs - Practice Set ${setId} (Gujarati)`,
+        slug: `categories/${categoryName}/quiz/${setIdStr}`,
         category: category
     };
 
-    return <QuizEngine quiz={quiz as any} questions={questions} />;
+    return { quiz, questions, category, setId };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const p = await params;
+    const data = await getQuizData(p.category, p.setId);
+    
+    if (!data) return { title: 'Quiz Not Found' };
+
+    const seo = getCategorySeo(data.category);
+    const title = `${data.category} MCQ Practice Set ${data.setId} in Gujarati | ${data.category} કરંટ અફેર્સ | CurrentAdda`;
+    const description = `Practice ${data.category} Current Affairs set ${data.setId} in Gujarati with explanations. Specifically designed for GSSSB CCE, GPSC, and all competitive exams in Gujarat. ${seo?.shortDesc || ''}`;
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: `https://currentadda.vercel.app/categories/${p.category}/quiz/${p.setId}`,
+        },
+        openGraph: {
+            title,
+            description,
+            type: 'article',
+            url: `https://currentadda.vercel.app/categories/${p.category}/quiz/${p.setId}`,
+        }
+    };
+}
+
+export default async function CategoryQuizPage({ params }: PageProps) {
+    const p = await params;
+    const data = await getQuizData(p.category, p.setId);
+
+    if (!data) {
+        notFound();
+    }
+
+    const { quiz, questions, category, setId } = data;
+    const seo = getCategorySeo(category);
+
+    // Schema.org logic
+    const quizSchema = {
+        "@context": "https://schema.org",
+        "@type": "Quiz",
+        "name": quiz.title,
+        "description": `Interactive practice set ${setId} for ${category} current affairs in Gujarati.`,
+        "educationalAlignment": [
+            { "@type": "AlignmentObject", "educationalFramework": "GSSSB CCE", "targetName": "Current Affairs" },
+            { "@type": "AlignmentObject", "educationalFramework": "GPSC", "targetName": "General Knowledge" }
+        ],
+        "hasPart": questions.slice(0, 10).map((q, i) => ({
+            "@type": "Question",
+            "name": q.text,
+            "acceptedAnswer": { "@type": "Answer", "text": q.answer }
+        }))
+    };
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://currentadda.vercel.app" },
+            { "@type": "ListItem", "position": 2, "name": "Categories", "item": "https://currentadda.vercel.app/categories" },
+            { "@type": "ListItem", "position": 3, "name": category, "item": `https://currentadda.vercel.app/categories/${p.category}` },
+            { "@type": "ListItem", "position": 4, "name": `Set ${setId}`, "item": `https://currentadda.vercel.app/categories/${p.category}/quiz/${p.setId}` }
+        ]
+    };
+
+    return (
+        <main className="min-h-screen pb-20">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(quizSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+            
+            {/* SEO Text Hidden Visually for Robots */}
+            <div className="sr-only">
+                <h1>{quiz.title}</h1>
+                <p>Preparation questions for {category} in Gujarati (કરંટ અફેર્સ ગુજરાતી).</p>
+                {questions.slice(0, 3).map((q, i) => (
+                    <div key={i}>
+                        <h2>{q.text}</h2>
+                        <p>{q.explanation || `The correct answer is ${q.answer}`}</p>
+                    </div>
+                ))}
+            </div>
+
+            <QuizEngine quiz={quiz as any} questions={questions} />
+        </main>
+    );
 }
