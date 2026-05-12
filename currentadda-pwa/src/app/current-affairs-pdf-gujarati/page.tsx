@@ -27,11 +27,11 @@ import {
 // SEO Meta Data
 export const metadata: Metadata = {
   title: 'Current Affairs in Gujarati PDF 2025-2026 | GPSC UPSC | VisionIAS Gujarati | કરંટ અફેર્સ',
-  description: 'ગુજરાતી કરંટ અફેર્સ 2025-2026 – VisionIAS-level quality, Gujarati language. Free PDF download for GPSC, UPSC, Talati, PSI. Oct 2025 to Mar 2026. Download directly from Telegram.',
-  keywords: 'Current Affairs in Gujarati, Current Affairs in Gujarati PDF, VisionIAS Current Affairs Gujarati, GPSC Current Affairs Gujarati, ગુજરાતી કરંટ અફેર્સ, Monthly Current Affairs Gujarati PDF, UPSC Gujarati Notes, Current Affairs PDF Download Gujarati 2025 2026',
+  description: 'ગુજરાતી કરંટ અફેર્સ 2025-2026 – VisionIAS-level quality, Gujarati language. Free PDF download for GPSC, UPSC, Talati, PSI. Oct 2025 to Apr 2026. Download directly from Telegram.',
+  keywords: 'April 2026 Current Affairs in Gujarati PDF, April 2026 Current Affairs MCQ PDF, Current Affairs in Gujarati, Current Affairs in Gujarati PDF, VisionIAS Current Affairs Gujarati, GPSC Current Affairs Gujarati, ગુજરાતી કરંટ અફેર્સ, Monthly Current Affairs Gujarati PDF, UPSC Gujarati Notes, Current Affairs PDF Download Gujarati 2025 2026',
   openGraph: {
     title: 'Gujarati Current Affairs PDF 2025-2026 – GPSC/UPSC Ready',
-    description: '224+ Articles per month. VisionIAS quality in Gujarati. Free Download on Telegram.',
+    description: '271+ Articles per month. VisionIAS quality in Gujarati. Free Download on Telegram.',
     url: 'https://currentadda.vercel.app/current-affairs-pdf-gujarati',
     type: 'website',
   },
@@ -44,6 +44,22 @@ export const revalidate = 86400;
 
 // Data Definitions
 const PDF_LIST = [
+  {
+    id: 'apr-2026',
+    monthEn: 'April 2026',
+    monthGu: 'એપ્રિલ 2026',
+    articles: '271 Articles',
+    size: '60+ MB',
+    telegramUrl: 'https://t.me/currentadda/20866',
+  },
+  {
+    id: 'apr-2026-mcq',
+    monthEn: 'April 2026 MCQ',
+    monthGu: 'એપ્રિલ 2026 MCQ',
+    articles: '300+ MCQs',
+    size: '10+ MB',
+    telegramUrl: 'https://t.me/currentadda/20867',
+  },
   {
     id: 'mar-2026',
     monthEn: 'March 2026',
@@ -137,7 +153,7 @@ const EXAMS = [
 const FAQS = [
   {
     q: "Current Affairs in Gujarati PDF free download ક્યાંથી મળે?",
-    a: "Telegram channel @currentadda પર free download available છે. દર મહિને 224+ articles સાથે professional PDF publish થાય છે."
+    a: "Telegram channel @currentadda પર free download available છે. દર મહિને 271+ articles અને 300+ MCQs સાથે professional PDF publish થાય છે."
   },
   {
     q: "VisionIAS Current Affairs Gujarati PDF ક્યાં મળે?",
@@ -145,11 +161,11 @@ const FAQS = [
   },
   {
     q: "GPSC exam માટે best current affairs source ક્યો છે?",
-    a: "GPSC preparation માટે monthly Gujarati current affairs PDF best છે — 14 categories, 224+ articles, exam-oriented coverage."
+    a: "GPSC preparation માટે monthly Gujarati current affairs PDF best છે — 14 categories, 271+ articles, 300+ MCQs, exam-oriented coverage."
   },
   {
     q: "Gujarati Current Affairs PDF ની size કેટલી છે?",
-    a: "દર monthly PDF approx. 58–59 MB છે, જેમાં 224+ clean, formatted articles include છે."
+    a: "દર monthly PDF approx. 58–65 MB છે, જેમાં 271+ clean, formatted articles include છે."
   },
   {
     q: "Current Affairs ક્યા categories cover થાય છે?",
@@ -157,7 +173,7 @@ const FAQS = [
   },
   {
     q: "કયા months ની Current Affairs Gujarati PDF available છે?",
-    a: "અત્યારે October 2025 થી લય ને March 2026 સુધી ના તમામ Current Affairs PDF available છે. દરેક month ની સીધી Telegram link થી ડાઉનલોડ કરી શકો છો."
+    a: "અત્યારે October 2025 થી લય ને April 2026 સુધી ના તમામ Current Affairs PDF available છે. દરેક month ની સીધી Telegram link થી ડાઉનલોડ કરી શકો છો."
   }
 ];
 
@@ -222,7 +238,7 @@ export default function GujaratiCurrentAffairsPdfPage() {
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Freshness Signal */}
-          <time dateTime="2026-04" className="inline-block text-[10px] uppercase font-bold tracking-widest text-[#f4900c] bg-[#f4900c]/10 px-3 py-1 rounded-full border border-[#f4900c]/20 mb-6">
+          <time dateTime="2026-04-15" className="inline-block text-[10px] uppercase font-bold tracking-widest text-[#f4900c] bg-[#f4900c]/10 px-3 py-1 rounded-full border border-[#f4900c]/20 mb-6">
             Last Updated: April 2026
           </time>
 
@@ -238,7 +254,7 @@ export default function GujaratiCurrentAffairsPdfPage() {
 
           <div className="flex justify-center mb-10 flex-wrap gap-x-6 gap-y-3">
             <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">✅ VisionIAS Quality</span>
-            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📚 224+ Articles/Month</span>
+            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📚 271+ Articles & 300+ MCQs</span>
             <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg text-[#16a34a] bg-[#16a34a]/10">🆓 Free PDF</span>
             <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📱 10,000+ Students</span>
           </div>
@@ -294,7 +310,7 @@ export default function GujaratiCurrentAffairsPdfPage() {
               <tr className="border-b border-slate-100/50">
                 <td className="p-4 font-bold text-slate-700">Articles / Month</td>
                 <td className="p-4 text-slate-500">50–100 articles</td>
-                <td className="p-4 font-black text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">224+ Articles</td>
+                <td className="p-4 font-black text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">271+ Articles</td>
               </tr>
               <tr className="border-b border-slate-100/50">
                 <td className="p-4 font-bold text-slate-700">Categories</td>
@@ -409,7 +425,7 @@ export default function GujaratiCurrentAffairsPdfPage() {
         <div className="max-w-4xl mx-auto px-5">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
             <div>
-              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">6</div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">7</div>
               <div className="text-xs font-bold text-slate-500 uppercase">Months Available</div>
             </div>
             <div>
