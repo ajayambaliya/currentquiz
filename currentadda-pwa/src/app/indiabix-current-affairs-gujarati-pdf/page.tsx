@@ -28,8 +28,8 @@ import {
 // SEO Meta Data Optimized for AI Overview & Direct Search Intent
 export const metadata: Metadata = {
   title: 'IndiaBix Current Affairs in Gujarati PDF Download 2026 | Free',
-  description: 'Download IndiaBix Current Affairs in Gujarati PDF for free. Best for GPSC, GSSSB, PSI. Get translated IndiaBix MCQ PDF for March 2026, February 2026 & more directly via Telegram.',
-  keywords: 'indiabix current affairs in gujarati, indiabix current affairs in gujarati pdf, Indiabix current affairs in gujarati pdf download, Indiabix MCQ Gujarati PDF, National current affairs indiabix gujarati, GPSC exam preparation PDF',
+  description: 'Download IndiaBix Current Affairs in Gujarati PDF for free. Best for GPSC, GSSSB, PSI. Get translated IndiaBix MCQ PDF for April 2026, March 2026 & more directly via Telegram.',
+  keywords: 'indiabix current affairs in gujarati, April 2026 IndiaBix Gujarati PDF, indiabix current affairs in gujarati pdf, Indiabix current affairs in gujarati pdf download, Indiabix MCQ Gujarati PDF, National current affairs indiabix gujarati, GPSC exam preparation PDF',
   openGraph: {
     title: 'IndiaBix Current Affairs in Gujarati PDF Download 2026',
     description: 'Instant free download of translated IndiaBix Current Affairs MCQs in Gujarati. Perfect for CCE, GPSC, and Police Bharati.',
@@ -46,13 +46,22 @@ export const revalidate = 86400;
 // Data Definitions
 const PDF_LIST = [
   {
+    id: 'apr-2026',
+    monthEn: 'April 2026',
+    monthGu: 'એપ્રિલ 2026',
+    articles: '300+ MCQs',
+    size: '~15 MB',
+    telegramUrl: 'https://t.me/currentadda/20867',
+    badge: 'Latest'
+  },
+  {
     id: 'mar-2026',
     monthEn: 'March 2026',
     monthGu: 'માર્ચ 2026',
     articles: 'Full Coverage',
     size: '~60 MB',
     telegramUrl: 'https://t.me/currentadda/20716',
-    badge: 'Latest'
+    badge: 'Trending'
   },
   {
     id: 'feb-2026',
@@ -95,7 +104,7 @@ const PDF_LIST = [
 const FAQS = [
   {
     q: "How to download IndiaBix current affairs in Gujarati PDF?",
-    a: "You can download the IndiaBix Current Affairs Gujarati translated PDF absolutely free from CurrentAdda. We provide direct Telegram links for months like March 2026, February 2026, and more without any complicated redirects. Just click the download button below."
+    a: "You can download the IndiaBix Current Affairs Gujarati translated PDF absolutely free from CurrentAdda. We provide direct Telegram links for months like April 2026, March 2026, February 2026, and more without any complicated redirects. Just click the download button below."
   },
   {
     q: "Is IndiaBix Current Affairs Gujarati PDF useful for GPSC & GSSSB?",
