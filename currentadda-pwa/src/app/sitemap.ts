@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const urls = new Set<string>();
 
     // Static routes
-    const routes = ['', '/current-affairs-in-gujarati', '/current-affairs-pdf-gujarati', '/indiabix-current-affairs-gujarati', '/indiabix-current-affairs-gujarati-pdf', '/pdf', '/subjects', '/leaderboard', '/categories'].map((route) => ({
+    const routes = ['', '/current-affairs-in-gujarati', '/daily-current-affairs-in-gujarati', '/current-affairs-gujarati/gpsc', '/current-affairs-gujarati/gsssb', '/current-affairs-gujarati/talati', '/current-affairs-gujarati/cce', '/current-affairs-pdf-gujarati', '/indiabix-current-affairs-gujarati', '/indiabix-current-affairs-gujarati-pdf', '/pdf', '/subjects', '/leaderboard', '/categories'].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
         changeFrequency: 'daily' as const,
@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .select('*')
         .order('created_at', { ascending: false });
 
-    const quizEntries = (quizzes || []).map((q) => {
+    const quizEntries = (quizzes || []).map((q: any) => {
         const url = `${baseUrl}/quiz/${q.slug}`;
         urls.add(url);
         return {
@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .order('created_at', { ascending: false });
 
     const subjectQuizEntries: MetadataRoute.Sitemap = [];
-    (subjectQuizzes || []).forEach((q) => {
+    (subjectQuizzes || []).forEach((q: any) => {
         const url = `${baseUrl}/quiz/${q.slug}`;
         if (!urls.has(url)) {
             urls.add(url);
@@ -53,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
 
     // 3. Handle Unique Categories and their Page Sets (1-5 sets each)
-    const uniqueCategories = Array.from(new Set((quizzes || []).map(q => q.category).filter(Boolean)));
+    const uniqueCategories = Array.from(new Set((quizzes || []).map((q: any) => q.category).filter(Boolean)));
     const categoryEntries: MetadataRoute.Sitemap = [];
 
     uniqueCategories.forEach(cat => {
@@ -80,7 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .from('subjects')
         .select('slug, created_at')
 
-    const subjectEntries = (subjects || []).map((s) => ({
+    const subjectEntries = (subjects || []).map((s: any) => ({
         url: `${baseUrl}/subjects/${s.slug}`,
         lastModified: new Date(s.created_at || new Date()),
         changeFrequency: 'weekly' as const,
@@ -128,12 +128,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }];
 
     // Get all unique year-month combos from quizzes for archive sitemap
-    const yearMonths = Array.from(new Set((quizzes || []).map(q => {
+    const yearMonths = Array.from(new Set((quizzes || []).map((q: any) => {
         const d = new Date(q.quiz_date);
         return `${d.getFullYear()}/${(d.getMonth() + 1).toString().padStart(2, '0')}`;
     })));
 
-    yearMonths.forEach(ym => {
+    yearMonths.forEach((ym: any) => {
         archiveRoutes.push({
             url: `${baseUrl}/archive/${ym}`,
             lastModified: new Date(),
@@ -149,7 +149,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         8: 'september', 9: 'october', 10: 'november', 11: 'december',
     };
 
-    const uniqueDates = Array.from(new Set((quizzes || []).map(q => q.quiz_date).filter(Boolean)));
+    const uniqueDates = Array.from(new Set((quizzes || []).map((q: any) => q.quiz_date).filter(Boolean)));
     const dailyEntries = uniqueDates.map(date => ({
         url: `${baseUrl}/daily/${date}`,
         lastModified: new Date(),
@@ -158,7 +158,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     // 9. Add Monthly landing pages for current-affairs-in-gujarati
-    const monthlyCAEntries = yearMonths.map(ym => {
+    const monthlyCAEntries = yearMonths.map((ym: any) => {
         const [yr, mo] = ym.split('/');
         const monthName = MONTH_NAMES_MAP[parseInt(mo) - 1] || 'january';
         return {

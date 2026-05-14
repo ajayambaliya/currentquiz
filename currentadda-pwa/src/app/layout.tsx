@@ -16,10 +16,10 @@ const gujarati = Noto_Serif_Gujarati({
 
 export const metadata: Metadata = {
   title: {
-    default: "Current Affairs in Gujarati 2026 | Best Daily Quiz, MCQs & Questions | CurrentAdda",
+    default: "Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz",
     template: "%s | CurrentAdda - કરંટ અફેર્સ ગુજરાતી 2026"
   },
-  description: "Best Current Affairs in Gujarati 2026 (કરંટ અફેર્સ ગુજરાતી). Daily Current Affairs Questions and Answers in Gujarati for GSSSB CCE (7338 Posts), GPSC, PSI, Constable & Talati. 10,000+ Free MCQs, Daily Quiz, Live Leaderboard. Updated daily!",
+  description: "ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.",
   keywords: [
     "current affairs in gujarati",
     "current affairs 2026 gujarati",
@@ -83,8 +83,8 @@ export const metadata: Metadata = {
     apple: "/newlogo.png",
   },
   openGraph: {
-    title: "Best Current Affairs in Gujarati 2026 | Daily Quiz & MCQs | CurrentAdda",
-    description: "Best Daily Current Affairs in Gujarati (કરંટ અફેર્સ ગુજરાતી 2026) — Questions & Answers for GSSSB CCE, GPSC, PSI, Constable & Talati. 10,000+ free MCQs. Updated daily!",
+    title: "Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz",
+    description: "ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.",
     url: "https://currentadda.vercel.app",
     siteName: "CurrentAdda",
     images: [
@@ -100,8 +100,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Current Affairs in Gujarati 2026 | Daily Quiz, MCQs & Q&A | CurrentAdda",
-    description: "Best Daily Current Affairs in Gujarati 2026. Questions & Answers for GSSSB CCE, GPSC, PSI, Constable & Talati. 10,000+ free MCQs updated daily!",
+    title: "Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz",
+    description: "ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.",
     images: ["/newlogo.png"],
   },
   appleWebApp: {

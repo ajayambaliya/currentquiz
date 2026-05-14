@@ -5,8 +5,8 @@ import { format, subMonths, eachMonthOfInterval } from 'date-fns';
 import { BookOpen, ChevronRight, Calendar, Sparkles, Trophy, Target, Clock, ArrowLeft, PlayCircle, FileText, BarChart3 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Best Current Affairs in Gujarati 2026 - Daily Questions & Answers, MCQ | CCE, GPSC | CurrentAdda',
-  description: 'Best Daily Current Affairs in Gujarati 2026 (કરંટ અફેર્સ ગુજરાતી). Current Affairs 2026 Questions and Answers for GSSSB CCE (7338 Posts, 30 Marks), GPSC, PSI, Constable, Talati & Bin Sachivalay. 10,000+ MCQs. Updated daily!',
+  title: 'Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz',
+  description: 'ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.',
   keywords: [
     'current affairs in gujarati',
     'current affairs 2026 in gujarati',
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     canonical: 'https://currentadda.vercel.app/current-affairs-in-gujarati',
   },
   openGraph: {
-    title: 'Best Current Affairs in Gujarati 2026 | Daily Quiz, MCQs & Q&A | CurrentAdda',
-    description: 'Best daily current affairs in Gujarati 2026. Questions & Answers with explanations for GPSC, GSSSB CCE, PSI, Constable, Talati. 10,000+ free MCQs. Updated daily!',
+    title: 'Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz',
+    description: 'ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.',
     url: 'https://currentadda.vercel.app/current-affairs-in-gujarati',
     type: 'website',
     siteName: 'CurrentAdda',
@@ -259,6 +259,10 @@ export default async function CurrentAffairsGujaratiPage() {
               <BookOpen className="w-4 h-4" />
               Subject-wise Quiz
             </Link>
+            <a href="https://t.me/currentadda" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 border-2 border-blue-100 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-wide hover:border-blue-300 hover:bg-blue-100 transition-all">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a5.96 5.96 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.892-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              Join Telegram
+            </a>
           </div>
         </div>
       </section>

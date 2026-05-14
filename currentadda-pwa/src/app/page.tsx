@@ -3,8 +3,8 @@ import HomeClient from '@/components/HomeClient';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Current Affairs in Gujarati 2026 - Best Daily Quiz, Questions & Answers | CurrentAdda',
-  description: 'Best Current Affairs in Gujarati 2026 — Daily Current Affairs Questions and Answers (કરંટ અફેર્સ ગુજરાતી). Free MCQs for GSSSB CCE, GPSC, PSI, Constable & Talati. Daily updated quiz with explanations in Gujarati.',
+  title: 'Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz',
+  description: 'ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.',
   alternates: {
     canonical: 'https://currentadda.vercel.app',
   },
