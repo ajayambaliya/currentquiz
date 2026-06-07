@@ -26,12 +26,12 @@ import {
 
 // SEO Meta Data
 export const metadata: Metadata = {
-  title: 'Current Affairs in Gujarati PDF 2025-2026 | GPSC UPSC | VisionIAS Gujarati | કરંટ અફેર્સ',
-  description: 'ગુજરાતી કરંટ અફેર્સ 2025-2026 – VisionIAS-level quality, Gujarati language. Free PDF download for GPSC, UPSC, Talati, PSI. Oct 2025 to Apr 2026. Download directly from Telegram.',
-  keywords: 'April 2026 Current Affairs in Gujarati PDF, April 2026 Current Affairs MCQ PDF, Current Affairs in Gujarati, Current Affairs in Gujarati PDF, VisionIAS Current Affairs Gujarati, GPSC Current Affairs Gujarati, ગુજરાતી કરંટ અફેર્સ, Monthly Current Affairs Gujarati PDF, UPSC Gujarati Notes, Current Affairs PDF Download Gujarati 2025 2026',
+  title: 'Current Affairs in Gujarati PDF May 2026 | GPSC UPSC | VisionIAS Gujarati | કરંટ અફેર્સ',
+  description: 'મે 2026 ગુજરાતી કરંટ અફેર્સ PDF – 265 Articles, 15 Categories. VisionIAS-level quality, Gujarati language. Free PDF download for GPSC, UPSC, Talati, PSI. Oct 2025 to May 2026. Download directly from Telegram.',
+  keywords: 'May 2026 Current Affairs in Gujarati PDF, May 2026 Current Affairs MCQ PDF, current affairs in gujarati, current affairs gujarati, current affairs 2026 in gujarati, current affairs 2026 questions and answers in gujarati, April 2026 Current Affairs in Gujarati PDF, VisionIAS Current Affairs Gujarati, GPSC Current Affairs Gujarati, ગુજરાતી કરંટ અફેર્સ, Monthly Current Affairs Gujarati PDF, UPSC Gujarati Notes, Current Affairs PDF Download Gujarati 2025 2026, મે 2026 ગુજરાતી PDF',
   openGraph: {
-    title: 'Gujarati Current Affairs PDF 2025-2026 – GPSC/UPSC Ready',
-    description: '271+ Articles per month. VisionIAS quality in Gujarati. Free Download on Telegram.',
+    title: 'May 2026 Gujarati Current Affairs PDF – 265 Articles | GPSC/UPSC Ready',
+    description: 'મે 2026 – 265 Articles, 15 Categories. VisionIAS quality in Gujarati. Free Download on Telegram.',
     url: 'https://currentadda.vercel.app/current-affairs-pdf-gujarati',
     type: 'website',
   },
@@ -45,12 +45,31 @@ export const revalidate = 86400;
 // Data Definitions
 const PDF_LIST = [
   {
+    id: 'may-2026',
+    monthEn: 'May 2026',
+    monthGu: 'મે 2026',
+    articles: '265 Articles',
+    size: '15 Categories',
+    telegramUrl: 'https://t.me/currentadda/20920',
+    isNew: true,
+  },
+  {
+    id: 'may-2026-mcq',
+    monthEn: 'May 2026 MCQ',
+    monthGu: 'મે 2026 MCQ',
+    articles: '312 MCQs',
+    size: '18 Categories',
+    telegramUrl: 'https://t.me/currentadda/20919',
+    isNew: true,
+  },
+  {
     id: 'apr-2026',
     monthEn: 'April 2026',
     monthGu: 'એપ્રિલ 2026',
     articles: '271 Articles',
     size: '60+ MB',
     telegramUrl: 'https://t.me/currentadda/20866',
+    isNew: false,
   },
   {
     id: 'apr-2026-mcq',
@@ -59,6 +78,7 @@ const PDF_LIST = [
     articles: '300+ MCQs',
     size: '10+ MB',
     telegramUrl: 'https://t.me/currentadda/20867',
+    isNew: false,
   },
   {
     id: 'mar-2026',
@@ -67,6 +87,7 @@ const PDF_LIST = [
     articles: '227 Articles',
     size: '59.38 MB',
     telegramUrl: 'https://t.me/currentadda/20718',
+    isNew: false,
   },
   {
     id: 'feb-2026',
@@ -75,6 +96,7 @@ const PDF_LIST = [
     articles: '224+ Articles',
     size: '58+ MB',
     telegramUrl: 'https://t.me/currentadda/20529',
+    isNew: false,
   },
   {
     id: 'jan-2026',
@@ -83,6 +105,7 @@ const PDF_LIST = [
     articles: '224 Articles',
     size: '58.89 MB',
     telegramUrl: 'https://t.me/currentadda/20733',
+    isNew: false,
   },
   {
     id: 'dec-2025',
@@ -91,6 +114,7 @@ const PDF_LIST = [
     articles: '162 Articles',
     size: '46.11 MB',
     telegramUrl: 'https://t.me/currentadda/20733',
+    isNew: false,
   },
   {
     id: 'nov-2025',
@@ -99,6 +123,7 @@ const PDF_LIST = [
     articles: '224 Articles',
     size: '58.88 MB',
     telegramUrl: 'https://t.me/currentadda/20734',
+    isNew: false,
   },
   {
     id: 'oct-2025',
@@ -107,6 +132,7 @@ const PDF_LIST = [
     articles: '224 Articles',
     size: '58.86 MB',
     telegramUrl: 'https://t.me/currentadda/20735',
+    isNew: false,
   },
 ];
 
@@ -120,6 +146,12 @@ const CATEGORIES = [
   { icon: <MapPin className="w-5 h-5 text-[#f4900c]" />, en: 'Places in News', gu: 'સમાચારમાં સ્થળો', count: '10 per month' },
   { icon: <ClipboardList className="w-5 h-5 text-[#f4900c]" />, en: 'Schemes in News', gu: 'સમાચારમાં યોજનાઓ', count: '12 per month' },
   { icon: <Users2 className="w-5 h-5 text-[#f4900c]" />, en: 'Social Issues', gu: 'સામાજિક મુદ્દા', count: '29 per month' },
+  { icon: <BookOpen className="w-5 h-5 text-[#f4900c]" />, en: 'History & Culture', gu: 'સંસ્કૃતિ અને ઇતિહાસ', count: '18 per month' },
+  { icon: <Globe2 className="w-5 h-5 text-[#f4900c]" />, en: 'Geography', gu: 'ભૂગોળ', count: '15 per month' },
+  { icon: <Users className="w-5 h-5 text-[#f4900c]" />, en: 'Persons in News', gu: 'સમાચારમાં વ્યક્તિત્વ', count: '20 per month' },
+  { icon: <Award className="w-5 h-5 text-[#f4900c]" />, en: 'Awards & Rankings', gu: 'પુરસ્કારો અને ક્રમ', count: '10 per month' },
+  { icon: <Trophy className="w-5 h-5 text-[#f4900c]" />, en: 'Sports', gu: 'રમતગમત', count: '12 per month' },
+  { icon: <CheckCircle2 className="w-5 h-5 text-[#f4900c]" />, en: 'Ethics & Integrity', gu: 'નૈતિકતા', count: '8 per month' },
 ];
 
 const EXAMS = [
@@ -152,8 +184,12 @@ const EXAMS = [
 
 const FAQS = [
   {
+    q: "મે 2026 Current Affairs in Gujarati PDF ક્યાંથી ડાઉનલોડ કરવી?",
+    a: "મે 2026 ગુજરાતી કરંટ અફેર્સ PDF Telegram channel @currentadda પર free available છે. VisionIAS-based 265 articles PDF (link: t.me/currentadda/20920) અને 312 MCQ PDF (link: t.me/currentadda/20919) — બંને ઉપર download link આપેલ છે."
+  },
+  {
     q: "Current Affairs in Gujarati PDF free download ક્યાંથી મળે?",
-    a: "Telegram channel @currentadda પર free download available છે. દર મહિને 271+ articles અને 300+ MCQs સાથે professional PDF publish થાય છે."
+    a: "Telegram channel @currentadda પર free download available છે. દર મહિને 265+ articles અને 312+ MCQs સાથે professional PDF publish થાય છે."
   },
   {
     q: "VisionIAS Current Affairs Gujarati PDF ક્યાં મળે?",
@@ -161,19 +197,19 @@ const FAQS = [
   },
   {
     q: "GPSC exam માટે best current affairs source ક્યો છે?",
-    a: "GPSC preparation માટે monthly Gujarati current affairs PDF best છે — 14 categories, 271+ articles, 300+ MCQs, exam-oriented coverage."
+    a: "GPSC preparation માટે monthly Gujarati current affairs PDF best છે — 15 categories, 265+ articles, 312+ MCQs, exam-oriented coverage."
   },
   {
     q: "Gujarati Current Affairs PDF ની size કેટલી છે?",
-    a: "દર monthly PDF approx. 58–65 MB છે, જેમાં 271+ clean, formatted articles include છે."
+    a: "દર monthly PDF approx. 58–65 MB છે, જેમાં 265+ clean, formatted articles include છે."
   },
   {
     q: "Current Affairs ક્યા categories cover થાય છે?",
-    a: "14 categories: રાજનીતિ, આંતરરાષ્ટ્રીય, અર્થતંત્ર, પર્યાવરણ, વિજ્ઞાન/ટેક, સુરક્ષા, સામાજિક, ઇતિહાસ, ભૂગોળ, સ્થળો, યોજનાઓ, વ્યક્તિત્વ, સંસ્કૃતિ, નીતિશાસ્ત્ર."
+    a: "15 categories: રાજનીતિ, આંતરરાષ્ટ્રીય, અર્થતંત્ર, પર્યાવરણ, વિજ્ઞાન/ટેક, સુરક્ષા, સામાજિક, ઇતિહાસ, ભૂગોળ, સ્થળો, યોજનાઓ, વ્યક્તિત્વ, સંસ્કૃતિ, નીતિશાસ્ત્ર, રમતગમત."
   },
   {
     q: "કયા months ની Current Affairs Gujarati PDF available છે?",
-    a: "અત્યારે October 2025 થી લય ને April 2026 સુધી ના તમામ Current Affairs PDF available છે. દરેક month ની સીધી Telegram link થી ડાઉનલોડ કરી શકો છો."
+    a: "અત્યારે October 2025 થી May 2026 સુધી ના તમામ Current Affairs PDF available છે. દરેક month ની સીધી Telegram link થી ડાઉનલોડ કરી શકો છો."
   }
 ];
 
@@ -238,8 +274,8 @@ export default function GujaratiCurrentAffairsPdfPage() {
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Freshness Signal */}
-          <time dateTime="2026-04-15" className="inline-block text-[10px] uppercase font-bold tracking-widest text-[#f4900c] bg-[#f4900c]/10 px-3 py-1 rounded-full border border-[#f4900c]/20 mb-6">
-            Last Updated: April 2026
+          <time dateTime="2026-05-31" className="inline-block text-[10px] uppercase font-bold tracking-widest text-[#f4900c] bg-[#f4900c]/10 px-3 py-1 rounded-full border border-[#f4900c]/20 mb-6">
+            🆕 Last Updated: May 2026
           </time>
 
           <h1 className="text-3xl sm:text-5xl font-black mb-6 leading-tight">
@@ -254,7 +290,8 @@ export default function GujaratiCurrentAffairsPdfPage() {
 
           <div className="flex justify-center mb-10 flex-wrap gap-x-6 gap-y-3">
             <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">✅ VisionIAS Quality</span>
-            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📚 271+ Articles & 300+ MCQs</span>
+            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📚 265+ Articles | 312 MCQs</span>
+            <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📂 15 Categories</span>
             <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg text-[#16a34a] bg-[#16a34a]/10">🆓 Free PDF</span>
             <span className="flex items-center gap-2 text-sm font-bold bg-white/10 px-4 py-2 rounded-lg">📱 10,000+ Students</span>
           </div>
@@ -315,7 +352,7 @@ export default function GujaratiCurrentAffairsPdfPage() {
               <tr className="border-b border-slate-100/50">
                 <td className="p-4 font-bold text-slate-700">Categories</td>
                 <td className="p-4 text-slate-500">5–8 Basic</td>
-                <td className="p-4 font-bold text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">14 Categories Depth</td>
+                <td className="p-4 font-bold text-[#1a2744] bg-[#ffecd0]/30 border-l border-[#f4900c]/20">15 Categories Depth</td>
               </tr>
               <tr className="border-b border-slate-100/50">
                 <td className="p-4 font-bold text-slate-700">PDF Depth</td>
@@ -337,12 +374,17 @@ export default function GujaratiCurrentAffairsPdfPage() {
         <div className="max-w-4xl mx-auto px-5">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-black text-[#1a2744]">Monthly Current Affairs in Gujarati PDF – 2025-2026</h2>
-            <p className="text-slate-600 mt-2">Direct Telegram links for the highest quality monthly PDFs available.</p>
+            <p className="text-slate-600 mt-2">Direct Telegram links for the highest quality monthly PDFs available. <strong className="text-[#f4900c]">May 2026 is now live!</strong></p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {PDF_LIST.map((pdf) => (
-              <article key={pdf.id} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-[#f4900c]/50 hover:shadow-xl hover:shadow-[#f4900c]/5 transition-all group flex flex-col" itemScope itemType="https://schema.org/DigitalDocument">
+              <article key={pdf.id} className={`bg-white rounded-2xl p-6 shadow-sm border transition-all group flex flex-col relative ${pdf.isNew ? 'border-[#f4900c]/60 shadow-[#f4900c]/10 shadow-lg ring-1 ring-[#f4900c]/20' : 'border-slate-200 hover:border-[#f4900c]/50 hover:shadow-xl hover:shadow-[#f4900c]/5'}`} itemScope itemType="https://schema.org/DigitalDocument">
+                {pdf.isNew && (
+                  <div className="absolute -top-3 -right-2 bg-[#f4900c] text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-[#f4900c]/30 animate-pulse">
+                    🆕 New
+                  </div>
+                )}
                 <div className="inline-block bg-[#1a2744] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full self-start mb-4">
                   {pdf.monthEn}
                 </div>
@@ -425,11 +467,11 @@ export default function GujaratiCurrentAffairsPdfPage() {
         <div className="max-w-4xl mx-auto px-5">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
             <div>
-              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">7</div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">9</div>
               <div className="text-xs font-bold text-slate-500 uppercase">Months Available</div>
             </div>
             <div>
-              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">1,285+</div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">1,550+</div>
               <div className="text-xs font-bold text-slate-500 uppercase">Articles Total</div>
             </div>
             <div>
@@ -437,7 +479,7 @@ export default function GujaratiCurrentAffairsPdfPage() {
               <div className="text-xs font-bold text-slate-500 uppercase">Students</div>
             </div>
             <div>
-              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">14</div>
+              <div className="text-3xl sm:text-4xl font-black text-[#1a2744] mb-2">15</div>
               <div className="text-xs font-bold text-slate-500 uppercase">Categories</div>
             </div>
             <div>
@@ -499,7 +541,7 @@ export default function GujaratiCurrentAffairsPdfPage() {
       {/* Footer Text */}
       <footer className="bg-slate-900 text-slate-400 py-12 px-5 text-center pb-32 sm:pb-12 text-sm leading-loose border-t border-slate-800">
         <div className="max-w-4xl mx-auto">
-          Current Affairs in Gujarati | ગુજરાતી કરંટ અફેર્સ | GPSC Current Affairs | UPSC Gujarati Notes | VisionIAS Gujarati PDF | Monthly Current Affairs Gujarati | Competitive Exam Gujarati Notes | Current Adda
+          Current Affairs in Gujarati | May 2026 Current Affairs Gujarati PDF | ગુજરાતી કરંટ અફેર્સ | GPSC Current Affairs | UPSC Gujarati Notes | VisionIAS Gujarati PDF | Monthly Current Affairs Gujarati | Current Affairs 2026 in Gujarati | Current Adda
         </div>
       </footer>
 

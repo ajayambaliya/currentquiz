@@ -27,12 +27,12 @@ import {
 
 // SEO Meta Data Optimized for AI Overview & Direct Search Intent
 export const metadata: Metadata = {
-  title: 'IndiaBix Current Affairs in Gujarati PDF Download 2026 | Free',
-  description: 'Download IndiaBix Current Affairs in Gujarati PDF for free. Best for GPSC, GSSSB, PSI. Get translated IndiaBix MCQ PDF for April 2026, March 2026 & more directly via Telegram.',
-  keywords: 'indiabix current affairs in gujarati, April 2026 IndiaBix Gujarati PDF, indiabix current affairs in gujarati pdf, Indiabix current affairs in gujarati pdf download, Indiabix MCQ Gujarati PDF, National current affairs indiabix gujarati, GPSC exam preparation PDF',
+  title: 'IndiaBix Current Affairs in Gujarati PDF May 2026 | 312 MCQs Free Download',
+  description: 'Download IndiaBix Current Affairs in Gujarati PDF May 2026 free. 312 MCQs, 18 Categories, 31 Days. Best for GPSC, GSSSB, PSI. Get translated IndiaBix MCQ PDF for May 2026, April 2026, March 2026 & more directly via Telegram.',
+  keywords: 'indiabix current affairs in gujarati, may 2026 indiabix gujarati pdf, indiabix current affairs gujarati, indiabix gujarati current affairs, indiabix gujarati, indiabix current affairs in gujarati pdf, May 2026 IndiaBix Gujarati PDF, Indiabix current affairs in gujarati pdf download, Indiabix MCQ Gujarati PDF, National current affairs indiabix gujarati, GPSC exam preparation PDF',
   openGraph: {
-    title: 'IndiaBix Current Affairs in Gujarati PDF Download 2026',
-    description: 'Instant free download of translated IndiaBix Current Affairs MCQs in Gujarati. Perfect for CCE, GPSC, and Police Bharati.',
+    title: 'IndiaBix Current Affairs in Gujarati PDF May 2026 | 312 MCQs Free',
+    description: 'May 2026: 312 MCQs, 18 Categories. Instant free download of translated IndiaBix Current Affairs MCQs in Gujarati. Perfect for CCE, GPSC, and Police Bharati.',
     url: 'https://currentadda.vercel.app/indiabix-current-affairs-gujarati-pdf',
     type: 'website',
   },
@@ -45,6 +45,15 @@ export const revalidate = 86400;
 
 // Data Definitions
 const PDF_LIST = [
+  {
+    id: 'may-2026-mcq',
+    monthEn: 'May 2026 MCQ',
+    monthGu: 'મે 2026 MCQ',
+    articles: '312 MCQs | 31 Days',
+    size: '18 Categories',
+    telegramUrl: 'https://t.me/currentadda/20919',
+    badge: 'New 🔥'
+  },
   {
     id: 'apr-2026',
     monthEn: 'April 2026',
@@ -103,8 +112,12 @@ const PDF_LIST = [
 
 const FAQS = [
   {
+    q: "How to download May 2026 IndiaBix Current Affairs in Gujarati PDF?",
+    a: "May 2026 IndiaBix Current Affairs Gujarati PDF is now available for free! It contains 312 MCQs across 18 categories covering all 31 days of May 2026. Click the download button above or visit t.me/currentadda/20919 directly on Telegram. No login or sign-up required."
+  },
+  {
     q: "How to download IndiaBix current affairs in Gujarati PDF?",
-    a: "You can download the IndiaBix Current Affairs Gujarati translated PDF absolutely free from CurrentAdda. We provide direct Telegram links for months like April 2026, March 2026, February 2026, and more without any complicated redirects. Just click the download button below."
+    a: "You can download the IndiaBix Current Affairs Gujarati translated PDF absolutely free from CurrentAdda. We provide direct Telegram links for months like May 2026, April 2026, March 2026, February 2026, and more without any complicated redirects. Just click the download button below."
   },
   {
     q: "Is IndiaBix Current Affairs Gujarati PDF useful for GPSC & GSSSB?",
@@ -188,7 +201,8 @@ export default function IndiabixCurrentAffairsPdfPage() {
 
           <p className="text-lg md:text-xl text-indigo-100 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
              નેશનલ લેવલના <strong>IndiaBix MCQs</strong> હવે સંપૂર્ણ ગુજરાતી ભાષામાં! <br className="hidden sm:block" />
-             <span className="text-rose-200">GPSC 1-2, CCE, અને PSI</span> માટે 2026/2025 ની ડાયરેક્ટ PDF ડાઉનલોડ કરો.
+             <span className="text-rose-200">🆕 મે 2026: <strong className="text-white">312 MCQs | 18 Categories | 31 Days</strong></span><br />
+             <span className="text-indigo-200">GPSC 1-2, CCE, અને PSI માટે 2026/2025 ની ડાયરેક્ટ PDF ડાઉનલોડ કરો.</span>
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
