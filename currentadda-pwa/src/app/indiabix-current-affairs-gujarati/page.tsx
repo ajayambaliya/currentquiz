@@ -27,7 +27,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export const revalidate = 3600;
+export const revalidate = 86400; // Revalidate IndiaBix page once per day
 
 export default async function IndiaBixPage() {
   let initialQuizzes: any[] = [];

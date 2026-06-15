@@ -18,8 +18,8 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-// Revalidate data every hour to keep the homepage fresh but fast
-export const revalidate = 3600;
+// Revalidate data every 12 hours to keep the homepage fresh but fast
+export const revalidate = 43200;
 
 export default async function HomePage() {
   let initialQuizzes: any[] = [];

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 
-export const revalidate = 3600; // Revalidate sitemap every hour
+export const revalidate = 86400; // Revalidate sitemap once per day
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://currentadda.vercel.app'

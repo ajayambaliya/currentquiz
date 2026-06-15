@@ -5,7 +5,7 @@ import { ArrowLeft, ChevronRight, Calendar, BookOpen, CheckCircle2, XCircle, Hel
 import { notFound } from 'next/navigation';
 import SoftAuthWall from '@/components/SoftAuthWall';
 
-export const revalidate = 3600;
+export const revalidate = 604800; // Revalidate every 7 days (historical daily notes are permanent)
 
 
 

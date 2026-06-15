@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, BookOpen, Calendar, Clock, PlayCircle, Trophy } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 3600;
+export const revalidate = 86400; // Revalidate exam-specific pages once per day
 
 const EXAMS: Record<string, { title: string; metaDesc: string; gujaratiTitle: string; marksText: string; }> = {
   'gpsc': {

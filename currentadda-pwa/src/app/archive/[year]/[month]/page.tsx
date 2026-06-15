@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ChevronRight, ArrowLeft, Clock, Calendar } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, parse } from 'date-fns';
 
-export const revalidate = 3600;
+export const revalidate = 604800; // Revalidate monthly archive once per 7 days
 
 export default async function MonthlyArchivePage({ params }: { params: Promise<{ year: string; month: string }> }) {
     const { year, month } = await params;

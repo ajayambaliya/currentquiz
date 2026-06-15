@@ -118,8 +118,6 @@ export const viewport: Viewport = {
 };
 
 import ClientProviders from '@/components/ClientProviders';
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default function RootLayout({
   children,
@@ -131,8 +129,6 @@ export default function RootLayout({
       <body className="antialiased" suppressHydrationWarning>
         <ClientProviders />
         {children}
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

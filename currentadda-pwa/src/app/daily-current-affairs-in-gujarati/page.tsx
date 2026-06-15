@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600;
+export const revalidate = 86400; // Revalidate daily list once per day
 
 export default async function DailyCurrentAffairsGujaratiPage() {
   // Fetch latest 30 daily quizzes

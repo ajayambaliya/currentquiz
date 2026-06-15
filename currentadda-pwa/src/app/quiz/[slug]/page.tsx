@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 
 // Allow on-demand ISR for dynamic slugs not pre-rendered
 export const dynamicParams = true;
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 604800; // Revalidate every 7 days (static quizzes rarely change)
 
 const getQuizData = cache(async function getQuizData(slug: string) {
     // 1. Try to find in standard quizzes first
