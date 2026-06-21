@@ -12,6 +12,7 @@ const gujarati = Noto_Serif_Gujarati({
   subsets: ["gujarati"],
   variable: "--font-gujarati",
   display: "swap",
+  weight: ["400", "500", "600", "700", "900"],
 });
 
 export const metadata: Metadata = {
