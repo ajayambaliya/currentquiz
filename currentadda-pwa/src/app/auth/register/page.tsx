@@ -84,23 +84,27 @@ export default function RegisterPage() {
     // Step 2: Verify OTP & Complete Registration
     const handleVerifyAndRegister = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (loading) return;
         setLoading(true);
         setError(null);
 
-        if (otpCode.length < 6) {
+        if (otpCode.trim().length < 6) {
             setError("કૃપા કરીને 6-અંકનો OTP કોડ દાખલ કરો.");
             setLoading(false);
             return;
         }
 
         try {
-            await verifyWhatsAppOtpAndRegister({
-                formattedPhone,
-                otpCode,
-                fullName,
-                email,
-                password,
-            });
+            await Promise.race([
+                verifyWhatsAppOtpAndRegister({
+                    formattedPhone,
+                    otpCode: otpCode.trim(),
+                    fullName,
+                    email,
+                    password,
+                }),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('વિનંતી સમય સમાપ્ત થયો (Timeout). કૃપા કરીને ફરી પ્રયત્ન કરો.')), 12000))
+            ]);
 
             setSuccess(true);
         } catch (err: any) {

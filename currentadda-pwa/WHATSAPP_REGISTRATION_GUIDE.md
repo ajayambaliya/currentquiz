@@ -28,12 +28,12 @@ This document contains the complete technical specifications, database schema, A
 Run this cURL command to create the ingress endpoint bound to your production WhatsApp session (`db88cc61-5f49-474e-a66b-4647ae87697a`):
 
 ```bash
-curl -X POST "http://130.210.12.220:2785/api/integration/plugins/supabase-otp-hook/instances" \
-  -H "X-API-Key: owa_k1_5cd511091c78b8a1ed5e7d7c53ca6f05aad6104e8d47b247395fa28cd666be83" \
+curl -X POST "http://<YOUR_OPENWA_SERVER_IP>:2785/api/integration/plugins/supabase-otp-hook/instances" \
+  -H "X-API-Key: <YOUR_OPENWA_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{
     "instanceId": "currentadda-otp",
-    "sessionScope": "db88cc61-5f49-474e-a66b-4647ae87697a",
+    "sessionScope": "<YOUR_SESSION_ID>",
     "config": {
       "appName": "CurrentAdda",
       "messageTemplate": "📚 *CurrentAdda* | Your verification OTP is *{otp}*. Do not share it with anyone. Valid for 5 minutes."
@@ -42,7 +42,7 @@ curl -X POST "http://130.210.12.220:2785/api/integration/plugins/supabase-otp-ho
 ```
 
 > **Ingress Endpoint Generated**:  
-> `http://130.210.12.220:2785/api/ingress/supabase-otp-hook/currentadda-otp/send-sms`
+> `http://<YOUR_OPENWA_SERVER_IP>:2785/api/ingress/supabase-otp-hook/currentadda-otp/send-sms`
 
 ### Step 2: Supabase Auth Hook Configuration
 1. Navigate to **Supabase Dashboard** ➔ **Authentication** ➔ **Auth Hooks**.
@@ -55,8 +55,8 @@ curl -X POST "http://130.210.12.220:2785/api/integration/plugins/supabase-otp-ho
 Pass the secret back to OpenWA so it can verify incoming webhook signatures host-side:
 
 ```bash
-curl -X PATCH "http://130.210.12.220:2785/api/integration/plugins/supabase-otp-hook/instances/currentadda-otp" \
-  -H "X-API-Key: owa_k1_5cd511091c78b8a1ed5e7d7c53ca6f05aad6104e8d47b247395fa28cd666be83" \
+curl -X PATCH "http://<YOUR_OPENWA_SERVER_IP>:2785/api/integration/plugins/supabase-otp-hook/instances/currentadda-otp" \
+  -H "X-API-Key: <YOUR_OPENWA_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{"secret":"v1,whsec_YOUR_COPIED_SUPABASE_SECRET_HERE"}'
 ```

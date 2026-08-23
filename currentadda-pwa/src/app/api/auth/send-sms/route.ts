@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const OPENWA_TARGET_URL = 'http://130.210.12.220:2785/api/ingress/supabase-otp-hook/currentadda-otp/send-sms';
+const DEFAULT_OPENWA_URL = 'http://130.210.12.220:2785/api/ingress/supabase-otp-hook/currentadda-otp/send-sms';
 
 export async function POST(req: NextRequest) {
   try {
+    const targetUrl = process.env.OPENWA_SMS_HOOK_URL || DEFAULT_OPENWA_URL;
     const rawBody = await req.text();
 
-    // Forward all incoming webhook headers to preserve standard webhook signatures
+    // Forward all incoming standard webhook headers to preserve HMAC-SHA256 signature verification
     const forwardHeaders: Record<string, string> = {
       'Content-Type': req.headers.get('content-type') || 'application/json',
     };
@@ -19,11 +20,16 @@ export async function POST(req: NextRequest) {
     if (webhookTimestamp) forwardHeaders['webhook-timestamp'] = webhookTimestamp;
     if (webhookSignature) forwardHeaders['webhook-signature'] = webhookSignature;
 
-    const response = await fetch(OPENWA_TARGET_URL, {
+    // Use 8-second timeout boundary so webhooks never hang
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+    const response = await fetch(targetUrl, {
       method: 'POST',
       headers: forwardHeaders,
       body: rawBody,
-    });
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeoutId));
 
     const data = await response.text();
 
