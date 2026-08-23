@@ -11,14 +11,17 @@ export default function robots(): MetadataRoute.Robots {
                     '/api/',
                     '/auth/',
                     '/profile',
-                    '/favicon.ico?*',
-                    '/*?*',
                 ],
             },
             {
-                userAgent: ['GPTBot', 'OAI-SearchBot'],
+                userAgent: ['GPTBot', 'OAI-SearchBot', 'Google-Extended', 'PerplexityBot', 'ClaudeBot', 'Applebot-Extended'],
                 allow: '/',
-                disallow: ['/admin/', '/api/'],
+                disallow: [
+                    '/admin/',
+                    '/api/',
+                    '/auth/',
+                    '/profile',
+                ],
             }
         ],
         sitemap: 'https://currentadda.vercel.app/sitemap.xml',

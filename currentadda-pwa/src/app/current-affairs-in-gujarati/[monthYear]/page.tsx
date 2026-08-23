@@ -64,9 +64,9 @@ export async function generateMetadata({ params }: { params: Promise<{ monthYear
   const guMonth = GUJARATI_MONTHS[month] || month;
   const guYear = GUJARATI_YEARS[year] || year;
 
-  // Title exactly matches the search query format Googlebot sees
-  const title = `Current Affairs ${monthName} ${year} in Gujarati - ${guMonth} ${year} MCQs & Questions | GPSC, CCE | CurrentAdda`;
-  const description = `Best Current Affairs ${monthName} ${year} in Gujarati (${guMonth} ${guYear} કરંટ અફેર્સ) — Complete daily quiz compilation, questions & answers with Gujarati explanations for GSSSB CCE 2026, GPSC Class 1-2, PSI, Constable & Talati. 100% Free.`;
+  // High-CTR title matching actual Google Search Console search queries
+  const title = `Current Affairs ${monthName} ${year} in Gujarati (${guMonth} કરંટ અફેર્સ) | Daily MCQs, Gujarat News & Answers`;
+  const description = `${monthName} ${year} ના સંપૂર્ણ Current Affairs in Gujarati (${guMonth} ${guYear} કરંટ અફેર્સ) — દૈનિક MCQs, ગુજરાત સરકારના તાજા સમાચાર, પ્રશ્નો અને વિગતવાર જવાબો. GSSSB CCE 2026, GPSC Class 1-2, PSI, Constable & Talati માટે 100% ફ્રી.`;
 
   return {
     title,
@@ -75,8 +75,13 @@ export async function generateMetadata({ params }: { params: Promise<{ monthYear
       `current affairs ${monthName.toLowerCase()} ${year} in gujarati`,
       `${monthName.toLowerCase()} ${year} current affairs in gujarati`,
       `current affairs ${monthName.toLowerCase()} ${year} gujarati`,
+      `gujarat current affairs ${monthName.toLowerCase()} ${year} important news`,
+      `gujarat latest current affairs ${monthName.toLowerCase()} ${year} gujarat government news`,
+      `gujarat current affairs ${monthName.toLowerCase()} 17 ${year}`,
+      `gujarat current affairs ${monthName.toLowerCase()} 18 ${year}`,
       `${guMonth} ${year} કરંટ અફેર્સ`,
       `${guMonth} ${guYear} કરંટ અફેર ગુજરાતી`,
+      `વર્તમાન પ્રવાહ ${guMonth} ${year}`,
       `${monthName} ${year} current affairs questions and answers in gujarati`,
       `monthly current affairs ${monthName} ${year} gujarati`,
       `current affairs ${monthName} ${year} mcq`,
@@ -399,33 +404,74 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: Pr
           </Link>
         </nav>
 
+        {/* ── Gujarat & National Highlights Section (Visible & High Value) ── */}
+        <section className="mb-10">
+          <div className="bg-gradient-to-br from-indigo-50/70 via-white to-purple-50/50 rounded-3xl p-7 border border-indigo-100/80 shadow-sm">
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="w-5 h-5 text-indigo-600" />
+              <h2 className="text-lg font-black text-slate-900 leading-tight">
+                {monthName} {year} — ગુજરાત અને રાષ્ટ્રીય વર્તમાન પ્રવાહ (Important News Highlights)
+              </h2>
+            </div>
+            <p className="text-xs text-slate-600 font-medium gujarati-text leading-relaxed mb-4">
+              GPSC Class 1-2, GSSSB CCE 2026, PSI અને તમામ ગુજરાત સ્પર્ધાત્મક પરીક્ષાઓમાં {guMonth} {year} ના નીચે મુજબના મુખ્ય વિષયોમાંથી સીધા પ્રશ્નો પૂછાય છે:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+              <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-2xs">
+                <div className="text-xs font-black text-indigo-700 mb-2 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+                  ગુજરાત વિશેષ (Gujarat State News)
+                </div>
+                <ul className="text-xs text-slate-600 space-y-1.5 gujarati-text">
+                  <li>• ગુજરાત સરકારની નવી યોજનાઓ અને કેબિનેટ નિર્ણયો</li>
+                  <li>• ગુજરાતના સાંસ્કૃતિક ઉત્સવો, પર્યટન અને વારસો</li>
+                  <li>• ગુજરાત ઇન્ફ્રાસ્ટ્રક્ચર, સેમિકન્ડક્ટર અને ઇન્ડસ્ટ્રીયલ ડેવલપમેન્ટ</li>
+                  <li>• સાપુતારા મોનસૂન ફેસ્ટિવલ, વડનગર શ્રાવણોત્સવ &amp; ગિફ્ટ સિટી ઇવેન્ટ્સ</li>
+                </ul>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-2xs">
+                <div className="text-xs font-black text-purple-700 mb-2 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-purple-600"></span>
+                  રાષ્ટ્રીય &amp; આંતરરાષ્ટ્રીય (National &amp; World)
+                </div>
+                <ul className="text-xs text-slate-600 space-y-1.5 gujarati-text">
+                  <li>• કેન્દ્રીય બજેટ, RBI નીતિઓ, GDP ગ્રોથ અને આર્થિક ડેટા</li>
+                  <li>• ઇસરો (ISRO) મિશન્સ, સંરક્ષણ (Defence) અને DRDO ક્ષેપણાસ્ત્ર પરીક્ષણ</li>
+                  <li>• ખેલ-જગત (Sports Records, Olympics, Cricket) અને નવા એવોર્ડ્સ</li>
+                  <li>• સુપ્રીમ કોર્ટ ચુકાદા, સંસદ બિલ અને બંધારણીય સુધારાઓ</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── SEO Rich Content ─────────────────────────────────────────────── */}
         <section className="mb-10">
           <div className="bg-white/60 rounded-3xl p-7 border border-slate-100">
             <h2 className="text-lg font-black text-slate-900 mb-4">
-              {monthName} {year} Current Affairs in Gujarati — Complete Guide
+              {monthName} {year} Current Affairs in Gujarati — Complete Guide &amp; Study Notes
             </h2>
             <div className="space-y-3 text-sm text-slate-600 font-medium gujarati-text leading-relaxed">
               <p>
                 <strong>Current Affairs {monthName} {year} in Gujarati</strong> ({guMonth} {guYear} કરંટ અફેર્સ) ની complete compilation CurrentAdda પર ઉપલબ્ધ છે.
-                {quizzes.length} daily quizzes, {totalQuestions}+ MCQs — National, International, Sports, Economy, Science, Defence, Politics, Awards — તમામ topics cover.
+                {quizzes.length} daily quizzes, {totalQuestions}+ MCQs — National, International, Sports, Economy, Science, Defence, Politics, Awards — તમામ topics cover કરવામાં આવ્યા છે.
               </p>
               <p>
-                <strong>GSSSB CCE 2026</strong> (7338 posts) ની Prelims + Mains mates <strong>{guMonth} {year} current affairs</strong> essential. CurrentAdda ની daily quiz practice
-                accuracy improve કરવામાં help કરે — 0.25 negative marking ધ્યાનમાં રાખો.
+                <strong>GSSSB CCE 2026</strong> (7338 જગ્યાઓ) ની Prelims (30 Marks) + Group B Mains (30 Marks) માટે <strong>{guMonth} {year} current affairs</strong> અતિ મહત્વપૂર્ણ છે. CurrentAdda ની daily quiz practice
+                accuracy વધારવામાં મદદરૂપ થશે — 0.25 નેગેટિવ માર્કિંગ ધ્યાનમાં રાખી પ્રેક્ટિસ કરો.
               </p>
               <p>
                 <strong>GPSC Class 1-2</strong>, PSI, Police Constable, Talati cum Mantri, Bin Sachivalay Clerk, TET/TAT/HTAT —
-                {guMonth} {year} ના monthly current affairs MCQs revision revision.
+                બધી જ પરીક્ષાઓ માટે {guMonth} {year} ના monthly current affairs MCQs નું સંપૂર્ણ revision અહીં ઉપલબ્ધ છે.
               </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                 {[
                   `${monthName} ${year} Current Affairs in Gujarati — ${totalQuestions}+ Free MCQs`,
-                  `${guMonth} ${guYear} Current Affairs Questions & Answers`,
-                  `GSSSB CCE ${year} — ${monthName} Current Affairs (30 Marks)`,
-                  `GPSC ${monthName} ${year} Gujarati Current Affairs`,
-                  `Daily Current Affairs ${monthName} ${year} Gujarati Quiz`,
-                  `${monthName} ${year} Current Affairs PDF Gujarati`,
+                  `${guMonth} ${guYear} Current Affairs Questions & Answers with Explanation`,
+                  `GSSSB CCE ${year} — ${monthName} Current Affairs (30 Marks Weightage)`,
+                  `GPSC ${monthName} ${year} Gujarati Current Affairs & Analysis`,
+                  `Daily Current Affairs ${monthName} ${year} Gujarati Quiz & Leaderboard`,
+                  `${monthName} ${year} Current Affairs PDF & Notes in Gujarati`,
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-xs text-slate-500">
                     <span className="text-indigo-400">✓</span> {item}
@@ -446,19 +492,19 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: Pr
             {[
               {
                 q: `Current affairs ${monthName} ${year} in Gujarati ક્યાં practice કરવું?`,
-                a: `CurrentAdda.vercel.app પર — ${quizzes.length} quizzes, ${totalQuestions}+ MCQs Gujarati explanations સાથે. Completely free!`,
+                a: `CurrentAdda (currentadda.vercel.app) પર — ${quizzes.length} quizzes, ${totalQuestions}+ MCQs Gujarati explanations સાથે ઉપલબ્ધ છે. 100% Free!`,
               },
               {
-                q: `${guMonth} ${year} current affairs questions and answers Gujarati?`,
-                a: `CurrentAdda પર ${guMonth} ${year} ના ${totalQuestions}+ questions and answers Gujarati explanation સાથે available. Practice now!`,
+                q: `${guMonth} ${year} Gujarat Current Affairs અને Government News ક્યાં મળશે?`,
+                a: `CurrentAdda પર ${guMonth} ${year} ના ગુજરાત સરકારના તમામ મહત્વપૂર્ણ નિર્ણયો, યોજનાઓ અને દૈનિક ઘટનાઓ MCQs અને ગુજરાતી સમજૂતી સાથે આપવામાં આવ્યા છે.`,
               },
               {
-                q: `GSSSB CCE 2026 mate ${guMonth} ${year} current affairs important che?`,
-                a: `Yes! GSSSB CCE Prelims (30 marks) + Group B Mains (30 marks) mates ${guMonth} ${year} current affairs crucial. CurrentAdda par practice karo.`,
+                q: `GSSSB CCE 2026 માટે ${guMonth} ${year} current affairs કેટલું મહત્વનું છે?`,
+                a: `GSSSB CCE Prelims માં 30 marks (General Awareness & Current Affairs) અને Group B Mains માં 30 marks કરંટ અફેર્સ માટે ફાળવવામાં આવ્યા છે. દરરોજ પ્રેક્ટિસ કરવાથી પૂરા માર્ક્સ મેળવી શકાય છે.`,
               },
               {
-                q: `${monthName} ${year} current affairs PDF in Gujarati?`,
-                a: `Telegram @currentadda par ${monthName} ${year} current affairs PDF free. Website par Study Mode (Notes) ma text format ma read kari shako.`,
+                q: `${monthName} ${year} current affairs PDF in Gujarati ડાઉનલોડ કેવી રીતે કરવું?`,
+                a: `CurrentAdda Telegram channel (@currentadda) પર ${monthName} ${year} ની PDF ઉપલબ્ધ છે. ઉપરાંત વેબસાઇટ પર દરેક દિવસના Study Mode (Notes) માં તમામ પ્રશ્નો વાંચી શકાય છે.`,
               },
             ].map((faq, i) => (
               <details key={i} className="bg-white border border-slate-100 rounded-2xl overflow-hidden group" open={i === 0}>
@@ -523,23 +569,6 @@ export default async function MonthlyCurrentAffairsPage({ params }: { params: Pr
             </div>
           </Link>
         </section>
-
-        {/* sr-only keyword signals for Googlebot */}
-        <div className="sr-only" aria-label="Additional SEO content">
-          <h3>Current Affairs {monthName} {year} in Gujarati — All Topics</h3>
-          <ul>
-            <li>Current Affairs {monthName} {year} in Gujarati — National Events</li>
-            <li>Current Affairs {monthName} {year} in Gujarati — International Events</li>
-            <li>Current Affairs {monthName} {year} in Gujarati — Sports</li>
-            <li>Current Affairs {monthName} {year} in Gujarati — Economy</li>
-            <li>Current Affairs {monthName} {year} in Gujarati — Science & Technology</li>
-            <li>Current Affairs {monthName} {year} in Gujarati — Awards & Honours</li>
-            <li>Current Affairs {monthName} {year} in Gujarati — Appointments</li>
-            <li>{guMonth} {guYear} કરંટ અફેર્સ — GPSC, GSSSB CCE</li>
-            <li>{monthName} {year} current affairs questions and answers in Gujarati</li>
-            <li>Daily current affairs Gujarati {monthName} {year}</li>
-          </ul>
-        </div>
 
       </div>
     </main>

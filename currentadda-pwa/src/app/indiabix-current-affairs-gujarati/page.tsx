@@ -108,9 +108,9 @@ export default async function IndiaBixPage() {
             <ArrowLeft className="w-5 h-5 text-slate-500" />
           </Link>
           <div className="flex flex-col">
-            <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">
+            <span className="text-lg font-black tracking-tight text-slate-900 leading-none">
               IndiaBIX Gujarati
-            </h1>
+            </span>
             <span className="text-[8px] font-black text-indigo-500 uppercase tracking-[0.15em] mt-0.5">
               નેશનલ કરંટ અફેર્સ 2026
             </span>
@@ -128,9 +128,9 @@ export default async function IndiaBixPage() {
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
               <span className="text-[9px] font-black uppercase tracking-[0.15em] text-indigo-600">IndiaBIX Translation • Expert Curated</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-slate-900 mb-6">
+            <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-slate-900 mb-6">
               <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent italic">IndiaBIX</span> Current Affairs <br /> in Gujarati
-            </h2>
+            </h1>
             <p className="text-slate-600 font-medium text-sm md:text-lg max-w-2xl mx-auto leading-relaxed gujarati-text">
                 IndiaBIX એ નેશનલ અને ઈન્ટરનેશનલ કરંટ અફેર્સ માટે જાણીતું પોર્ટલ છે. CurrentAdda પર અમે તેના પ્રશ્નોનું 
                 <strong> ગુજરાતી ભાષામાં શ્રેષ્ઠ સંકલન </strong> અને વિગતવાર સમજૂતી પ્રદાન કરીએ છીએ, જે GPSC અને CCE જેવી 

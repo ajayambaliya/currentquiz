@@ -209,16 +209,6 @@ export default async function CategorySetsPage({ params }: { params: Promise<{ c
                     </div>
                 </div>
 
-                {/* Keyword Cloud (Hidden visually but SEO-meaningful via aria) */}
-                <div className="sr-only" aria-label={`${seo.name} categories and keywords`}>
-                    <h3>{seo.name} Current Affairs Keywords</h3>
-                    <ul>
-                        {[...seo.keywords, ...seo.gujaratiKeywords].map((kw) => (
-                            <li key={kw}>{kw}</li>
-                        ))}
-                    </ul>
-                </div>
-
                 {/* Related Categories */}
                 <div>
                     <h2 className="text-base font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">

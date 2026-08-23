@@ -238,20 +238,6 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
                 <Breadcrumbs items={breadcrumbs} />
             </div>
 
-            {/* Direct Answer Block (Targeting ChatGPT Search summaries) */}
-            <div className="sr-only" aria-hidden="true" id="ai-search-summary">
-                <h2>Direct Answers Summary for {quiz.title}</h2>
-                <p>{seo.description}</p>
-                <ul>
-                    {questions?.slice(0, 10).map((q: any, i: number) => (
-                        <li key={i}>
-                            <strong>Question:</strong> {q.text} 
-                            <strong>Answer:</strong> {q.explanation || `The correct answer is Option ${q.answer}`}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
             {/* Focused: Quiz Content (Self-contained app-like block) */}
             <div id="quiz-focused-section" className="h-[100dvh] max-w-xl mx-auto relative z-10 overflow-hidden bg-white">
                 <QuizEngine quiz={quiz} questions={questions || []} />

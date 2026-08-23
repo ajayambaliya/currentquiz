@@ -1,26 +1,28 @@
 import { supabase } from '@/lib/supabase';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calendar, ChevronRight, Clock, ArrowLeft, PlayCircle } from 'lucide-react';
+import { Calendar, ChevronRight, Clock, ArrowLeft, PlayCircle, BookOpen } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 
 export const metadata: Metadata = {
-  title: 'Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz',
-  description: 'ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.',
+  title: "Daily Current Affairs in Gujarati 2026 (દૈનિક કરંટ અફેર્સ) | Today's GK Notes & Quiz",
+  description: "દરરોજ અપડેટ થતા Daily Current Affairs in Gujarati (આજના વર્તમાન પ્રવાહ) — GPSC, GSSSB CCE, PSI, Talati માટે દૈનિક GK નોટ્સ, MCQs અને ફ્રી ક્વિઝ.",
   keywords: [
     'daily current affairs in gujarati',
     'daily current affairs gujarati 2026',
-    'daily current affairs for gpsc in gujarati',
     'today current affairs in gujarati',
     'current affairs today gujarati',
+    'આજના કરંટ અફેર્સ',
+    'દૈનિક વર્તમાન પ્રવાહ',
+    'daily current affairs for gpsc in gujarati',
     'daily quiz current affairs gujarati'
   ].join(', '),
   alternates: {
     canonical: 'https://currentadda.vercel.app/daily-current-affairs-in-gujarati',
   },
   openGraph: {
-    title: 'Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz',
-    description: 'ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.',
+    title: "Daily Current Affairs in Gujarati 2026 (દૈનિક કરંટ અફેર્સ) | Today's GK Notes & Quiz",
+    description: "દરરોજ અપડેટ થતા Daily Current Affairs in Gujarati — GPSC, GSSSB CCE, PSI, Talati માટે દૈનિક GK નોટ્સ, MCQs અને ફ્રી ક્વિઝ.",
     url: 'https://currentadda.vercel.app/daily-current-affairs-in-gujarati',
     type: 'website',
     siteName: 'CurrentAdda',
@@ -58,9 +60,9 @@ export default async function DailyCurrentAffairsGujaratiPage() {
             <ArrowLeft className="w-5 h-5 text-slate-500" />
           </Link>
           <div className="flex flex-col">
-            <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">
+            <span className="text-lg font-black tracking-tight text-slate-900 leading-none">
               Daily Current Affairs
-            </h1>
+            </span>
             <span className="text-[8px] font-black text-indigo-500 uppercase tracking-[0.15em] mt-0.5">
               રોજિંદા કરંટ અફેર્સ 2026
             </span>
@@ -137,25 +139,4 @@ export default async function DailyCurrentAffairsGujaratiPage() {
       </div>
     </main>
   );
-}
-
-// Simple BookOpen icon for the Read Notes button since it's not imported at the top
-function BookOpen(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-    </svg>
-  )
 }

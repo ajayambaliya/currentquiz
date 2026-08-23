@@ -29,9 +29,9 @@ export default function PdfHubPage() {
             <ArrowLeft className="w-5 h-5 text-indigo-700" />
           </Link>
           <div className="flex flex-col">
-            <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">
+            <span className="text-lg font-black tracking-tight text-slate-900 leading-none">
               PDF Downloads
-            </h1>
+            </span>
             <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mt-0.5">
               Available Resources
             </span>
@@ -47,7 +47,9 @@ export default function PdfHubPage() {
             <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                  <FileDown className="w-8 h-8" />
             </div>
-            <h2 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">PDF Collection Center</h2>
+            <h1 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">
+              Current Affairs PDF Downloads in Gujarati
+            </h1>
             <p className="text-slate-600 font-medium text-sm leading-relaxed mb-10 max-w-sm mx-auto">
                 Here you can find all our professionally compiled free PDFs for GPSC, CCE, PSI, and more. Select a category below!
             </p>

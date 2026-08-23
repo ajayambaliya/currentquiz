@@ -73,7 +73,7 @@ export default function SubjectMainTopicsPage({ params }: { params: Promise<{ su
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
             </div>
-            <h1 className="text-xl font-black text-slate-900 mb-2">Connection Error</h1>
+            <h2 className="text-xl font-black text-slate-900 mb-2">Connection Error</h2>
             <p className="text-slate-500 font-bold text-sm mb-6 max-w-sm">
                 નેટવર્ક સમસ્યાના કારણે ડેટા લોડ થઈ શક્યો નથી.
             </p>
@@ -90,7 +90,7 @@ export default function SubjectMainTopicsPage({ params }: { params: Promise<{ su
 
     if (!subject) return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-10 text-center">
-            <h1 className="text-2xl font-black text-slate-900 mb-2">Subject Not Found</h1>
+            <h2 className="text-2xl font-black text-slate-900 mb-2">Subject Not Found</h2>
             <Link href="/subjects" className="text-indigo-600 font-bold">Back to Subjects</Link>
         </div>
     );

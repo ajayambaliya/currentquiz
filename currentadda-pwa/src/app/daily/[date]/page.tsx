@@ -147,20 +147,6 @@ export default async function DailyNotesPage({ params }: { params: Promise<{ dat
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }} />
 
-      {/* Bot-friendly Direct Answer Block (Targeting ChatGPT Search) */}
-      <div className="sr-only" aria-hidden="true" id="ai-search-summary">
-          <h2>Summary: {displayDate} Current Affairs in Gujarati</h2>
-          <p>This page contains comprehensive daily current affairs for {displayDate} specifically for Gujarat Govt Exams.</p>
-          <ul>
-              {questions?.slice(0, 15).map((q: any, i: number) => (
-                  <li key={i}>
-                      <strong>Q:</strong> {q.text} 
-                      <strong>A:</strong> {q.explanation || `Correct: ${q.answer}`}
-                  </li>
-              ))}
-          </ul>
-      </div>
-
       {/* Header */}
       <header className="bg-white/70 backdrop-blur-2xl sticky top-0 z-50 border-b border-slate-100/50 shadow-sm">
         <div className="max-w-3xl mx-auto px-5 py-3 flex items-center gap-3">
@@ -168,9 +154,9 @@ export default async function DailyNotesPage({ params }: { params: Promise<{ dat
             <ArrowLeft className="w-5 h-5 text-slate-500" />
           </Link>
           <div className="flex flex-col flex-1">
-            <h1 className="text-base font-black tracking-tight text-slate-900 leading-none">
+            <span className="text-base font-black tracking-tight text-slate-900 leading-none">
               Daily Current Affairs Notes
-            </h1>
+            </span>
             <span className="text-[8px] font-black text-indigo-500 uppercase tracking-[0.15em] mt-0.5">
               {displayDate} • {totalQuestions} Questions
             </span>
@@ -198,9 +184,9 @@ export default async function DailyNotesPage({ params }: { params: Promise<{ dat
             <Calendar className="w-3 h-3 text-indigo-600" />
             <span className="text-[9px] font-black uppercase tracking-[0.15em] text-indigo-600">{date}</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900 leading-tight mb-3">
+          <h1 className="text-2xl md:text-3xl font-black text-slate-900 leading-tight mb-3">
             Current Affairs <span className="text-indigo-600">{displayDate}</span> in Gujarati
-          </h2>
+          </h1>
           <p className="text-slate-500 text-sm font-medium gujarati-text leading-relaxed">
             {displayDate} ની Current Affairs MCQs ગુજરાતી ભાષામાં, વિગતવાર સમજૂતી સાથે.
             GSSSB CCE 2026, GPSC, PSI, Constable અને તમામ Gujarat Govt Exams ની તૈયારી માટે ઉપયોગી.

@@ -169,9 +169,9 @@ export default function IndiabixCurrentAffairsPdfPage() {
               <ArrowLeft className="w-5 h-5 text-indigo-700" />
             </Link>
             <div>
-              <h1 className="text-base font-black tracking-tight text-slate-900 leading-none">
+              <span className="text-base font-black tracking-tight text-slate-900 leading-none">
                 IndiaBix Gujarati
-              </h1>
+              </span>
             </div>
           </div>
           <a href="https://t.me/currentadda" target="_blank" className="font-bold text-xs bg-indigo-600 text-white px-5 py-2.5 rounded-full hidden sm:flex items-center gap-2 hover:bg-indigo-700 transition shadow-md shadow-indigo-200">

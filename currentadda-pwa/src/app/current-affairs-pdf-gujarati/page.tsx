@@ -255,9 +255,9 @@ export default function GujaratiCurrentAffairsPdfPage() {
               <ArrowLeft className="w-5 h-5 text-slate-700" />
             </Link>
             <div>
-              <h1 className="text-base md:text-lg font-black tracking-tight text-[#1a2744] leading-none">
+              <span className="text-base md:text-lg font-black tracking-tight text-[#1a2744] leading-none">
                 CurrentAdda
-              </h1>
+              </span>
             </div>
           </div>
           <Link href="https://t.me/currentadda" target="_blank" className="font-bold text-xs bg-[#f4900c]/10 text-[#f4900c] px-4 py-2 rounded-full hidden sm:flex items-center gap-2">

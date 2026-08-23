@@ -85,7 +85,7 @@ export default function AdminNotifications() {
                         <div className="bg-indigo-600 p-4 rounded-2xl shadow-lg">
                             <Lock className="text-white w-8 h-8" />
                         </div>
-                        <h1 className="text-2xl font-black text-slate-900">Admin Login</h1>
+                        <h2 className="text-2xl font-black text-slate-900">Admin Login</h2>
                         <p className="text-slate-500 text-sm">Please login to send notifications</p>
                     </div>
 

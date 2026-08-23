@@ -6,32 +6,77 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 86400; // Revalidate exam-specific pages once per day
 
-const EXAMS: Record<string, { title: string; metaDesc: string; gujaratiTitle: string; marksText: string; }> = {
+const EXAMS: Record<string, { title: string; metaDesc: string; gujaratiTitle: string; marksText: string; faqs: { q: string; a: string }[] }> = {
   'gpsc': {
     title: 'GPSC Current Affairs in Gujarati 2026',
     metaDesc: 'Best GPSC Current Affairs in Gujarati 2026 (કરંટ અફેર્સ). 10,000+ Free MCQs for Class 1-2 & DySO with detailed Gujarati explanations.',
     gujaratiTitle: 'GPSC કરંટ અફેર્સ',
-    marksText: 'GPSC Class 1-2 અને DySO માટે કરંટ અફેર્સનું વેઇટેજ 50 માર્ક્સનું હોય છે.'
+    marksText: 'GPSC Class 1-2 અને DySO માટે કરંટ અફેર્સનું વેઇટેજ 50 માર્ક્સનું હોય છે.',
+    faqs: [
+      { q: 'GPSC Current Affairs in Gujarati ની તૈયારી કેવી રીતે કરવી?', a: 'CurrentAdda પર GPSC Class 1-2 માટે દૈનિક MCQs, વિગતવાર ગુજરાતી સમજૂતી, અર્થતંત્ર, બંધારણ અને આંતરરાષ્ટ્રીય ઘટનાઓના વિશેષ પ્રશ્નો ફ્રીમાં પ્રેક્ટિસ કરી શકાય છે.' },
+      { q: 'GPSC માં કરંટ અફેર્સના કેટલા માર્ક્સ હોય છે?', a: 'GPSC Prelims (General Studies) માં Current Affairs ના આશરે 40-50 પ્રશ્નો પૂછાય છે.' },
+    ]
   },
   'gsssb': {
-    title: 'GSSSB CCE Current Affairs in Gujarati 2026',
-    metaDesc: 'GSSSB CCE 2026 Current Affairs in Gujarati (7338 Posts). Free MCQs and daily questions for Group A & Group B exams.',
-    gujaratiTitle: 'GSSSB CCE કરંટ અફેર્સ',
-    marksText: 'CCE પ્રિલિમ્સમાં 30 માર્ક્સ અને મેન્સમાં 30 માર્ક્સ.'
+    title: 'GSSSB Current Affairs in Gujarati 2026',
+    metaDesc: 'GSSSB 2026 Current Affairs in Gujarati (7338 Posts). Free MCQs and daily questions for Group A & Group B exams.',
+    gujaratiTitle: 'GSSSB કરંટ અફેર્સ',
+    marksText: 'CCE પ્રિલિમ્સમાં 30 માર્ક્સ અને મેન્સમાં 30 માર્ક્સ.',
+    faqs: [
+      { q: 'GSSSB પરીક્ષા માટે કરંટ અફેર્સ કેટલા માર્ક્સનું પૂછાય છે?', a: 'GSSSB CCE પ્રિલિમ્સમાં 30 માર્ક્સ અને ગ્રૂપ B મેન્સમાં 30 માર્ક્સનું કરંટ અફેર્સ પૂછાય છે.' }
+    ]
   },
   'cce': {
     title: 'GSSSB CCE Current Affairs in Gujarati 2026',
-    metaDesc: 'GSSSB CCE 2026 Current Affairs in Gujarati (7000+ Vacancies). 30 Marks weightage. Free MCQs and daily questions for Group A & Group B exams.',
+    metaDesc: 'GSSSB CCE 2026 Current Affairs in Gujarati (7338 Vacancies). 30 Marks weightage. Free MCQs and daily questions for Group A & Group B exams.',
     gujaratiTitle: 'GSSSB CCE કરંટ અફેર્સ',
-    marksText: 'CCE પ્રિલિમ્સમાં 30 માર્ક્સ અને મેન્સમાં 30 માર્ક્સ.'
+    marksText: 'CCE પ્રિલિમ્સમાં 30 માર્ક્સ અને મેન્સમાં 30 માર્ક્સ.',
+    faqs: [
+      { q: 'GSSSB CCE 2026 માં કરંટ અફેર્સનું શું વેઇટેજ છે?', a: 'CCE Prelims (150 Marks) માં General Awareness & Current Affairs માટે 30 માર્ક્સ અને Group B Mains (200 Marks) માં કરંટ અફેર્સ માટે 30 માર્ક્સ ફાળવાયેલા છે.' },
+      { q: 'CCE 2026 Current Affairs PDF ક્યાંથી મળશે?', a: 'CurrentAdda વેબસાઇટ પર સ્ટડી નોટ્સ અને Telegram channel @currentadda પરથી PDF ફ્રીમાં ડાઉનલોડ કરી શકો છો.' }
+    ]
   },
   'talati': {
     title: 'Talati Current Affairs in Gujarati 2026',
     metaDesc: 'Talati and Panchayat exams Current Affairs in Gujarati 2026. Daily questions and MCQs for Talati cum Mantri preparation.',
     gujaratiTitle: 'તલાટી કરંટ અફેર્સ',
-    marksText: 'તલાટી ની પરીક્ષામાં કરંટ અફેર્સ ના અંદાજે 10-15 પ્રશ્નો પૂછાય છે.'
+    marksText: 'તલાટી ની પરીક્ષામાં કરંટ અફેર્સ ના અંદાજે 10-15 પ્રશ્નો પૂછાય છે.',
+    faqs: [
+      { q: 'તલાટી પરીક્ષા માટે કરંટ અફેર્સ કેવી રીતે વાંચવું?', a: 'છેલ્લા 6 મહિનાના ગુજરાત અને રાષ્ટ્રીય કરંટ અફેર્સ CurrentAdda પર દરરોજ 15 મિનિટ ક્વિઝ રમીને તૈયાર કરો.' }
+    ]
+  },
+  'psi': {
+    title: 'PSI Current Affairs in Gujarati 2026',
+    metaDesc: 'Police Sub Inspector (PSI) Current Affairs in Gujarati 2026. Free MCQs, Law, Defence and National events in Gujarati for PSI preparation.',
+    gujaratiTitle: 'PSI કરંટ અફેર્સ',
+    marksText: 'PSI પ્રિલિમ્સ અને મેન્સ જનરલ નોલેજ પેપરમાં કરંટ અફેર્સનું મોટું વેઇટેજ છે.',
+    faqs: [
+      { q: 'PSI પરીક્ષા માટે કયા કરંટ અફેર્સ ટોપિક્સ મહત્વના છે?', a: 'સંરક્ષણ (Defence), કાયદાકીય સુધારાઓ (Bills & Acts), નવી નિમણૂકો અને રાષ્ટ્રીય સુરક્ષા સંબંધિત મુદ્દાઓ PSI માટે ખૂબ ઉપયોગી છે.' }
+    ]
+  },
+  'police-constable': {
+    title: 'Police Constable Current Affairs in Gujarati 2026',
+    metaDesc: 'Gujarat Police Constable Bharti Current Affairs in Gujarati 2026. Daily GK, Sports, Awards and State news MCQs with Gujarati explanation.',
+    gujaratiTitle: 'પોલીસ કોન્સ્ટેબલ કરંટ અફેર્સ',
+    marksText: 'પોલીસ કોન્સ્ટેબલ પરીક્ષામાં વર્તમાન પ્રવાહ અને જનરલ નોલેજના સીધા પ્રશ્નો પૂછાય છે.',
+    faqs: [
+      { q: 'પોલીસ કોન્સ્ટેબલ માટે કરંટ અફેર્સની પ્રેક્ટિસ ક્યાં કરવી?', a: 'CurrentAdda પર કોન્સ્ટેબલ ભરતી માટે દૈનિક MCQs અને રમત-ગમત, એવોર્ડ્સ, મહત્વના દિવસોના સ્પેશિયલ સેટ્સ ઉપલબ્ધ છે.' }
+    ]
+  },
+  'bin-sachivalay': {
+    title: 'Bin Sachivalay Clerk Current Affairs in Gujarati 2026',
+    metaDesc: 'GSSSB Bin Sachivalay Clerk Current Affairs in Gujarati 2026. Free MCQs, government schemes, and state current affairs.',
+    gujaratiTitle: 'બિન સચિવાલય કરંટ અફેર્સ',
+    marksText: 'બિન સચિવાલય ક્લાર્ક પરીક્ષા માટે સરકારી યોજનાઓ અને વર્તમાન પ્રવાહો અતિ મહત્વના છે.',
+    faqs: [
+      { q: 'બિન સચિવાલય પરીક્ષા માટે કયા પ્રશ્નો પૂછાય છે?', a: 'ગુજરાત સરકારની નવી યોજનાઓ, બજેટ, બંધારણીય સુધારાઓ અને મહત્વના વ્યક્તિઓની નિમણૂક બિન સચિવાલયમાં વધુ પૂછાય છે.' }
+    ]
   }
 };
+
+export async function generateStaticParams() {
+  return Object.keys(EXAMS).map((exam) => ({ exam }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ exam: string }> }): Promise<Metadata> {
   const { exam } = await params;
@@ -42,7 +87,7 @@ export async function generateMetadata({ params }: { params: Promise<{ exam: str
   }
 
   return {
-    title: `${examData.title} | Free Daily Quiz`,
+    title: `${examData.title} | Free Daily Quiz & MCQs`,
     description: examData.metaDesc,
     alternates: {
       canonical: `https://currentadda.vercel.app/current-affairs-gujarati/${exam}`,
@@ -84,9 +129,23 @@ export default async function ExamCurrentAffairsPage({ params }: { params: Promi
     ]
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": examData.faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 pb-32">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <header className="bg-white/70 backdrop-blur-2xl sticky top-0 z-50 border-b border-slate-100/50 shadow-sm">
         <div className="max-w-3xl mx-auto px-5 py-3 flex items-center gap-3">
@@ -94,9 +153,9 @@ export default async function ExamCurrentAffairsPage({ params }: { params: Promi
             <ArrowLeft className="w-5 h-5 text-slate-500" />
           </Link>
           <div className="flex flex-col">
-            <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none uppercase">
-              {exam} Current Affairs
-            </h1>
+            <span className="text-lg font-black tracking-tight text-slate-900 leading-none">
+              {examData.title}
+            </span>
             <span className="text-[8px] font-black text-indigo-500 uppercase tracking-[0.15em] mt-0.5">
               {examData.gujaratiTitle}
             </span>

@@ -25,6 +25,20 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/current-affairs-gujarati',
+        destination: '/current-affairs-in-gujarati',
+        permanent: true,
+      },
+      {
+        source: '/daily',
+        destination: '/daily-current-affairs-in-gujarati',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

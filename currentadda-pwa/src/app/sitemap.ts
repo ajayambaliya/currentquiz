@@ -7,8 +7,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://currentadda.vercel.app'
     const urls = new Set<string>();
 
-    // Static routes
-    const routes = ['', '/current-affairs-in-gujarati', '/daily-current-affairs-in-gujarati', '/current-affairs-gujarati/gpsc', '/current-affairs-gujarati/gsssb', '/current-affairs-gujarati/talati', '/current-affairs-gujarati/cce', '/current-affairs-pdf-gujarati', '/indiabix-current-affairs-gujarati', '/indiabix-current-affairs-gujarati-pdf', '/pdf', '/subjects', '/leaderboard', '/categories'].map((route) => ({
+    // Static canonical routes
+    const routes = [
+        '',
+        '/current-affairs-in-gujarati',
+        '/daily-current-affairs-in-gujarati',
+        '/current-affairs-gujarati/gpsc',
+        '/current-affairs-gujarati/gsssb',
+        '/current-affairs-gujarati/cce',
+        '/current-affairs-gujarati/talati',
+        '/current-affairs-gujarati/psi',
+        '/current-affairs-gujarati/police-constable',
+        '/current-affairs-gujarati/bin-sachivalay',
+        '/current-affairs-pdf-gujarati',
+        '/indiabix-current-affairs-gujarati',
+        '/indiabix-current-affairs-gujarati-pdf',
+        '/pdf',
+        '/subjects',
+        '/leaderboard',
+        '/categories',
+        '/archive',
+        '/author'
+    ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
         changeFrequency: 'daily' as const,
@@ -119,30 +139,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         };
     }).filter(Boolean) as any[];
 
-    // 7. Add Archive routes
-    const archiveRoutes: MetadataRoute.Sitemap = [{
-        url: `${baseUrl}/archive`,
-        lastModified: new Date(),
-        changeFrequency: 'daily' as const,
-        priority: 0.7,
-    }];
-
-    // Get all unique year-month combos from quizzes for archive sitemap
-    const yearMonths = Array.from(new Set((quizzes || []).map((q: any) => {
-        const d = new Date(q.quiz_date);
-        return `${d.getFullYear()}/${(d.getMonth() + 1).toString().padStart(2, '0')}`;
-    })));
-
-    yearMonths.forEach((ym: any) => {
-        archiveRoutes.push({
-            url: `${baseUrl}/archive/${ym}`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly' as const,
-            priority: 0.6,
-        });
-    });
-
-    // 8. Add Daily text-content pages
+    // 7. Add Daily text-content pages
     const MONTH_NAMES_MAP: Record<number, string> = {
         0: 'january', 1: 'february', 2: 'march', 3: 'april',
         4: 'may', 5: 'june', 6: 'july', 7: 'august',
@@ -157,7 +154,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.85,
     }));
 
-    // 9. Add Monthly landing pages for current-affairs-in-gujarati
+    // 8. Add Monthly landing pages for current-affairs-in-gujarati
+    const yearMonths = Array.from(new Set((quizzes || []).map((q: any) => {
+        const d = new Date(q.quiz_date);
+        return `${d.getFullYear()}/${(d.getMonth() + 1).toString().padStart(2, '0')}`;
+    })));
+
     const monthlyCAEntries = yearMonths.map((ym: any) => {
         const [yr, mo] = ym.split('/');
         const monthName = MONTH_NAMES_MAP[parseInt(mo) - 1] || 'january';
@@ -177,7 +179,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...subjectEntries,
         ...mainTopicEntries,
         ...subTopicEntries,
-        ...archiveRoutes,
         ...dailyEntries,
         ...monthlyCAEntries,
     ]

@@ -1,9 +1,25 @@
 import { supabase } from '@/lib/supabase';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight, ArrowLeft, Clock, Calendar } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, parse } from 'date-fns';
 
 export const revalidate = 604800; // Revalidate monthly archive once per 7 days
+
+export async function generateMetadata({ params }: { params: Promise<{ year: string; month: string }> }): Promise<Metadata> {
+    const { year, month } = await params;
+    const dateStr = `${year}-${month}-01`;
+    const selectedDate = parse(dateStr, 'yyyy-MM-dd', new Date());
+    const monthName = format(selectedDate, 'MMMM').toLowerCase();
+
+    return {
+        title: `${format(selectedDate, 'MMMM yyyy')} Current Affairs Archive | CurrentAdda`,
+        description: `Archive of all daily quizzes and current affairs MCQs for ${format(selectedDate, 'MMMM yyyy')} in Gujarati.`,
+        alternates: {
+            canonical: `https://currentadda.vercel.app/current-affairs-in-gujarati/${monthName}-${year}`,
+        }
+    };
+}
 
 export default async function MonthlyArchivePage({ params }: { params: Promise<{ year: string; month: string }> }) {
     const { year, month } = await params;
@@ -28,9 +44,9 @@ export default async function MonthlyArchivePage({ params }: { params: Promise<{
                         <ArrowLeft className="w-5 h-5 text-slate-500" />
                     </Link>
                     <div className="flex flex-col">
-                        <h1 className="text-lg font-black text-slate-900 leading-none gujarati-text">
+                        <span className="text-lg font-black text-slate-900 leading-none gujarati-text">
                             {format(selectedDate, 'MMMM yyyy')}
-                        </h1>
+                        </span>
                         <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mt-1">
                             {quizzes?.length || 0} Quizzes Found
                         </span>

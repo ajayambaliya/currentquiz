@@ -195,9 +195,9 @@ export default async function CurrentAffairsGujaratiPage() {
             <ArrowLeft className="w-5 h-5 text-slate-500" />
           </Link>
           <div className="flex flex-col">
-            <h1 className="text-lg font-black tracking-tight text-slate-900 leading-none">
+            <span className="text-lg font-black tracking-tight text-slate-900 leading-none">
               Current Affairs in Gujarati
-            </h1>
+            </span>
             <span className="text-[8px] font-black text-indigo-500 uppercase tracking-[0.15em] mt-0.5">
               કરંટ અફેર્સ ગુજરાતી 2026
             </span>
@@ -356,6 +356,45 @@ export default async function CurrentAffairsGujaratiPage() {
                 <div className={`bg-gradient-to-br ${cat.color} p-4 rounded-2xl text-center shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all`}>
                   <div className="text-2xl mb-1">{cat.emoji}</div>
                   <span className="text-[8px] font-black text-white uppercase tracking-wide">{cat.name}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Exam-Specific Current Affairs Hubs ── */}
+        <section className="mb-12">
+          <div className="flex items-center gap-2 mb-6">
+            <Target className="w-4 h-4 text-indigo-600" />
+            <h3 className="text-xs font-black uppercase tracking-widest text-slate-900">Exam-Specific Current Affairs</h3>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {[
+              { name: 'GPSC Class 1-2', gu: 'GPSC કરંટ અફેર્સ', href: '/current-affairs-gujarati/gpsc', badge: '50 Marks' },
+              { name: 'GSSSB CCE 2026', gu: 'CCE કરંટ અફેર્સ', href: '/current-affairs-gujarati/cce', badge: '30+30 Marks' },
+              { name: 'PSI Exam', gu: 'પોલીસ સબ ઇન્સ્પેક્ટર', href: '/current-affairs-gujarati/psi', badge: 'Special' },
+              { name: 'Police Constable', gu: 'કોન્સ્ટેબલ ભરતી', href: '/current-affairs-gujarati/police-constable', badge: 'General GK' },
+              { name: 'Talati Mantri', gu: 'તલાટી મંત્રી', href: '/current-affairs-gujarati/talati', badge: '15 Marks' },
+              { name: 'Bin Sachivalay', gu: 'બિન સચિવાલય ક્લાર્ક', href: '/current-affairs-gujarati/bin-sachivalay', badge: 'High Yield' },
+            ].map((ex) => (
+              <Link
+                key={ex.name}
+                href={ex.href}
+                className="bg-white p-4 rounded-2xl border border-slate-100 hover:border-indigo-300 hover:shadow-md transition-all group flex flex-col justify-between"
+              >
+                <div>
+                  <span className="text-[8px] font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    {ex.badge}
+                  </span>
+                  <div className="font-black text-slate-900 text-sm mt-2 group-hover:text-indigo-600 transition-colors">
+                    {ex.name}
+                  </div>
+                  <div className="text-[11px] font-bold text-slate-400 gujarati-text mt-0.5">
+                    {ex.gu}
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center gap-1 text-[9px] font-black text-indigo-600 uppercase tracking-widest">
+                  Practice <ChevronRight className="w-3 h-3" />
                 </div>
               </Link>
             ))}
