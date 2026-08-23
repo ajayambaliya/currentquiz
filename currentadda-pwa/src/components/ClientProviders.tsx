@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 const ProtectContent = dynamic(() => import('@/components/ProtectContent'), { ssr: false });
 const OneSignalInit = dynamic(() => import('@/components/OneSignalInit'), { ssr: false });
 const InstallPrompt = dynamic(() => import('@/components/InstallPrompt'), { ssr: false });
+const WhatsAppVerificationGuard = dynamic(() => import('@/components/WhatsAppVerificationGuard'), { ssr: false });
 
 export default function ClientProviders() {
     return (
@@ -13,6 +14,8 @@ export default function ClientProviders() {
             <OneSignalInit />
             <ProtectContent />
             <InstallPrompt />
+            <WhatsAppVerificationGuard />
         </>
     );
 }
+

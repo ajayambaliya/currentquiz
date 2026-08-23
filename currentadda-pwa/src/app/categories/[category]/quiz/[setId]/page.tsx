@@ -132,13 +132,14 @@ export default async function CategoryQuizPage({ params }: PageProps) {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
             {/* Hidden for Bots but Snapped for Consistency */}
-            <div className="snap-start sr-only">
+            <div className="snap-start sr-only" aria-hidden="false">
                 <h1>{quiz.title}</h1>
                 <p>Preparation questions for {category} in Gujarati (કરંટ અફેર્સ ગુજરાતી).</p>
-                {questions.slice(0, 3).map((q, i) => (
-                    <div key={i}>
-                        <h2>{q.text}</h2>
-                        <p>{q.explanation || `The correct answer is ${q.answer}`}</p>
+                {questions.map((q, i) => (
+                    <div key={i} className="mb-4">
+                        <h2>{i + 1}. {q.text}</h2>
+                        <p><strong>Answer:</strong> Option {q.answer}</p>
+                        {q.explanation && <p><strong>Explanation:</strong> {q.explanation}</p>}
                     </div>
                 ))}
             </div>

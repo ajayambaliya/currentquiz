@@ -1,24 +1,29 @@
 import { createClient } from '@supabase/supabase-js';
 import HomeClient from '@/components/HomeClient';
+import StructuredData from '@/components/StructuredData';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Daily Current Affairs in Gujarati 2026 | GPSC, GSSSB, Talati – Free Quiz',
-  description: 'ગુજરાતીમાં રોજ અપડેટ! GPSC, GSSSB, PSI, Talati માટે Free MCQ Quiz + Leaderboard. 10,000+ પ્રશ્નો.',
+  title: 'Gujarati Current Affairs 2026 | GPSC, GSSSB & Talati',
+  description: 'GPSC, GSSSB CCE, PSI અને તલાટી પરીક્ષા માટે દરરોજ ફ્રી ગુજરાતી કરંટ અફેર્સ ક્વિઝ અને નોટ્સ. 10,000+ MCQs સાથે લાઇવ લીડરબોર્ડ અને મોક ટેસ્ટ વડે સ્કોર વધારો.',
   alternates: {
     canonical: 'https://currentadda.vercel.app',
   },
+  openGraph: {
+    title: 'Gujarati Current Affairs 2026 | GPSC, GSSSB & Talati',
+    description: 'GPSC, GSSSB CCE, PSI અને તલાટી પરીક્ષા માટે દરરોજ ફ્રી ગુજરાતી કરંટ અફેર્સ ક્વિઝ અને નોટ્સ.',
+    url: 'https://currentadda.vercel.app',
+    siteName: 'CurrentAdda',
+    locale: 'gu_IN',
+    type: 'website',
+  },
 };
 
-// Server-side fetch needs a standard client or we can use the one from lib (it's safe)
-// We create a fresh client here to be explicit about server-side usage, 
-// using the publicly available Anon Key which is safe for fetching public quizzes.
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-// Revalidate data every 12 hours to keep the homepage fresh but fast
 export const revalidate = 43200;
 
 export default async function HomePage() {
@@ -29,25 +34,111 @@ export default async function HomePage() {
       .from('quizzes')
       .select('*')
       .order('quiz_date', { ascending: false })
-      .range(0, 9); // Fetch first 10 items for the first page
+      .range(0, 9);
 
     if (data) {
       initialQuizzes = data;
     }
   } catch (error) {
     console.error('Error fetching initial quizzes on server:', error);
-    // Silent fail, client will attempt to fetch or show empty state
   }
 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://currentadda.vercel.app/#website",
     "name": "CurrentAdda",
     "url": "https://currentadda.vercel.app",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://currentadda.vercel.app/?s={search_term_string}",
       "query-input": "required name=search_term_string"
+    }
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "@id": "https://currentadda.vercel.app/#organization",
+    "name": "CurrentAdda",
+    "url": "https://currentadda.vercel.app",
+    "logo": "https://currentadda.vercel.app/newlogo.png",
+    "sameAs": [
+      "https://t.me/currentadda",
+      "https://github.com/ajayambaliya/currentquiz"
+    ],
+    "founder": {
+      "@id": "https://currentadda.vercel.app/#author"
+    }
+  };
+
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://currentadda.vercel.app/#author",
+    "name": "Ajay Ambaliya",
+    "jobTitle": "Founder & Educator",
+    "url": "https://currentadda.vercel.app/author",
+    "worksFor": {
+      "@id": "https://currentadda.vercel.app/#organization"
+    },
+    "sameAs": [
+      "https://github.com/ajayambaliya",
+      "https://t.me/currentadda"
+    ]
+  };
+
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://currentadda.vercel.app/#app",
+    "name": "CurrentAdda - Daily Gujarati Current Affairs Quiz",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "https://currentadda.vercel.app/#breadcrumb",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://currentadda.vercel.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Current Affairs in Gujarati",
+        "item": "https://currentadda.vercel.app/current-affairs-in-gujarati"
+      }
+    ]
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://currentadda.vercel.app/#webpage",
+    "url": "https://currentadda.vercel.app",
+    "name": "Gujarati Current Affairs 2026 | GPSC, GSSSB & Talati",
+    "isPartOf": {
+      "@id": "https://currentadda.vercel.app/#website"
+    },
+    "author": {
+      "@id": "https://currentadda.vercel.app/#author"
+    },
+    "publisher": {
+      "@id": "https://currentadda.vercel.app/#organization"
+    },
+    "reviewedBy": {
+      "@id": "https://currentadda.vercel.app/#author"
     }
   };
 
@@ -149,49 +240,20 @@ export default async function HomePage() {
     ]
   };
 
-  // SSR keyword-rich content for Googlebot (hidden visually)
-  const seoBlock = (
-    <div className="sr-only" aria-hidden="false" role="main">
-      <h1>Current Affairs in Gujarati 2026 — Best Daily Quiz &amp; Questions and Answers</h1>
-      <p>
-        Best Current Affairs in Gujarati 2026 (કરંટ અફેર્સ ગુજરાતી ૨૦૨૬) — CurrentAdda provides free daily current affairs questions and answers in Gujarati for GSSSB CCE 2026, GPSC Class 1-2, PSI, Police Constable, Talati cum Mantri and Bin Sachivalay exams.
-      </p>
-      <h2>Daily Current Affairs Gujarati — Questions &amp; Answers 2026</h2>
-      <p>
-        Practice daily current affairs gujarati MCQs with detailed explanations. Current affairs 2026 questions and answers in Gujarati updated daily. 10,000+ MCQs free for GPSC, GSSSB, PSI & all Gujarat government competitive exams.
-      </p>
-      <h2>Best Current Affairs in Gujarati for Competitive Exams</h2>
-      <ul>
-        <li>Current affairs in Gujarati for GPSC — Class 1-2 preparation</li>
-        <li>GSSSB CCE current affairs Gujarati — 30 marks in Prelims & Mains</li>
-        <li>Daily current affairs Gujarati quiz — updated every day</li>
-        <li>Current affairs MCQ in Gujarati — 10,000+ practice questions</li>
-        <li>IndiaBix current affairs in Gujarati — translated with explanations</li>
-        <li>Current affairs PDF in Gujarati 2026 — available via Telegram</li>
-        <li>Monthly current affairs Gujarati — January 2026, February 2026, March 2026</li>
-      </ul>
-      <h2>Current Affairs in Gujarati January 2026</h2>
-      <p>January 2026 current affairs in Gujarati — practice all important events of January 2026 with MCQs and detailed Gujarati explanations on CurrentAdda.</p>
-      <h2>CCE Current Affairs Gujarati</h2>
-      <p>GSSSB CCE 2026 current affairs preparation in Gujarati. CCE exam has 30 marks for current affairs in both Prelims (150 marks) and Mains Group B (200 marks). Practice all CCE current affairs categories on CurrentAdda.</p>
-    </div>
-  );
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      <StructuredData
+        data={[
+          websiteSchema,
+          organizationSchema,
+          personSchema,
+          webAppSchema,
+          breadcrumbSchema,
+          webPageSchema,
+          navigationSchema,
+          faqSchema
+        ]}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(navigationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      {seoBlock}
       <HomeClient initialQuizzes={initialQuizzes} />
     </>
   );

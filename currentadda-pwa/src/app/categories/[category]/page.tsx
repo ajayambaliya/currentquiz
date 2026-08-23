@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import CategorySetsClient from './CategorySetsClient';
 import { getCategorySeo, ALL_CATEGORY_NAMES } from '@/lib/category-seo';
 import Link from 'next/link';
+import { subMonths } from 'date-fns';
+import { supabase } from '@/lib/supabase';
 
 export async function generateStaticParams() {
     return ALL_CATEGORY_NAMES.map((cat) => ({ category: cat }));
@@ -66,6 +68,23 @@ export default async function CategorySetsPage({ params }: { params: Promise<{ c
     const seo = getCategorySeo(name);
 
     if (!seo) notFound();
+
+    // Fetch the question count on the server for instant SEO pre-rendering of set links
+    let initialCount = 0;
+    try {
+        const eightMonthsAgo = subMonths(new Date(), 8).toISOString();
+        const { count, error } = await supabase
+            .from('questions')
+            .select('*', { count: 'exact', head: true })
+            .eq('category', name)
+            .gte('created_at', eightMonthsAgo);
+
+        if (!error && count !== null) {
+            initialCount = count;
+        }
+    } catch (err) {
+        console.error('Error pre-fetching category question count on server:', err);
+    }
 
     const colors = COLOR_MAP[seo.color] || COLOR_MAP['indigo'];
     const baseUrl = 'https://currentadda.vercel.app';
@@ -162,7 +181,7 @@ export default async function CategorySetsPage({ params }: { params: Promise<{ c
             </div>
 
             {/* ── Interactive Quiz Sets (Client Component) ── */}
-            <CategorySetsClient category={name} />
+            <CategorySetsClient category={name} initialCount={initialCount} />
 
             {/* ── SEO Rich Content Block ── */}
             <section className="max-w-xl mx-auto px-5 py-10 space-y-10">

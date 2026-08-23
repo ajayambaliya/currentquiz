@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'zoamwugxvboxgjxqvntw.supabase.co',
+        hostname: 'ngmtfxjvvxfjeopwsvls.supabase.co',
         port: '',
         pathname: '/storage/v1/object/public/**',
       },
@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/supabase-proxy/:path*',
-        destination: 'https://zoamwugxvboxgjxqvntw.supabase.co/:path*',
+        destination: 'https://ngmtfxjvvxfjeopwsvls.supabase.co/:path*',
       },
     ]
   },

@@ -15,6 +15,8 @@ import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import BottomNav from '@/components/BottomNav';
+import { displayPhoneNumber } from '@/lib/phone-helper';
+
 
 export default function UserProfile() {
     const { user, loading: authLoading } = useAuth();
@@ -316,11 +318,23 @@ export default function UserProfile() {
                             >
                                 {profile?.full_name}
                             </motion.h1>
-                            <div className="flex items-center justify-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{user?.email}</span>
+                            <div className="flex flex-col items-center gap-1.5">
+                                {user?.email && (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{user?.email}</span>
+                                    </div>
+                                )}
+                                {profile?.whatsapp_number && profile?.is_whatsapp_verified && (
+                                    <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full text-emerald-400 font-bold text-xs">
+                                        <MessageCircle className="w-3.5 h-3.5 fill-emerald-500 text-emerald-500" />
+                                        <span>{displayPhoneNumber(profile.whatsapp_number)}</span>
+                                        <span className="bg-emerald-500 text-black text-[9px] font-black uppercase px-1.5 py-0.5 rounded">Verified</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
+
                     </div>
 
                     {/* Quick Stats Grid */}

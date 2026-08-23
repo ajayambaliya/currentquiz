@@ -286,13 +286,16 @@ export default async function QuizPage({ params }: { params: Promise<{ slug: str
                     <div className="mt-8 p-5 bg-slate-50 rounded-2xl border border-slate-100">
                         <h3 className="text-xs font-black text-slate-700 uppercase tracking-widest mb-3 flex items-center gap-2">
                              <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
-                             Sample Study Content
+                             Complete Study Content
                         </h3>
-                        <div className="space-y-4">
-                            {questions?.slice(0, 3).map((q: any, i: number) => (
-                                <div key={i} className="border-b border-white pb-3 last:border-0 last:pb-0">
-                                    <h4 className="text-[13px] font-black text-slate-800 gujarati-text mb-1">{q.text}</h4>
-                                    <p className="text-[11px] text-slate-500 gujarati-text line-clamp-1">{q.explanation || `The correct answer is Option ${q.answer}`}</p>
+                        <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                            {questions?.map((q: any, i: number) => (
+                                <div key={i} className="border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <h4 className="text-[13px] font-black text-slate-800 gujarati-text mb-1">{i + 1}. {q.text}</h4>
+                                    <p className="text-[11px] text-slate-600 gujarati-text mb-1"><strong>જવાબ:</strong> Option {q.answer}</p>
+                                    {q.explanation && (
+                                        <p className="text-[11px] text-slate-500 gujarati-text bg-white p-3 rounded-xl border border-slate-100 mt-2 shadow-sm leading-relaxed">{q.explanation}</p>
+                                    )}
                                 </div>
                             ))}
                         </div>

@@ -11,9 +11,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { subMonths } from 'date-fns';
 import BottomNav from '@/components/BottomNav';
 
-export default function CategorySetsClient({ category }: { category: string }) {
-    const [totalQuestions, setTotalQuestions] = useState<number | null>(null);
-    const [loading, setLoading] = useState(true);
+export default function CategorySetsClient({ category, initialCount }: { category: string; initialCount?: number }) {
+    const [totalQuestions, setTotalQuestions] = useState<number | null>(initialCount ?? null);
+    const [loading, setLoading] = useState(initialCount === undefined);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
@@ -24,7 +24,10 @@ export default function CategorySetsClient({ category }: { category: string }) {
 
     async function fetchCount(isMounted: boolean) {
         try {
-            if (isMounted) { setLoading(true); setErrorMsg(null); }
+            if (isMounted && totalQuestions === null) { 
+                setLoading(true); 
+                setErrorMsg(null); 
+            }
             const eightMonthsAgo = subMonths(new Date(), 8).toISOString();
             const { count, error } = await supabase
                 .from('questions')
@@ -34,7 +37,9 @@ export default function CategorySetsClient({ category }: { category: string }) {
             if (error) throw error;
             if (isMounted) setTotalQuestions(count || 0);
         } catch (err: any) {
-            if (isMounted) setErrorMsg(err.message || 'Failed to load. Please retry.');
+            if (isMounted && totalQuestions === null) {
+                setErrorMsg(err.message || 'Failed to load. Please retry.');
+            }
         } finally {
             if (isMounted) setLoading(false);
         }
@@ -42,7 +47,7 @@ export default function CategorySetsClient({ category }: { category: string }) {
 
     const setSize = 10;
     const currentTotal = totalQuestions || 0;
-    const numSets = loading ? 0 : Math.ceil(currentTotal / setSize);
+    const numSets = Math.ceil(currentTotal / setSize);
     const sets = Array.from({ length: numSets }).map((_, i) => ({
         id: i + 1,
         title: `Set ${i + 1}`,
