@@ -7,6 +7,7 @@ import { sendExistingUserWhatsAppOtp, verifyExistingUserWhatsApp } from '@/servi
 import { formatPhoneNumber, isValidIndianPhone } from '@/lib/phone-helper';
 import { MessageCircle, ShieldCheck, ArrowRight, Loader2, AlertCircle, RefreshCw, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
 const COOLDOWN_SECONDS = 60;
@@ -110,8 +111,18 @@ export default function WhatsAppVerificationGuard() {
 
           {/* Header */}
           <div className="text-center space-y-3 relative z-10">
-            <div className="w-16 h-16 bg-emerald-50 border border-emerald-100 rounded-3xl flex items-center justify-center mx-auto text-emerald-600 shadow-sm">
-              <MessageCircle className="w-8 h-8 fill-emerald-500 text-emerald-500" />
+            <div className="relative w-20 h-20 mx-auto">
+              <Image
+                src="/newlogo.png"
+                alt="CurrentAdda Logo"
+                width={80}
+                height={80}
+                className="object-contain mx-auto"
+                priority
+              />
+              <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-emerald-500 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+                <MessageCircle className="w-4 h-4 fill-white text-white" />
+              </div>
             </div>
 
             <div className="space-y-1">
