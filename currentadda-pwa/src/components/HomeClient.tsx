@@ -293,14 +293,14 @@ export default function HomeClient({ initialQuizzes = [] }: { initialQuizzes?: a
                         </div>
                         
                         {/* Clear Keyword-Rich Primary H1 */}
-                        <h1 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight text-slate-900 mb-4">
+                        <h1 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight text-slate-900 mb-4 gujarati-text">
                             ગુજરાતી કરંટ અફેર્સ 2026 — <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">GPSC & GSSSB દૈનિક મોક ટેસ્ટ</span>
                         </h1>
 
                         {/* Top-of-Page Key Takeaway Summary Block (AEO / GEO) */}
                         <div className="bg-gradient-to-br from-indigo-50/90 via-purple-50/50 to-white p-5 rounded-2xl border border-indigo-100 mb-6 text-left shadow-sm">
                             <div className="flex items-center gap-2 mb-2">
-                                <span className="px-2.5 py-0.5 bg-indigo-600 text-white rounded-md text-[9px] font-black uppercase tracking-wider">
+                                <span className="px-2.5 py-0.5 bg-indigo-600 text-white rounded-md text-[9px] font-black uppercase tracking-wider gujarati-text">
                                     📌 Key Takeaway / સારાંશ
                                 </span>
                             </div>

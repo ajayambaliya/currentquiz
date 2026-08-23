@@ -52,7 +52,7 @@ export default function LoginPage() {
                         </div>
                         <div>
                             <h1 className="text-2xl font-black text-slate-800 tracking-tight">Welcome Back</h1>
-                            <p className="text-slate-500 text-xs font-medium gujarati-text">કરંટ અફેર્સ અને ક્વિઝ માટે લોગિન કરો</p>
+                            <p className="text-slate-500 text-xs font-medium gujarati-text">મોબાઈલ નંબર અને પાસવર્ડ દાખલ કરીને લોગિન કરો</p>
                         </div>
                     </div>
 
@@ -65,25 +65,28 @@ export default function LoginPage() {
                     {/* Login Form */}
                     <form onSubmit={handlePasswordLogin} className="space-y-4">
                         <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">
-                                મોબાઈલ નંબર અથવા ઈમેલ
+                            <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 gujarati-text">
+                                મોબાઈલ નંબર (Mobile Number)
                             </label>
                             <div className="relative">
                                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                 <input
-                                    type="text"
+                                    type="tel"
+                                    inputMode="numeric"
+                                    pattern="[0-9]*"
+                                    maxLength={10}
                                     required
                                     value={identifier}
                                     onChange={(e) => setIdentifier(e.target.value)}
-                                    className="w-full pl-11 pr-4 py-3.5 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all text-sm font-medium"
-                                    placeholder="9876543210 અથવા email@gmail.com"
+                                    className="w-full pl-11 pr-4 py-3.5 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all text-sm font-bold placeholder:font-normal placeholder:text-slate-400"
+                                    placeholder="10 અંકનો મોબાઈલ નંબર (દા.ત. 9876543210)"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-1.5">
                             <div className="flex justify-between items-center ml-1">
-                                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">પાસવર્ડ</label>
+                                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest gujarati-text">પાસવર્ડ (Password)</label>
                                 <Link href="/auth/forgot-password" className="text-xs font-bold text-indigo-600 hover:underline gujarati-text">
                                     પાસવર્ડ ભૂલી ગયા?
                                 </Link>
@@ -95,8 +98,8 @@ export default function LoginPage() {
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-11 pr-4 py-3.5 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all text-sm"
-                                    placeholder="••••••••"
+                                    className="w-full pl-11 pr-4 py-3.5 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all text-sm font-bold placeholder:font-normal placeholder:text-slate-400"
+                                    placeholder="તમારો પાસવર્ડ દાખલ કરો"
                                 />
                             </div>
                         </div>

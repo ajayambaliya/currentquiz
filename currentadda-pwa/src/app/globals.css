@@ -23,12 +23,12 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-inter), var(--font-gujarati), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Serif Gujarati", "Shruti", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 .gujarati-text {
-  font-family: var(--font-gujarati), serif;
+  font-family: var(--font-gujarati), "Noto Serif Gujarati", serif;
   line-height: 1.8;
 }
 
