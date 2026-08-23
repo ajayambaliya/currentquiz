@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const OPENWA_HOST = process.env.OPENWA_HOST || 'http://130.210.12.220:2785';
-const OPENWA_API_KEY = process.env.OPENWA_API_KEY || 'owa_k1_5cd511091c78b8a1ed5e7d7c53ca6f05aad6104e8d47b247395fa28cd666be83';
-const DEFAULT_INGRESS_URL = process.env.OPENWA_SMS_HOOK_URL || `${OPENWA_HOST}/api/ingress/supabase-otp-hook/currentadda-otp/send-sms`;
+const OPENWA_HOST = process.env.OPENWA_HOST || '';
+const OPENWA_API_KEY = process.env.OPENWA_API_KEY || '';
+const DEFAULT_INGRESS_URL = process.env.OPENWA_SMS_HOOK_URL || (OPENWA_HOST ? `${OPENWA_HOST}/api/ingress/supabase-otp-hook/currentadda-otp/send-sms` : '');
 
 // In-memory OTP counter for session load-balancing & rotation every 3 OTPs
 let globalOtpCounter = 0;
@@ -12,6 +12,9 @@ let cachedSessions: any[] = [];
 let lastSessionsFetch = 0;
 
 async function getReadySessions(): Promise<any[]> {
+  if (!OPENWA_HOST || !OPENWA_API_KEY) {
+    return [];
+  }
   const now = Date.now();
   if (cachedSessions.length > 0 && now - lastSessionsFetch < 30000) {
     return cachedSessions;
@@ -109,6 +112,14 @@ export async function POST(req: NextRequest) {
     if (webhookId) forwardHeaders['webhook-id'] = webhookId;
     if (webhookTimestamp) forwardHeaders['webhook-timestamp'] = webhookTimestamp;
     if (webhookSignature) forwardHeaders['webhook-signature'] = webhookSignature;
+
+    if (!DEFAULT_INGRESS_URL) {
+      console.warn('OpenWA ingress URL or host is not configured.');
+      return NextResponse.json(
+        { error: 'OpenWA WhatsApp gateway is not configured in environment variables' },
+        { status: 500 }
+      );
+    }
 
     const response = await fetch(DEFAULT_INGRESS_URL, {
       method: 'POST',
