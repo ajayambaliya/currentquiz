@@ -6,7 +6,7 @@ import {
     User as UserIcon, ArrowRight, FileDown,
     BarChart3, Clock, Flame, Shield, BookOpen,
     Share2, Rocket, Zap, Sparkles, MessageCircle,
-    LayoutGrid, Home, Trophy, Github, Instagram, Mail
+    LayoutGrid, Home, Trophy, Instagram, Mail
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,6 +16,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import BottomNav from '@/components/BottomNav';
 import { displayPhoneNumber } from '@/lib/phone-helper';
+import { compressImage } from '@/lib/image-compressor';
 
 
 export default function UserProfile() {
@@ -93,42 +94,33 @@ export default function UserProfile() {
 
     const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
-            const file = event.target.files?.[0];
-            if (!file || !user) return;
+            const rawFile = event.target.files?.[0];
+            if (!rawFile || !user) return;
 
-            // 1. Validations
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            if (!allowedTypes.includes(file.type)) {
-                alert('Only JPG, JPEG or PNG files are allowed.');
-                return;
-            }
-
-            if (file.size > 500 * 1024) { // 500KB
-                alert('File size must be less than 500KB.');
+            // Basic MIME validation
+            if (!rawFile.type.startsWith('image/')) {
+                alert('કૃપા કરીને ફોટો ફાઈલ (JPG, PNG, WebP) પસંદ કરો.');
                 return;
             }
 
             setUploading(true);
 
-            // 2. Delete OLD avatar from storage if exists to save space (1GB limit)
-            if (profile?.avatar_url) {
-                try {
-                    const oldPath = profile.avatar_url.split('/').pop();
-                    if (oldPath) {
-                        await supabase.storage.from('avatars').remove([oldPath]);
-                    }
-                } catch (err) {
-                    console.error('Error deleting old avatar:', err);
-                }
-            }
+            // 1. Client-side Instant Compression (Target: ~100KB - 180KB WebP)
+            const compressedFile = await compressImage(rawFile, {
+                maxDimension: 600,
+                targetMinKB: 80,
+                targetMaxKB: 180,
+                outputFormat: 'image/webp',
+            });
 
-            // 3. Upload NEW avatar
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${user.id}.${fileExt}`; // Fixed filename per user to simplify
-            const { data: uploadData, error: uploadError } = await supabase.storage
+            // 2. Upload Compressed WebP Avatar
+            const fileName = `${user.id}.webp`;
+            const { error: uploadError } = await supabase.storage
                 .from('avatars')
-                .upload(fileName, file, {
-                    upsert: true // This allows replacing the file if it exists
+                .upload(fileName, compressedFile, {
+                    contentType: 'image/webp',
+                    cacheControl: '3600',
+                    upsert: true
                 });
 
             if (uploadError) {
@@ -136,29 +128,30 @@ export default function UserProfile() {
                 throw uploadError;
             }
 
-            // 4. Get Public URL
+            // 3. Get Public URL with timestamp bust
             const { data: { publicUrl } } = supabase.storage
                 .from('avatars')
                 .getPublicUrl(fileName);
 
-            // 5. Update Profile in DB
+            const updatedUrl = `${publicUrl}?v=${Date.now()}`;
+
+            // 4. Update Profile in Database
             const { error: updateError } = await supabase
                 .from('profiles')
-                .update({ avatar_url: publicUrl, updated_at: new Date().toISOString() })
+                .update({ avatar_url: updatedUrl, updated_at: new Date().toISOString() })
                 .eq('id', user.id);
 
             if (updateError) throw updateError;
 
-            // 6. Refresh Local State
-            setProfile({ ...profile, avatar_url: publicUrl });
-            alert('Profile picture updated!');
+            // 5. Refresh Local State
+            setProfile({ ...profile, avatar_url: updatedUrl });
 
         } catch (err: any) {
             console.error('Upload failed:', err);
-            // Show the actual error message to the user for better debugging
-            alert(`Upload failed: ${err.message || 'Unknown error'}`);
+            alert(`ફોટો અપલોડ કરવામાં સમસ્યા આવી: ${err.message || 'Unknown error'}`);
         } finally {
             setUploading(false);
+            if (event.target) event.target.value = '';
         }
     };
 
@@ -432,7 +425,6 @@ export default function UserProfile() {
                     </div>
 
                     <div className="flex justify-center gap-4">
-                        <SocialLink href="https://github.com/ajayambaliya" icon={<Github className="w-5 h-5" />} color="hover:bg-slate-800" />
                         <SocialLink href="https://instagram.com/ajayambaliyaa" icon={<Instagram className="w-5 h-5" />} color="hover:bg-pink-600" />
                         <SocialLink href="https://wa.me/918000212153" icon={<MessageCircle className="w-5 h-5" />} color="hover:bg-emerald-600" />
                         <SocialLink href="mailto:ajay.ambaliya007@gmail.com" icon={<Mail className="w-5 h-5" />} color="hover:bg-indigo-600" />

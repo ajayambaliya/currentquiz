@@ -64,8 +64,7 @@ export default async function HomePage() {
     "url": "https://currentadda.vercel.app",
     "logo": "https://currentadda.vercel.app/newlogo.png",
     "sameAs": [
-      "https://t.me/currentadda",
-      "https://github.com/ajayambaliya/currentquiz"
+      "https://t.me/currentadda"
     ],
     "founder": {
       "@id": "https://currentadda.vercel.app/#author"
@@ -83,7 +82,6 @@ export default async function HomePage() {
       "@id": "https://currentadda.vercel.app/#organization"
     },
     "sameAs": [
-      "https://github.com/ajayambaliya",
       "https://t.me/currentadda"
     ]
   };
