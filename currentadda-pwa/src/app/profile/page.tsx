@@ -9,7 +9,6 @@ import {
     LayoutGrid, Home, Trophy, Instagram, Mail
 } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import { supabase, getProxiedImageUrl } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
@@ -232,7 +231,7 @@ export default function UserProfile() {
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center overflow-hidden">
                             {profile?.avatar_url ? (
-                                <Image src={getProxiedImageUrl(profile.avatar_url)} alt="P" width={32} height={32} />
+                                <img src={getProxiedImageUrl(profile.avatar_url)} alt="Profile" className="w-full h-full object-cover" />
                             ) : (
                                 <UserIcon className="w-4 h-4 text-white" />
                             )}

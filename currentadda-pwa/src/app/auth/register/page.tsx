@@ -95,16 +95,13 @@ export default function RegisterPage() {
         }
 
         try {
-            await Promise.race([
-                verifyWhatsAppOtpAndRegister({
-                    formattedPhone,
-                    otpCode: otpCode.trim(),
-                    fullName,
-                    email,
-                    password,
-                }),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('વિનંતી સમય સમાપ્ત થયો (Timeout). કૃપા કરીને ફરી પ્રયત્ન કરો.')), 12000))
-            ]);
+            await verifyWhatsAppOtpAndRegister({
+                formattedPhone,
+                otpCode: otpCode.trim(),
+                fullName,
+                email,
+                password,
+            });
 
             setSuccess(true);
         } catch (err: any) {

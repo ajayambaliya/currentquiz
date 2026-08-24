@@ -77,43 +77,65 @@ export async function verifyWhatsAppOtpAndRegister({
     type: 'sms',
   });
 
-  if (verifyError || !authData.user) {
-    throw new Error(verifyError?.message || 'અમાન્ય અથવા એક્સપાયર થયેલ OTP કોડ. કૃપા કરીને સાચો OTP દાખલ કરો.');
-  }
+  let currentUser = authData?.user;
 
-  const userId = authData.user.id;
-
-  // 2. Set password for user credentials if provided
-  if (password) {
-    try {
-      await supabase.auth.updateUser({
-        password: password,
-        data: {
-          full_name: fullName,
-        },
-      });
-    } catch (passErr) {
-      console.warn('Notice: Non-fatal password update warning:', passErr);
+  // Fallback: if verifyOtp returned an error (e.g. token already consumed), check if user session is active
+  if (verifyError || !currentUser) {
+    const { data: userData } = await supabase.auth.getUser();
+    if (userData?.user && (userData.user.phone === formattedPhone || !userData.user.phone)) {
+      currentUser = userData.user;
+    } else {
+      throw new Error(verifyError?.message || 'અમાન્ય અથવા એક્સપાયર થયેલ OTP કોડ. કૃપા કરીને સાચો OTP દાખલ કરો.');
     }
   }
 
-  // 3. Upsert profile data in public.profiles
-  const { error: profileError } = await supabase
-    .from('profiles')
-    .upsert({
-      id: userId,
-      full_name: fullName.trim(),
-      email: email ? email.trim() : null,
-      whatsapp_number: formattedPhone,
-      is_whatsapp_verified: true,
-      updated_at: new Date().toISOString(),
-    });
+  const userId = currentUser.id;
 
-  if (profileError) {
-    console.error('Profile upsert warning:', profileError);
+  // 2. Concurrently update password metadata and upsert profile
+  const asyncTasks: Promise<any>[] = [];
+
+  if (password) {
+    asyncTasks.push(
+      (async () => {
+        try {
+          await supabase.auth.updateUser({
+            password: password,
+            data: {
+              full_name: fullName.trim(),
+            },
+          });
+        } catch (passErr) {
+          console.warn('Notice: Non-fatal password update warning:', passErr);
+        }
+      })()
+    );
   }
 
-  return { success: true, user: authData.user, session: authData.session };
+  asyncTasks.push(
+    (async () => {
+      try {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .upsert({
+            id: userId,
+            full_name: fullName.trim(),
+            email: email ? email.trim() : null,
+            whatsapp_number: formattedPhone,
+            is_whatsapp_verified: true,
+            updated_at: new Date().toISOString(),
+          });
+        if (profileError) {
+          console.error('Profile upsert warning:', profileError);
+        }
+      } catch (profileErr) {
+        console.error('Profile upsert exception:', profileErr);
+      }
+    })()
+  );
+
+  await Promise.allSettled(asyncTasks);
+
+  return { success: true, user: currentUser, session: authData?.session };
 }
 
 /**
