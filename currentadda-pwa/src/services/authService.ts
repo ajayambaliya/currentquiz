@@ -1,6 +1,23 @@
 import { supabase } from '@/lib/supabase';
 import { formatPhoneNumber, isValidIndianPhone } from '@/lib/phone-helper';
 
+function formatAuthError(error: any, defaultMsg: string): string {
+  if (!error) return defaultMsg;
+  const msg = (error.message || '').toLowerCase();
+  const code = (error.code || error.error_code || '').toLowerCase();
+
+  if (error.status === 503 || msg.includes('service unavailable') || code.includes('503')) {
+    return 'વોટ્સએપ વેરીફીકેશન સર્વિસ હાલ મેઈન્ટેનન્સમાં છે. કૃપા કરીને થોડીવાર પછી પ્રયત્ન કરો.';
+  }
+  if (error.status === 429 || msg.includes('rate limit') || msg.includes('too many') || code.includes('rate_limit')) {
+    return 'ઘણા બધા OTP વિનંતીઓ મોકલાયા છે. કૃપા કરીને 1 મિનિટ રાહ જુઓ.';
+  }
+  if (msg.includes('hook') || msg.includes('timeout') || code.includes('hook_timeout')) {
+    return 'સર્વર પ્રતિસાદમાં થોડો સમય લાગી રહ્યો છે. કૃપા કરીને થોડી સેકન્ડ રાહ જોઈ ફરી પ્રયત્ન કરો.';
+  }
+  return error.message || defaultMsg;
+}
+
 /**
  * 1. Sends WhatsApp OTP for new user registration
  */
@@ -31,13 +48,7 @@ export async function sendWhatsAppRegistrationOtp(rawPhone: string) {
   });
 
   if (error) {
-    if (error.status === 503 || error.message.toLowerCase().includes('service unavailable')) {
-      throw new Error('વોટ્સએપ વેરીફીકેશન સર્વિસ હાલ મેઈન્ટેનન્સમાં છે. કૃપા કરીને થોડીવાર પછી પ્રયત્ન કરો.');
-    }
-    if (error.status === 429 || error.message.toLowerCase().includes('rate limit')) {
-      throw new Error('ઘણા બધા OTP વિનંતીઓ મોકલાયા છે. કૃપા કરીને 1 મિનિટ રાહ જુઓ.');
-    }
-    throw new Error(error.message || 'OTP મોકલવામાં નિષ્ફળતા મળી. કૃપા કરીને ફરી પ્રયત્ન કરો.');
+    throw new Error(formatAuthError(error, 'OTP મોકલવામાં નિષ્ફળતા મળી. કૃપા કરીને ફરી પ્રયત્ન કરો.'));
   }
 
   return { success: true, formattedPhone };
@@ -178,7 +189,7 @@ export async function sendWhatsAppLoginOtp(rawPhone: string) {
   });
 
   if (error) {
-    throw new Error(error.message || 'OTP મોકલવામાં નિષ્ફળતા મળી.');
+    throw new Error(formatAuthError(error, 'OTP મોકલવામાં નિષ્ફળતા મળી.'));
   }
 
   return { success: true, formattedPhone };
@@ -230,7 +241,7 @@ export async function sendWhatsAppPasswordResetOtp(rawPhone: string) {
   });
 
   if (error) {
-    throw new Error(error.message || 'પાસવર્ડ રીસેટ OTP મોકલવામાં સમસ્યા આવી.');
+    throw new Error(formatAuthError(error, 'પાસવર્ડ રીસેટ OTP મોકલવામાં સમસ્યા આવી.'));
   }
 
   return { success: true, formattedPhone };
@@ -297,7 +308,7 @@ export async function sendExistingUserWhatsAppOtp(rawPhone: string, currentUserI
   });
 
   if (error) {
-    throw new Error(error.message || 'OTP મોકલવામાં નિષ્ફળતા મળી.');
+    throw new Error(formatAuthError(error, 'OTP મોકલવામાં નિષ્ફળતા મળી.'));
   }
 
   return { success: true, formattedPhone };
