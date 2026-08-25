@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { formatPhoneNumber, isValidIndianPhone } from '@/lib/phone-helper';
+import { toE164, toStandardDigits, isValidIndianPhone } from '@/lib/phone-helper';
 
 function formatAuthError(error: any, defaultMsg: string): string {
   if (!error) return defaultMsg;
@@ -15,33 +15,96 @@ function formatAuthError(error: any, defaultMsg: string): string {
   if (msg.includes('hook') || msg.includes('timeout') || code.includes('hook_timeout')) {
     return 'સર્વર પ્રતિસાદમાં થોડો સમય લાગી રહ્યો છે. કૃપા કરીને થોડી સેકન્ડ રાહ જોઈ ફરી પ્રયત્ન કરો.';
   }
+  if (msg.includes('user already registered') || msg.includes('already exists') || code.includes('user_already_exists')) {
+    return 'આ વોટ્સએપ નંબર પહેલેથી રજિસ્ટર્ડ છે. કૃપા કરીને લોગિન કરો.';
+  }
+  if (msg.includes('invalid login credentials')) {
+    return 'મોબાઇલ નંબર અથવા પાસવર્ડ ખોટો છે.';
+  }
+  if (msg.includes('token has expired') || msg.includes('otp expired') || msg.includes('invalid token')) {
+    return 'OTP કોડ અમાન્ય અથવા એક્સપાયર થઈ ગયો છે. કૃપા કરીને ફરીથી પ્રયત્ન કરો.';
+  }
   return error.message || defaultMsg;
 }
 
 /**
- * 1. Sends WhatsApp OTP for new user registration
+ * 1. Initiates WhatsApp OTP Registration with cryptographically secure password storage
  */
-export async function sendWhatsAppRegistrationOtp(rawPhone: string, fullName?: string, email?: string) {
+export async function sendWhatsAppRegistrationOtp(
+  rawPhone: string,
+  password?: string,
+  fullName?: string,
+  email?: string
+) {
+  console.log('[AuthService] sendWhatsAppRegistrationOtp called for:', rawPhone);
+
   if (!isValidIndianPhone(rawPhone)) {
     throw new Error('કૃપા કરીને માન્ય 10-અંકનો વોટ્સએપ મોબાઈલ નંબર દાખલ કરો.');
   }
 
-  const formattedPhone = formatPhoneNumber(rawPhone);
-  const plainDigits = formattedPhone.replace('+', '');
+  const formattedPhone = toE164(rawPhone);
+  const plainDigits = toStandardDigits(rawPhone);
 
-  // Check if number already registered in profiles table (checks both with + and without +)
-  const { data: existingUser } = await supabase
+  // Check if number is already registered and verified in profiles table
+  const { data: existingProfile } = await supabase
     .from('profiles')
-    .select('id')
+    .select('id, is_whatsapp_verified')
     .or(`whatsapp_number.eq.${formattedPhone},whatsapp_number.eq.${plainDigits}`)
     .maybeSingle();
 
-  if (existingUser) {
+  if (existingProfile && existingProfile.is_whatsapp_verified) {
     throw new Error('આ વોટ્સએપ નંબર પહેલેથી રજિસ્ટર્ડ છે. કૃપા કરીને લોગિન કરો.');
   }
 
-  // Trigger Supabase Phone OTP with initial user metadata (Delivered via OpenWA WhatsApp Hook)
-  const { error } = await supabase.auth.signInWithOtp({
+  // Trigger Supabase Auth signUp with phone & password
+  // This stores the encrypted password in auth.users immediately upon signup request
+  if (password) {
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+      phone: formattedPhone,
+      password: password,
+      options: {
+        data: {
+          full_name: fullName?.trim() || 'Student',
+          email: email?.trim() || null,
+        },
+      },
+    });
+
+    if (signUpError) {
+      console.warn('[AuthService] signUp returned error:', signUpError);
+
+      // If user already exists in auth.users (e.g. from an incomplete previous attempt)
+      const errLower = (signUpError.message || '').toLowerCase();
+      if (errLower.includes('already registered') || errLower.includes('already exists')) {
+        console.log('[AuthService] User exists in auth.users, triggering OTP resend...');
+        // Fallback to signInWithOtp so user can complete verification
+        const { error: otpError } = await supabase.auth.signInWithOtp({
+          phone: formattedPhone,
+          options: {
+            shouldCreateUser: false,
+            data: {
+              full_name: fullName?.trim() || 'Student',
+              email: email?.trim() || null,
+            },
+          },
+        });
+
+        if (otpError) {
+          throw new Error(formatAuthError(otpError, 'આ નંબર પહેલેથી રજિસ્ટર્ડ છે. કૃપા કરીને લોગિન કરો.'));
+        }
+
+        return { success: true, formattedPhone };
+      }
+
+      throw new Error(formatAuthError(signUpError, 'OTP મોકલવામાં નિષ્ફળતા મળી. કૃપા કરીને ફરી પ્રયત્ન કરો.'));
+    }
+
+    console.log('[AuthService] User signed up successfully with password. OTP dispatched to WhatsApp.');
+    return { success: true, formattedPhone, user: signUpData?.user };
+  }
+
+  // Fallback for passwordless OTP registration if no password provided
+  const { error: otpError } = await supabase.auth.signInWithOtp({
     phone: formattedPhone,
     options: {
       shouldCreateUser: true,
@@ -52,15 +115,15 @@ export async function sendWhatsAppRegistrationOtp(rawPhone: string, fullName?: s
     },
   });
 
-  if (error) {
-    throw new Error(formatAuthError(error, 'OTP મોકલવામાં નિષ્ફળતા મળી. કૃપા કરીને ફરી પ્રયત્ન કરો.'));
+  if (otpError) {
+    throw new Error(formatAuthError(otpError, 'OTP મોકલવામાં નિષ્ફળતા મળી. કૃપા કરીને ફરી પ્રયત્ન કરો.'));
   }
 
   return { success: true, formattedPhone };
 }
 
 /**
- * 2. Verifies OTP & creates completed user profile
+ * 2. Verifies OTP & completes profile creation
  */
 export async function verifyWhatsAppOtpAndRegister({
   formattedPhone,
@@ -75,19 +138,24 @@ export async function verifyWhatsAppOtpAndRegister({
   email: string;
   password?: string;
 }) {
+  const e164Phone = toE164(formattedPhone);
+  const plainDigits = toStandardDigits(formattedPhone);
+  console.log('[AuthService] verifyWhatsAppOtpAndRegister called for:', e164Phone);
+
   // 1. Verify OTP code entered by user
   const { data: authData, error: verifyError } = await supabase.auth.verifyOtp({
-    phone: formattedPhone,
+    phone: e164Phone,
     token: otpCode.trim(),
     type: 'sms',
   });
 
   let currentUser = authData?.user;
 
-  // Fallback: if verifyOtp returned an error (e.g. token already consumed), check if user session is active
+  // Fallback: check session if token was just consumed
   if (verifyError || !currentUser) {
+    console.warn('[AuthService] verifyOtp initial warning:', verifyError);
     const { data: userData } = await supabase.auth.getUser();
-    if (userData?.user && (userData.user.phone === formattedPhone || !userData.user.phone)) {
+    if (userData?.user) {
       currentUser = userData.user;
     } else {
       throw new Error(verifyError?.message || 'અમાન્ય અથવા એક્સપાયર થયેલ OTP કોડ. કૃપા કરીને સાચો OTP દાખલ કરો.');
@@ -96,49 +164,44 @@ export async function verifyWhatsAppOtpAndRegister({
 
   const userId = currentUser.id;
 
-  // 2. Concurrently update password metadata and upsert profile
-  const asyncTasks: Promise<any>[] = [];
-
+  // 2. Ensure password is set if provided (guarantees password is active even if registered via OTP fallback)
   if (password) {
-    asyncTasks.push(
-      (async () => {
-        try {
-          await supabase.auth.updateUser({
-            password: password,
-            data: {
-              full_name: fullName.trim(),
-            },
-          });
-        } catch (passErr) {
-          console.warn('Notice: Non-fatal password update warning:', passErr);
-        }
-      })()
-    );
+    try {
+      const { error: updatePassError } = await supabase.auth.updateUser({
+        password: password,
+        data: {
+          full_name: fullName.trim(),
+        },
+      });
+      if (updatePassError) {
+        console.warn('[AuthService] updateUser password warning:', updatePassError);
+      }
+    } catch (passErr) {
+      console.warn('[AuthService] Non-fatal password update warning:', passErr);
+    }
   }
 
-  asyncTasks.push(
-    (async () => {
-      try {
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .upsert({
-            id: userId,
-            full_name: fullName.trim(),
-            email: email ? email.trim() : null,
-            whatsapp_number: formattedPhone,
-            is_whatsapp_verified: true,
-            updated_at: new Date().toISOString(),
-          });
-        if (profileError) {
-          console.error('Profile upsert warning:', profileError);
-        }
-      } catch (profileErr) {
-        console.error('Profile upsert exception:', profileErr);
-      }
-    })()
-  );
+  // 3. Upsert user profile into public.profiles
+  try {
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .upsert({
+        id: userId,
+        full_name: fullName.trim(),
+        email: email ? email.trim() : null,
+        whatsapp_number: plainDigits, // Stored consistently as 91XXXXXXXXXX
+        is_whatsapp_verified: true,
+        updated_at: new Date().toISOString(),
+      });
 
-  await Promise.allSettled(asyncTasks);
+    if (profileError) {
+      console.error('[AuthService] Profile upsert error:', profileError);
+    } else {
+      console.log('[AuthService] Profile successfully upserted for user:', userId);
+    }
+  } catch (profileErr) {
+    console.error('[AuthService] Profile upsert exception:', profileErr);
+  }
 
   return { success: true, user: currentUser, session: authData?.session };
 }
@@ -154,54 +217,93 @@ export async function loginWithPhoneOrEmail({
   password: string;
 }) {
   const trimmed = identifier.trim();
+  console.log('[AuthService] loginWithPhoneOrEmail called for identifier:', trimmed);
 
-  // If user entered a 10-digit phone number or +91 number
+  // If user entered a 10-digit Indian phone number or +91 number
   if (isValidIndianPhone(trimmed)) {
-    const formattedPhone = formatPhoneNumber(trimmed);
+    const formattedPhone = toE164(trimmed);
+    console.log('[AuthService] Attempting signInWithPassword with phone:', formattedPhone);
     const { data, error } = await supabase.auth.signInWithPassword({
       phone: formattedPhone,
       password: password,
     });
 
     if (error) {
-      throw new Error(error.message === 'Invalid login credentials' 
-        ? 'મોબાઇલ નંબર અથવા પાસવર્ડ ખોટો છે.' 
-        : error.message);
+      console.warn('[AuthService] Phone login error:', error.message);
+      throw new Error(
+        error.message === 'Invalid login credentials'
+          ? 'મોબાઇલ નંબર અથવા પાસવર્ડ ખોટો છે.'
+          : error.message
+      );
     }
 
+    console.log('[AuthService] Phone login successful for user:', data.user?.id);
     return data;
   }
 
   // Otherwise authenticate with Email
-  const { data, error } = await supabase.auth.signInWithPassword({
+  console.log('[AuthService] Attempting signInWithPassword with email:', trimmed);
+  const { data: emailData, error: emailError } = await supabase.auth.signInWithPassword({
     email: trimmed,
     password: password,
   });
 
-  if (error) {
-    throw new Error(error.message === 'Invalid login credentials' 
-      ? 'ઈમેલ અથવા પાસવર્ડ ખોટો છે.' 
-      : error.message);
+  if (!emailError && emailData?.user) {
+    console.log('[AuthService] Email direct login successful for user:', emailData.user.id);
+    return emailData;
   }
 
-  return data;
+  // If email direct sign in failed (e.g. user registered with phone and email is only in profile):
+  // Check if profile exists with this email to resolve linked phone number
+  try {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('whatsapp_number')
+      .eq('email', trimmed)
+      .maybeSingle();
+
+    if (profile?.whatsapp_number) {
+      const linkedPhone = toE164(profile.whatsapp_number);
+      console.log('[AuthService] Found linked WhatsApp number for email, trying phone login:', linkedPhone);
+      const { data: linkedData, error: linkedError } = await supabase.auth.signInWithPassword({
+        phone: linkedPhone,
+        password: password,
+      });
+
+      if (!linkedError && linkedData?.user) {
+        console.log('[AuthService] Linked phone login successful for user:', linkedData.user.id);
+        return linkedData;
+      }
+    }
+  } catch (linkErr) {
+    console.warn('[AuthService] Linked profile email lookup warning:', linkErr);
+  }
+
+  throw new Error(
+    emailError?.message === 'Invalid login credentials'
+      ? 'ઈમેલ અથવા પાસવર્ડ ખોટો છે.'
+      : emailError?.message || 'લોગિન કરવામાં નિષ્ફળતા મળી.'
+  );
 }
 
 /**
- * 4. Sends 1-Click WhatsApp Login OTP (Passwordless Login)
+ * 4. Sends 1-Click WhatsApp Login OTP (Passwordless Instant Login)
  */
 export async function sendWhatsAppLoginOtp(rawPhone: string) {
+  console.log('[AuthService] sendWhatsAppLoginOtp called for:', rawPhone);
+
   if (!isValidIndianPhone(rawPhone)) {
     throw new Error('કૃપા કરીને માન્ય 10-અંકનો વોટ્સએપ મોબાઈલ નંબર દાખલ કરો.');
   }
 
-  const formattedPhone = formatPhoneNumber(rawPhone);
+  const formattedPhone = toE164(rawPhone);
+  const plainDigits = toStandardDigits(rawPhone);
 
-  // Check if user exists
+  // Check if user exists in profiles (check both formats)
   const { data: existingUser } = await supabase
     .from('profiles')
     .select('id')
-    .eq('whatsapp_number', formattedPhone)
+    .or(`whatsapp_number.eq.${formattedPhone},whatsapp_number.eq.${plainDigits}`)
     .maybeSingle();
 
   if (!existingUser) {
@@ -226,8 +328,11 @@ export async function sendWhatsAppLoginOtp(rawPhone: string) {
  * 5. Verifies 1-Click WhatsApp Login OTP
  */
 export async function verifyWhatsAppLoginOtp(formattedPhone: string, otpCode: string) {
+  const e164Phone = toE164(formattedPhone);
+  console.log('[AuthService] verifyWhatsAppLoginOtp called for:', e164Phone);
+
   const { data, error } = await supabase.auth.verifyOtp({
-    phone: formattedPhone,
+    phone: e164Phone,
     token: otpCode.trim(),
     type: 'sms',
   });
@@ -243,17 +348,20 @@ export async function verifyWhatsAppLoginOtp(formattedPhone: string, otpCode: st
  * 6. Sends WhatsApp Password Reset OTP
  */
 export async function sendWhatsAppPasswordResetOtp(rawPhone: string) {
+  console.log('[AuthService] sendWhatsAppPasswordResetOtp called for:', rawPhone);
+
   if (!isValidIndianPhone(rawPhone)) {
     throw new Error('કૃપા કરીને માન્ય 10-અંકનો વોટ્સએપ નંબર દાખલ કરો.');
   }
 
-  const formattedPhone = formatPhoneNumber(rawPhone);
+  const formattedPhone = toE164(rawPhone);
+  const plainDigits = toStandardDigits(rawPhone);
 
-  // Check if number is registered
+  // Check if number is registered (check both with + and without +)
   const { data: userProfile } = await supabase
     .from('profiles')
     .select('id')
-    .eq('whatsapp_number', formattedPhone)
+    .or(`whatsapp_number.eq.${formattedPhone},whatsapp_number.eq.${plainDigits}`)
     .maybeSingle();
 
   if (!userProfile) {
@@ -286,8 +394,11 @@ export async function verifyWhatsAppOtpAndResetPassword({
   otpCode: string;
   newPassword: string;
 }) {
+  const e164Phone = toE164(formattedPhone);
+  console.log('[AuthService] verifyWhatsAppOtpAndResetPassword called for:', e164Phone);
+
   const { data: authData, error: verifyError } = await supabase.auth.verifyOtp({
-    phone: formattedPhone,
+    phone: e164Phone,
     token: otpCode.trim(),
     type: 'sms',
   });
@@ -304,6 +415,7 @@ export async function verifyWhatsAppOtpAndResetPassword({
     throw new Error(updateError.message || 'પાસવર્ડ અપડેટ કરવામાં નિષ્ફળતા મળી.');
   }
 
+  console.log('[AuthService] Password reset successfully for user:', authData.user.id);
   return { success: true, user: authData.user };
 }
 
@@ -315,12 +427,13 @@ export async function sendExistingUserWhatsAppOtp(rawPhone: string, currentUserI
     throw new Error('કૃપા કરીને માન્ય 10-અંકનો વોટ્સએપ મોબાઈલ નંબર દાખલ કરો.');
   }
 
-  const formattedPhone = formatPhoneNumber(rawPhone);
+  const formattedPhone = toE164(rawPhone);
+  const plainDigits = toStandardDigits(rawPhone);
 
   const { data: existingUser } = await supabase
     .from('profiles')
     .select('id')
-    .eq('whatsapp_number', formattedPhone)
+    .or(`whatsapp_number.eq.${formattedPhone},whatsapp_number.eq.${plainDigits}`)
     .maybeSingle();
 
   if (existingUser && existingUser.id !== currentUserId) {
@@ -357,8 +470,11 @@ export async function verifyExistingUserWhatsApp({
   fullName?: string;
   email?: string;
 }) {
+  const e164Phone = toE164(formattedPhone);
+  const plainDigits = toStandardDigits(formattedPhone);
+
   const { data: authData, error: verifyError } = await supabase.auth.verifyOtp({
-    phone: formattedPhone,
+    phone: e164Phone,
     token: otpCode.trim(),
     type: 'sms',
   });
@@ -377,7 +493,7 @@ export async function verifyExistingUserWhatsApp({
     .from('profiles')
     .upsert({
       id: targetUserId,
-      whatsapp_number: formattedPhone,
+      whatsapp_number: plainDigits,
       is_whatsapp_verified: true,
       full_name: fullName || authData.user?.user_metadata?.full_name || 'Student',
       email: email || authData.user?.email || null,
@@ -385,7 +501,7 @@ export async function verifyExistingUserWhatsApp({
     });
 
   if (profileError) {
-    console.error('Profile update error:', profileError);
+    console.error('[AuthService] Profile update error:', profileError);
     throw new Error('પ્રોફાઇલ અપડેટ કરવામાં સમસ્યા આવી.');
   }
 
