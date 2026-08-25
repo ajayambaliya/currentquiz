@@ -70,7 +70,7 @@ export default function RegisterPage() {
         }
 
         try {
-            const res = await sendWhatsAppRegistrationOtp(phone);
+            const res = await sendWhatsAppRegistrationOtp(phone, fullName, email);
             setFormattedPhone(res.formattedPhone);
             localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
             setStep('otp');

@@ -21,29 +21,34 @@ function formatAuthError(error: any, defaultMsg: string): string {
 /**
  * 1. Sends WhatsApp OTP for new user registration
  */
-export async function sendWhatsAppRegistrationOtp(rawPhone: string) {
+export async function sendWhatsAppRegistrationOtp(rawPhone: string, fullName?: string, email?: string) {
   if (!isValidIndianPhone(rawPhone)) {
     throw new Error('કૃપા કરીને માન્ય 10-અંકનો વોટ્સએપ મોબાઈલ નંબર દાખલ કરો.');
   }
 
   const formattedPhone = formatPhoneNumber(rawPhone);
+  const plainDigits = formattedPhone.replace('+', '');
 
-  // Check if number already registered in profiles table
+  // Check if number already registered in profiles table (checks both with + and without +)
   const { data: existingUser } = await supabase
     .from('profiles')
     .select('id')
-    .eq('whatsapp_number', formattedPhone)
+    .or(`whatsapp_number.eq.${formattedPhone},whatsapp_number.eq.${plainDigits}`)
     .maybeSingle();
 
   if (existingUser) {
     throw new Error('આ વોટ્સએપ નંબર પહેલેથી રજિસ્ટર્ડ છે. કૃપા કરીને લોગિન કરો.');
   }
 
-  // Trigger Supabase Phone OTP (Delivered via OpenWA WhatsApp Hook)
+  // Trigger Supabase Phone OTP with initial user metadata (Delivered via OpenWA WhatsApp Hook)
   const { error } = await supabase.auth.signInWithOtp({
     phone: formattedPhone,
     options: {
       shouldCreateUser: true,
+      data: {
+        full_name: fullName?.trim() || 'Student',
+        email: email?.trim() || null,
+      },
     },
   });
 
