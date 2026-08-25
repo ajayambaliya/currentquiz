@@ -1,18 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LogIn, Lock, Loader2, Phone } from 'lucide-react';
+import { LogIn, Lock, Loader2, Phone, AlertTriangle, ArrowRight, X } from 'lucide-react';
 import { loginWithPhoneOrEmail } from '@/services/authService';
+
+const MIGRATION_NOTE_KEY = 'migration_note_dismissed';
 
 export default function LoginPage() {
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [showMigrationNote, setShowMigrationNote] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        const dismissed = localStorage.getItem(MIGRATION_NOTE_KEY);
+        if (!dismissed) {
+            setShowMigrationNote(true);
+        }
+    }, []);
+
+    const dismissMigrationNote = () => {
+        localStorage.setItem(MIGRATION_NOTE_KEY, 'true');
+        setShowMigrationNote(false);
+    };
 
     const handlePasswordLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,6 +40,9 @@ export default function LoginPage() {
                 password,
             });
 
+            // Mark migration note as dismissed once logged in
+            localStorage.setItem(MIGRATION_NOTE_KEY, 'true');
+
             router.push('/');
             router.refresh();
         } catch (err: any) {
@@ -36,7 +54,53 @@ export default function LoginPage() {
 
     return (
         <main className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-md space-y-8 animate-fade-in-up">
+            <div className="w-full max-w-md space-y-6 animate-fade-in-up">
+                {/* Migration Alert Banner for Old Users (Shows only once) */}
+                {showMigrationNote && (
+                    <div className="bg-amber-500/10 border-2 border-amber-500/30 rounded-3xl p-5 relative overflow-hidden backdrop-blur-sm shadow-lg shadow-amber-500/5 space-y-3">
+                        <div className="flex items-start justify-between gap-3">
+                            <div className="flex items-center gap-2.5 text-amber-700">
+                                <div className="p-2 bg-amber-500/20 rounded-xl">
+                                    <AlertTriangle className="w-5 h-5 text-amber-600" />
+                                </div>
+                                <h3 className="font-bold text-sm gujarati-text text-amber-900">
+                                    જૂના યુઝર્સ માટે મહત્વપૂર્ણ સૂચના
+                                </h3>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={dismissMigrationNote}
+                                className="p-1 text-amber-600/70 hover:text-amber-900 hover:bg-amber-500/20 rounded-lg transition-all"
+                                title="બંધ કરો"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
+
+                        <p className="text-xs leading-relaxed text-amber-900/80 gujarati-text">
+                            નવી સુરક્ષા સિસ્ટમ મુજબ, તમામ જૂના યુઝર્સે <strong className="text-amber-950">એકવાર ફરીથી પોતાના વોટ્સએપ નંબર સાથે નવું રજિસ્ટ્રેશન</strong> કરવું ફરજિયાત છે. ત્યાર બાદ તમે દર વખતે તમારા વોટ્સએપ નંબર અને પાસવર્ડ વડે સરળતાથી લોગિન કરી શકશો.
+                        </p>
+
+                        <div className="flex items-center justify-between pt-1 gap-2">
+                            <Link
+                                href="/auth/register"
+                                onClick={dismissMigrationNote}
+                                className="inline-flex items-center gap-1.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md shadow-amber-600/20 transition-all group"
+                            >
+                                <span className="gujarati-text">અહીં નવું રજિસ્ટ્રેશન કરો</span>
+                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                            </Link>
+                            <button
+                                type="button"
+                                onClick={dismissMigrationNote}
+                                className="text-xs font-bold text-amber-800/80 hover:text-amber-950 gujarati-text px-2 py-1"
+                            >
+                                સમજાઈ ગયું
+                            </button>
+                        </div>
+                    </div>
+                )}
+
                 <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 space-y-6">
                     {/* Brand Header */}
                     <div className="text-center space-y-3">

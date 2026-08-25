@@ -103,6 +103,7 @@ export default function RegisterPage() {
                 password,
             });
 
+            localStorage.setItem('migration_note_dismissed', 'true');
             setSuccess(true);
         } catch (err: any) {
             setError(err.message || "અમાન્ય OTP કોડ. કૃપા કરીને ફરી તપાસો.");
