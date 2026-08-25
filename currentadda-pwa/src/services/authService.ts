@@ -70,36 +70,33 @@ export async function sendWhatsAppRegistrationOtp(
       },
     });
 
-    if (signUpError) {
-      console.warn('[AuthService] signUp returned error:', signUpError);
+    // Supabase anti-enumeration: if user already exists, signUp returns error = null but identities is []
+    const isExistingUser = !signUpError && signUpData?.user && (!signUpData.user.identities || signUpData.user.identities.length === 0);
 
-      // If user already exists in auth.users (e.g. from an incomplete previous attempt)
-      const errLower = (signUpError.message || '').toLowerCase();
-      if (errLower.includes('already registered') || errLower.includes('already exists')) {
-        console.log('[AuthService] User exists in auth.users, triggering OTP resend...');
-        // Fallback to signInWithOtp so user can complete verification
-        const { error: otpError } = await supabase.auth.signInWithOtp({
-          phone: formattedPhone,
-          options: {
-            shouldCreateUser: false,
-            data: {
-              full_name: fullName?.trim() || 'Student',
-              email: email?.trim() || null,
-            },
+    if (signUpError || isExistingUser) {
+      console.log('[AuthService] User exists in auth.users or signUp returned error, dispatching OTP via signInWithOtp...');
+
+      const { error: otpError } = await supabase.auth.signInWithOtp({
+        phone: formattedPhone,
+        options: {
+          shouldCreateUser: false,
+          data: {
+            full_name: fullName?.trim() || 'Student',
+            email: email?.trim() || null,
           },
-        });
+        },
+      });
 
-        if (otpError) {
-          throw new Error(formatAuthError(otpError, 'આ નંબર પહેલેથી રજિસ્ટર્ડ છે. કૃપા કરીને લોગિન કરો.'));
-        }
-
-        return { success: true, formattedPhone };
+      if (otpError) {
+        console.warn('[AuthService] signInWithOtp fallback error:', otpError);
+        throw new Error(formatAuthError(otpError, 'OTP મોકલવામાં નિષ્ફળતા મળી. કૃપા કરીને ફરી પ્રયત્ન કરો.'));
       }
 
-      throw new Error(formatAuthError(signUpError, 'OTP મોકલવામાં નિષ્ફળતા મળી. કૃપા કરીને ફરી પ્રયત્ન કરો.'));
+      console.log('[AuthService] OTP successfully dispatched to existing user via WhatsApp.');
+      return { success: true, formattedPhone };
     }
 
-    console.log('[AuthService] User signed up successfully with password. OTP dispatched to WhatsApp.');
+    console.log('[AuthService] New user signed up successfully with password. OTP dispatched to WhatsApp.');
     return { success: true, formattedPhone, user: signUpData?.user };
   }
 
