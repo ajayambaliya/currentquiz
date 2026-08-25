@@ -366,6 +366,33 @@ export default function RegisterPage() {
                         Login
                     </Link>
                 </p>
+
+                {/* WhatsApp Support / Help Box */}
+                <div className="pt-2 border-t border-slate-100">
+                    <a
+                        href="https://wa.me/918000212153?text=નમસ્તે%20CurrentAdda%20Team%2C%20મને%20રજિસ્ટ્રેશન%2FOTPમાં%20સમસ્યા%20આવી%20રહી%20છે.%20(સ્ક્રીનશોટ%20સાથે)"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-emerald-50/80 hover:bg-emerald-100/90 border border-emerald-200/80 p-3.5 rounded-2xl flex items-center justify-between gap-3 transition-all group shadow-sm hover:shadow"
+                    >
+                        <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-white flex-shrink-0 shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                                <MessageCircle className="w-5 h-5 fill-white" />
+                            </div>
+                            <div className="text-left space-y-0.5">
+                                <p className="text-xs font-bold text-emerald-950 gujarati-text">
+                                    કોઈપણ સમસ્યા હોય તો વોટ્સએપ કરો
+                                </p>
+                                <p className="text-[11px] text-emerald-800 leading-tight gujarati-text">
+                                    સ્ક્રીનશોટ સાથે મેસેજ કરો: <span className="font-black text-emerald-900 tracking-wide font-mono">8000212153</span>
+                                </p>
+                            </div>
+                        </div>
+                        <span className="text-[11px] font-bold bg-emerald-600 group-hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl transition-colors flex-shrink-0 shadow-sm">
+                            Help
+                        </span>
+                    </a>
+                </div>
             </motion.div>
         </main>
     );
